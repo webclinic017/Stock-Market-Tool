@@ -14,6 +14,7 @@ import { FundInvestorComponent } from './fund-formula/fund-investor/fund-investo
 import { LoginComponentComponent } from './authorization/login-component/login-component.component';
 import { LoginComponent } from './authorization/login/login.component';
 import { RegisterComponent } from './authorization/register/register.component';
+import { CommExampleComponent } from './comm-example/comm-example.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RegisterComponent } from './authorization/register/register.component';
     FundInvestorComponent,
     LoginComponentComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CommExampleComponent
   ],
   imports: [
     BrowserModule
