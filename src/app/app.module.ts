@@ -11,7 +11,6 @@ import { StockComponent } from './stock/stock.component';
 import { FundFormulaComponent } from './fund-formula/fund-formula.component';
 import { FormulaInvestorComponent } from './fund-formula/formula-investor/formula-investor.component';
 import { FundInvestorComponent } from './fund-formula/fund-investor/fund-investor.component';
-import { LoginComponentComponent } from './authorization/login-component/login-component.component';
 import { LoginComponent } from './authorization/login/login.component';
 import { RegisterComponent } from './authorization/register/register.component';
 import { CommExampleComponent } from './comm-example/comm-example.component';
@@ -28,7 +27,6 @@ import { CommExampleComponent } from './comm-example/comm-example.component';
     FundFormulaComponent,
     FormulaInvestorComponent,
     FundInvestorComponent,
-    LoginComponentComponent,
     LoginComponent,
     RegisterComponent,
     CommExampleComponent
