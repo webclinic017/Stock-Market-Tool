@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-logout',
   template: `
-  <h1>login Component</h1>
+  <h1>logout Component</h1>
   `,
 })
-export class LoginComponent implements OnInit {
+export class LogoutComponent implements OnInit {
 
   ngOnInit() {}
 
