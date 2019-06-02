@@ -10,19 +10,19 @@ import { LogoutComponent } from './authorization/logout/logout.component';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    AboutComponent,
-    HomeComponent,
-    LoginComponent,
-    LogoutComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        AboutComponent,
+        HomeComponent,
+        LoginComponent,
+        LogoutComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
