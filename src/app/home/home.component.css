@@ -1,6 +1,21 @@
-body {
-    background: url("https://www.thomsontreks.com/wp-content/uploads/2015/11/canisummit.jpg")
-        no-repeat;
-        padding-bottom: 75ch;
+/* TODO: adds purplish box in center - maybe discard? */
+.fill-height {
+    position: relative;
+    background: rgb(230, 171, 212);
+    height: 82.5vh;
 }
 
+.big_font_120 {
+    font-size: 120px;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #F8F8F8 !important;
+    color: black;
+}
+
+.vertical-center {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
