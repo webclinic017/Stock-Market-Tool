@@ -1,21 +1,21 @@
-/* TODO: adds purplish box in center - maybe discard? */
-.fill-height {
-    position: relative;
-    background: rgb(230, 171, 212);
-    height: 82.5vh;
-}
-
 .big_font_120 {
     font-size: 120px;
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    background-color: #F8F8F8 !important;
-    color: black;
+    background-color: black !important;
+    color: #F8F8F8;
+    margin-top: 2rem;
+    font-family: Georgia;
 }
 
 .vertical-center {
-    min-height: 100vh;
+    /*min-height: 100vh;*/
     display: flex;
     align-items: center;
   }
+
+h1 {
+    color: black;
+    font-family: Georgia;
+}

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-home',
     template: `
-        <div class="container fill-height" style="padding-top: 100px;">
+        <div class="container fill-height" style="margin-top: 13rem;">
             <div class="row">
                 <div class="col-lg-1"></div>
                     <div class="col-lg-10 text-center">
@@ -31,10 +31,10 @@ export class HomeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'pink';
+        //this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'pink';
     }
 
-    // Route to Market Analysis
+    // Route to Market Analysis.
     public onStartNow() {
         console.log('redirect to Market Analysis tab');
         this.router.navigate(['market-analysis']);

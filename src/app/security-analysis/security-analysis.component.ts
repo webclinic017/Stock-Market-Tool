@@ -16,7 +16,5 @@ export class SecurityAnalysisComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit() {
-        ;
-    }
+    ngOnInit() { }
 }

@@ -1,4 +1,13 @@
 
 li a {
     padding-top: 4.5ch;
+    color: black;
+}
+
+span {
+    color: black;
+}
+
+.navbar-default .navbar-brand {
+    color: black;
 }
