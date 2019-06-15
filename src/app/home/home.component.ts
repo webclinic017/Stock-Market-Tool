@@ -7,8 +7,7 @@ import { Router } from '@angular/router';
         <body>
             <div class="container fill-height" style="margin-top: -2rem;">
                 <div class="row">
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-10 text-center"
+                    <div class="col-lg-10 text-center col-lg-offset-1"
                         style="margin-top: 15rem;">
                         <h1>
                             A Sensible Approach to Financial
