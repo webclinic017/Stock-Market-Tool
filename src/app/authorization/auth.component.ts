@@ -1,22 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from './auth.service';
 
-// TODO: Change Login to be included in the component, not root.
+// TODO: Cleanup styling
 @Component({
     selector: 'app-auth',
     template: `
-    <body style="margin-top: -2rem;">
-        <div class="col-xs-3 col-xs-offset-4"
-            style="margin-top: 10rem; padding-top: 2rem;
-                padding-left: 3rem; padding-right: 3rem; background-color: #6b789a;">
-            <h1 style="color: white;">Login</h1>
-        </div>
-        <div class="col-xs-3 col-xs-offset-4" style="padding-top: 2rem; padding-left: 3rem; padding-right: 3rem;">
+    <body style="margin-top: -10rem; ">
+            <div style="
+            position:relative;
+            top:25%;
+            margin: auto;
+            width: 30%;
+            height: 40%;
+            -webkit-box-shadow: 0 0 100px 100px black;">
             <router-outlet></router-outlet>
-        </div>
+            </div>
     </body>
     `,
     styleUrls: ['auth.component.css']
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit, OnDestroy {
 
+    constructor(public authService: AuthService) { }
+
+    ngOnInit(): void { }
+
+    ngOnDestroy(): void { }
 }

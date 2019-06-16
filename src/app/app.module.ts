@@ -12,6 +12,7 @@ import { SecurityAnalysisComponent } from './security-analysis/security-analysis
 import { AuthComponent } from './authorization/auth.component';
 import { RegisterComponent } from './authorization/register.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -29,9 +30,10 @@ import { FormsModule } from '@angular/forms';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
     ],
-    providers: [],
+    providers: [HttpClient],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
