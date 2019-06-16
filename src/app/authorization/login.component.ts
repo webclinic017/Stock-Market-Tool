@@ -8,7 +8,6 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
     template: `
         <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
             <div class="form-group">
-                <label for="username">Username</label>
                 <input type="text"
                 id="username"
                 class="form-control"
@@ -16,10 +15,10 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
                 ngModel
                 maxlength="12"
                 required
+                placeholder="Username"
                 />
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
                 <input type="password"
                 id="password"
                 class="form-control"
@@ -28,18 +27,20 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
                 ngModel
                 minlength="6"
                 required
+                placeholder="Password"
                 />
             </div>
-            <div>
+            <div class="text-center">
                 <button
                     class="btn btn-primary"
+                    style="padding-left: 17rem; padding-right: 17rem;"
                     type="submit"
                     [disabled]="!registrationForm.valid">
-                    Log in
+                    Login
                 </button>
                 <h4>
-                    Don't have an account? Click
-                        <a (click)="onRegisterClick()" style="cursor: pointer;">here</a>
+                    Don't have an account? <br /> Click
+                        <a (click)="onRegisterClick()" style="cursor: pointer; color: #6b789a !important;">here</a>
                     to register.
                 </h4>
             </div>

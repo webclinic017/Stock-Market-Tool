@@ -1,3 +1,15 @@
 * {
     font-family: Georgia;
    }
+
+/* TODO: Change button disabled color */
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:disabled, .btn-primary:visited {
+    background-color: #6b789a !important;
+    /*color: #F8F8F8;
+    margin-top: 2rem;*/
+    font-family: Georgia;
+}
+
+a:link {
+    color: #6b789a !important;
+}
