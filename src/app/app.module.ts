@@ -6,11 +6,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './authorization/login/login.component';
-import { LogoutComponent } from './authorization/logout/logout.component';
+import { LoginComponent } from './authorization/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MarketAnalysisComponent } from './market-analysis/market-analysis.component';
 import { SecurityAnalysisComponent } from './security-analysis/security-analysis.component';
+import { AuthComponent } from './authorization/auth.component';
+import { RegisterComponent } from './authorization/register.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
     declarations: [
@@ -18,15 +21,16 @@ import { SecurityAnalysisComponent } from './security-analysis/security-analysis
         HeaderComponent,
         AboutComponent,
         HomeComponent,
+        AuthComponent,
         LoginComponent,
-        LogoutComponent,
+        RegisterComponent,
         MarketAnalysisComponent,
         SecurityAnalysisComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
-        HttpClientModule
+        FormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

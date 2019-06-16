@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import { LoginComponent } from './authorization/login/login.component';
+import { LoginComponent } from './authorization/login.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { SecurityAnalysisComponent } from './security-analysis/security-analysis.component';
 import { MarketAnalysisComponent } from './market-analysis/market-analysis.component';
+import { AuthComponent } from './authorization/auth.component';
+import { RegisterComponent } from './authorization/register.component';
 
 const appRoutes: Routes =
 [
@@ -23,8 +25,23 @@ const appRoutes: Routes =
         component: AboutComponent,
     },
     {
-        path: 'login',
-        component: LoginComponent,
+        path: 'auth',
+        component: AuthComponent,
+        children: [
+            {
+                path: '',
+                redirectTo: 'login',
+                pathMatch: 'full'
+            },
+            {
+                path: 'login',
+                component: LoginComponent,
+            },
+            {
+                path: 'register',
+                component: RegisterComponent,
+            },
+        ]
     },
     {
         path: 'market-analysis',
