@@ -10,6 +10,7 @@ router.post("/register", (req, res, next) => {
         .then(hash => {
             const user = new User({
                 email: req.body.email,
+                username: req.body.username,
                 password: hash
             });
             user.save()
