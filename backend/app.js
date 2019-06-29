@@ -1,7 +1,19 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+
+const userRoutes = require("./routes/users");
+
+const User = require("./models/user");
 
 const app = express();
+mongoose.connect("mongodb+srv://DanielCanas:WSgnHp2IM8zOmqov@cluster0-988hr.mongodb.net/market-predictor?retryWrites=true&w=majority")
+  .then(() => {
+    console.log("Connection with database established!");
+  })
+  .catch(() => {
+    console("Could not establish connection with the database!");
+  });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -13,31 +25,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("/api/posts", (req, res, next) => {
-  const post = req.body;
-  console.log(post);
-  res.status(201).json({
-    message : "If you see this post is working!"
-  });
-});
-
-app.get("/api/posts", (req, res, next) => {
-  const posts = [
-    {
-      id: "fcn3u9rbn9c",
-      title: "First server side post",
-      content: "This is coming from the server!"
-    },
-    {
-      id: "fg73g8f10hsfo",
-      title: "Second server side post",
-      content: "This is coming from the server!"
-    }
-  ];
-  res.status(200).json({
-    message: "We fetched a post successfully!",
-    posts: posts
-  });
-});
+app.use("/api/user", userRoutes);
 
 module.exports = app;
