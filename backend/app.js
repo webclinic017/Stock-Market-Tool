@@ -3,8 +3,10 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const userRoutes = require("./routes/users");
+const securityRoutes = require("./routes/securitys");
 
 const User = require("./models/user");
+const Security = require("./models/security");
 
 const app = express();
 mongoose.connect("mongodb+srv://DanielCanas:WSgnHp2IM8zOmqov@cluster0-988hr.mongodb.net/market-predictor?retryWrites=true&w=majority")
@@ -26,5 +28,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/user", userRoutes);
+app.use("/api/security", securityRoutes);
 
 module.exports = app;
