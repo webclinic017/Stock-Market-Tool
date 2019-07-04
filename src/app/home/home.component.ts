@@ -4,25 +4,22 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-home',
     template: `
-        <body>
-            <div class="container fill-height" style="margin-top: -2rem;">
-                <div class="row">
-                    <div class="col-lg-10 text-center col-lg-offset-1"
-                        style="margin-top: 15rem;">
-                        <h1>
+        <div class="bg">
+            <div style="margin-top: -2rem;">
+                <div class="home-content">
+                    <h1>
                             A Sensible Approach to Financial
-                        </h1>
-                        <h1 class="big_font_120">SUCCESS</h1>
-                        <button
-                            type="button"
-                            class="btn btn-primary"
-                            (click)="onStartNow()">
-                            Start Now
-                        </button>
-                    </div>
+                    </h1>
+                    <h1 class="big_font_120">SUCCESS</h1>
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="onStartNow()">
+                        Start Now
+                    </button>
                 </div>
             </div>
-        </body>
+        </div>
     `,
     styleUrls: ['./home.component.css']
 })
