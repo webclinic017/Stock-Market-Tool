@@ -6,8 +6,15 @@ body {
     height: 100vh;
     background-size: 100% auto;
     background-color: #b5c5df;
+    margin-top: -10rem;
 }
 
 div {
     background-color: #F8F8F8;
+    position:relative;
+    top:25%;
+    margin: auto;
+    width: 30%;
+    height: 40%;
+    -webkit-box-shadow: 0 0 3rem 2rem grey;
 }

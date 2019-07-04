@@ -6,14 +6,8 @@ import { AuthService } from './auth.service';
 @Component({
     selector: 'app-auth',
     template: `
-    <body style="margin-top: -10rem; ">
-            <div style="
-            position:relative;
-            top:25%;
-            margin: auto;
-            width: 30%;
-            height: 40%;
-            -webkit-box-shadow: 0 0 100px 100px black;">
+    <body>
+            <div>
             <router-outlet></router-outlet>
             </div>
     </body>
