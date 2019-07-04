@@ -11,30 +11,29 @@ import { AuthService } from './auth.service';
         <div style=" padding-top: 2rem; background-color: #6b789a; display: flex;">
             <h1 style="width: 100%; text-align: center; color: white; background-color: #6b789a;"> Login </h1>
         </div>
-        <div
-            style="padding-top: 2rem; padding-left: 3rem; padding-right: 3rem;">
+        <div>
             <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
                 <div class="form-group">
                     <input type="text"
-                    id="username"
-                    class="form-control"
-                    name="username"
-                    ngModel
-                    maxlength="12"
-                    required
-                    placeholder="Username"
+                        id="username"
+                        class="form-control"
+                        name="username"
+                        ngModel
+                        maxlength="12"
+                        required
+                        placeholder="Username"
                     />
                 </div>
                 <div class="form-group">
                     <input type="password"
-                    id="password"
-                    class="form-control"
-                    name="password"
-                    type="password"
-                    ngModel
-                    minlength="6"
-                    required
-                    placeholder="Password"
+                        id="password"
+                        class="form-control"
+                        name="password"
+                        type="password"
+                        ngModel
+                        minlength="6"
+                        required
+                        placeholder="Password"
                     />
                 </div>
                 <div class="text-center">
