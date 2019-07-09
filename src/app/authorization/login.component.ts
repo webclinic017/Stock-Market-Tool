@@ -63,10 +63,12 @@ export class LoginComponent implements OnInit {
         public authService: AuthService
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.authService.currentView.next("login");
+    }
 
     public onRegisterClick(): void {
-        this.authService.viewChanged.next();
+        this.authService.currentView.next("register");
         this.router.navigate( ['../register'], {relativeTo: this.activatedRoute} );
     }
 

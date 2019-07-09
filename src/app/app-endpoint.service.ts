@@ -25,11 +25,11 @@ export class AppEndpointService {
     // Register a new user.
     public register(email: string, password: string, username: string): Observable<RegisterResponse> {
         return this.http.post<RegisterResponse>(
-            'endpointUrl',
+            '/register',
             {
+                username,
                 email,
-                password,
-                username
+                password
             }
         )
         .pipe(
@@ -50,7 +50,7 @@ export class AppEndpointService {
     // Login an existing user.
     public login(email: string, password: string, username: string): Observable<RegisterResponse> {
         return this.http.post<LoginResponse>(
-            'endpointUrl',
+            '/login',
             {
                 password,
                 username

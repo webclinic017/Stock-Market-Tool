@@ -44,10 +44,16 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.isMobile = device.mobile;
 
         // Toggle size of window bases on register or login view.
-        this.viewChangeSubscription = this.authService.viewChanged.subscribe(() => {
-            this.isLoginView = !this.isLoginView;
+        this.viewChangeSubscription = this.authService.currentView.subscribe((view: string) => {
+            if (view === 'login') {
+                this.isLoginView = true;
+            } else {
+                this.isLoginView = false;
+            }
         });
     }
 
-    ngOnDestroy(): void { }
+    ngOnDestroy(): void {
+        this.viewChangeSubscription.unsubscribe();
+    }
 }
