@@ -13,6 +13,6 @@ Serve investment recommendation(s) given stock and current point in time.
 
 
 
-## ValuePredictor (Front End)
+## ValuePredictor
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli), version 8.
+This project was generated with the MEAN stack.
