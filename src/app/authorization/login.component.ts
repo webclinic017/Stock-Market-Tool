@@ -4,7 +4,6 @@ import { NgForm } from '@angular/forms';
 import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 import { AuthService } from './auth.service';
 
-// TODO: Cleanup styling
 @Component({
     selector: 'app-login',
     template: `
@@ -67,6 +66,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() { }
 
     public onRegisterClick(): void {
+        this.authService.viewChanged.next();
         this.router.navigate( ['../register'], {relativeTo: this.activatedRoute} );
     }
 
