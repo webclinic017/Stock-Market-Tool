@@ -12,3 +12,6 @@ alias gacan="git commit --amend --no-edit"
 # Push commit to branch.
 alias gp="git push"
 alias gpf="git push -f"
+
+# Run server.
+alias run-server="npm run start:server"
