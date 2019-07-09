@@ -2,12 +2,49 @@
     font-family: Georgia;
 }
 
-body {
+.auth-body {
     height: 100vh;
     background-size: 100% auto;
     background-color: #b5c5df;
+    margin-top: -10rem;
 }
 
-div {
+.mobile-auth-login {
     background-color: #F8F8F8;
+    position:relative;
+    top:25%;
+    margin: auto;
+    width: 70%;
+    height: 29rem;
+    -webkit-box-shadow: 0 0 1rem .5rem #172336;
+}
+
+.mobile-auth-register {
+    background-color: #F8F8F8;
+    position:relative;
+    top:25%;
+    margin: auto;
+    width: 70%;
+    height: 33.5rem;
+    -webkit-box-shadow: 0 0 1rem .5rem #172336;
+}
+
+.desktop-auth-login {
+    background-color: #F8F8F8;
+    position:relative;
+    top:25%;
+    margin: auto;
+    width: 30%;
+    height: 29rem;
+    -webkit-box-shadow: 0 0 1rem .5rem #172336;
+}
+
+.desktop-auth-register {
+    background-color: #F8F8F8;
+    position:relative;
+    top:25%;
+    margin: auto;
+    width: 30%;
+    height: 33.5rem;
+    -webkit-box-shadow: 0 0 1rem .5rem #172336;
 }

@@ -6,6 +6,7 @@ import { AppEndpointService, RegisterResponse } from '../app-endpoint.service';
 export class AuthService {
     public error: string;
     public errorEmitted = new Subject<string>();
+    public viewChanged = new Subject();
 
     constructor(public endpointService: AppEndpointService) { }
 

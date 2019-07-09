@@ -4,68 +4,70 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Subscription } from 'rxjs';
 
-// TODO: Cleanup styling
 @Component({
     selector: 'app-register',
     template: `
-        <div style=" padding-top: 2rem; background-color: #6b789a; display: flex;">
-        <div class="alert alert-danger" *ngIf="errorMessage">
-            <p>{{ errorMessage }}</p>
+        <div *ngIf="errorMessage" style=" padding-top: 2rem; background-color: #6b789a; display: flex;">
+            <div class="alert alert-danger">
+                <p>{{ errorMessage }}</p>
+            </div>
         </div>
-        <h1 style="width: 100%; text-align: center; color: white; background-color: #6b789a;"> Register </h1>
-        </div>
-        <div
-            style="padding-top: 2rem; padding-left: 3rem; padding-right: 3rem;">
-            <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
-                <div class="form-group">
-                    <input type="email"
-                    id="email"
-                    class="form-control"
-                    ngModel
-                    name="email"
-                    required
-                    email
-                    placeholder="Email"
-                    />
+        <div class="input-container">
+            <h1 class="input-header"> Register </h1>
+                <div class="input-body">
+                    <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+                        <div class="form-group shorter-input-box">
+                            <input type="email"
+                            id="email"
+                            class="form-control"
+                            ngModel
+                            name="email"
+                            required
+                            email
+                            placeholder="Email"
+                            />
+                        </div>
+                        <div class="form-group shorter-input-box">
+                            <input type="text"
+                            id="username"
+                            class="form-control"
+                            name="username"
+                            ngModel
+                            maxlength="12"
+                            required
+                            placeholder="Username"
+                            />
+                        </div>
+                        <div class="form-group shorter-input-box">
+                            <input type="password"
+                            id="password"
+                            class="form-control"
+                            name="password"
+                            type="password"
+                            ngModel
+                            minlength="6"
+                            required
+                            placeholder="Password"
+                            />
+                        </div>
+                        <div class="text-center shorter-input-button">
+                            <button
+                                class="btn btn-primary btn-block"
+                                type="submit"
+                                [disabled]="!registrationForm.valid">
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                    <div class="text-center">
+                        <h4 style="width: 100%; text-align: center;">
+                            Already have an account? <br /> Click
+                                <a (click)="onLoginClick()" style="cursor: pointer; color: #6b789a !important;">here</a>
+                            to login.
+                        </h4>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="text"
-                    id="username"
-                    class="form-control"
-                    name="username"
-                    ngModel
-                    maxlength="12"
-                    required
-                    placeholder="Username"
-                    />
-                </div>
-                <div class="form-group">
-                    <input type="password"
-                    id="password"
-                    class="form-control"
-                    name="password"
-                    type="password"
-                    ngModel
-                    minlength="6"
-                    required
-                    placeholder="Password"
-                    />
-                </div>
-                <div class="text-center">
-                    <button
-                        class="btn btn-primary btn-block"
-                        type="submit"
-                        [disabled]="!registrationForm.valid">
-                        Register
-                    </button>
-                </div>
-            </form>
-            <h4 style="width: 100%; text-align: center;">
-                Already have an account? <br /> Click
-                    <a (click)="onLoginClick()" style="cursor: pointer; color: #6b789a !important;">here</a>
-                to login.
-            </h4>
-        </div>
+            </div>
     `,
     styleUrls: ['login.component.css']
 })
@@ -86,6 +88,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     public onLoginClick(): void {
+        this.authService.viewChanged.next();
         this.router.navigate( ['../login'], {relativeTo: this.activatedRoute} );
     }
 
