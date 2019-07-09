@@ -11,7 +11,10 @@ Serve investment recommendation(s) given stock and current point in time.
 - Have a full featured and mobile compatible website to accurately display buy-ins, security valuation predictions, estimated returns, and sourced information.
 - Use machine learning to test, validate, and seek performance of the model’s stability for estimating returns.
 
+### Demo
 
+Click here to see a demo hosted off server on AWS.
+http://snr-des-demo.s3-website.us-east-2.amazonaws.com/home
 
 ## ValuePredictor
 
