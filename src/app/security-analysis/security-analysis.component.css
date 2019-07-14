@@ -25,7 +25,7 @@
 .summary-col {
     display: flex;
     flex-direction: column;
-    width: 25rem;
+    width: 26rem;
     padding-top: 1rem;
     padding-bottom: 2rem;
 }

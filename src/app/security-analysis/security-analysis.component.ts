@@ -49,56 +49,78 @@ export class OwnerSummary {
                 </div>
                 <!-- TODO: Change to more simple table on small screen/mobile -->
                 <div class="owner-summary">
-                    <h2 class="text-center">American Express Co. (AXP) Owner's Summary</h2>
+                    <h2 class="text-center font-weight-bold">American Express Co. (AXP) Owner's Summary</h2>
                     <div class="summary-columns">
                         <div class="summary-col">
                             <div>
-                                <span style="padding-right: 3.2rem;">Intrinsic Value</span>
+                                <span style="padding-right: 2.9rem; font-weight: bold;">Intrinsic Value</span>
                                 <span>{{ this.testData.intrinsicValue }}</span>
                             </div>
                             <div>
-                                <span style="padding-right: 3rem;">1 Year Growth</span>
+                                <span style="padding-right: 3rem; font-weight: bold;">1 Year Growth</span>
                                 <span>{{ this.testData.oneYearGrowth }}</span>
                             </div>
                             <div>
-                                <span style="padding-right: 3rem;">5 Year Growth</span>
+                                <span style="padding-right: 3rem; font-weight: bold;">5 Year Growth</span>
                                 <span>{{ this.testData.fiveYearGrowth }}</span>
                             </div>
                         </div>
                         <div class="summary-col">
                             <div>
-                                <span style="padding-right: 4.2rem;">Historic Financials</span>
-                                <span
-                                    [ngStyle]="{'color': this.testData.historicFin === 0 ? 'LimeGreen' : 'Red'}"
-                                    style="font-weight: bold;">{{ this.finEnum[this.testData.historicFin] }}
+                                <span style="padding-right: 3.89rem; font-weight: bold;">Historic Financials</span>
+                                <span 
+                                    *ngIf="this.testData.historicFin === 0; else unhealthy"
+                                    style="font-weight: bold; color: LimeGreen">
+                                    {{ this.finEnum[this.testData.historicFin] }}
+                                    <span class="oi oi-circle-check" style="color: LimeGreen" aria-hidden="true"></span>
                                 </span>
+                                <ng-template #unhealthy>
+                                    <span style="font-weight: bold; color: Red">
+                                        {{ this.finEnum[this.testData.historicFin] }}
+                                    </span>
+                                </ng-template>
                             </div>
                             <div>
-                                <span style="padding-right: 5.4rem;">Acute Financials</span>
-                                <span
-                                    [ngStyle]="{'color': this.testData.acuteFin === 0 ? 'LimeGreen' : 'Red'}"
-                                    style="font-weight: bold;">{{ this.finEnum[this.testData.acuteFin] }}
+                                <span style="padding-right: 5.1rem; font-weight: bold;">Acute Financials</span>
+                                <span 
+                                    *ngIf="this.testData.acuteFin === 0; else unhealthy"
+                                    style="font-weight: bold; color: LimeGreen">
+                                    {{ this.finEnum[this.testData.acuteFin] }}
+                                    <span class="oi oi-circle-check" style="color: LimeGreen" aria-hidden="true"></span>
                                 </span>
+                                <ng-template #unhealthy>
+                                    <span style="font-weight: bold; color: Red">
+                                        {{ this.finEnum[this.testData.acuteFin] }}
+                                    </span>
+                                </ng-template>
                             </div>
                             <div>
-                                <span style="padding-right: 3rem;">Projected Financials</span>
-                                <span
-                                    [ngStyle]="{'color': this.testData.projectedFin === 0 ? 'LimeGreen' : 'Red'}"
-                                    style="font-weight: bold;">{{ this.finEnum[this.testData.projectedFin] }}
+                                <span style="padding-right: 2.6rem; font-weight: bold;">Projected Financials</span>
+                                <span 
+                                    *ngIf="this.testData.projectedFin === 0; else unhealthy"
+                                    style="font-weight: bold; color: LimeGreen">
+                                    {{ this.finEnum[this.testData.projectedFin] }}
+                                    <span class="oi oi-circle-check" style="color: LimeGreen" aria-hidden="true"></span>
                                 </span>
+                                <ng-template #unhealthy>
+                                    <span style="font-weight: bold; color: Red">
+                                        {{ this.finEnum[this.testData.projectedFin] }} 
+                                        <span class="oi oi-circle-x" style="color: Red" aria-hidden="true"></span>
+                                    </span>
+                                </ng-template>
                             </div>
                         </div>
                         <div class="summary-col">
                             <div>
-                                <span style="padding-right: 6.9rem;">Est. Time to Value</span>
+                                <span style="padding-right: 6.9rem; font-weight: bold;">Est. Time to Value</span>
                                 <span>{{ this.testData.fiveYearGrowth }}</span>
                             </div>
                             <div>
-                                <span style="padding-right: 2.6rem;">Sustainable Growth Rate</span>
+                                <span style="padding-right: 2.3rem; font-weight: bold;">Sustainable Growth Rate</span>
                                 <span>{{ this.testData.fiveYearGrowth }}</span>
                             </div>
                             <div>
-                                <span style="padding-right: 2.3rem;">Effect from Intrinsic Value</span>
+                                <span style="padding-right: 1.6rem; font-weight: bold;">Effect from Intrinsic Value</span>
                                 <span>{{ this.testData.fiveYearGrowth }}</span>
                             </div>
                         </div>
