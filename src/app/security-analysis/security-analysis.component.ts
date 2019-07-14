@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppEndpointService } from '../app-endpoint.service';
+
 export enum FinancialsDisplayEnum {
     'Healthy',
     'Unhealthy'
@@ -12,6 +14,7 @@ export enum FinacialsEnum {
 
 // TODO: Replicate on backend.
 export class OwnerSummary {
+    public ticker: string;
     public intrinsicValue: number;
     public oneYearGrowth: number;
     public fiveYearGrowth: number;
@@ -22,6 +25,10 @@ export class OwnerSummary {
     public growthRate: number;
     public effectOfIntrVal: number;
 }
+
+// TODO: Ticker enum that displays as follows:
+// AXP : 0, then in display enum 'American express Co. (AXP)'
+// export class tickerEnum {} export class tickerDisplayEnum
 
 @Component({
     selector: 'app-security-analysis',
@@ -42,12 +49,12 @@ export class OwnerSummary {
                 </div>
                 <!-- TODO: Change to more simple table on small screen/mobile -->
                 <div class="owner-summary">
-                    <h2 class="text-center">Owner's Summary</h2>
+                    <h2 class="text-center">American Express Co. (AXP) Owner's Summary</h2>
                     <div class="summary-columns">
                         <div class="summary-col">
                             <div>
                                 <span style="padding-right: 3.2rem;">Intrinsic Value</span>
-                                <span>{{ this.finEnum[this.testData.acuteFin] }}</span>
+                                <span>{{ this.testData.intrinsicValue }}</span>
                             </div>
                             <div>
                                 <span style="padding-right: 3rem;">1 Year Growth</span>
@@ -60,16 +67,25 @@ export class OwnerSummary {
                         </div>
                         <div class="summary-col">
                             <div>
-                                <span style="padding-right: 4.3rem;">Historic Financials</span>
-                                <span>{{ this.finEnum[this.testData.historicFin] }}</span>
+                                <span style="padding-right: 4.2rem;">Historic Financials</span>
+                                <span
+                                    [ngStyle]="{'color': this.testData.historicFin === 0 ? 'LimeGreen' : 'Red'}"
+                                    style="font-weight: bold;">{{ this.finEnum[this.testData.historicFin] }}
+                                </span>
                             </div>
                             <div>
                                 <span style="padding-right: 5.4rem;">Acute Financials</span>
-                                <span>{{ this.finEnum[this.testData.acuteFin] }}</span>
+                                <span
+                                    [ngStyle]="{'color': this.testData.acuteFin === 0 ? 'LimeGreen' : 'Red'}"
+                                    style="font-weight: bold;">{{ this.finEnum[this.testData.acuteFin] }}
+                                </span>
                             </div>
                             <div>
                                 <span style="padding-right: 3rem;">Projected Financials</span>
-                                <span>{{ this.finEnum[this.testData.projectedFin] }}</span>
+                                <span
+                                    [ngStyle]="{'color': this.testData.projectedFin === 0 ? 'LimeGreen' : 'Red'}"
+                                    style="font-weight: bold;">{{ this.finEnum[this.testData.projectedFin] }}
+                                </span>
                             </div>
                         </div>
                         <div class="summary-col">
@@ -82,7 +98,7 @@ export class OwnerSummary {
                                 <span>{{ this.testData.fiveYearGrowth }}</span>
                             </div>
                             <div>
-                                <span style="padding-right: 2.4rem;">Effect from Intrinsic Value</span>
+                                <span style="padding-right: 2.3rem;">Effect from Intrinsic Value</span>
                                 <span>{{ this.testData.fiveYearGrowth }}</span>
                             </div>
                         </div>
@@ -106,24 +122,31 @@ export class OwnerSummary {
 })
 export class SecurityAnalysisComponent implements OnInit {
     public testData: OwnerSummary = {
-         intrinsicValue: 1212,
-         oneYearGrowth: 12121,
-         fiveYearGrowth: 1212,
-         historicFin: 0,
-         acuteFin: 0,
-         projectedFin: 1,
-         timeToValue: 1,
-         growthRate: 12,
-         effectOfIntrVal: 1211
-    }
+        ticker: 'AXP',
+        intrinsicValue: 1212,
+        oneYearGrowth: 12121,
+        fiveYearGrowth: 1212,
+        historicFin: 0,
+        acuteFin: 0,
+        projectedFin: 1,
+        timeToValue: 1,
+        growthRate: 12,
+        effectOfIntrVal: 1211
+    };
     public finEnum = FinancialsDisplayEnum;
 
-    constructor() { }
+    constructor(
+        private _endpointService: AppEndpointService
+    ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        // TODO:
+    }
 
-    public handleTickerSearch(tickerInput: HTMLInputElement) {
-        console.log(tickerInput.value);
-        console.log(this.finEnum[this.testData.acuteFin]);
+    public async handleTickerSearch(tickerInput: HTMLInputElement): Promise<void> {
+        // TODO: Set display to load.
+        const ticker = tickerInput.value;
+        // this.testData = await this._endpointService.securityAnalysis(ticker);
+        // TODO: End loading, display details.
     }
 }
