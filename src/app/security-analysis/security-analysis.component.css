@@ -3,6 +3,13 @@
     flex-direction: column;
 }
 
+.interact-bar {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-bottom: 1rem;
+}
+
 .owner-summary {
     display: flex;
     flex-direction: column;
@@ -18,11 +25,17 @@
 .summary-col {
     display: flex;
     flex-direction: column;
+    width: 25rem;
 }
 
 .security-details {
     display: flex;
     justify-content: space-between;
+}
+
+.cashflow-header {
+    padding-left: 4.5rem;
+    padding-right: 4.5rem;
 }
 
 .cashflow {
