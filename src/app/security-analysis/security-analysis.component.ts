@@ -74,7 +74,7 @@ export class OwnerSummary {
                         </div>
                         <div class="summary-col">
                             <div>
-                                <span style="padding-right: 7rem;">Est. Time to Value</span>
+                                <span style="padding-right: 6.9rem;">Est. Time to Value</span>
                                 <span>{{ this.testData.fiveYearGrowth }}</span>
                             </div>
                             <div>
@@ -82,7 +82,7 @@ export class OwnerSummary {
                                 <span>{{ this.testData.fiveYearGrowth }}</span>
                             </div>
                             <div>
-                                <span style="padding-right: 2.3rem;">Effect from Intrinsic Value</span>
+                                <span style="padding-right: 2.4rem;">Effect from Intrinsic Value</span>
                                 <span>{{ this.testData.fiveYearGrowth }}</span>
                             </div>
                         </div>
