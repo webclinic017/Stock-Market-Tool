@@ -1,0 +1,38 @@
+.security-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.owner-summary {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    background-color: #e7e7e7;
+}
+
+.summary-columns {
+    display: flex;
+    justify-content: space-around;
+}
+
+.summary-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.security-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cashflow {
+    background-color: #e7e7e7;
+}
+
+.capital {
+    background-color: #e7e7e7;
+}
+
+.management {
+    background-color: #e7e7e7;
+}
