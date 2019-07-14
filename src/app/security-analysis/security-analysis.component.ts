@@ -42,6 +42,7 @@ import { Component, OnInit } from '@angular/core';
             </div>
         </div>
     `,
+    styleUrls: ['security-analysis.component.css']
 })
 export class SecurityAnalysisComponent implements OnInit {
 
