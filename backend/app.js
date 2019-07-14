@@ -14,7 +14,7 @@ mongoose.connect("mongodb+srv://DanielCanas:WSgnHp2IM8zOmqov@cluster0-988hr.mong
     console.log("Connection with database established!");
   })
   .catch(() => {
-    console("Could not establish connection with the database!");
+    console.log("Could not establish connection with the database!");
   });
 
 app.use(bodyParser.json());
@@ -26,6 +26,12 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS");
   next();
 });
+
+//app.use("/home", (req, res, next) => {
+  //res.status(201).json({
+    //message: 'Welcome to the server!'
+  //});
+//});
 
 app.use("/api/user", userRoutes);
 app.use("/api/security", securityRoutes);

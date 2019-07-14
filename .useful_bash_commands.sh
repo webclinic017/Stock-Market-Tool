@@ -7,7 +7,7 @@ alias mn-mac-smt="cd ~/Documents/Github/Stock-Market-Tool/"
 alias grom="git pull --rebase origin master"
 
 # Add new staged changes to previous commit (smaller commit history).
-alias gacan="git commit --amend --no-edit"
+alias gcan="git commit --amend --no-edit"
 
 # Push commit to branch.
 alias gp="git push"
