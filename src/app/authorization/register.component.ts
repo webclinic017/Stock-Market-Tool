@@ -82,14 +82,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.authService.currentView.next("register");
+        this.authService.currentView.next('register');
         this.errorSubscription = this.authService.errorEmitted.subscribe((error: string) => {
             this.errorMessage = error;
         });
     }
 
     public onLoginClick(): void {
-        this.authService.currentView.next("login");
+        this.authService.currentView.next('login');
         this.router.navigate( ['../login'], {relativeTo: this.activatedRoute} );
     }
 

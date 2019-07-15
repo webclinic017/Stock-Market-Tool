@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -64,11 +63,11 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.authService.currentView.next("login");
+        this.authService.currentView.next('login');
     }
 
     public onRegisterClick(): void {
-        this.authService.currentView.next("register");
+        this.authService.currentView.next('register');
         this.router.navigate( ['../register'], {relativeTo: this.activatedRoute} );
     }
 

@@ -58,4 +58,10 @@ export class AppEndpointService {
         );
     }
 
+    // TODO:
+    // Compute security analysis.
+    public securityAnalysis() {
+        // TODO: Call to backend.
+        // return response.
+    }
 }
