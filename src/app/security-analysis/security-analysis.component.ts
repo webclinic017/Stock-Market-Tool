@@ -68,7 +68,7 @@ export class OwnerSummary {
                         <div class="summary-col">
                             <div>
                                 <span style="padding-right: 3.89rem; font-weight: bold;">Historic Financials</span>
-                                <span 
+                                <span
                                     *ngIf="this.testData.historicFin === 0; else unhealthy"
                                     style="font-weight: bold; color: LimeGreen">
                                     {{ this.finEnum[this.testData.historicFin] }}
@@ -82,7 +82,7 @@ export class OwnerSummary {
                             </div>
                             <div>
                                 <span style="padding-right: 5.1rem; font-weight: bold;">Acute Financials</span>
-                                <span 
+                                <span
                                     *ngIf="this.testData.acuteFin === 0; else unhealthy"
                                     style="font-weight: bold; color: LimeGreen">
                                     {{ this.finEnum[this.testData.acuteFin] }}
@@ -96,7 +96,7 @@ export class OwnerSummary {
                             </div>
                             <div>
                                 <span style="padding-right: 2.6rem; font-weight: bold;">Projected Financials</span>
-                                <span 
+                                <span
                                     *ngIf="this.testData.projectedFin === 0; else unhealthy"
                                     style="font-weight: bold; color: LimeGreen">
                                     {{ this.finEnum[this.testData.projectedFin] }}
@@ -104,7 +104,7 @@ export class OwnerSummary {
                                 </span>
                                 <ng-template #unhealthy>
                                     <span style="font-weight: bold; color: Red">
-                                        {{ this.finEnum[this.testData.projectedFin] }} 
+                                        {{ this.finEnum[this.testData.projectedFin] }}
                                         <span class="oi oi-circle-x" style="color: Red" aria-hidden="true"></span>
                                     </span>
                                 </ng-template>
@@ -128,13 +128,112 @@ export class OwnerSummary {
                 </div>
                 <div class="security-details">
                     <div class="cashflow">
-                        <h3 class="cashflow-header">Discounted Cashflow</h3>
+                        <h3>Discounted Cashflow</h3>
+                        <div class="col-row">
+                            <span>Cash and Equivalents</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Short-Term Assets</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Long-Term Assets</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Discounted Cashflow</span>
+                            <span>1232</span>
+                        </div>
+                        <hr style="border-color: black" />
+                        <div class="col-row">
+                            <span>Intrinsic Value</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Price</span>
+                            <span>1232</span>
+                        </div>
+                        <hr style="border-color: black" />
+                        <div class="col-row">
+                            <span>Net Margin of Safety</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Margin of Safety</span>
+                            <span>1232</span>
+                        </div>
                     </div>
                     <div class="capital">
-                        <h3 class="cashflow-header">Captial Structure</h3>
+                        <h3 align="center">Capital Structure</h3>
+                        <h4 align="center" style="color: orange">Moderate Leverage</h4>
+                        <div class="col-row">
+                            <span>Debt-to-Capital-Ratio</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Debt-to-Equity-Ratio <br> (D/E)</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Interest Coverage <br> Ratio</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Degree of Combined <br> Leverage</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Degree of Operating <br> Leverage (DOL)</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Degree of Financial <br> Leverage</span>
+                            <span>1232</span>
+                        </div>
                     </div>
                     <div class="management">
-                        <h3 class="cashflow-header">Management Effectiveness</h3>
+                        <h3>Management Effectiveness</h3>
+                        <div class="col-row">
+                            <span>Price to Earnings Ration (P/E)</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Earning Yield (E/P)</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Absolue P/E</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Relative P/E</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Return on Equity (ROE)</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Return on Invested Capital (ROIC)</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Retention Ratio</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Sustainable Growth Rate</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Return on Assets (ROA)</span>
+                            <span>1232</span>
+                        </div>
+                        <div class="col-row">
+                            <span>Price to Book (P/B)</span>
+                            <span>1232</span>
+                        </div>
                     </div>
                 </div>
             </div>

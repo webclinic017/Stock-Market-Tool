@@ -35,19 +35,27 @@
     justify-content: space-between;
 }
 
-.cashflow-header {
+.cashflow {
+    background-color: #e7e7e7;
     padding-left: 4.5rem;
     padding-right: 4.5rem;
 }
 
-.cashflow {
-    background-color: #e7e7e7;
-}
-
 .capital {
     background-color: #e7e7e7;
+    padding-left: 4.5rem;
+    padding-right: 4.5rem;
 }
 
 .management {
     background-color: #e7e7e7;
+    padding-left: 4.5rem;
+    padding-right: 4.5rem;
+}
+
+.col-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    padding-bottom: .5rem;
 }
