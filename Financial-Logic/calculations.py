@@ -9,46 +9,66 @@ y = corporateBondRateAAA
 NOPAT = 12 #Net operating profit after tax
 investedCapital = 30
 price = 100
+assets = 80
 earnings = 10
 dividends = 5
 retainedEarnings = price - dividends
 sectorHighPeMult = 18
 sectorLowPwMult = 7
 shareholdersEquity = 20
+peMult = 8.5
+peArray3 = [peMult - 1, peMult, peMult + 1]
+peArray5 = [peMult - 1, peMult, peMult + 1, peMult - 1, peMult + 1]
+peArray10 = [peMult - 1, peMult, peMult + 1, peMult - 1, peMult, peMult + 1, peMult - 1, peMult, peMult + 1, peMult]
+noGrowthPe = 8.5
+growthMult = 2
+bookValue = 20
 
-# Formulas
-pe = price / earnings
-if sectorHighPeMult < pe :
-    highPe = True
-else:
-     highPe = False
+# Valuation Formulas
+def pe(price, earnings)
+    return price / earnings #Also known as pe absolute
 
-if pe < sectorLowPwMult :
-    lowPe = True
-else:
-    lowPe = False
+def earningsYield(earnings, price)
+    return earnings / price #Expected continuing rate of return
 
-earningsYield = earnings / price #Expected continuing rate of return
-peAbsolute = pe
+def peRelative3 (peArray3)
+    return sum(peArray3)/len(peArray3)
+def peRelative5 (peArray5)
+    return sum(peArray5)/len(peArray5)
+def peRelative10 (peArray10)
+    return sum(peArray10)/len(peArray10)
 
-peRelative3 = sum([pe - 1, pe, pe + 1])/ 3
-peRelative5 = sum([pe - 1, pe, pe + 1, pe - 1, pe + 1])/ 5
-peRelative10 = sum([pe - 1, pe, pe + 1, pe - 1, pe, pe + 1, pe - 1, pe, pe + 1, pe])/ 10
+def roe(earnings, shareholdersEquity)
+    return earnings / shareholdersEquity
 
-roe = earnings / shareholdersEquity
-roic = NOPAT / investedCapital
-retentionRatio = retainedEarnings / earnings
-dividendPayoutRatio = dividends / earnings
-sgr = roe * (1 - dividendPayoutRatio)
+def roic(NOPAT, investedCapital)
+    return NOPAT / investedCapital
+
+def retentionRatio(retainedEarnings, earnings)
+    return retainedEarnings / earnings
+
+def dividendPayoutRatio( dividends, earnings)
+    return dividends / earnings
+
+def sgr(roe, dividendPayoutRatio)
+    return roe * (1 - dividendPayoutRatio)
 #sgr = roe * retentionRatio as well
 
+def retentionRatio(dividendPayoutRatio)
+    return 1 - dividendPayoutRatio
 
+def roa (earnings, assets)
+    return earnings / assets
 
+def pb(price, bookValue)
+    return price / bookValue
+#below 1.0 is good, trackings below 3.0
 
+def origGrahamFormula(eps, noGrowthPe, growthMult, g)
+    return eps * (noGrowthPe + growthMult * g)
 
-
-origGrahamFormula = eps * (8.5 + 2 * g)
-revisedGrahamFormula = (eps * (8.5 + 2 * g) * minReturn) / y
+def revisedGrahamFormula(eps, noGrowthPe, growthMult, g, minReturn, y)
+    return (eps * (noGrowthPe + growthMult * g) * minReturn) / y
 
 print("The max value is : ", origGrahamFormula)
 input("Press any key to exit")
