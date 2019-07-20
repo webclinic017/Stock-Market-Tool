@@ -31,6 +31,7 @@
     "mongoose-unique-validator": "^2.0.3",
     "ngx-input-search": "^2.2.1",
     "ngx-responsive": "^7.0.1",
+    "ngx-smart-popover": "^1.1.0",
     "nodemon": "^1.18.11",
     "open-iconic": "^1.1.1",
     "rxjs": "~6.3.3",

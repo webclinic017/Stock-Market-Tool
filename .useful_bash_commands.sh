@@ -1,13 +1,22 @@
 #!/bin/bash
 
-# navigate to this directory (For Matt's personal setup).
-alias mn-mac-smt="cd ~/Documents/Github/Stock-Market-Tool/"
+# Navigate to this directory (For Matt's personal setup).
+alias mn-smt="cd ~/Documents/Github/Stock-Market-Tool/"
+
+# Fetch updates.
+alias gf="git fetch"
 
 # Update branch to take in changes from master.
-alias grom="git pull --rebase origin master"
+alias grom="gf; git rebase origin/master"
 
-# Add new staged changes to previous commit (smaller commit history).
+# Stage all changed files.
+alias gaa="git add -A"
+
+# Commit staged files with same message as last commit.
 alias gcan="git commit --amend --no-edit"
+
+# Stage changes with previous commit message. (smaller commit history).
+alias gacan="gaa; gcan"
 
 # Push commit to branch.
 alias gp="git push"
