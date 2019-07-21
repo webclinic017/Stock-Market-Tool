@@ -24,9 +24,7 @@ export class AppEndpointService {
 
     // Register a new user.
     public register(email: string, password: string, username: string): Observable<RegisterResponse> {
-        return this.http.post<RegisterResponse>(
-            '/register',
-            {
+        return this.http.post<RegisterResponse>('/register', {
                 username,
                 email,
                 password
@@ -49,9 +47,7 @@ export class AppEndpointService {
 
     // Login an existing user.
     public login(email: string, password: string, username: string): Observable<RegisterResponse> {
-        return this.http.post<LoginResponse>(
-            '/login',
-            {
+        return this.http.post<LoginResponse>('/login', {
                 password,
                 username
             }
@@ -60,7 +56,7 @@ export class AppEndpointService {
 
     // TODO:
     // Compute security analysis.
-    public securityAnalysis() {
+    public securityAnalysis(): void {
         // TODO: Call to backend.
         // return response.
     }
