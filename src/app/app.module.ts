@@ -14,6 +14,7 @@ import { AuthComponent } from './authorization/auth.component';
 import { RegisterComponent } from './authorization/register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import {PopoverModule} from 'ngx-smart-popover';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { HttpClient } from '@angular/common/http';
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        PopoverModule
     ],
     providers: [HttpClient],
     bootstrap: [AppComponent]

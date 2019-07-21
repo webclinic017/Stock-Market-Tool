@@ -72,11 +72,28 @@ export class OwnerSummary {
                                     *ngIf="this.testData.historicFin === 0; else unhealthy"
                                     style="font-weight: bold; color: LimeGreen">
                                     {{ this.finEnum[this.testData.historicFin] }}
-                                    <span class="oi oi-circle-check" style="color: LimeGreen" aria-hidden="true"></span>
+                                    <span
+                                        popover="Explains why this is healthy."
+                                        popoverPlacement="top-right"
+                                        [popoverOnHover]="true"
+                                        [popoverCloseOnMouseOutside]="true"
+                                        class="oi oi-circle-check"
+                                        style="color: LimeGreen"
+                                        aria-hidden="true">
+                                    </span>
                                 </span>
                                 <ng-template #unhealthy>
                                     <span style="font-weight: bold; color: Red">
                                         {{ this.finEnum[this.testData.historicFin] }}
+                                        <span
+                                        popover="Explains why this is unhealthy."
+                                        popoverPlacement="top-right"
+                                        [popoverOnHover]="true"
+                                        [popoverCloseOnMouseOutside]="true"
+                                        class="oi oi-circle-x"
+                                        style="color: Red"
+                                        aria-hidden="true">
+                                        </span>
                                     </span>
                                 </ng-template>
                             </div>
@@ -86,11 +103,28 @@ export class OwnerSummary {
                                     *ngIf="this.testData.acuteFin === 0; else unhealthy"
                                     style="font-weight: bold; color: LimeGreen">
                                     {{ this.finEnum[this.testData.acuteFin] }}
-                                    <span class="oi oi-circle-check" style="color: LimeGreen" aria-hidden="true"></span>
+                                    <span
+                                        popover="Explains why this is healthy."
+                                        popoverPlacement="top-right"
+                                        [popoverOnHover]="true"
+                                        [popoverCloseOnMouseOutside]="true"
+                                        class="oi oi-circle-check"
+                                        style="color: LimeGreen"
+                                        aria-hidden="true">
+                                    </span>
                                 </span>
                                 <ng-template #unhealthy>
                                     <span style="font-weight: bold; color: Red">
                                         {{ this.finEnum[this.testData.acuteFin] }}
+                                        <span
+                                        popover="Explains why this is unhealthy."
+                                        popoverPlacement="top-right"
+                                        [popoverOnHover]="true"
+                                        [popoverCloseOnMouseOutside]="true"
+                                        class="oi oi-circle-x"
+                                        style="color: Red"
+                                        aria-hidden="true">
+                                        </span>
                                     </span>
                                 </ng-template>
                             </div>
@@ -100,12 +134,28 @@ export class OwnerSummary {
                                     *ngIf="this.testData.projectedFin === 0; else unhealthy"
                                     style="font-weight: bold; color: LimeGreen">
                                     {{ this.finEnum[this.testData.projectedFin] }}
-                                    <span class="oi oi-circle-check" style="color: LimeGreen" aria-hidden="true"></span>
+                                    <span
+                                        popover="Explains why this is healthy."
+                                        popoverPlacement="top-right"
+                                        [popoverOnHover]="true"
+                                        [popoverCloseOnMouseOutside]="true"
+                                        class="oi oi-circle-check"
+                                        style="color: LimeGreen"
+                                        aria-hidden="true">
+                                    </span>
                                 </span>
                                 <ng-template #unhealthy>
                                     <span style="font-weight: bold; color: Red">
                                         {{ this.finEnum[this.testData.projectedFin] }}
-                                        <span class="oi oi-circle-x" style="color: Red" aria-hidden="true"></span>
+                                        <span
+                                        popover="Explains why this is unhealthy."
+                                        popoverPlacement="top-right"
+                                        [popoverOnHover]="true"
+                                        [popoverCloseOnMouseOutside]="true"
+                                        class="oi oi-circle-x"
+                                        style="color: Red"
+                                        aria-hidden="true">
+                                        </span>
                                     </span>
                                 </ng-template>
                             </div>
