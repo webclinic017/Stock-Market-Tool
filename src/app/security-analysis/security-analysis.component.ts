@@ -51,6 +51,7 @@ export class SecurityAnalysisComponent implements OnInit {
     };
     public finEnum = FinancialsDisplayEnum;
     public isMobile: boolean;
+    public mobileViewNumber = 0;
 
     constructor(
         private _endpointService: AppEndpointService
@@ -67,5 +68,14 @@ export class SecurityAnalysisComponent implements OnInit {
         const ticker = tickerInput.value;
         // this.testData = await this._endpointService.securityAnalysis(ticker);
         // TODO: End loading, display details.
+    }
+
+    // Change numbered view on mobile.
+    public handleMoreInfoClick(): void {
+        if (this.mobileViewNumber < 3) {
+            this.mobileViewNumber++;
+        } else {
+            this.mobileViewNumber = 0;
+        }
     }
 }

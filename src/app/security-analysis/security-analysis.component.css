@@ -6,7 +6,8 @@
 .security-body-mobile {
     display: flex;
 	flex-direction: column;
-	align-items: center;
+    align-items: center;
+    padding-bottom: 2rem;
 }
 
 .interact-bar {
