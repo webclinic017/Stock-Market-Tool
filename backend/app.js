@@ -1,3 +1,5 @@
+const dbCredentials = require('./dbCredentials');
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -8,8 +10,11 @@ const securityRoutes = require("./routes/securitys");
 const User = require("./models/user");
 const Security = require("./models/security");
 
+const dbUsername = dbCredentials.username;
+const dbPassword = dbCredentials.password;
+
 const app = express();
-mongoose.connect("mongodb+srv://DanielCanas:WSgnHp2IM8zOmqov@cluster0-988hr.mongodb.net/market-predictor?retryWrites=true&w=majority")
+mongoose.connect(`mongodb+srv://${dbUsername}:${dbPassword}@cluster0-988hr.mongodb.net/market-predictor?retryWrites=true&w=majority`)
   .then(() => {
     console.log("Connection with database established!");
   })
