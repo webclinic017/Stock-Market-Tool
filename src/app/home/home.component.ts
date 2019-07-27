@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-home',
@@ -26,14 +27,20 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
     constructor(
         private elementRef: ElementRef,
-        private router: Router
+        private router: Router,
+        private http: HttpClient
     ) { }
 
     ngOnInit() { }
 
     // Route to Market Analysis.
     public onStartNow() {
+        /*
         console.log('redirect to Market Analysis tab');
         this.router.navigate(['market-analysis']);
+        */
+        this.http.get('api/security/info').subscribe((res) =>{
+            console.log(res);
+        });
     }
 }
