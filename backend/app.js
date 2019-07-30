@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 const userRoutes = require("./routes/users");
 const securityRoutes = require("./routes/securitys");
+const pytonCommunicationRoutes = require("./routes/pythonCommunication");
 
 const User = require("./models/user");
 const Security = require("./models/security");
@@ -40,5 +41,6 @@ app.use((req, res, next) => {
 
 app.use("/api/user", userRoutes);
 app.use("/api/security", securityRoutes);
+app.use("/api/communications", pytonCommunicationRoutes);
 
 module.exports = app;
