@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
         console.log('redirect to Market Analysis tab');
         this.router.navigate(['market-analysis']);
         */
-        this.http.get('api/security/info').subscribe((res) =>{
+        this.http.get('api/security/info').subscribe((res) => {
             console.log(res);
         });
     }
