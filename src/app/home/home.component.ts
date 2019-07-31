@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
             <div style="margin-top: -2rem;">
                 <div class="home-content">
                     <h1>
-                            A Sensible Approach to Financial
+                        A Sensible Approach to Financial
                     </h1>
                     <h1 class="big_font_120">SUCCESS</h1>
                     <button
