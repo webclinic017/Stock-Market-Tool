@@ -71,8 +71,12 @@ export class LoginComponent implements OnInit {
         this.router.navigate( ['../register'], {relativeTo: this.activatedRoute} );
     }
 
-    public onSubmit( form: NgForm ): void {
+    public async onSubmit( form: NgForm ) {
+        const username = form.value.username;
+        const password = form.value.password;
+
         console.log(form.value);
+        await this.authService.login(username, password);
         form.reset();
     }
 }
