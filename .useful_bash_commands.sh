@@ -22,5 +22,5 @@ alias gacan="gaa; gcan"
 alias gp="git push"
 alias gpf="git push -f"
 
-# Run server.
-alias run-server="npm run start:server"
+# Start server.
+alias server="npm run start:server"

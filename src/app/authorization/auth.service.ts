@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { AppEndpointService, RegisterResponse } from '../app-endpoint.service';
+import { AppEndpointService } from '../app-endpoint.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -12,20 +12,13 @@ export class AuthService {
 
     // Register user with backend.
     public async registerUser(email: string, password: string, username: string) {
-        console.log(email, password, username);
-
-        this.endpointService.register(email, password, username).subscribe(res => {
-            console.log(res);
-        },
-        errorMessage => {
-            console.log(errorMessage);
-            this.errorEmitted.next(errorMessage);
-        });
+        const response = await this.endpointService.register({email, password, username});
+        console.log(response);
     }
 
     // Recieve user login credentials from backend.
-    public login(email: string, password: string, username: string): string {
-        console.log(email, password, username);
-        return '';
+    public async login(username: string, password: string) {
+        const response = await this.endpointService.login({username, password});
+        console.log(response);
     }
 }
