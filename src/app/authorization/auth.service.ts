@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { AppEndpointService } from '../app-endpoint.service';
+import { AppEndpointService } from '../server-communication/app-endpoint.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
