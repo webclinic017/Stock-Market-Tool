@@ -1,4 +1,6 @@
 <div class="container">
+
+    <!-- Desktop devices -->
     <div *ngIf="!isMobile; else mobileView" class="security-body">
         <div class="interact-bar">
             <div>
@@ -12,7 +14,6 @@
                 <button class="btn-primary">Per Dollar</button>
             </div>
         </div>
-        <!-- TODO: Change to more simple table on small screen/mobile -->
         <div class="owner-summary">
             <h2 class="text-center font-weight-bold">American Express Co. (AXP) Owner's Summary</h2>
             <div class="summary-columns">
@@ -252,6 +253,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Mobile devices -->
     <ng-template #mobileView>
         <div class="security-body-mobile">
             <div>
