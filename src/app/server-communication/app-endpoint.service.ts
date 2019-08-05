@@ -11,7 +11,7 @@ export class AppEndpointService {
     // Return details of security.
     public getSecurity(securitysRequest: SecuritysRequest) {
         const params = new HttpParams().set('ticker', securitysRequest.ticker);
-        this.http.get( this.dbUrl + 'security/info', { params }).subscribe((res) => {
+        this.http.get( `${this.dbUrl}security/info`, { params }).subscribe((res) => {
             return res;
         });
     }
@@ -21,7 +21,7 @@ export class AppEndpointService {
         const params = new HttpParams().set('username', registerRequest.username);
         params.set('email', registerRequest.email);
         params.set('password', registerRequest.password);
-        this.http.put( this.dbUrl + 'users/register', { params }).subscribe((res) => {
+        this.http.put( `${this.dbUrl}users/register`, { params }).subscribe((res) => {
             return res;
         });
     }
@@ -30,7 +30,7 @@ export class AppEndpointService {
     public login(loginRequest: LoginRequest) {
         const params = new HttpParams().set('username', loginRequest.username);
         params.set('password', loginRequest.password);
-        this.http.put( this.dbUrl + 'users/login', { params }).subscribe((res) => {
+        this.http.put( `${this.dbUrl}users/login`, { params }).subscribe((res) => {
             return res;
         });
     }
