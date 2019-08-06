@@ -98,8 +98,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
         const password = form.value.password;
         const username = form.value.username;
 
+        console.log(form.value);
         await this.authService.registerUser(email, password, username);
-
         form.reset();
     }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppEndpointService } from '../app-endpoint.service';
+import { AppEndpointService } from '../server-communication/app-endpoint.service';
 import { device } from 'device.js';
 
 export enum FinancialsDisplayEnum {

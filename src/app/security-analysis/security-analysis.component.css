@@ -1,6 +1,6 @@
 .security-body {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
 
 .security-body-mobile {
@@ -10,11 +10,38 @@
     padding-bottom: 2rem;
 }
 
+.left-col {
+    margin-right: 1.5rem;
+    padding-top: 4rem;
+}
+
+.simple-col {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.5rem;
+    padding-top: 5.5rem;
+}
+
+.pad-left {
+    padding-left: .5rem;
+}
+
+.owner-header {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
 .interact-bar {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     padding-bottom: 1rem;
+}
+
+.centered-in-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .mobile-interact-bar {
@@ -48,7 +75,6 @@
 .summary-col {
     display: flex;
     flex-direction: column;
-    width: 26rem;
     padding-top: 1rem;
     padding-bottom: 2rem;
 }
