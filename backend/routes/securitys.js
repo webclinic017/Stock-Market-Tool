@@ -4,12 +4,12 @@ const Security = require("../models/security");
 const router = express.Router();
 
 router.get("/info", (req, res, next) => {
-    Security.findOne({ ticker: req.body.ticker})
+    Security.findOne({ ticker: req.query.ticker})
     .then(security => {
         if(!security)
         {
             return res.status(401).json({
-                message: "Security not found in database!"
+                message: 'Security not found in database!'
             });
         }
         res.status(200).json({
