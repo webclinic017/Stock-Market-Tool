@@ -11,7 +11,7 @@ export class AuthService {
     constructor(public endpointService: AppEndpointService) { }
 
     // Register user with backend.
-    public async registerUser(email: string, password: string, username: string) {
+    public async registerUser(username: string, email: string, password: string) {
         const response = await this.endpointService.register({email, password, username});
         console.log(response);
     }
