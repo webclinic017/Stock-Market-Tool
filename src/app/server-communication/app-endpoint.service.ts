@@ -18,10 +18,12 @@ export class AppEndpointService {
 
     // Register a new user.
     public register(registerRequest: RegisterRequest) {
-        const params = new HttpParams().set('username', registerRequest.username);
-        params.set('email', registerRequest.email);
-        params.set('password', registerRequest.password);
-        this.http.put(`${this.dbUrl}users/register`, { params }).subscribe((res) => {
+        const params = new HttpParams()
+            .set('username', registerRequest.username)
+            .set('email', registerRequest.email)
+            .set('password', registerRequest.password);
+        console.log('params', params);
+        this.http.get(`${this.dbUrl}users/register`, { params }).subscribe((res) => {
             return res;
         });
     }

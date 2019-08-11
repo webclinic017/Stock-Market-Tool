@@ -6,11 +6,11 @@ const User = require("../models/user");
 const router = express.Router();
 
 router.post("/register", (req, res, next) => {
-    bcryptjs.hash(req.body.password, 10)
+    bcryptjs.hash(req.query.password, 10)
         .then(hash => {
             const user = new User({
-                email: req.body.email,
-                username: req.body.username,
+                email: req.query.email,
+                username: req.query.username,
                 password: hash
             });
             user.save()
@@ -48,7 +48,7 @@ router.post("/login", (req, res, next) => {
                     message: "User authentication failed!"
                 });
             }
-            const token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser._id}, 'this_serves_as_a_long_string', 
+            const token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser._id}, 'this_serves_as_a_long_string',
             { expiresIn: '1h'});
             res.status(200).json({
                 token: token
