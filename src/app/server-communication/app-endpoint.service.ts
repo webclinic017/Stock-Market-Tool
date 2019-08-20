@@ -23,7 +23,7 @@ export class AppEndpointService {
             .set('email', registerRequest.email)
             .set('password', registerRequest.password);
         console.log('params', params);
-        this.http.get(`${this.dbUrl}users/register`, { params }).subscribe((res) => {
+        this.http.post(`${this.dbUrl}users/register`, { params }).subscribe((res) => {
             return res;
         });
     }
@@ -32,7 +32,7 @@ export class AppEndpointService {
     public login(loginRequest: LoginRequest) {
         const params = new HttpParams().set('username', loginRequest.username);
         params.set('password', loginRequest.password);
-        this.http.put(`${this.dbUrl}users/login`, { params }).subscribe((res) => {
+        this.http.post(`${this.dbUrl}users/login`, { params }).subscribe((res) => {
             return res;
         });
     }
