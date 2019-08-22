@@ -7,11 +7,6 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'app-register',
     template: `
-        <div *ngIf="errorMessage" style=" padding-top: 2rem; background-color: #6b789a; display: flex;">
-            <div class="alert alert-danger">
-                <p>{{ errorMessage }}</p>
-            </div>
-        </div>
         <div class="input-container">
             <h1 class="input-header"> Register </h1>
                 <div class="input-body">
@@ -83,9 +78,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.authService.currentView.next('register');
-        this.errorSubscription = this.authService.errorEmitted.subscribe((error: string) => {
-            this.errorMessage = error;
-        });
     }
 
     public onLoginClick(): void {
@@ -103,7 +95,5 @@ export class RegisterComponent implements OnInit, OnDestroy {
         form.reset();
     }
 
-    ngOnDestroy(): void {
-        this.errorSubscription.unsubscribe();
-    }
+    ngOnDestroy(): void { }
 }
