@@ -23,7 +23,7 @@ export class AppEndpointService {
             .set('email', registerRequest.email)
             .set('password', registerRequest.password);
         console.log('params', params);
-        this.http.post(`${this.dbUrl}users/register`, { params }).subscribe((res) => {
+        this.http.get(`${this.dbUrl}users/register`, { params }).subscribe((res) => {
             return res;
         });
     }
