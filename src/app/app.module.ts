@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule} from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AboutComponent } from './about/about.component';
@@ -14,7 +13,8 @@ import { AuthComponent } from './authorization/auth.component';
 import { RegisterComponent } from './authorization/register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import {PopoverModule} from 'ngx-smart-popover';
+import { PopoverModule } from 'ngx-smart-popover';
+import { DashboardComponent } from './security-analysis/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -28,6 +28,7 @@ import {PopoverModule} from 'ngx-smart-popover';
         RegisterComponent,
         MarketAnalysisComponent,
         SecurityAnalysisComponent,
+        DashboardComponent
     ],
     imports: [
         BrowserModule,
@@ -36,7 +37,7 @@ import {PopoverModule} from 'ngx-smart-popover';
         HttpClientModule,
         PopoverModule
     ],
-    providers: [HttpClient],
-    bootstrap: [AppComponent]
+    providers: [ HttpClient ],
+    bootstrap: [ AppComponent ]
 })
 export class AppModule { }

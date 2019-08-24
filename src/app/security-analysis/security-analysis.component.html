@@ -1,169 +1,19 @@
 <div class="container">
+    <div class="security-body">
 
-    <!-- Desktop devices -->
-    <div *ngIf="!isMobile; else mobileView" class="security-body">
-
-        <!-- Owner Summary -->
-        <div class="left-col">
-            <div>
-                <input #tickerInput type="text" placeholder="Enter Ticker symbol"/>
-                <button class="btn-primary" (click)="handleTickerSearch(tickerInput)">Search</button>
-            </div>
-            <div class="owner-summary">
-                <h2 class="text-center font-weight-bold owner-header">American Express Co. (AXP) <br /> Owner's Summary</h2>
-                <div class="security-body">
-                    <div class="summary-col">
-
-                        <!-- Value and Growth -->
-                        <div class="col-row">
-                            <span style="padding-right: 2.9rem; font-weight: bold;">Intrinsic Value</span>
-                            <span>{{ this.testData.intrinsicValue }}</span>
-                        </div>
-                        <div class="col-row">
-                            <span style="padding-right: 3rem; font-weight: bold;">1 Year Growth</span>
-                            <span>{{ this.testData.oneYearGrowth }}</span>
-                        </div>
-                        <div class="col-row">
-                            <span style="padding-right: 3rem; font-weight: bold;">5 Year Growth</span>
-                            <span>{{ this.testData.fiveYearGrowth }}</span>
-                        </div>
-
-                        <!-- Financials -->
-                        <div class="col-row" style="padding-top: 2rem;">
-                            <span style="padding-right: 3.89rem; font-weight: bold;">Historic Financials</span>
-                            <span
-                                *ngIf="this.testData.historicFin === 0; else unhealthyHist"
-                                style="font-weight: bold; color: LimeGreen">
-                                {{ this.finEnum[this.testData.historicFin] }}
-                                <span
-                                    popover="Explains why this is healthy."
-                                    popoverPlacement="top-right"
-                                    [popoverOnHover]="true"
-                                    [popoverCloseOnMouseOutside]="true"
-                                    class="oi oi-circle-check"
-                                    style="color: LimeGreen"
-                                    aria-hidden="true">
-                                </span>
-                            </span>
-                            <ng-template #unhealthyHist>
-                                <span style="font-weight: bold; color: Red">
-                                    {{ this.finEnum[this.testData.historicFin] }}
-                                    <span
-                                    popover="Explains why this is unhealthy."
-                                    popoverPlacement="top-right"
-                                    [popoverOnHover]="true"
-                                    [popoverCloseOnMouseOutside]="true"
-                                    class="oi oi-circle-x"
-                                    style="color: Red"
-                                    aria-hidden="true">
-                                    </span>
-                                </span>
-                            </ng-template>
-                        </div>
-                        <div class="col-row">
-                            <span style="padding-right: 5.1rem; font-weight: bold;">Acute Financials</span>
-                            <span
-                                *ngIf="this.testData.acuteFin === 0; else unhealthyAcute"
-                                style="font-weight: bold; color: LimeGreen">
-                                {{ this.finEnum[this.testData.acuteFin] }}
-                                <span
-                                    popover="Explains why this is healthy."
-                                    popoverPlacement="top-right"
-                                    [popoverOnHover]="true"
-                                    [popoverCloseOnMouseOutside]="true"
-                                    class="oi oi-circle-check"
-                                    style="color: LimeGreen"
-                                    aria-hidden="true">
-                                </span>
-                            </span>
-                            <ng-template #unhealthyAcute>
-                                <span style="font-weight: bold; color: Red">
-                                    {{ this.finEnum[this.testData.acuteFin] }}
-                                    <span
-                                    popover="Explains why this is unhealthy."
-                                    popoverPlacement="top-right"
-                                    [popoverOnHover]="true"
-                                    [popoverCloseOnMouseOutside]="true"
-                                    class="oi oi-circle-x"
-                                    style="color: Red"
-                                    aria-hidden="true">
-                                    </span>
-                                </span>
-                            </ng-template>
-                        </div>
-                        <div class="col-row">
-                            <span style="padding-right: 2.6rem; font-weight: bold;">Projected Financials</span>
-                            <span
-                                *ngIf="this.testData.projectedFin === 0; else unhealthyProj"
-                                style="font-weight: bold; color: LimeGreen">
-                                {{ this.finEnum[this.testData.projectedFin] }}
-                                <span
-                                    popover="Explains why this is healthy."
-                                    popoverPlacement="top-right"
-                                    [popoverOnHover]="true"
-                                    [popoverCloseOnMouseOutside]="true"
-                                    class="oi oi-circle-check"
-                                    style="color: LimeGreen"
-                                    aria-hidden="true">
-                                </span>
-                            </span>
-                            <ng-template #unhealthyProj>
-                                <span style="font-weight: bold; color: Red">
-                                    {{ this.finEnum[this.testData.projectedFin] }}
-                                    <span
-                                    popover="Explains why this is unhealthy."
-                                    popoverPlacement="top-right"
-                                    [popoverOnHover]="true"
-                                    [popoverCloseOnMouseOutside]="true"
-                                    class="oi oi-circle-x"
-                                    style="color: Red"
-                                    aria-hidden="true">
-                                    </span>
-                                </span>
-                            </ng-template>
-                        </div>
-
-                        <!-- Rate -->
-                        <div class="col-row" style="padding-top: 2rem;">
-                            <span style="padding-right: 6.9rem; font-weight: bold;">Est. Time to Value</span>
-                            <span>{{ this.testData.fiveYearGrowth }}</span>
-                        </div>
-                        <div class="col-row">
-                            <span style="padding-right: 2.3rem; font-weight: bold;">Sustainable Growth Rate</span>
-                            <span>{{ this.testData.fiveYearGrowth }}</span>
-                        </div>
-                        <div class="col-row">
-                            <span style="padding-right: 1.6rem; font-weight: bold;">Effect from Intrinsic Value</span>
-                            <span>{{ this.testData.fiveYearGrowth }}</span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+        <!-- Ticker Search -->
+        <div>
+            <input #tickerInput type="text" placeholder="Enter Ticker symbol"/>
+            <button class="btn-primary" (click)="handleTickerSearch(tickerInput)">Search</button>
         </div>
 
-        <div class="simple-col">
-
-            <!-- Interact Bar -->
-            <div class="interact-bar">
-                <div>
-                    <button class="btn btn-primary">ML Model</button>
-                </div>
-                <div class="pad-left">
-                    <button class="btn btn-primary">Reported</button>
-                </div>
-                <div class="pad-left">
-                    <button class="btn btn-primary">Per Share</button>
-                </div>
-                <div class="pad-left">
-                    <button class="btn btn-primary">Per Dollar</button>
-                </div>
+        <!-- Owner Summary -->
+        <div #ownerSummary>
+            <div class="owner-summary-header">
+                <h1 style="margin-bottom: 0;">American Express Co. (AXP) <br /> Owner's Summary</h1>
             </div>
-
-            <!-- Info -->
-            <div class="centered-in-col">
-                <div *ngIf="mobileViewNumber === 0" class="mobile-owner-summary">
-                    <h3 align="center">AXP Owner's Summary</h3>
+            <div class="owner-summary-body">
+                <div class="owner-summary-body-col">
                     <div class="col-row">
                         <span>Intrinsic Value</span>
                         <span>1232</span>
@@ -176,13 +26,15 @@
                         <span>5 Year Average</span>
                         <span>1232</span>
                     </div>
+                </div>
+                <div class="owner-summary-body-col">
                     <div class="col-row">
                         <span style="padding-right: 3.89rem; font-weight: bold;">Historic Financials</span>
                         <span
                             *ngIf="this.testData.historicFin === 0; else unhealthyHistMobile"
                             style="font-weight: bold; color: LimeGreen">
                             {{ this.finEnum[this.testData.historicFin] }}
-                             <span
+                            <span
                                 popover="Explains why this is healthy."
                                 popoverPlacement="top-right"
                                 [popoverOnHover]="true"
@@ -269,6 +121,8 @@
                             </span>
                         </ng-template>
                     </div>
+                </div>
+                <div class="owner-summary-body-col">
                     <div class="col-row">
                         <span>Est. Time to Value</span>
                         <span>1232</span>
@@ -282,365 +136,19 @@
                         <span>1232</span>
                     </div>
                 </div>
-                <div *ngIf="mobileViewNumber === 1" class="mobile-owner-summary">
-                    <h3>Discounted Cashflow</h3>
-                    <div class="col-row">
-                        <span>Cash and Equivalents</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Short-Term Assets</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Long-Term Assets</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Discounted Cashflow</span>
-                        <span>1232</span>
-                    </div>
-                    <hr style="border-color: black" />
-                    <div class="col-row">
-                        <span>Intrinsic Value</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Price</span>
-                        <span>1232</span>
-                    </div>
-                    <hr style="border-color: black" />
-                    <div class="col-row">
-                        <span>Net Margin of Safety</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Margin of Safety</span>
-                        <span>1232</span>
-                    </div>
-                </div>
-                <div *ngIf="mobileViewNumber === 2" class="mobile-owner-summary">
-                    <h3 align="center">Capital Structure</h3>
-                    <h4 align="center" style="color: orange">Moderate Leverage</h4>
-                    <div class="col-row">
-                        <span>Debt-to-Capital-Ratio</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Debt-to-Equity-Ratio <br> (D/E)</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Interest Coverage <br> Ratio</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Degree of Combined <br> Leverage</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Degree of Operating <br> Leverage (DOL)</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Degree of Financial <br> Leverage</span>
-                        <span>1232</span>
-                    </div>
-                </div>
-                <div *ngIf="mobileViewNumber === 3" class="mobile-owner-summary">
-                    <h3 align="center">Management Effectiveness</h3>
-                    <div class="col-row">
-                        <span>Price to Earnings Ration (P/E)</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Earning Yield (E/P)</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Absolue P/E</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Relative P/E</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Return on Equity (ROE)</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Return on Invested Capital (ROIC)</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Retention Ratio</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Sustainable Growth Rate</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Return on Assets (ROA)</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Price to Book (P/B)</span>
-                        <span>1232</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- More Info Button -->
-            <div class="centered-in-col">
-                <button class="btn btn-primary" (click)="handleMoreInfoClick()">More Info</button>
             </div>
         </div>
+
+        <!-- Interact Bar -->
+        <div class="interact-bar">
+                <button class="btn btn-primary view-button" (click)="handleComponentClick('dashboard')">Dashboard</button>
+                <button class="btn btn-primary view-button" (click)="handleComponentClick('mlModel')">ML Model</button>
+                <button class="btn btn-primary view-button" (click)="handleComponentClick('reported')">Reported</button>
+        </div>
+
+        <!-- Loaded Component -->
+        <app-dashboard *ngIf="loadedComponent === 'dashboard'"></app-dashboard>
+        <!--<app-ml-model *ngIf="loadedComponent === 'mlModel'"></app-ml-model> TODO: Implement. -->
+        <!--<app-reported *ngIf="loadedComponent === 'reported'"></app-reported> TODO: Implement. -->
     </div>
-
-    <!-- Mobile devices -->
-    <ng-template #mobileView>
-        <div class="security-body-mobile">
-            <div>
-                <input #tickerInput type="text" placeholder="Enter Ticker symbol"/>
-                <button class="btn-primary" (click)="handleTickerSearch(tickerInput)">Search</button>
-            </div>
-            <div class="mobile-interact-bar">
-                <button class="btn-primary">ML Model</button>
-                <button class="btn-primary">Reported</button>
-                <button class="btn-primary">Per Share</button>
-                <button class="btn-primary">Per Dollar</button>
-            </div>
-            <div *ngIf="mobileViewNumber === 0" class="mobile-owner-summary">
-                <h3 align="center">AXP Owner's Summary</h3>
-                <div class="col-row">
-                    <span>Intrinsic Value</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>1 Year Growth</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>5 Year Average</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span style="padding-right: 3.89rem; font-weight: bold;">Historic Financials</span>
-                    <span
-                        *ngIf="this.testData.historicFin === 0; else unhealthyHistMobile"
-                        style="font-weight: bold; color: LimeGreen">
-                        {{ this.finEnum[this.testData.historicFin] }}
-                         <span
-                            popover="Explains why this is healthy."
-                            popoverPlacement="top-right"
-                            [popoverOnHover]="true"
-                            [popoverCloseOnMouseOutside]="true"
-                            class="oi oi-circle-check"
-                            style="color: LimeGreen"
-                            aria-hidden="true">
-                        </span>
-                    </span>
-                    <ng-template #unhealthyHistMobile>
-                        <span style="font-weight: bold; color: Red">
-                            {{ this.finEnum[this.testData.historicFin] }}
-                            <span
-                            popover="Explains why this is unhealthy."
-                            popoverPlacement="top-right"
-                            [popoverOnHover]="true"
-                            [popoverCloseOnMouseOutside]="true"
-                            class="oi oi-circle-x"
-                            style="color: Red"
-                            aria-hidden="true">
-                            </span>
-                        </span>
-                    </ng-template>
-                </div>
-                <div class="col-row">
-                    <span style="padding-right: 5.1rem; font-weight: bold;">Acute Financials</span>
-                    <span
-                        *ngIf="this.testData.acuteFin === 0; else unhealthyAcuteMobile"
-                        style="font-weight: bold; color: LimeGreen">
-                        {{ this.finEnum[this.testData.acuteFin] }}
-                        <span
-                            popover="Explains why this is healthy."
-                            popoverPlacement="top-right"
-                            [popoverOnHover]="true"
-                            [popoverCloseOnMouseOutside]="true"
-                            class="oi oi-circle-check"
-                            style="color: LimeGreen"
-                            aria-hidden="true">
-                        </span>
-                    </span>
-                    <ng-template #unhealthyAcuteMobile>
-                        <span style="font-weight: bold; color: Red">
-                            {{ this.finEnum[this.testData.acuteFin] }}
-                            <span
-                            popover="Explains why this is unhealthy."
-                            popoverPlacement="top-right"
-                            [popoverOnHover]="true"
-                            [popoverCloseOnMouseOutside]="true"
-                            class="oi oi-circle-x"
-                            style="color: Red"
-                            aria-hidden="true">
-                            </span>
-                        </span>
-                    </ng-template>
-                </div>
-                <div class="col-row">
-                    <span style="padding-right: 2.6rem; font-weight: bold;">Projected Financials</span>
-                    <span
-                        *ngIf="this.testData.projectedFin === 0; else unhealthyProjMobile"
-                        style="font-weight: bold; color: LimeGreen">
-                        {{ this.finEnum[this.testData.projectedFin] }}
-                        <span
-                            popover="Explains why this is healthy."
-                            popoverPlacement="top-right"
-                            [popoverOnHover]="true"
-                            [popoverCloseOnMouseOutside]="true"
-                            class="oi oi-circle-check"
-                            style="color: LimeGreen"
-                            aria-hidden="true">
-                        </span>
-                    </span>
-                    <ng-template #unhealthyProjMobile>
-                        <span style="font-weight: bold; color: Red">
-                            {{ this.finEnum[this.testData.projectedFin] }}
-                            <span
-                            popover="Explains why this is unhealthy."
-                            popoverPlacement="top-right"
-                            [popoverOnHover]="true"
-                            [popoverCloseOnMouseOutside]="true"
-                            class="oi oi-circle-x"
-                            style="color: Red"
-                            aria-hidden="true">
-                            </span>
-                        </span>
-                    </ng-template>
-                </div>
-                <div class="col-row">
-                    <span>Est. Time to Value</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Sustainable Growth Rate</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Effect from Intrinsic Value</span>
-                    <span>1232</span>
-                </div>
-            </div>
-            <div *ngIf="mobileViewNumber === 1" class="mobile-owner-summary">
-                <h3>Discounted Cashflow</h3>
-                <div class="col-row">
-                    <span>Cash and Equivalents</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Short-Term Assets</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Long-Term Assets</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Discounted Cashflow</span>
-                    <span>1232</span>
-                </div>
-                <hr style="border-color: black" />
-                <div class="col-row">
-                    <span>Intrinsic Value</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Price</span>
-                    <span>1232</span>
-                </div>
-                <hr style="border-color: black" />
-                <div class="col-row">
-                    <span>Net Margin of Safety</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Margin of Safety</span>
-                    <span>1232</span>
-                </div>
-            </div>
-            <div *ngIf="mobileViewNumber === 2" class="mobile-owner-summary">
-                <h3 align="center">Capital Structure</h3>
-                <h4 align="center" style="color: orange">Moderate Leverage</h4>
-                <div class="col-row">
-                    <span>Debt-to-Capital-Ratio</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Debt-to-Equity-Ratio <br> (D/E)</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Interest Coverage <br> Ratio</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Degree of Combined <br> Leverage</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Degree of Operating <br> Leverage (DOL)</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Degree of Financial <br> Leverage</span>
-                    <span>1232</span>
-                </div>
-            </div>
-            <div *ngIf="mobileViewNumber === 3" class="mobile-owner-summary">
-                <h3 align="center">Management Effectiveness</h3>
-                <div class="col-row">
-                    <span>Price to Earnings Ration (P/E)</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Earning Yield (E/P)</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Absolue P/E</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Relative P/E</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Return on Equity (ROE)</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Return on Invested Capital (ROIC)</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Retention Ratio</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Sustainable Growth Rate</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Return on Assets (ROA)</span>
-                    <span>1232</span>
-                </div>
-                <div class="col-row">
-                    <span>Price to Book (P/B)</span>
-                    <span>1232</span>
-                </div>
-            </div>
-            <button class="btn-primary" (click)="handleMoreInfoClick()">More Info</button>
-        </div>
-    </ng-template>
 </div>
