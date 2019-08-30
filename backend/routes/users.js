@@ -6,11 +6,12 @@ const User = require("../models/user");
 const router = express.Router();
 
 router.post("/register", (req, res, next) => {
-    bcryptjs.hash(req.query.password, 10)
+    bcryptjs.hash(req.body.password, 10)
         .then(hash => {
+            console.log(req.body);
             const user = new User({
-                email: req.query.email,
-                username: req.query.username,
+                email: req.body.email,
+                username: req.body.username,
                 password: hash
             });
             user.save()
@@ -30,7 +31,7 @@ router.post("/register", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
     let fetchedUser;
-    User.findOne({ email: req.query.email})
+    User.findOne({ email: req.body.email})
         .then(user => {
             if(!user)
             {
@@ -39,7 +40,7 @@ router.post("/login", (req, res, next) => {
                 });
             }
             fetchedUser = user;
-            return bcryptjs.compare(req.query.password, user.password);
+            return bcryptjs.compare(req.body.password, user.password);
         })
         .then(result => {
             if(!result)

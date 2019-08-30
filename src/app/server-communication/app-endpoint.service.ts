@@ -18,12 +18,9 @@ export class AppEndpointService {
 
     // Register a new user.
     public register(registerRequest: RegisterRequest) {
-        const params = new HttpParams()
-            .set('username', registerRequest.username)
-            .set('email', registerRequest.email)
-            .set('password', registerRequest.password);
-        console.log('params', params);
-        this.http.get(`${this.dbUrl}users/register`, { params }).subscribe((res) => {
+        console.log('request: ', registerRequest);
+        this.http.post(`${this.dbUrl}users/register`, registerRequest).subscribe((res) => {
+            console.log('res: ', res);
             return res;
         });
     }
