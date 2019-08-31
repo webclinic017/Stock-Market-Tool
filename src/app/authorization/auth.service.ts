@@ -13,12 +13,10 @@ export class AuthService {
     // Register user with backend.
     public async registerUser(username: string, email: string, password: string) {
         const response = await this.endpointService.register({email, password, username});
-        console.log(response);
     }
 
     // Recieve user login credentials from backend.
     public async login(username: string, password: string) {
         const response = await this.endpointService.login({username, password});
-        console.log(response);
     }
 }

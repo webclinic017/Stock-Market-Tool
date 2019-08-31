@@ -31,7 +31,7 @@ router.post("/register", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
     let fetchedUser;
-    User.findOne({username: req.query.username})
+    User.findOne({username: req.body.username})
         .then(user => {
             if(!user)
             {
@@ -40,7 +40,7 @@ router.post("/login", (req, res, next) => {
                 });
             }
             fetchedUser = user;
-            return bcryptjs.compare(req.query.password, user.password);
+            return bcryptjs.compare(req.body.password, user.password);
         })
         .then(result => {
             if(!result)

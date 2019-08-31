@@ -18,16 +18,12 @@ export class AppEndpointService {
 
     // Register a new user.
     public register(registerRequest: RegisterRequest) {
-        this.http.post(`${this.dbUrl}user/register`, registerRequest).subscribe((res) => {
-            return res;
-        });
+        return this.http.post(`${this.dbUrl}user/register`, registerRequest).toPromise();
     }
 
     // Login an existing user.
-    public login(loginRequest: LoginRequest) {
-        this.http.post(`${this.dbUrl}user/login`, loginRequest).subscribe((res) => {
-            return res;
-        });
+    public async login(loginRequest: LoginRequest) {
+        return this.http.post(`${this.dbUrl}user/login`, /*{ params }*/ loginRequest).toPromise();
     }
 
     // TODO: Need details from Jimmy.
