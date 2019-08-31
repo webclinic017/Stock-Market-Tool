@@ -5,10 +5,14 @@ export interface RegisterRequest {
 }
 
 export interface RegisterResponse {
-    idToken: string;
-    expiresIn: string;
-    refreshToken: string;
-    localId: string;
+    message: string;
+    result: {
+        email: string,
+        password: string,
+        username: string,
+        __v: number,
+        _id: string
+    };
 }
 
 export interface LoginRequest {
@@ -17,10 +21,7 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
-    idToken: string;
-    expiresIn: string;
-    refreshToken: string;
-    localId: string;
+    token: string;
 }
 
 export interface SecuritysRequest {
