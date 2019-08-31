@@ -19,8 +19,7 @@ export class AppEndpointService {
     // Register a new user.
     public register(registerRequest: RegisterRequest) {
         console.log('request: ', registerRequest);
-        this.http.post(`${this.dbUrl}users/register`, registerRequest).subscribe((res) => {
-            console.log('res: ', res);
+        this.http.post(`${this.dbUrl}user/register`, registerRequest).subscribe((res) => {
             return res;
         });
     }
@@ -34,7 +33,7 @@ export class AppEndpointService {
         });
     }
 
-    // TODO:
+    // TODO: Need details from Jimmy.
     // Compute security analysis.
     public securityAnalysis(): void {
         // TODO: Call to backend.

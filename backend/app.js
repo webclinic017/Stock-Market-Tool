@@ -3,6 +3,7 @@ const dbCredentials = require('./dbCredentials');
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require('cors')
 
 const userRoutes = require("./routes/users");
 const securityRoutes = require("./routes/securitys");
@@ -30,7 +31,6 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS");
-  res.sendStatus(200);
   next();
 });
 
@@ -44,5 +44,6 @@ app.use((req, res, next) => {
 app.use("/api/user", userRoutes);
 app.use("/api/security", securityRoutes);
 app.use("/api/communications", pytonCommunicationRoutes);
+app.use(cors());
 
 module.exports = app;
