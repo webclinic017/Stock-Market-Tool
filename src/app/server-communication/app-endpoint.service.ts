@@ -18,7 +18,6 @@ export class AppEndpointService {
 
     // Register a new user.
     public register(registerRequest: RegisterRequest) {
-        console.log('request: ', registerRequest);
         this.http.post(`${this.dbUrl}user/register`, registerRequest).subscribe((res) => {
             return res;
         });
@@ -26,9 +25,7 @@ export class AppEndpointService {
 
     // Login an existing user.
     public login(loginRequest: LoginRequest) {
-        const params = new HttpParams().set('username', loginRequest.username);
-        params.set('password', loginRequest.password);
-        this.http.post(`${this.dbUrl}users/login`, { params }).subscribe((res) => {
+        this.http.post(`${this.dbUrl}user/login`, loginRequest).subscribe((res) => {
             return res;
         });
     }
