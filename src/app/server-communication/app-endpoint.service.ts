@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { RegisterRequest, LoginRequest, SecuritysRequest } from './app-endpoint.constants';
+import { RegisterRequest, LoginRequest, SecuritysRequest, LoginResponse, RegisterResponse } from './app-endpoint.constants';
 
 @Injectable({ providedIn: 'root' })
 export class AppEndpointService {
@@ -9,21 +9,18 @@ export class AppEndpointService {
     constructor(private http: HttpClient) { }
 
     // Return details of security.
-    public getSecurity(securitysRequest: SecuritysRequest) {
+    public getSecurity(securitysRequest: SecuritysRequest) { // TODO: Add response type.
         const params = new HttpParams().set('ticker', securitysRequest.ticker);
-        this.http.get(`${this.dbUrl}security/info`, { params }).subscribe((res) => {
-            return res;
-        });
+        return this.http.get(`${this.dbUrl}security/info`, { params }).toPromise();
     }
 
     // Register a new user.
-    public register(registerRequest: RegisterRequest) {
-        return this.http.post(`${this.dbUrl}user/register`, registerRequest).toPromise();
+    public register(registerRequest: RegisterRequest): Promise<RegisterResponse>  {
+        return this.http.post<RegisterResponse>(`${this.dbUrl}user/register`, registerRequest).toPromise();
     }
 
-    // Login an existing user.
-    public async login(loginRequest: LoginRequest) {
-        return this.http.post(`${this.dbUrl}user/login`, /*{ params }*/ loginRequest).toPromise();
+    public login(loginRequest: LoginRequest): Promise<LoginResponse> {
+        return this.http.post<LoginResponse>(`${this.dbUrl}user/login`, loginRequest).toPromise();
     }
 
     // TODO: Need details from Jimmy.

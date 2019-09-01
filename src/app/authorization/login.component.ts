@@ -74,8 +74,6 @@ export class LoginComponent implements OnInit {
     public async onSubmit( form: NgForm ) {
         const username = form.value.username;
         const password = form.value.password;
-
-        console.log(form.value);
         await this.authService.login(username, password);
         form.reset();
     }

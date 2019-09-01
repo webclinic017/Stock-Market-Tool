@@ -11,12 +11,20 @@ export class AuthService {
     constructor(public endpointService: AppEndpointService) { }
 
     // Register user with backend.
-    public async registerUser(username: string, email: string, password: string) {
-        const response = await this.endpointService.register({email, password, username});
+    public async registerUser(username: string, email: string, password: string): Promise<void> {
+        try {
+            const response = await this.endpointService.register({email, password, username});
+        } catch (error) {
+            console.log(error.error.error.message);
+        }
     }
 
     // Recieve user login credentials from backend.
-    public async login(username: string, password: string) {
-        const response = await this.endpointService.login({username, password});
+    public async login(username: string, password: string): Promise<void> {
+        try {
+            const response = await this.endpointService.login({username, password});
+        } catch (error) {
+            console.log(error.error.message);
+        }
     }
 }
