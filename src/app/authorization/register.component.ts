@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-register',
@@ -64,28 +65,39 @@ import { Subscription } from 'rxjs';
                 </div>
             </div>
     `,
-    styleUrls: ['login.component.css']
+    styleUrls: ['login.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-    public errorMessage: string;
+    public toastSubscription: Subscription;
     public errorSubscription: Subscription;
+    public error: string;
 
     constructor(
         public router: Router,
         public activatedRoute: ActivatedRoute,
-        public authService: AuthService
+        public authService: AuthService,
+        private _toastrService: ToastrService
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.authService.currentView.next('register');
+        this.errorSubscription = this.authService.error.subscribe((error: string) => this.error = error);
+        this.toastSubscription = this.authService.registerToast.subscribe((success: boolean) => {
+            if (success) {
+                this._toastrService.success('Registration succeeded');
+                // TODO: await a sleep, then redirect?
+            } else {
+                this._toastrService.error(this.error, 'Registration failed');
+            }
+        });
     }
 
     public onLoginClick(): void {
         this.authService.currentView.next('login');
-        this.router.navigate( ['../login'], {relativeTo: this.activatedRoute} );
+        this.router.navigate(['../login'], {relativeTo: this.activatedRoute});
     }
 
-    public async onSubmit( form: NgForm ) {
+    public async onSubmit(form: NgForm): Promise<void> {
         const email = form.value.email;
         const password = form.value.password;
         const username = form.value.username;
@@ -95,5 +107,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
         form.reset();
     }
 
-    ngOnDestroy(): void { }
+    ngOnDestroy(): void {
+        this.errorSubscription.unsubscribe();
+        this.toastSubscription.unsubscribe();
+    }
 }

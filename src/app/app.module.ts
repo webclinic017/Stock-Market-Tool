@@ -15,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { PopoverModule } from 'ngx-smart-popover';
 import { DashboardComponent } from './security-analysis/dashboard/dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { DashboardComponent } from './security-analysis/dashboard/dashboard.comp
         AppRoutingModule,
         FormsModule,
         HttpClientModule,
-        PopoverModule
+        PopoverModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot()
     ],
     providers: [ HttpClient ],
     bootstrap: [ AppComponent ]
