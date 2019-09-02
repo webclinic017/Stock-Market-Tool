@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-login',
@@ -52,18 +54,31 @@ import { AuthService } from './auth.service';
             </div>
         </div>
     `,
-    styleUrls: ['login.component.css']
+    styleUrls: ['login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+    public toastSubscription: Subscription;
+    public errorSubscription: Subscription;
+    private username: string;
+    public error: string;
 
     constructor(
         public router: Router,
         public activatedRoute: ActivatedRoute,
-        public authService: AuthService
+        public authService: AuthService,
+        private _toastrService: ToastrService
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.authService.currentView.next('login');
+        this.errorSubscription = this.authService.error.subscribe((error: string) => this.error = error);
+        this.toastSubscription = this.authService.loginToast.subscribe((success: boolean) => {
+            if (success) {
+                this._toastrService.success(`Welcome, ${this.username}!`, 'Login succeeded');
+            } else {
+                this._toastrService.error(this.error, 'Login failed');
+            }
+        });
     }
 
     public onRegisterClick(): void {
@@ -71,10 +86,16 @@ export class LoginComponent implements OnInit {
         this.router.navigate( ['../register'], {relativeTo: this.activatedRoute} );
     }
 
-    public async onSubmit( form: NgForm ) {
+    public async onSubmit(form: NgForm): Promise<void> {
         const username = form.value.username;
+        this.username = username;
         const password = form.value.password;
         await this.authService.login(username, password);
         form.reset();
+    }
+
+    ngOnDestroy(): void {
+        this.errorSubscription.unsubscribe();
+        this.toastSubscription.unsubscribe();
     }
 }
