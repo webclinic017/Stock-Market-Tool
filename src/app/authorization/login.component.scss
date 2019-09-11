@@ -1,22 +1,25 @@
+@import "src/styles.scss";
+
 * {
     font-family: Georgia;
    }
 
 /* TODO: Change button disabled color */
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:disabled, .btn-primary:visited {
-    background-color: #6b789a !important;
+    background-color: $blue !important;
     font-family: Georgia;
 }
 
 .input-container {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .input-header {
     text-align: center;
     color: white;
-    background-color: #6b789a;
+    background-color: $blue;
     margin-top: 0rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
