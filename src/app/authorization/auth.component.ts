@@ -6,7 +6,7 @@ import { device } from 'device.js';
 @Component({
     selector: 'app-auth',
     template: `
-    <body *ngIf="isLoginView; else registerView" class="auth-body">
+    <body *ngIf="isLoginView; else registerView" class="container">
         <div *ngIf="!isMobile; else mobileView" class="desktop-auth-login">
             <router-outlet></router-outlet>
         </div>
@@ -17,7 +17,7 @@ import { device } from 'device.js';
         </ng-template>
     </body>
     <ng-template #registerView>
-        <body class="auth-body">
+        <body class="container">
             <div *ngIf="!isMobile; else mobileView" class="desktop-auth-register">
                 <router-outlet></router-outlet>
             </div>
