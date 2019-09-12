@@ -11,14 +11,14 @@ $standard-text-color: black;
     flex-direction: column;
     margin-bottom: 2rem;
     .smt-nav-header {
-        //text-align: center;
+        text-align: center;
         margin-top: 4rem;
         margin-bottom: 1rem;
         span {
             color: $standard-text-color;
             font-size: $nav-header-font-size;
             //font-weight: ;
-            padding-left: 14rem;
+            //padding-left: 14rem;
         }
     }
     .smt-nav-body {
