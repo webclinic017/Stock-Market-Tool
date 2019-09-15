@@ -8,6 +8,7 @@
         <div class="empty-border-bottom"></div>
         <div class="smt-nav-body-content">
             <div
+                *ngIf="!isLoggedIn"
                 class="smt-nav-item"
                 routerLinkActive="smt-active-nav">
                 <span
@@ -19,6 +20,7 @@
                 </a>
             </div>
             <div
+                *ngIf="!isLoggedIn"
                 class="smt-nav-item"
                 routerLinkActive="smt-active-nav">
                 <span
@@ -30,6 +32,7 @@
                 </a>
             </div>
             <div
+                *ngIf="isLoggedIn"
                 class="smt-nav-item"
                 routerLinkActive="smt-active-nav">
                 <span
@@ -41,6 +44,7 @@
                 </a>
             </div>
             <div
+                *ngIf="isLoggedIn"
                 class="smt-nav-item"
                 routerLinkActive="smt-active-nav">
                 <span
@@ -52,6 +56,7 @@
                 </a>
             </div>
             <div
+                *ngIf="!isLoggedIn"
                 class="smt-nav-item"
                 routerLinkActive="smt-active-nav">
                 <span
@@ -60,6 +65,18 @@
                 </span>
                 <a routerLink="/auth">
                     Login
+                </a>
+            </div>
+            <div
+                *ngIf="isLoggedIn"
+                class="smt-nav-item"
+                routerLinkActive="smt-active-nav">
+                <span
+                    class="oi oi-person icon-color"
+                    aria-hidden="true">
+                </span>
+                <a routerLink="/profile">
+                    Profile
                 </a>
             </div>
         </div>

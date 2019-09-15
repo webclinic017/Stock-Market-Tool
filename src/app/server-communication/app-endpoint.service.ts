@@ -4,23 +4,21 @@ import { RegisterRequest, LoginRequest, SecuritysRequest, LoginResponse, Registe
 
 @Injectable({ providedIn: 'root' })
 export class AppEndpointService {
-    private dbUrl = 'http://localhost:3000/api/';
+    private _dbUrl = 'http://localhost:3000/api/';
 
     constructor(private http: HttpClient) { }
 
-    // Return details of security.
     public getSecurity(securitysRequest: SecuritysRequest) { // TODO: Add response type.
         const params = new HttpParams().set('ticker', securitysRequest.ticker);
-        return this.http.get(`${this.dbUrl}security/info`, { params }).toPromise();
+        return this.http.get(`${this._dbUrl}security/info`, { params }).toPromise();
     }
 
-    // Register a new user.
     public register(registerRequest: RegisterRequest): Promise<RegisterResponse>  {
-        return this.http.post<RegisterResponse>(`${this.dbUrl}user/register`, registerRequest).toPromise();
+        return this.http.post<RegisterResponse>(`${this._dbUrl}user/register`, registerRequest).toPromise();
     }
 
     public login(loginRequest: LoginRequest): Promise<LoginResponse> {
-        return this.http.post<LoginResponse>(`${this.dbUrl}user/login`, loginRequest).toPromise();
+        return this.http.post<LoginResponse>(`${this._dbUrl}user/login`, loginRequest).toPromise();
     }
 
     // TODO: Need details from Jimmy.

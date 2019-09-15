@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AboutComponent } from './about/about.component';
@@ -17,6 +17,8 @@ import { PopoverModule } from 'ngx-smart-popover';
 import { DashboardComponent } from './security-analysis/dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthInterceptor } from './authorization/auth.interceptor';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
         HeaderComponent,
         AboutComponent,
         HomeComponent,
+        ProfileComponent,
         AuthComponent,
         LoginComponent,
         RegisterComponent,
@@ -41,7 +44,14 @@ import { ToastrModule } from 'ngx-toastr';
         BrowserAnimationsModule,
         ToastrModule.forRoot()
     ],
-    providers: [ HttpClient ],
+    providers: [
+        HttpClient,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        }
+    ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }

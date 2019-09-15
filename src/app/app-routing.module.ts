@@ -7,6 +7,7 @@ import { SecurityAnalysisComponent } from './security-analysis/security-analysis
 import { MarketAnalysisComponent } from './market-analysis/market-analysis.component';
 import { AuthComponent } from './authorization/auth.component';
 import { RegisterComponent } from './authorization/register.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes =
 [
@@ -41,6 +42,10 @@ const appRoutes: Routes =
                 component: RegisterComponent,
             },
         ]
+    },
+    {
+        path: 'profile',
+        component: ProfileComponent,
     },
     {
         path: 'market-analysis',
