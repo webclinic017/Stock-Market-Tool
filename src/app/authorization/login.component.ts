@@ -59,7 +59,7 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnInit, OnDestroy {
     public toastSubscription: Subscription;
     public errorSubscription: Subscription;
-    private username: string;
+    private _username: string;
     public error: string;
 
     constructor(
@@ -74,7 +74,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.errorSubscription = this.authService.error.subscribe((error: string) => this.error = error);
         this.toastSubscription = this.authService.loginToast.subscribe((success: boolean) => {
             if (success) {
-                this._toastrService.success(`Welcome, ${this.username}!`, 'Login succeeded');
+                this._toastrService.success(`Welcome, ${this._username}!`, 'Login succeeded');
+                this.router.navigate(['market-analysis']);
             } else {
                 this._toastrService.error(this.error, 'Login failed');
             }
@@ -88,7 +89,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     public async onSubmit(form: NgForm): Promise<void> {
         const username = form.value.username;
-        this.username = username;
+        this._username = username;
         const password = form.value.password;
         await this.authService.login(username, password);
         form.reset();

@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppEndpointService } from '../server-communication/app-endpoint.service';
 
 @Component({
     selector: 'app-home',
@@ -25,14 +26,14 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
     constructor(
-        private elementRef: ElementRef,
-        private router: Router
+        private _elementRef: ElementRef,
+        private _router: Router
     ) { }
 
-    ngOnInit() { }
+    ngOnInit(): void { }
 
     // Route to Market Analysis.
-    public onStartNow() {
-        this.router.navigate(['market-analysis']);
+    public onStartNow(): void {
+        this._router.navigate(['about']);
     }
 }
