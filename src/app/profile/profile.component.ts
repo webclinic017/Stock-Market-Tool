@@ -12,12 +12,9 @@ import { ToastrService } from 'ngx-toastr';
                     <div class="portfolio">
                         <h1>Hi</h1>
                     </div>
-                    <div *ngIf="tickerIsLoaded" class="data">
-                    </div>
                 </div>
-                <div class="profile-component">
-                    <div class="portfolio">
-                        <h1>Hi</h1>
+                <div *ngIf="tickerIsLoaded" class="profile-component">
+                    <div class="table">
                     </div>
                 </div>
             </div>
@@ -25,7 +22,8 @@ import { ToastrService } from 'ngx-toastr';
                 <div>
                     <button
                         (click)="handleLogoutClick()"
-                        class="btn btn-default">Logout</button>
+                        class="btn btn-info">Logout
+                    </button>
                 </div>
                 <div *ngIf="tickerIsLoaded" class="profile-component">
                     <div class="">
@@ -50,6 +48,6 @@ export class ProfileComponent implements OnInit {
     public handleLogoutClick(): void {
         this.authService.isLoggedIn.next(false);
         this._toastrService.success('Logout successful');
-        this.router.navigate(['market-analysis']);
+        this.router.navigate(['home']);
     }
 }
