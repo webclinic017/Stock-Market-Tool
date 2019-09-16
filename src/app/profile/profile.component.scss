@@ -1,0 +1,19 @@
+@import "src/styles.scss";
+
+.profile-body {
+    display: flex;
+    flex-direction: column;
+    .profile-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-bottom: 5rem;
+        .profile-component {
+            background-color: $navbar-background;
+            border-top: 1px solid $navbar-border;
+            border-left: 1px solid $navbar-border;
+            border-right: 1px solid $navbar-border;
+            border-bottom: 1px solid $navbar-border;
+        }
+    }
+}

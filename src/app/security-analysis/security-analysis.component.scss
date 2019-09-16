@@ -1,3 +1,5 @@
+@import "src/styles.scss";
+
 .security-body {
     display: flex;
 	flex-direction: column;
@@ -6,25 +8,25 @@
 }
 
 .owner-summary-header {
-    background-color: #f8f8f8;
-    border-top: 1px solid #e7e7e7;
-    border-left: 1px solid #e7e7e7;
-    border-right: 1px solid #e7e7e7;
+    background-color: $navbar-background;
+    border-top: 1px solid $navbar-border;
+    border-left: 1px solid $navbar-border;
+    border-right: 1px solid $navbar-border;
     padding-top: 1rem;
     padding-bottom: 2rem;
     text-align: center;
-    border-bottom: 1px solid #e7e7e7;
+    border-bottom: 1px solid $navbar-border;
 }
 
 .owner-summary-body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: #f8f8f8;
-    border-top: 1px solid #e7e7e7;
-    border-left: 1px solid #e7e7e7;
-    border-right: 1px solid #e7e7e7;
-    border-bottom: 1px solid #e7e7e7;
+    background-color: $navbar-background;
+    border-top: 1px solid $navbar-border;
+    border-left: 1px solid $navbar-border;
+    border-right: 1px solid $navbar-border;
+    border-bottom: 1px solid $navbar-border;
 }
 
 .owner-summary-body-col {
