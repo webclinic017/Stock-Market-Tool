@@ -6,7 +6,7 @@ const checkAuth = require("../middleware/check-auth");
 
 const router = express.Router();
 
-router.get("/info", checkAuth, (req, res, next) => {
+router.get("/dashboard", checkAuth, (req, res, next) => {
     Security.findOne({ ticker: req.query.ticker})
     .then(security => {
         if(!security)
