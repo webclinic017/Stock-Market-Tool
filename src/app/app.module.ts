@@ -19,6 +19,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './authorization/auth.interceptor';
 import { ProfileComponent } from './profile/profile.component';
+import { ReportedComponent } from './security-analysis/reported/reported.component';
+import { CashflowTableComponent } from './security-analysis/reported/tables/cashflow-statement-table.component';
+import { BalanceSheetTableComponent } from './security-analysis/reported/tables/balance-sheet-table.component';
+import { IncomeStatementTableComponent } from './security-analysis/reported/tables/income-statement-table.component';
+import { MatPaginatorModule, MatTableModule } from '@angular/material';
 
 
 @NgModule({
@@ -33,7 +38,11 @@ import { ProfileComponent } from './profile/profile.component';
         RegisterComponent,
         MarketAnalysisComponent,
         SecurityAnalysisComponent,
-        DashboardComponent
+        ReportedComponent,
+        CashflowTableComponent,
+        BalanceSheetTableComponent,
+        IncomeStatementTableComponent,
+        DashboardComponent,
     ],
     imports: [
         BrowserModule,
@@ -42,7 +51,9 @@ import { ProfileComponent } from './profile/profile.component';
         HttpClientModule,
         PopoverModule,
         BrowserAnimationsModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
+        MatPaginatorModule,
+        MatTableModule
     ],
     providers: [
         HttpClient,

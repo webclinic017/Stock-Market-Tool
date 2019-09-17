@@ -45,11 +45,14 @@ router.get("/dashboard", checkAuth, (req, res, next) => {
             });
         });
 });
-router.get("/getReportedTicker", checkAuth, (req, res, next) => {
-    Reported.findOne({ ticker: req.query.ticker})
+router.post("/getReportedTicker", checkAuth, (req, res, next) => {
+    Reported.findOne({ symbol: req.body.ticker}) // this isn't finding anything... (see below)
     .then(reported => {
+        console.log(req.body.ticker); // prints GOOGL
+        console.log(reported); // prints null
         if(!reported)
         {
+            console.log('yikes'); // failing into this if statement
             return res.status(401).json({
                 message: "Reported security not found in database!"
             });
