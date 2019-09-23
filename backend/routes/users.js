@@ -2,8 +2,27 @@ const express = require("express");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 const router = express.Router();
+
+function getCurrentPrice(ticker, callback) {
+    const Http = new XMLHttpRequest();
+    const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + ticker + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
+    Http.open("GET", url, true);
+    Http.send();
+
+    Http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var myObj = JSON.parse(this.responseText);
+          if(myObj.hasOwnProperty('Error Message')) {
+              callback.apply(-1);
+              return;
+          }
+          callback.apply(parseFloat(myObj["Global Quote"]["05. price"]));
+        }
+    };
+}
 
 router.post("/register", (req, res, next) => {
     bcryptjs.hash(req.body.password, 10)
@@ -76,21 +95,31 @@ router.post("/addWatchlistTicker", (req, res, next) => {
             {
                 var today = new Date();
                 var currentDate = today.getMonth() + '/' + today.getDate() + '/' + today.getFullYear();
-                const newStock = {
-                    ticker: req.query.ticker,
-                    dateAdded: currentDate
-                };
-                user.stocks.push(newStock);
-                user.save().then(result => {
-                    res.status(201).json({
-                       message: 'Ticker added to watchlist!',
-                       result: result
+                getCurrentPrice(req.query.ticker, function(){
+                    var price = this;
+                    if(price == -1){
+                        return res.status(500).json({
+                            message: "Unable to obtain price data for the ticker entered!"
+                        });
+                    }
+                    const newStock = {
+                        ticker: req.query.ticker,
+                        dateAdded: currentDate,
+                        priceEntered: price
+                    };
+                    user.stocks.push(newStock);
+                    user.save().then(result => {
+                        res.status(201).json({
+                           message: 'Ticker added to watchlist!',
+                           result: result
+                        });
+                    })
+                    .catch(err => {
+                        res.status(500).json({
+                            error: err
+                        });
                     });
-                })
-                .catch(err => {
-                    res.status(500).json({
-                        error: err
-                    });
+                    
                 });
             }
             else {
