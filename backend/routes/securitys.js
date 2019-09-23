@@ -1,6 +1,5 @@
 const express = require("express");
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-//const request = require('request');
 const Security = require("../models/security");
 const checkAuth = require("../middleware/check-auth");
 
