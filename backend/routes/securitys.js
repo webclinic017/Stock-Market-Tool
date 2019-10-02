@@ -3,7 +3,7 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Security = require("../models/security");
 const Reported = require("../models/reported");
 const checkAuth = require("../middleware/check-auth");
-//const tickerDataService = require("../services/tickerDataService");
+const tickerDataService = require("../services/tickerDataService");
 
 const router = express.Router();
 
@@ -46,7 +46,7 @@ router.get("/dashboard", checkAuth, (req, res, next) => {
             });
         });
 });
-/*
+
 router.get("/getReportedTicker", checkAuth, (req, res, next) => {
     Reported.findOne({ ticker: req.query.ticker})
     .then(reported => {
@@ -66,7 +66,7 @@ router.get("/getReportedTicker", checkAuth, (req, res, next) => {
         });
     });
 });
-*/
+
 router.get("/currentPrice", (req, res, next) => {
     const Http = new XMLHttpRequest();
     const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + req.query.ticker + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
