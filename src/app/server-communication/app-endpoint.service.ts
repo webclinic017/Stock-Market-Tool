@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { RegisterRequest, LoginRequest, SecuritysRequest, LoginResponse, RegisterResponse } from './app-endpoint.constants';
+import { RegisterRequest, LoginRequest, SecuritysRequest, LoginResponse, RegisterResponse, ReportedRequest, ReportedResponse } from './app-endpoint.constants';
 
 @Injectable({ providedIn: 'root' })
 export class AppEndpointService {
@@ -8,9 +8,13 @@ export class AppEndpointService {
 
     constructor(private http: HttpClient) { }
 
-    public getSecurity(securitysRequest: SecuritysRequest) { // TODO: Add response type.
+    /*public getSecurity(securitysRequest: SecuritysRequest) {
         const params = new HttpParams().set('ticker', securitysRequest.ticker);
         return this.http.get(`${this._dbUrl}security/info`, { params }).toPromise();
+    }*/
+
+    public reported(reportedRequest: ReportedRequest): Promise<ReportedResponse> {
+        return this.http.post<ReportedResponse>(`${this._dbUrl}security/reported`, reportedRequest).toPromise();
     }
 
     public register(registerRequest: RegisterRequest): Promise<RegisterResponse>  {
@@ -21,8 +25,6 @@ export class AppEndpointService {
         return this.http.post<LoginResponse>(`${this._dbUrl}user/login`, loginRequest).toPromise();
     }
 
-    // TODO: Need details from Jimmy.
-    // Compute security analysis.
     public securityAnalysis(): void {
         // TODO: Call to backend.
         // return response.

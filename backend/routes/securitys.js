@@ -7,43 +7,42 @@ const router = express.Router();
 
 router.get("/dashboard", checkAuth, (req, res, next) => {
     Security.findOne({ ticker: req.query.ticker})
-    .then(security => {
-        if(!security)
-        {
-            return res.status(401).json({
-                message: "Security not found in database!"
+        .then(security => {
+            if(!security) {
+                return res.status(401).json({
+                    message: "Security not found in database!"
+                });
+            }
+            res.status(200).json({
+                ticker: security.ticker,
+                CAE: security.CAE,
+                STA: security.STA,
+                LTA: security.LTA,
+                DCF: security.DCF,
+                IV: security.IV,
+                DC: security.DTCR,
+                DE: security.DE,
+                ICR: security.ICR,
+                DCL: security.DCL,
+                DOL: security.DOL,
+                DFL: security.DFL,
+                PE: security.PE,
+                EY: security.EY,
+                AbsolutePE: security.AbsolutePE,
+                RelativePE: security.RelativePE,
+                ROE: security.ROE,
+                ROIC: security.ROIC,
+                RetentionRatio: security.RetentionRatio,
+                SGR: security.SGR,
+                ROA: security.ROA,
+                PB: security.PB
             });
-        }
-        res.status(200).json({
-            ticker: security.ticker,
-            CAE: security.CAE,
-            STA: security.STA,
-            LTA: security.LTA,
-            DCF: security.DCF,
-            IV: security.IV,
-            DC: security.DTCR,
-            DE: security.DE,
-            ICR: security.ICR,
-            DCL: security.DCL,
-            DOL: security.DOL,
-            DFL: security.DFL,
-            PE: security.PE,
-            EY: security.EY,
-            AbsolutePE: security.AbsolutePE,
-            RelativePE: security.RelativePE,
-            ROE: security.ROE,
-            ROIC: security.ROIC,
-            RetentionRatio: security.RetentionRatio,
-            SGR: security.SGR,
-            ROA: security.ROA,
-            PB: security.PB
+        })
+        .catch(err => {
+            return res.status(401).json({
+                message: "Security lookup failed!"
+            });
         });
-    })
-    .catch(err => {
-        return res.status(401).json({
-            message: "Security lookup failed!"
-        });
-    });
 });
 
 router.get("/currentPrice", (req, res, next) => {
