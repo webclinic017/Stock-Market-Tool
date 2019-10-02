@@ -1,7 +1,9 @@
 const express = require("express");
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Security = require("../models/security");
+const Reported = require("../models/reported");
 const checkAuth = require("../middleware/check-auth");
+//const tickerDataService = require("../services/tickerDataService");
 
 const router = express.Router();
 
@@ -44,7 +46,27 @@ router.get("/dashboard", checkAuth, (req, res, next) => {
             });
         });
 });
-
+/*
+router.get("/getReportedTicker", checkAuth, (req, res, next) => {
+    Reported.findOne({ ticker: req.query.ticker})
+    .then(reported => {
+        if(!reported)
+        {
+            return res.status(401).json({
+                message: "Reported security not found in database!"
+            });
+        }
+        const reportedTicker = {};
+        reportedTicker = tickerDataService.getCleanTickerData(reported);
+        res.status(200).json(reportedTicker);  
+    })
+    .catch(err => {
+        return res.status(401).json({
+            message: "Reported security lookup failed!"
+        });
+    });
+});
+*/
 router.get("/currentPrice", (req, res, next) => {
     const Http = new XMLHttpRequest();
     const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + req.query.ticker + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
