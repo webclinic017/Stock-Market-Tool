@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const uniqueValidator = require("mongoose-unique-validator");
 
 const reportedSchema = mongoose.Schema({
+    symbol: { type: String, unique: true },
     YEAR_INC: [{ type: String }],
     REV: [{ type: Number }],
     SALES_SERV_REV: [{ type: Number }],
