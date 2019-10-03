@@ -1,9 +1,3 @@
-// TODO:
-// Need to wait and see if structure changes from Jimmy. Assuming it does not,
-// const numYears = max(res.YEAR_INC.length, res.YEAR_BAL.length, res.YEAR_CF.length) - 1;
-// Will need to add conditional logic in parse${cf, inc, bal}Sheet() that checks for the existence
-// of the current year. If it does not, return null for all fields. Indexing will return false data.
-//
 /*
  * Parses ticker data from database into a useable format.
  */
@@ -15,7 +9,9 @@ function getCleanTickerData(res) {
     // Let i start at 1 to account for first index being string of field name.
     for (let i = 1; i <= numYears; i++) {
         // Do not record years containing no data.
-        if (res.YEAR_INC[i] === null) {
+        if (res.YEAR_INC[i] === null &&
+            res.YEAR_BAL[i] === null &&
+            res.YEAR_CF[i] === null) {
             continue;
         }
         fiscalYears.push(parseFiscalYear(res, i));
@@ -29,12 +25,20 @@ function getCleanTickerData(res) {
  * Parses ticker data from database into a specific year.
  */
 function parseFiscalYear(res, yearIndex) {
-    return {
-        year: res.YEAR_INC[yearIndex],
-        balanceSheet: parseBalanceSheet(res, yearIndex),
-        incomeSheet: parseIncomeSheet(res, yearIndex),
-        cashflowSheet: parseCashflowSheet(res, yearIndex),
-    };
+    fiscalYear = {};
+    if (res.YEAR_INC[i] !== null) {
+        fiscalYear.incomeSheet = parseIncomeSheet(res, yearIndex);
+        fiscalYear.year = res.YEAR_INC[i];
+    }
+    if (res.YEAR_BAL[i] !== null) {
+        fiscalYear.balanceSheet = parseBalanceSheet(res, yearIndex);
+        fiscalYear.year = res.YEAR_BAL[i];
+    }
+    if (res.YEAR_CF[i] !== null) {
+        fiscalYear.cashFlowSheet = parseCashflowSheet(res, yearIndex);
+        fiscalYear.year = res.YEAR_CF[i];
+    }
+    return fiscalYear;
 }
 
 /*
@@ -74,7 +78,6 @@ function parseBalanceSheet(res, yearIndex) {
         miscAssets: res.MISC_ASSETS[yearIndex],
         totalNonCurrAssets: res.TOTAL_NON_CURR_ASSETS[yearIndex],
         totalAssets2: res.TOTAL_ASSETS2[yearIndex],
-        liabAndEquity1: res.LIAB_AND_EQUITY1[yearIndex],
         payablesAccruals: res.PAYABLES_ACCRUALS[yearIndex],
         payables: res.PAYABLES[yearIndex],
         accruedTaxes: res.ACCRUED_TAXES[yearIndex],
@@ -115,7 +118,7 @@ function parseBalanceSheet(res, yearIndex) {
         equityBeforeMinInt: res.EQUITY_BEFORE_MIN_INT[yearIndex],
         minNonControlInt: res.MIN_NON_CONTROL_INT[yearIndex],
         totalEquity: res.TOTAL_EQUITY[yearIndex],
-        liabAndEquity2: res.LIAB_AND_EQUITY2[yearIndex]
+        liabAndEquity: res.LIAB_AND_EQUITY[yearIndex]
     }
 }
 
