@@ -25,7 +25,7 @@ function getCleanTickerData(res) {
  * Parses ticker data from database into a specific year.
  */
 function parseFiscalYear(res, yearIndex) {
-    fiscalYear = {};
+    const fiscalYear = {};
     if (res.YEAR_INC[i] !== null) {
         fiscalYear.incomeSheet = parseIncomeSheet(res, yearIndex);
         fiscalYear.year = res.YEAR_INC[i];
@@ -35,7 +35,7 @@ function parseFiscalYear(res, yearIndex) {
         fiscalYear.year = res.YEAR_BAL[i];
     }
     if (res.YEAR_CF[i] !== null) {
-        fiscalYear.cashFlowSheet = parseCashflowSheet(res, yearIndex);
+        fiscalYear.cashflowSheet = parseCashflowSheet(res, yearIndex);
         fiscalYear.year = res.YEAR_CF[i];
     }
     return fiscalYear;
