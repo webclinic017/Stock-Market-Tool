@@ -4,7 +4,7 @@ export interface Ticker {
 }
 
 export interface FiscalYear {
-    year: number;
+    year: string;
     balanceSheet: BalanceSheet;
     incomeSheet: IncomeSheet;
     cashflowSheet: CashflowSheet;
@@ -43,7 +43,6 @@ export interface BalanceSheet {
     miscAssets: number;
     totalNonCurrAssets: number;
     totalAssets2: number;
-    liabAndEquity1: number;
     payablesAccruals: number;
     payables: number;
     accruedTaxes: number;
@@ -84,7 +83,7 @@ export interface BalanceSheet {
     equityBeforeMinInt: number;
     minNonControlInt: number;
     totalEquity: number;
-    liabAndEquity2: number;
+    liabAndEquity: number;
 }
 
 export interface IncomeSheet {
