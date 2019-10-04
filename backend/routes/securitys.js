@@ -7,7 +7,7 @@ const tickerDataService = require("../services/tickerDataService");
 const router = express.Router();
 
 router.get("/dashboard", checkAuth, (req, res, next) => {
-    Security.findOne({ ticker: req.query.ticker})
+    Security.findOne({ ticker: req.query.ticker })
         .then(security => {
             if(!security) {
                 return res.status(401).json({
@@ -45,11 +45,10 @@ router.get("/dashboard", checkAuth, (req, res, next) => {
             });
         });
 });
+
 router.post("/getReportedTicker", checkAuth, (req, res, next) => {
-    Reported.findOne({ symbol: req.body.ticker}) // this isn't finding anything... (see below)
+    Reported.findOne({ symbol: req.body.symbol }) // this isn't finding anything... (see below)
     .then(reported => {
-        console.log(req.body.ticker); // prints GOOGL
-        console.log(reported); // prints null
         if(!reported)
         {
             console.log('yikes'); // failing into this if statement
@@ -57,7 +56,7 @@ router.post("/getReportedTicker", checkAuth, (req, res, next) => {
                 message: "Reported security not found in database!"
             });
         }
-        const reportedTicker = {};
+        var reportedTicker = {};
         reportedTicker = tickerDataService.getCleanTickerData(reported);
         res.status(200).json(reportedTicker);  
     })
