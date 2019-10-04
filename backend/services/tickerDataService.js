@@ -26,17 +26,17 @@ function getCleanTickerData(res) {
  */
 function parseFiscalYear(res, yearIndex) {
     const fiscalYear = {};
-    if (res.YEAR_INC[i] !== null) {
+    if (res.YEAR_INC[yearIndex] !== null) {
         fiscalYear.incomeSheet = parseIncomeSheet(res, yearIndex);
-        fiscalYear.year = res.YEAR_INC[i];
+        fiscalYear.year = res.YEAR_INC[yearIndex];
     }
-    if (res.YEAR_BAL[i] !== null) {
+    if (res.YEAR_BAL[yearIndex] !== null) {
         fiscalYear.balanceSheet = parseBalanceSheet(res, yearIndex);
-        fiscalYear.year = res.YEAR_BAL[i];
+        fiscalYear.year = res.YEAR_BAL[yearIndex];
     }
-    if (res.YEAR_CF[i] !== null) {
+    if (res.YEAR_CF[yearIndex] !== null) {
         fiscalYear.cashflowSheet = parseCashflowSheet(res, yearIndex);
-        fiscalYear.year = res.YEAR_CF[i];
+        fiscalYear.year = res.YEAR_CF[yearIndex];
     }
     return fiscalYear;
 }
