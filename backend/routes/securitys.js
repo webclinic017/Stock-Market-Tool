@@ -47,18 +47,16 @@ router.get("/dashboard", checkAuth, (req, res, next) => {
 });
 
 router.post("/getReportedTicker", checkAuth, (req, res, next) => {
-    Reported.findOne({ symbol: req.body.symbol }) // this isn't finding anything... (see below)
+    Reported.findOne({ symbol: req.body.ticker })
     .then(reported => {
-        if(!reported)
-        {
-            console.log('yikes'); // failing into this if statement
+        if(!reported) {
             return res.status(401).json({
                 message: "Reported security not found in database!"
             });
         }
-        var reportedTicker = {};
-        reportedTicker = tickerDataService.getCleanTickerData(reported);
-        res.status(200).json(reportedTicker);  
+        console.log(reported);
+        const reportedTicker = tickerDataService.getCleanTickerData(reported);
+        res.status(200).json(reportedTicker);
     })
     .catch(err => {
         return res.status(401).json({
