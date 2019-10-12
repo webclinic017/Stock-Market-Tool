@@ -54,7 +54,6 @@ router.post("/getReportedTicker", checkAuth, (req, res, next) => {
                 message: "Reported security not found in database!"
             });
         }
-        console.log(reported);
         const reportedTicker = tickerDataService.getCleanTickerData(reported);
         res.status(200).json(reportedTicker);
     })

@@ -13,8 +13,8 @@ export class AppEndpointService {
         return this.http.get(`${this._dbUrl}security/info`, { params }).toPromise();
     }*/
 
-    public getReported(reportedRequest: ReportedRequest)/*: Promise<ReportedResponse>*/ {
-        return this.http.post/*<ReportedResponse>*/(`${this._dbUrl}security/getReportedTicker`, reportedRequest).toPromise();
+    public getReported(reportedRequest: ReportedRequest): Promise<ReportedResponse> {
+        return this.http.post<ReportedResponse>(`${this._dbUrl}security/getReportedTicker`, reportedRequest).toPromise();
     }
 
     public register(registerRequest: RegisterRequest): Promise<RegisterResponse>  {
