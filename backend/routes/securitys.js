@@ -64,6 +64,7 @@ router.post("/getReportedTicker", checkAuth, (req, res, next) => {
         });
     });
 });
+
 router.get("/currentPrice", (req, res, next) => {
     const Http = new XMLHttpRequest();
     const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + req.query.ticker + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
