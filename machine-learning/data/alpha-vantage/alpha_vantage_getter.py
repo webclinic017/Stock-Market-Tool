@@ -25,13 +25,13 @@ def alpha_vantage_getter(tickers):
             # Write to file.
             with open(f'json-data/{ticker}-price-daily.json', 'w') as f:
                 json.dump(response.json(), f)
-
-            # Need to wait as we can only complete 5 requests a minute.
-            time.sleep(20)
         except:
             print(f'{ticker} data capture failed')
         else:
-            print(f'{ticker} data captured successfully')
+            print(f'{ticker} data capture succeeded')
+        finally:
+            # Need to wait as we can only complete 5 requests a minute.
+            time.sleep(20)
 
 def main_function():
     # get list of tickers
