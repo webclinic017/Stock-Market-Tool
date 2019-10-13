@@ -4,7 +4,7 @@ import { RegisterRequest, LoginRequest, SecuritysRequest, LoginResponse, Registe
 
 @Injectable({ providedIn: 'root' })
 export class AppEndpointService {
-    private _dbUrl = 'http://localhost:3000/api/';
+    private _dbUrl = 'http://grahamselector-env.v3sgrfvbqz.us-east-1.elasticbeanstalk.com/api/';
 
     constructor(private http: HttpClient) { }
 
