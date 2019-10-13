@@ -1,0 +1,24 @@
+{
+  "name": "value-predictor",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^3.4.1",
+    "cors": "^2.8.5",
+    "device.js": "^2.3.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.0",
+    "mongoose-unique-validator": "^2.0.3",
+    "ngx-input-search": "^2.2.1",
+    "ngx-responsive": "^7.0.1",
+    "ngx-smart-popover": "^1.1.0",
+    "ngx-toastr": "^10.2.0",
+    "nodemon": "^1.18.11",
+    "open-iconic": "^1.1.1",
+    "tslib": "^1.9.0",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
