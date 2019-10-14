@@ -2,9 +2,6 @@ import requests
 import time
 import json
 
-# Constants
-key = 'P4Y44752S9IOSDIC'
-
 # Read list of S&P 500 stocks.
 def populate_ticker_array(tickers):
     with open('./s&p500-companies.txt') as fp:
