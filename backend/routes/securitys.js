@@ -46,7 +46,7 @@ router.get("/dashboard", checkAuth, (req, res, next) => {
         });
 });
 
-router.post("/getReportedTicker", checkAuth, (req, res, next) => {
+router.post("/getReportedTicker", /*checkAuth,*/ (req, res, next) => { // TODO: Put back auth once ML no longer needs to hit this.
     Reported.findOne({ symbol: req.body.ticker })
     .then(reported => {
         if(!reported) {

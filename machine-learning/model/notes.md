@@ -29,7 +29,7 @@ g = reasonably expected 7 to 10 year growth rate (see Sustainable growth rate #F
 4.4 = the average yield of AAA corporate bonds in 1962 (Graham did not specify the duration of the bonds, though it has been asserted that he used 20 year AAA bonds as his benchmark for this variable[4])
 Y= the current yield on AAA corporate bonds.
 ```
-We want to idealize the values of `P/E` and `g`.
+We want to idealize the values of `P/E` and `g` coefficient.
 * `V = (EPS * (y + ug) * 4.4) / Y`
 * `V = ((4.4 * EPS) / Y) * (y + ug)`
 

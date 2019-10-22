@@ -12,7 +12,7 @@ export class ReportedComponent implements OnInit {
     constructor(private _appEndpointService: AppEndpointService) { }
 
     async ngOnInit() {
-        const res = await this._appEndpointService.getReported({ticker: 'GOOGL'});
+        const res = await this._appEndpointService.getReported({ticker: 'HRB'});
         console.log(res);
     }
 }
