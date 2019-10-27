@@ -24,6 +24,11 @@ import { CashflowTableComponent } from './security-analysis/reported/tables/cash
 import { BalanceSheetTableComponent } from './security-analysis/reported/tables/balance-sheet-table.component';
 import { IncomeStatementTableComponent } from './security-analysis/reported/tables/income-statement-table.component';
 import { MatPaginatorModule, MatTableModule } from '@angular/material';
+import { SmtIncomeOneComponent } from './security-analysis/reported/tables/income/smt-income-one.component';
+import { SmtIncomeTwoComponent } from './security-analysis/reported/tables/income/smt-income-two.component';
+import { SmtIncomeThreeComponent } from './security-analysis/reported/tables/income/smt-income-three.component';
+import { SmtIncomeFourComponent } from './security-analysis/reported/tables/income/smt-income-four.component';
+import { SmtIncomeFiveComponent } from './security-analysis/reported/tables/income/smt-income-five.component';
 
 
 @NgModule({
@@ -43,6 +48,11 @@ import { MatPaginatorModule, MatTableModule } from '@angular/material';
         BalanceSheetTableComponent,
         IncomeStatementTableComponent,
         DashboardComponent,
+        SmtIncomeOneComponent,
+        SmtIncomeTwoComponent,
+        SmtIncomeThreeComponent,
+        SmtIncomeFourComponent,
+        SmtIncomeFiveComponent,
     ],
     imports: [
         BrowserModule,
