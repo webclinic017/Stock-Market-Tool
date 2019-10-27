@@ -1,3 +1,38 @@
+import inspect
+
+#TODO: Naming Convention Updates:
+#TOTAL_INT_ASSETS is now TOTAL_INTANG_ASSETS
+#OTH_INT_ASSETS is now OTH_INTANG_ASSETS
+#DISP_INTAG_ASSETS is now DISP_INTANG_ASSETS
+#ACQ_INTAG_ASSETS is now ACQ_INTANG_ASSETS
+#ACQ_FIXED_INTAG is now ACQ_FIXED_INTANG
+#STI is now ST_INVEST
+#CHG_ACCTS_REC is now CREDIT_SALES
+#INC_TAX_BENEFIT is now INC_TAX_EXPENSE
+
+#TODO: Compare all duplicates: Put in PythonApplication1. If Unused, delete them all.
+#i=0
+#while(i < 35):
+#	if(data['NET_EXTRA1'][i] != data['NET_EXTRA2'][i]):
+#		print('NET_EXTRA1 != NET_EXTRA2')
+#	if(data['TOTAL_ASSETS1'][i] != data['TOTAL_ASSETS2'][i]):
+#		print('TOTAL_ASSETS1 != TOTAL_ASSETS2')
+#	if(data['DERIV_HEDGE_ASSETS1'][i] != data['DERIV_HEDGE_ASSETS2'][i]):
+#		print('DERIV_HEDGE_ASSETS1 != DERIV_HEDGE_ASSETS2')
+#	if(data['NET_CASH_DISC_OPS1'][i] != data['NET_CASH_DISC_OPS2'][i] != data['NET_CASH_DISC_OPS3'][i]):
+#		print('NET_CASH_DISC_OPS1 != NET_CASH_DISC_OPS1 != NET_CASH_DISC_OPS3')
+#	if(data['DEFF_REV_1'][i] != data['DEFF_REV_2'][i]):
+#		print('DEFF_REV_1 != DEFF_REV_2')
+#	if(data['DERIV_HEDGE_1'][i] != data['DERIV_HEDGE_2'][i]):
+#		print('DERIV_HEDGE_1 != DERIV_HEDGE_2')
+#	if(data['NET_CASH_DISC_OPS1'][i] != data['NET_CASH_DISC_OPS2'][i]):
+#		print('NET_CASH_DISC_OPS1 != NET_CASH_DISC_OPS2')
+#	if(data['CASH_INVEST_ACT1'][i] != data['CASH_INVEST_ACT2'][i]):
+#		print('CASH_INVEST_ACT1 != CASH_INVEST_ACT2')
+#	if(data['CASH_FIN_ACT1'][i] != data['CASH_FIN_ACT2'][i]):
+#		print('CASH_FIN_ACT1 != CASH_FIN_ACT2')
+#	i += 1
+
 class inc(str):
 	YEAR_INC				 = "In Millions of USD except Per Share"
 	REV						 = "Revenue"
@@ -23,7 +58,7 @@ class inc(str):
 	AFFILIATES				 = "(Income) Loss from Affiliates"
 	NON_OP_INC				 = "Other Non-Op (Income) Loss"
 	PRETAX_INCOME			 = "Pretax Income"
-	INC_TAX_BENEFIT			 = "Income Tax Expense (Benefit)"
+	INC_TAX_EXPENSE			 = "Income Tax Expense (Benefit)"
 	CURR_INC_TAX			 = "Current Income Tax"
 	DEFF_INC_TAX			 = "Deferred Income Tax"
 	CONT_OPS				 = "Income (Loss) from Cont Ops"
@@ -47,7 +82,7 @@ class bal(str):
 	TOTAL_ASSETS1				= "Total Assets"						 
 	CASH_EQ_STI					= "Cash, Cash Equivalents & STI"		 
 	CASH_EQ						= "Cash & Cash Equivalents"				 
-	STI							= "ST Investments"						 
+	ST_INVEST					= "ST Investments"						 
 	ACCTS_REC					= "Accounts & Notes Receiv"				 
 	ACCTS_REC_NET				= "Accounts Receivable, Net"			 
 	NOTES_REC_NET				= "Notes Receivable, Net"				 
@@ -67,9 +102,9 @@ class bal(str):
 	LTI_RECEIVABLES				= "LT Investments & Receivables"
 	LT_INVEST					= "LT Investments"
 	OTH_LT_ASSETS				= "Other LT Assets"						 
-	TOTAL_INT_ASSETS			= "Total Intangible Assets"				 
+	TOTAL_INTANG_ASSETS			= "Total Intangible Assets"				 
 	GOODWILL					= "Goodwill"							 
-	OTH_INT_ASSETS				= "Other Intangible Assets"	
+	OTH_INTANG_ASSETS			= "Other Intangible Assets"	
 	PREPAID_EXP					= "Prepaid Expense"
 	DEFF_TAX_ASSETS				= "Deferred Tax Assets"					 
 	DERIV_HEDGE_ASSETS2			= "Derivative & Hedging Assets"			 
@@ -127,7 +162,7 @@ class cf(str):
 	DEF_INT_COMP				 = "Deferred Income Taxes"				  
 	OTH_NON_CASH_ADJ			 = "Other Non-Cash Adj"					  
 	CHG_NON_CASH_OP				 = "Chg in Non-Cash Work Cap"			  
-	CHG_ACCTS_REC				 = "(Inc) Dec in Accts Receiv"			  
+	CREDIT_SALES				 = "(Inc) Dec in Accts Receiv"			  
 	CHG_INVENTORIES				 = "(Inc) Dec in Inventories"			  
 	CHG_ACCTS_PAYABLE			 = "Inc (Dec) in Accts Payable"			  
 	CHG_OTHER					 = "Inc (Dec) in Other"					  
@@ -137,10 +172,10 @@ class cf(str):
 	CHG_FIXED_INTANG			 = "Change in Fixed & Intang"			  
 	DISP_FIXED_INTANG			 = "Disp in Fixed & Intang"				  
 	DISP_FIXED_PROD_ASSETS		 = "Disp of Fixed Prod Assets"			  
-	DISP_INTAG_ASSETS			 = "Disp of Intangible Assets"			  
-	ACQ_FIXED_INTAG				 = "Acq of Fixed & Intang"				  
+	DISP_INTANG_ASSETS			 = "Disp of Intangible Assets"			  
+	ACQ_FIXED_INTANG			 = "Acq of Fixed & Intang"				  
 	ACQ_FIXED_PROD_ASSETS		 = "Acq of Fixed Prod Assets"			  
-	ACQ_INTAG_ASSETS			 = "Acq of Intangible Assets"			  
+	ACQ_INTANG_ASSETS			 = "Acq of Intangible Assets"			  
 	NET_CHG_LT_INVEST			 = "Net Change in LT Investment"			
 	DEC_LT_INVEST				 = "Dec in LT Investment"				  
 	INC_LT_INVEST				 = "Inc in LT Investment"				  
@@ -194,7 +229,7 @@ class ticker(float):
 	AFFILIATES				    = [None] * 35
 	NON_OP_INC				    = [None] * 35
 	PRETAX_INCOME			    = [None] * 35
-	INC_TAX_BENEFIT			    = [None] * 35
+	INC_TAX_EXPENSE			    = [None] * 35
 	CURR_INC_TAX			    = [None] * 35
 	DEFF_INC_TAX			    = [None] * 35
 	CONT_OPS				    = [None] * 35
@@ -217,7 +252,7 @@ class ticker(float):
 	TOTAL_ASSETS1				= [None] * 35
 	CASH_EQ_STI					= [None] * 35
 	CASH_EQ						= [None] * 35
-	STI							= [None] * 35
+	ST_INVEST					= [None] * 35
 	ACCTS_REC					= [None] * 35
 	ACCTS_REC_NET				= [None] * 35
 	NOTES_REC_NET				= [None] * 35
@@ -237,9 +272,9 @@ class ticker(float):
 	LTI_RECEIVABLES				= [None] * 35
 	LT_INVEST					= [None] * 35
 	OTH_LT_ASSETS				= [None] * 35
-	TOTAL_INT_ASSETS			= [None] * 35
+	TOTAL_INTANG_ASSETS			= [None] * 35
 	GOODWILL					= [None] * 35
-	OTH_INT_ASSETS				= [None] * 35
+	OTH_INTANG_ASSETS			= [None] * 35
 	PREPAID_EXP					= [None] * 35
 	DEFF_TAX_ASSETS				= [None] * 35
 	DERIV_HEDGE_ASSETS2			= [None] * 35
@@ -297,7 +332,7 @@ class ticker(float):
 	DEF_INT_COMP				= [None] * 35
 	OTH_NON_CASH_ADJ			= [None] * 35
 	CHG_NON_CASH_OP				= [None] * 35
-	CHG_ACCTS_REC				= [None] * 35
+	CREDIT_SALES				= [None] * 35
 	CHG_INVENTORIES				= [None] * 35
 	CHG_ACCTS_PAYABLE			= [None] * 35
 	CHG_OTHER					= [None] * 35
@@ -307,10 +342,10 @@ class ticker(float):
 	CHG_FIXED_INTANG			= [None] * 35
 	DISP_FIXED_INTANG			= [None] * 35
 	DISP_FIXED_PROD_ASSETS		= [None] * 35
-	DISP_INTAG_ASSETS			= [None] * 35
-	ACQ_FIXED_INTAG				= [None] * 35
+	DISP_INTANG_ASSETS			= [None] * 35
+	ACQ_FIXED_INTANG			= [None] * 35
 	ACQ_FIXED_PROD_ASSETS		= [None] * 35
-	ACQ_INTAG_ASSETS			= [None] * 35
+	ACQ_INTANG_ASSETS			= [None] * 35
 	NET_CHG_LT_INVEST			= [None] * 35
 	DEC_LT_INVEST				= [None] * 35
 	INC_LT_INVEST				= [None] * 35
@@ -337,3 +372,13 @@ class ticker(float):
 	NET_CHG_CASH				= [None] * 35
 	CASH_PAID_TAXES				= [None] * 35
 	CASH_PAID_INT				= [None] * 35
+	
+	
+def getTickerAttrs():
+	omit = "as_integer_ratio", "conjugate", "fromhex", "hex", "imag", "is_integer", "real"
+	return [x for x in inspect.getmembers(ticker) if not (x[0].startswith('__') or x[0] in omit) ]
+
+def getTickerLabels():
+	omit = "as_integer_ratio", "conjugate", "fromhex", "hex", "imag", "is_integer", "real"
+	return [x for x in dir(ticker) if not (x.startswith('__') or x in omit) ]
+

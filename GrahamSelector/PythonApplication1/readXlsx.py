@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd 
 import json
 import Reported
+import inspect
 
 path = './'
 strXlsx = ".xlsx"
@@ -44,8 +45,174 @@ def createLocaljsonObj(symbol):
 	unkept = []
 	
 	symbol = symbol.strip(strXlsx)
-	data['symbol'] = symbol
+	data['SYMBOL'] = symbol
 	index = 0
+	
+	data['YEAR_INC']				= [None] * 35
+	data['REV']						= [None] * 35
+	data['SALES_SERV_REV']			= [None] * 35
+	data['OTHER_REV']				= [None] * 35
+	data['COST_OF_REV']				= [None] * 35
+	data['COGS']					= [None] * 35
+	data['PROFIT']					= [None] * 35
+	data['OTH_PROFIT']				= [None] * 35
+	data['OP_EXP']					= [None] * 35
+	data['SG_AND_ADMIN']			= [None] * 35
+	data['SELL_AND_MARK']			= [None] * 35
+	data['GEN_AND_ADMIN']			= [None] * 35
+	data['R_AND_D']					= [None] * 35
+	data['DEP_AMORT']				= [None] * 35
+	data['OTH_OP_EXP']				= [None] * 35
+	data['OP_INC_LOSS']				= [None] * 35
+	data['NON_OP_INC_LOSS']			= [None] * 35
+	data['NET_INT_EXP']				= [None] * 35
+	data['INT_EXP']					= [None] * 35
+	data['INT_INC']					= [None] * 35
+	data['FOREX']					= [None] * 35
+	data['AFFILIATES']				= [None] * 35
+	data['NON_OP_INC']				= [None] * 35
+	data['PRETAX_INCOME']			= [None] * 35
+	data['INC_TAX_EXPENSE']			= [None] * 35
+	data['CURR_INC_TAX']			= [None] * 35
+	data['DEFF_INC_TAX']			= [None] * 35
+	data['CONT_OPS']				= [None] * 35
+	data['NET_EXTRA1']				= [None] * 35
+	data['DISC_OPS']				= [None] * 35
+	data['ACCT_CHNG']				= [None] * 35
+	data['INCOME_MI']				= [None] * 35
+	data['MIN_INTEREST']			= [None] * 35
+	data['NI_INC']  				= [None] * 35
+	data['PREF_DIVS']				= [None] * 35
+	data['OTH_ADJ']					= [None] * 35
+	data['NI_AVAIL_COMMON_GAAP']	= [None] * 35
+	data['NI_AVAIL_COMMON_ADJ']		= [None] * 35
+	data['NET_ABNORMAL']			= [None] * 35
+	data['NET_EXTRA2']				= [None] * 35
+	data['BASIC_WEIGHT_AVG_SHARES'] = [None] * 35
+	data['DIL_WEIGHT_AVG_SHARES']	= [None] * 35
+	data['YEAR_BAL']				= [None] * 35
+	data['TOTAL_ASSETS1']			= [None] * 35
+	data['CASH_EQ_STI']				= [None] * 35
+	data['CASH_EQ']					= [None] * 35
+	data['ST_INVEST']				= [None] * 35
+	data['ACCTS_REC']				= [None] * 35
+	data['ACCTS_REC_NET']			= [None] * 35
+	data['NOTES_REC_NET']			= [None] * 35
+	data['INV']						= [None] * 35
+	data['RAW_MAT']					= [None] * 35
+	data['WIP']						= [None] * 35
+	data['FIN_GOODS'] 				= [None] * 35
+	data['OTH_INV']					= [None] * 35
+	data['OTH_ST_ASSETS']			= [None] * 35
+	data['DERIV_HEDGE_ASSETS1']		= [None] * 35
+	data['TAXES_RECIEV']			= [None] * 35
+	data['MISC_ST_ASSETS']			= [None] * 35
+	data['TOTAL_CURR_ASSETS']		= [None] * 35
+	data['PPE_NET']					= [None] * 35
+	data['PPE']						= [None] * 35
+	data['ACC_DEPREC']				= [None] * 35
+	data['LTI_RECEIVABLES']			= [None] * 35
+	data['LT_INVEST']				= [None] * 35
+	data['OTH_LT_ASSETS']			= [None] * 35
+	data['TOTAL_INTANG_ASSETS']		= [None] * 35
+	data['GOODWILL']				= [None] * 35
+	data['OTH_INTANG_ASSETS']		= [None] * 35
+	data['PREPAID_EXP']				= [None] * 35
+	data['DEFF_TAX_ASSETS']			= [None] * 35
+	data['DERIV_HEDGE_ASSETS2']		= [None] * 35
+	data['MISC_ASSETS']				= [None] * 35
+	data['TOTAL_NON_CURR_ASSETS']	= [None] * 35
+	data['TOTAL_ASSETS2']			= [None] * 35
+	data['LIAB_AND_EQUITY1']		= [None] * 35
+	data['PAYABLES_ACCRUALS']		= [None] * 35
+	data['PAYABLES']				= [None] * 35
+	data['ACCRUED_TAXES']			= [None] * 35
+	data['INT_DIVS_PAYABLES']		= [None] * 35
+	data['OTH_PAYABLES_ACCURALS']	= [None] * 35
+	data['ST_DEBT']					= [None] * 35
+	data['ST_BORROWINGS']			= [None] * 35
+	data['ST_FIN_LEASES']			= [None] * 35
+	data['ST_OP_LEASES']			= [None] * 35
+	data['CURR_LT_DEBT']			= [None] * 35
+	data['OTH_ST_LIAB']				= [None] * 35
+	data['DEFF_REV_1']				= [None] * 35
+	data['DERIV_HEDGE_1']			= [None] * 35
+	data['MISC_ST_LIAB']			= [None] * 35
+	data['TOTAL_CURR_LIAB']			= [None] * 35
+	data['LT_DEBT']					= [None] * 35
+	data['LT_BORROW']				= [None] * 35
+	data['LT_FIN_LEASES']			= [None] * 35
+	data['LT_OP_LEASES']			= [None] * 35
+	data['OTH_LT_LIAB']				= [None] * 35
+	data['ACCURED_LIAB']			= [None] * 35
+	data['PENSION_LIAB']			= [None] * 35
+	data['PENSIONS']				= [None] * 35
+	data['OTH_POST_RET_BEN']		= [None] * 35
+	data['DEFF_REV_2']				= [None] * 35
+	data['DEF_TAX_LIAB']			= [None] * 35
+	data['DERIV_HEDGE_2']			= [None] * 35
+	data['MISC_LT_LIAB']			= [None] * 35
+	data['TOTAL_NON_CURR_LIAB']		= [None] * 35
+	data['TOTAL_LIAB']				= [None] * 35
+	data['PREF_EQUITY_HYBRID_CAP']	= [None] * 35
+	data['SHARE_CAP_APIC']			= [None] * 35
+	data['COMMON_STOCK']			= [None] * 35
+	data['ADD_PAID_CAP']			= [None] * 35
+	data['TREASURY_STOCK']			= [None] * 35
+	data['RE']						= [None] * 35
+	data['OTH_EQUITY']				= [None] * 35
+	data['EQUITY_BEFORE_MIN_INT']	= [None] * 35
+	data['MIN_NON_CONTROL_INT']		= [None] * 35
+	data['TOTAL_EQUITY']			= [None] * 35
+	data['LIAB_AND_EQUITY']			= [None] * 35
+	data['YEAR_CF']					= [None] * 35
+	data['NI_CF']  					= [None] * 35
+	data['DEPRE_AMORT']				= [None] * 35
+	data['NON_CASH_ITEMS']			= [None] * 35
+	data['STOCK_COMP']				= [None] * 35
+	data['DEF_INT_COMP']			= [None] * 35
+	data['OTH_NON_CASH_ADJ']		= [None] * 35
+	data['CHG_NON_CASH_OP']			= [None] * 35
+	data['CHG_ACCTS_REC']			= [None] * 35
+	data['CHG_INVENTORIES']			= [None] * 35
+	data['CHG_ACCTS_PAYABLE']		= [None] * 35
+	data['CHG_OTHER']				= [None] * 35
+	data['NET_CASH_DISC_OPS1']		= [None] * 35
+	data['CASH_OP_ACT']				= [None] * 35
+	data['CASH_INVEST_ACT1']		= [None] * 35
+	data['CHG_FIXED_INTANG']		= [None] * 35
+	data['DISP_FIXED_INTANG']		= [None] * 35
+	data['DISP_FIXED_PROD_ASSETS']	= [None] * 35
+	data['DISP_INTANG_ASSETS']		= [None] * 35
+	data['ACQ_FIXED_INTANG']		= [None] * 35
+	data['ACQ_FIXED_PROD_ASSETS']	= [None] * 35
+	data['ACQ_INTANG_ASSETS']		= [None] * 35
+	data['NET_CHG_LT_INVEST']		= [None] * 35
+	data['DEC_LT_INVEST']			= [None] * 35
+	data['INC_LT_INVEST']			= [None] * 35
+	data['NET_CASH_ACQ_DIV']		= [None] * 35
+	data['CASH_DIVEST']				= [None] * 35
+	data['CASH_ACQ_SUBS']			= [None] * 35
+	data['CASH_JVS']				= [None] * 35
+	data['OTH_INVEST_ACT']			= [None] * 35
+	data['NET_CASH_DISC_OPS2']		= [None] * 35
+	data['CASH_INVEST_ACT2']		= [None] * 35
+	data['CASH_FIN_ACT1']			= [None] * 35
+	data['DIVS_PAID']				= [None] * 35
+	data['CASH_REPAY_DEBT']			= [None] * 35
+	data['CASH_ST_DEBT']			= [None] * 35
+	data['CASH_LT_DEBT']			= [None] * 35
+	data['REPAY_LT_DEBT']			= [None] * 35
+	data['CASH_REPURCH_EQUITY']		= [None] * 35
+	data['INC_CAPITAL_STOCK']		= [None] * 35
+	data['DEC_CAPITAL_STOCK']		= [None] * 35
+	data['OTH_FIN_ACT']				= [None] * 35
+	data['NET_CASH_DISC_OPS3']		= [None] * 35
+	data['CASH_FIN_ACT2']			= [None] * 35
+	data['EFFECT_FOREX_RATES']		= [None] * 35
+	data['NET_CHG_CASH']			= [None] * 35
+	data['CASH_PAID_TAXES']			= [None] * 35
+	data['CASH_PAID_INT']			= [None] * 35
 	#print("******************************")
 	#print("INC")
 	#print("******************************")
@@ -128,9 +295,9 @@ def createLocaljsonObj(symbol):
 		elif(Reported.inc.PRETAX_INCOME == label):	
 			Reported.ticker.PRETAX_INCOME =  apply(label, row)
 			data['PRETAX_INCOME'] = Reported.ticker.PRETAX_INCOME
-		elif(Reported.inc.INC_TAX_BENEFIT == label):	
-			Reported.ticker.INC_TAX_BENEFIT =  apply(label, row)
-			data['INC_TAX_BENEFIT'] = Reported.ticker.INC_TAX_BENEFIT
+		elif(Reported.inc.INC_TAX_EXPENSE == label):	
+			Reported.ticker.INC_TAX_EXPENSE =  apply(label, row)
+			data['INC_TAX_EXPENSE'] = Reported.ticker.INC_TAX_EXPENSE
 		elif(Reported.inc.CURR_INC_TAX == label):		
 			Reported.ticker.CURR_INC_TAX =  apply(label, row)
 			data['CURR_INC_TAX'] = Reported.ticker.CURR_INC_TAX
@@ -208,9 +375,9 @@ def createLocaljsonObj(symbol):
 		elif(Reported.bal.CASH_EQ == label):
 			Reported.ticker.CASH_EQ = apply(label, row)
 			data['CASH_EQ'] = Reported.ticker.CASH_EQ
-		elif(Reported.bal.STI == label):
-			Reported.ticker.STI = apply(label, row)
-			data['STI'] = Reported.ticker.STI
+		elif(Reported.bal.ST_INVEST == label):
+			Reported.ticker.ST_INVEST = apply(label, row)
+			data['ST_INVEST'] = Reported.ticker.ST_INVEST
 		elif(Reported.bal.ACCTS_REC == label):
 			Reported.ticker.ACCTS_REC = apply(label, row)
 			data['ACCTS_REC'] = Reported.ticker.ACCTS_REC
@@ -268,15 +435,15 @@ def createLocaljsonObj(symbol):
 		elif(Reported.bal.OTH_LT_ASSETS == label):
 			Reported.ticker.OTH_LT_ASSETS = apply(label, row)
 			data['OTH_LT_ASSETS'] = Reported.ticker.OTH_LT_ASSETS
-		elif(Reported.bal.TOTAL_INT_ASSETS == label):
-			Reported.ticker.TOTAL_INT_ASSETS = apply(label, row)
-			data['TOTAL_INT_ASSETS'] = Reported.ticker.TOTAL_INT_ASSETS
+		elif(Reported.bal.TOTAL_INTANG_ASSETS == label):
+			Reported.ticker.TOTAL_INTANG_ASSETS = apply(label, row)
+			data['TOTAL_INTANG_ASSETS'] = Reported.ticker.TOTAL_INTANG_ASSETS
 		elif(Reported.bal.GOODWILL == label):
 			Reported.ticker.GOODWILL = apply(label, row)
 			data['GOODWILL'] = Reported.ticker.GOODWILL
-		elif(Reported.bal.OTH_INT_ASSETS == label):
-			Reported.ticker.OTH_INT_ASSETS = apply(label, row)
-			data['OTH_INT_ASSETS'] = Reported.ticker.OTH_INT_ASSETS
+		elif(Reported.bal.OTH_INTANG_ASSETS == label):
+			Reported.ticker.OTH_INTANG_ASSETS = apply(label, row)
+			data['OTH_INTANG_ASSETS'] = Reported.ticker.OTH_INTANG_ASSETS
 		elif(Reported.bal.PREPAID_EXP == label):
 			Reported.ticker.PREPAID_EXP = apply(label, row)
 			data['PREPAID_EXP'] = Reported.ticker.PREPAID_EXP
@@ -456,9 +623,9 @@ def createLocaljsonObj(symbol):
 		elif(Reported.cf.CHG_NON_CASH_OP == label):
 			Reported.ticker.CHG_NON_CASH_OP = apply(label, row)
 			data['CHG_NON_CASH_OP'] = Reported.ticker.CHG_NON_CASH_OP
-		elif(Reported.cf.CHG_ACCTS_REC == label):
-			Reported.ticker.CHG_ACCTS_REC = apply(label, row)
-			data['CHG_ACCTS_REC'] = Reported.ticker.CHG_ACCTS_REC
+		elif(Reported.cf.CREDIT_SALES == label):
+			Reported.ticker.CREDIT_SALES = apply(label, row)
+			data['CREDIT_SALES'] = Reported.ticker.CREDIT_SALES
 		elif(Reported.cf.CHG_INVENTORIES == label):
 			Reported.ticker.CHG_INVENTORIES = apply(label, row)
 			data['CHG_INVENTORIES'] = Reported.ticker.CHG_INVENTORIES
@@ -486,18 +653,18 @@ def createLocaljsonObj(symbol):
 		elif(Reported.cf.DISP_FIXED_PROD_ASSETS == label):
 			Reported.ticker.DISP_FIXED_PROD_ASSETS = apply(label, row)
 			data['DISP_FIXED_PROD_ASSETS'] = Reported.ticker.DISP_FIXED_PROD_ASSETS
-		elif(Reported.cf.DISP_INTAG_ASSETS == label):
-			Reported.ticker.DISP_INTAG_ASSETS = apply(label, row)
-			data['DISP_INTAG_ASSETS'] = Reported.ticker.DISP_INTAG_ASSETS
-		elif(Reported.cf.ACQ_FIXED_INTAG == label):
-			Reported.ticker.ACQ_FIXED_INTAG = apply(label, row)
-			data['ACQ_FIXED_INTAG'] = Reported.ticker.ACQ_FIXED_INTAG
+		elif(Reported.cf.DISP_INTANG_ASSETS == label):
+			Reported.ticker.DISP_INTANG_ASSETS = apply(label, row)
+			data['DISP_INTANG_ASSETS'] = Reported.ticker.DISP_INTANG_ASSETS
+		elif(Reported.cf.ACQ_FIXED_INTANG == label):
+			Reported.ticker.ACQ_FIXED_INTANG = apply(label, row)
+			data['ACQ_FIXED_INTANG'] = Reported.ticker.ACQ_FIXED_INTANG
 		elif(Reported.cf.ACQ_FIXED_PROD_ASSETS == label):
 			Reported.ticker.ACQ_FIXED_PROD_ASSETS = apply(label, row)
 			data['ACQ_FIXED_PROD_ASSETS'] = Reported.ticker.ACQ_FIXED_PROD_ASSETS
-		elif(Reported.cf.ACQ_INTAG_ASSETS == label):
-			Reported.ticker.ACQ_INTAG_ASSETS = apply(label, row)
-			data['ACQ_INTAG_ASSETS'] = Reported.ticker.ACQ_INTAG_ASSETS
+		elif(Reported.cf.ACQ_INTANG_ASSETS == label):
+			Reported.ticker.ACQ_INTANG_ASSETS = apply(label, row)
+			data['ACQ_INTANG_ASSETS'] = Reported.ticker.ACQ_INTANG_ASSETS
 		elif(Reported.cf.NET_CHG_LT_INVEST == label):
 			Reported.ticker.NET_CHG_LT_INVEST = apply(label, row)
 			data['NET_CHG_LT_INVEST'] = Reported.ticker.NET_CHG_LT_INVEST
@@ -580,10 +747,19 @@ def createLocaljsonObj(symbol):
 			unkept.append(label)
 		row = [None] * 35
 
-		filename = symbol.strip(strXlsx)
+	filename = symbol.strip(strXlsx)
+	ToFile(path, filename, data)
+	decorateFile(path, filename + ".json" )
+	getTickerObject()
 
-		ToFile(path, filename, data)
-		decorateFile(path, filename + ".json" )
+
+
+def getTickerObject():
+	omit = "as_integer_ratio", "conjugate", "fromhex", "hex", "imag", "is_integer", "real"
+	#print([x for x in inspect.getmembers(Reported.ticker) if not (x[0].startswith('__') or x[0] in omit) ])
+	return [x for x in inspect.getmembers(Reported.ticker) if not (x[0].startswith('__') or x[0] in omit) ]
+
+
 			
 			
 
@@ -602,6 +778,7 @@ def decorateFile(path, fileName):
 	contents = myfile.read()        
 	contents = contents.replace('nan', 'null').replace('None', 'null').replace('\"\\\"[', '[').replace(']\\\"\"', ']')
 	contents = contents.replace('\"[', '[').replace(']\"', ']').replace('\\\"', '\'').replace('Shareholders\'', 'Shareholders')
+	contents = contents.replace('\'', '\"')
 	newFile = open(fileName, "w")
 	newFile.write(contents)        
 	myfile.close()               
@@ -627,3 +804,4 @@ def applyYear(row):
 		i += 1
 		
 	return newRow
+
