@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/ROE", (req, res, next) => {
 
     var spawn = require("child_process").spawn; 
-    var process = spawn('python', ["../../Financial-Logic/test.py", req.body.netIncome, req.body.shareholderEquity]); 
+    var process = spawn('python', ["../../financial-logic/test.py", req.body.netIncome, req.body.shareholderEquity]); 
     
     process.stdout.on('data', function(data) { 
         res.send(data.toString()); 

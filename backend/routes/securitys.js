@@ -6,44 +6,53 @@ const checkAuth = require("../middleware/check-auth");
 const tickerDataService = require("../services/tickerDataService");
 const router = express.Router();
 
-router.get("/dashboard", checkAuth, (req, res, next) => {
-    Security.findOne({ ticker: req.query.ticker })
-        .then(security => {
-            if(!security) {
-                return res.status(401).json({
-                    message: "Security not found in database!"
-                });
-            }
-            res.status(200).json({
-                ticker: security.ticker,
-                CAE: security.CAE,
-                STA: security.STA,
-                LTA: security.LTA,
-                DCF: security.DCF,
-                IV: security.IV,
-                DC: security.DTCR,
-                DE: security.DE,
-                ICR: security.ICR,
-                DCL: security.DCL,
-                DOL: security.DOL,
-                DFL: security.DFL,
-                PE: security.PE,
-                EY: security.EY,
-                AbsolutePE: security.AbsolutePE,
-                RelativePE: security.RelativePE,
-                ROE: security.ROE,
-                ROIC: security.ROIC,
-                RetentionRatio: security.RetentionRatio,
-                SGR: security.SGR,
-                ROA: security.ROA,
-                PB: security.PB
-            });
-        })
-        .catch(err => {
+function getCurrentPrice(ticker, callback) {
+    const Http = new XMLHttpRequest();
+    const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + ticker + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
+    Http.open("GET", url, true);
+    Http.send();
+
+    Http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var myObj = JSON.parse(this.responseText);
+          if(myObj.hasOwnProperty('Error Message')) {
+              callback.apply(-1);
+              return;
+          }
+          callback.apply(parseFloat(myObj["Global Quote"]["05. price"]));
+        }
+    };
+}
+
+router.get("/scorecard", (req, res, next) => {
+    Reported.findOne({ symbol: req.query.ticker })
+    .then(reported => {
+        if(!reported) {
             return res.status(401).json({
-                message: "Security lookup failed!"
-            });
+                message: "Reported security not found in database!"
+            });  
+        }
+        getCurrentPrice(req.query.ticker, function(){
+            var price = this;
+            //var spawn = require("child_process").spawn;
+            var spawn = require("child_process");
+            var process = spawn.spawnSync('python', ["././financial-logic/test.py", reported, price.toString()]);
+            console.log(process.stdout.toString());
+            return res.send(process.stdout.toString());
+            //return res.send(process.stdout.toString());
+            //console.log("We start here!");
+            //process.stdout.on('data', function(data) { 
+                //console.log("We are finally in here!");
+                //return res.send(data.toString());
+            //})
+            //console.log("Now we are here!");
         });
+    })
+    .catch(err => {
+        return res.status(401).json({
+            message: "Reported security lookup failed!"
+        });
+    });
 });
 
 router.post("/getReportedTicker", checkAuth, (req, res, next) => {
