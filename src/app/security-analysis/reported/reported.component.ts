@@ -17,7 +17,7 @@ export class ReportedComponent implements OnInit {
     ) { }
 
     async ngOnInit() {
-        const res = await this._appEndpointService.getReported({ticker: 'HRB'});
+        const res = await this._appEndpointService.getReported({ticker: 'A'});
         console.log(res);
         await this.reportedService.getReportedData();
         this.reportedService.getIncomeTables();
