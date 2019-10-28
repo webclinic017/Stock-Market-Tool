@@ -83,7 +83,7 @@ router.post("/login", (req, res, next) => {
 });
 
 router.post("/addWatchlistTicker", (req, res, next) => {
-    User.findOne({username: req.query.username})
+    User.findOne({username: req.body.username})
         .then(user => {
             if(!user)
             {
@@ -91,11 +91,11 @@ router.post("/addWatchlistTicker", (req, res, next) => {
                     message: "User does not exist!"
                 });
             }
-            if(!user.stocks.some(stock => stock.ticker == req.query.ticker))
+            if(!user.stocks.some(stock => stock.ticker == req.body.ticker))
             {
                 var today = new Date();
                 var currentDate = today.getMonth() + '/' + today.getDate() + '/' + today.getFullYear();
-                getCurrentPrice(req.query.ticker, function(){
+                getCurrentPrice(req.body.ticker, function(){
                     var price = this;
                     if(price == -1){
                         return res.status(500).json({
@@ -103,7 +103,7 @@ router.post("/addWatchlistTicker", (req, res, next) => {
                         });
                     }
                     const newStock = {
-                        ticker: req.query.ticker,
+                        ticker: req.body.ticker,
                         dateAdded: currentDate,
                         priceEntered: price
                     };
@@ -119,7 +119,7 @@ router.post("/addWatchlistTicker", (req, res, next) => {
                             error: err
                         });
                     });
-                    
+
                 });
             }
             else {
@@ -162,8 +162,8 @@ router.post("/removeWatchlistTicker", (req, res, next) => {
         })
 });
 
-router.get("/getWatchlist", (req, res, next) => {
-    User.findOne({username: req.query.username})
+router.post("/getWatchlist", (req, res, next) => {
+    User.findOne({username: req.body.username})
         .then(user => {
             if(!user)
             {

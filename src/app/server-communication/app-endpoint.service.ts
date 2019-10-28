@@ -25,6 +25,14 @@ export class AppEndpointService {
         return this.http.post<LoginResponse>(`${this._dbUrl}user/login`, loginRequest).toPromise();
     }
 
+    public getWatchList(getWatchlistRequest) {
+        return this.http.post(`${this._dbUrl}user/getWatchlist`, getWatchlistRequest).toPromise();
+    }
+
+    public addWatchlistTicker(addWatchlistTickerRequest) {
+        return this.http.post(`${this._dbUrl}user/addWatchlistTicker`, addWatchlistTickerRequest).toPromise();
+    }
+
     public securityAnalysis(): void {
         // TODO: Call to backend.
         // return response.

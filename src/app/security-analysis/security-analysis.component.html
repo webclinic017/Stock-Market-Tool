@@ -6,14 +6,19 @@
             <input #tickerInput type="text" placeholder="Enter Ticker symbol"/>
             <button class="btn-primary" (click)="handleTickerSearch(tickerInput)">Search</button>
         </div>
-
+        <div *ngIf="isLoading" class="lds-dual-ring lds-margin-top"></div>
         <!-- Owner Summary -->
-        <div #ownerSummary>
+        <div *ngIf="shouldShowOwnerSummary" [@expandAppear] class="summary-container" #ownerSummary>
             <div class="owner-summary-header">
-                <h1 style="margin-bottom: 0;">American Express Co. (AXP) <br /> Owner's Summary</h1>
+                <h1 style="margin-bottom: 0;">{{reportedTickerName}}<br /> Owner's Summary</h1>
             </div>
             <div class="owner-summary-body">
                 <div class="owner-summary-body-col">
+                    <div class="buy-recommendation">
+                        <span>BUY</span>
+                    </div>
+                </div>
+                <!--<div class="owner-summary-body-col">
                     <div class="col-row">
                         <span>Intrinsic Value</span>
                         <span>1232</span>
@@ -135,20 +140,24 @@
                         <span>Effect from Intrinsic Value</span>
                         <span>1232</span>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
 
         <!-- Interact Bar -->
         <div class="interact-bar">
-                <button class="btn btn-primary view-button" (click)="handleComponentClick('dashboard')">Dashboard</button>
-                <button class="btn btn-primary view-button" (click)="handleComponentClick('mlModel')">ML Model</button>
+                <button class="btn btn-primary view-button" (click)="handleComponentClick('dashboard')">Score Cards</button>
                 <button class="btn btn-primary view-button" (click)="handleComponentClick('reported')">Reported</button>
+                <button class="btn btn-primary watchlist-button" (click)="handleAddWatchlistClick()">Add to Watchlist</button>
         </div>
 
         <!-- Loaded Component -->
-        <app-dashboard *ngIf="loadedComponent === 'dashboard'"></app-dashboard>
-        <!--<app-ml-model *ngIf="loadedComponent === 'mlModel'"></app-ml-model> TODO: Implement. -->
-        <app-reported *ngIf="loadedComponent === 'reported'"></app-reported>
+        <app-dashboard *ngIf="shouldShowOwnerSummary && loadedComponent === 'dashboard'"
+            [@slideUp]>
+        </app-dashboard>
+        <app-reported *ngIf="shouldShowOwnerSummary && loadedComponent === 'reported'"
+            [@slideUp]
+            [ticker]="reportedTickerName">
+        </app-reported>
     </div>
 </div>
