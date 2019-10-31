@@ -34,18 +34,11 @@ router.get("/scorecard", (req, res, next) => {
         }
         getCurrentPrice(req.query.ticker, function(){
             var price = this;
-            //var spawn = require("child_process").spawn;
             var spawn = require("child_process");
-            var process = spawn.spawnSync('python', ["././financial-logic/test.py", reported, price.toString()]);
+            var process = spawn.spawnSync('python', ["././GrahamSelector/PythonApplication1/PythonApplication1.py", reported, price.toString()]);
             console.log(process.stdout.toString());
+            console.log(process.stderr.toString());
             return res.send(process.stdout.toString());
-            //return res.send(process.stdout.toString());
-            //console.log("We start here!");
-            //process.stdout.on('data', function(data) { 
-                //console.log("We are finally in here!");
-                //return res.send(data.toString());
-            //})
-            //console.log("Now we are here!");
         });
     })
     .catch(err => {
@@ -56,7 +49,7 @@ router.get("/scorecard", (req, res, next) => {
 });
 
 router.post("/getReportedTicker", /*checkAuth,*/ (req, res, next) => { // TODO: Put back auth once ML no longer needs to hit this.
-    Reported.findOne({ symbol: req.body.ticker })
+    Reported.findOne({ symbol: req.query.ticker })
     .then(reported => {
         if(!reported) {
             return res.status(401).json({
