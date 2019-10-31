@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
 import { AppEndpointService } from 'src/app/server-communication/app-endpoint.service';
 import { ReportedResponse, IncomeSheet, CashflowSheet, BalanceSheet } from '../../server-communication/app-endpoint.constants';
+import { AuthService } from '../../authorization/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class ReportedService {
-    reportedData: ReportedResponse;
+    public reportedData: ReportedResponse;
+    public loggedInUser: string;
 
-    constructor(private _appEndpointService: AppEndpointService) { }
+    constructor(
+        private _appEndpointService: AppEndpointService,
+        public authService: AuthService
+    ) {
+        this.loggedInUser = this.authService.loggedInUser;
+    }
 
     // Populate service with reported data.
-    public async getReportedData(): Promise<void> {
-        this.reportedData = await this._appEndpointService.getReported({ticker: 'GOOGL'});
+    public async getReportedData(ticker: string): Promise<void> {
+        this.reportedData = await this._appEndpointService.getReported({ticker: ticker});
         console.log(this.reportedData);
     }
 
@@ -24,7 +31,7 @@ export class ReportedService {
             const fourIncomeSheets = [];
 
             for (let j = upperBound; j > lowerBound; j--) {
-                fourIncomeSheets.push(this.reportedData.ticker.fiscalYears[j].incomeSheet);
+                fourIncomeSheets.push(this.reportedData.fiscalYears[j].incomeSheet);
             }
             upperBound -= 4;
             lowerBound -= 4;
@@ -43,7 +50,7 @@ export class ReportedService {
             const fourBalanceSheets = [];
 
             for (let j = upperBound; j > lowerBound; j--) {
-                fourBalanceSheets.push(this.reportedData.ticker.fiscalYears[j].balanceSheet);
+                fourBalanceSheets.push(this.reportedData.fiscalYears[j].balanceSheet);
             }
             upperBound -= 4;
             lowerBound -= 4;
@@ -62,12 +69,16 @@ export class ReportedService {
             const fourCashflowSheets = [];
 
             for (let j = upperBound; j > lowerBound; j--) {
-                fourCashflowSheets.push(this.reportedData.ticker.fiscalYears[j].cashflowSheet);
+                fourCashflowSheets.push(this.reportedData.fiscalYears[j].cashflowSheet);
             }
             upperBound -= 4;
             lowerBound -= 4;
             allCashflowSheets.push(fourCashflowSheets);
         }
         return allCashflowSheets;
+    }
+
+    public addTickerToWatchlist(ticker: string) {
+        this._appEndpointService.addWatchlistTicker({username: this.loggedInUser, ticker: ticker});
     }
 }

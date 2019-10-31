@@ -1,8 +1,4 @@
 /* API Classes */
-export interface Ticker {
-    fiscalYears: FiscalYear[];
-}
-
 export interface FiscalYear {
     year: string;
     balanceSheet: BalanceSheet;
@@ -215,5 +211,5 @@ export interface ReportedRequest {
 }
 
 export interface ReportedResponse {
-    ticker: Ticker;
+    fiscalYears: FiscalYear[];
 }

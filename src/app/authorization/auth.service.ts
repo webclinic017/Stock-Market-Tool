@@ -10,6 +10,7 @@ export class AuthService {
     public error = new Subject<string>();
     public isLoggedIn = new Subject<boolean>();
     private _authToken: string;
+    public loggedInUser: string;
 
     constructor(public endpointService: AppEndpointService) { }
 
@@ -33,6 +34,7 @@ export class AuthService {
             this._authToken = response.token;
             this.loginToast.next(true);
             this.isLoggedIn.next(true);
+            this.loggedInUser = username;
         } catch (error) {
             this.error.next(error.error.message);
             this.loginToast.next(false);
