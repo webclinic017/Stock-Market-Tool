@@ -14,13 +14,13 @@ import sys
 	#readXlsx.createLocaljsonObj(symbol)
 
 #Read JSON object
-data = {}
+data = sys.argv[1]
 #with open('AAL.json') as json_file:
 	#data = json.load(json_file)
 #data = json.loads(sys.argv[1])
 #data = sys.argv[1]
 #print(type(data))
-print(sys.argv[1])
+print(data)
 
 
 path = './'
@@ -542,7 +542,7 @@ def calculate():
 		
 		i += 1
 		
-	#print(dataCalc)
+	#\print(dataCalc)
 	filename = dataCalc['symbol']
 	ToFile(path, filename, dataCalc)
 	decorateFile(path, filename + ".json" )
