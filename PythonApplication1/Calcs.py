@@ -1,6 +1,7 @@
 
 
 class Names:
+	# Basics
 	MARGINAL_TAX_RATE				= "Marginal Corporate Tax Rate" #(Taxable Income above $18.333 million)
 	FAIR_RETURN_RATE				= "Graham's Fair Rate of Return (%)"
 	REV_GROWTH_RATE 				= "Revenue Growth Rate (%)"
@@ -22,6 +23,8 @@ class Names:
 	CAPEX							= "Capital Expenditures"
 	LEV_FCF							= "Levered Free Cash Flow" #More Important for Investors as it is what has been leftover after mandatory debt payments
 	UN_LEV_FCF						= "Unlevered Free Cash Flow"
+	
+	# Averages
 	AVG_RECEIVABLES					= "Average Accounts Receivable"
 	AVG_PAYABLES_ACCRUALS			= "Average Accounts Payable & Accruals"
 	AVG_WORKING_CAPITAL				= "Average Working Capital"
@@ -32,6 +35,8 @@ class Names:
 	AVG_LIABILITIES					= "Average Total Liabilities"
 	AVG_EQUITY						= "Average Equity"
 	AVG_DEBT						= "Average Total Debt"
+	
+	# Solvency:
 	CASH_RATIO						= "Cash Ratio"
 	CASH_SERVICE_RATIO				= "Cash Service Ratio"			
 	INT_SERVICE_RATIO				= "Interest Service Ratio"	
@@ -42,6 +47,8 @@ class Names:
 	CURRENT_RATIO					= "Current Ratio"
 	WORKING_CAP_RATIO				= "Net Working Capital Ratio"
 	DEBT_SERVICE_RATIO				= "Debt Service Ratio"			
+	
+	# Capital Structure
 	NET_DEBT						= "Net Debt"
 	DEBT_RATIO						= "Debt Ratio"
 	DEBT_EQ_RATIO					= "Debt to Equity Ratio"
@@ -59,6 +66,8 @@ class Names:
 	EFFECTIVE_INT_RATE				= "Effective Interest Rate (%)"
 	DEBT_COST_CAP					= "Debt to Cost of Capital"
 	WACC							= "Weighted Average Cost of Capital"
+	
+	# Asset Activity
 	SALES_TURNOVER					= "Sales Turnover"
 	DSO								= "Days Sales Outstanding"
 	ASSET_TURNOVER					= "Asset Turnover"
@@ -74,6 +83,8 @@ class Names:
 	WORKING_CAP_TURNOVER			= "Working Capital Turnover"
 	DWC								= "Days Working Capital"
 	ROI_INVESTMENTS					= "Return on Investments"
+	
+	# Liability Activity
 	CREDITORS_TURNOVER				= "Creditors Turnover"
 	CDO								= "Creditors Days Outstandings"
 	PAYABLES_TURNOVER_COGS			= "Payables Turnover using COGS"
@@ -85,6 +96,8 @@ class Names:
 	CHG_DEBT_REPAYMENT_REQ			= "Change in Required Short Term Debt Repayments"
 	DEBTORS_PAYBACK_PERIOD			= "Pace of Debt Repayment"
 	BURN_RATE						= "Burn Rate (%)"
+	
+	# Profitability 
 	CCC								= "Cash Conversion Cycle"
 	ROS								= "Return on Sales"
 	ROE								= "Return on Equity"	
@@ -103,6 +116,8 @@ class Names:
 	ROIC							= "Return on Invested Capital"
 	OPERATING_RATIO					= "Operating Ratio"
 	OP_PROFIT_MARGIN				= "Operating Profit Margin"
+	
+	# Valuation Measures
 	MV								= "Market Value"
 	MV_EBIT_RATIO					= "Market Value to Cash Flow"
 	ORIG_GRAHAM						= "Original Graham Equation" #TRY Net Income vs. EBIT vs EBITDA
@@ -129,6 +144,8 @@ class Names:
 	MARGIN_OF_SAFETY_FCF			= "Margin of Safety by Free Cash Flow"
 	DUPONT_SYSTEM_1					= "DuPont System of Valuation Method 1"
 	DUPONT_SYSTEM_2					= "DuPont System of Valuation Method 2"
+	
+	# Dividend Measures:
 	RETENTION_RATIO					= "Retention Ratio"
 	DIV_PAYOUT_RATIO				= "Dividend Payout Ratio"
 	EARNINGS_YIELD					= "Earnings Yield Ratio"
@@ -137,6 +154,7 @@ class Names:
 
 
 class Formulas:
+	# Basics
 	MARGINAL_TAX_RATE				= "35%"
 	FAIR_RETURN_RATE				= "1 / 8.5 (No Growth PE)"
 	REV_GROWTH_RATE 				= "Revenue Growth Rate" "(Current Revenue - Previous Revenue) / Previous Revenue"
@@ -158,6 +176,8 @@ class Formulas:
 	CAPEX							= "Current PP&E - Previous PP&E + Accumulated Depreciation"
 	LEV_FCF							= "Net Income + Depreciation + Amortization - (Change) Net Working Capital - Capital Expenditures"
 	UN_LEV_FCF						= "Net Income + Non-Cash Expenses - (Change) Net Working Capital - Capital Expenditures"
+	
+	# Averages
 	AVG_RECEIVABLES					= "1/2 (Beginning + Ending) Accounts Receivable"
 	AVG_PAYABLES_ACCRUALS			= "1/2 (Beginning + Ending) Accounts Payable and Accruals"
 	AVG_WORKING_CAPITAL				= "1/2 (Beginning + Ending) Working Capital"
@@ -168,6 +188,8 @@ class Formulas:
 	AVG_LIABILITIES					= "1/2 (Beginning + Ending) Liabilities"
 	AVG_EQUITY						= "1/2 (Beginning + Ending) Equity"
 	AVG_DEBT						= "1/2 (Beginning + Ending) Total Debt"
+	
+	# Solvency:
 	CASH_RATIO						= "(Cash + Cash Equivalents) / Current Liabilities"
 	CASH_SERVICE_RATIO				= "(Cash & Cash Equivalents) / Interest Expense"
 	INT_SERVICE_RATIO				= "EBIT / Interest Expense"
@@ -178,6 +200,8 @@ class Formulas:
 	CURRENT_RATIO					= "Current Assets / Current Liabilities"
 	WORKING_CAP_RATIO				= "(Current Assets - Current Liabiities) / Total Assets"
 	DEBT_SERVICE_RATIO				= "EBIT / Total Debt Payments"
+	
+	# Capital Structure
 	NET_DEBT						= "Total Debt - Cash & Cash Equivalents"
 	DEBT_RATIO						= "Total Debt / Assets"
 	DEBT_EQ_RATIO					= "Total Debt / Equity"
@@ -195,6 +219,8 @@ class Formulas:
 	EFFECTIVE_INT_RATE				= "Interest / Total Debt * 100"
 	DEBT_COST_CAP					= "Effective Interest Rate * (1 - Marginal Tax Rate)"
 	WACC							= "E / (E + D) * Cost of Equity + D / (E + D) * Cost of Debt *(1 - Tax Rate)"
+	
+	# Asset Activity
 	SALES_TURNOVER					= "Accounts Receivable / Total Credit Sales"
 	DSO								= "Sales Turnover * 365"
 	ASSET_TURNOVER					= "Sales / Average Assets"
@@ -210,6 +236,8 @@ class Formulas:
 	WORKING_CAP_TURNOVER			= "Sales / Average Working Capital"
 	DWC								= "Days Working Capital * 365"
 	ROI_INVESTMENTS					= "Cash from Investing Activities / Average (ST + LT) Investments"
+	
+	# Liability Activity
 	CREDITORS_TURNOVER				= "Net Credit Sales / Average Accounts Receivable"
 	CDO								= "Creditor's Turnover * 365"
 	PAYABLES_TURNOVER_COGS			= "Accounts Payable / COGS"
@@ -221,6 +249,8 @@ class Formulas:
 	CHG_DEBT_REPAYMENT_REQ			= "(Current Short Term Debt - Previous Short Term Debt) / Previous Short Term Debt * 100"
 	DEBTORS_PAYBACK_PERIOD			= "Average Total Debt / Debt Payments"
 	BURN_RATE						= "Cash + Cash Equivalents / (-) EBIT"
+	
+	# Profitability 
 	CCC								= "DIO + DSO - DPO"
 	ROS								= "Net Income / Sales"
 	ROE								= "Net Income / Equity"	
@@ -239,6 +269,8 @@ class Formulas:
 	ROIC							= "NOPAT / Invested Capital"
 	OPERATING_RATIO					= "Operating Cost / Sales"
 	OP_PROFIT_MARGIN				= "Operating Earnings / Sales"
+	
+	# Valuation Measures
 	MV								= "Share Price * Diluted Shares"
 	MV_EBIT_RATIO					= "Market Capitalization / EBIT"
 	ORIG_GRAHAM						= "EPS * (No Growth PE + Growth Multiple * Rate of Growth)"
@@ -265,6 +297,8 @@ class Formulas:
 	MARGIN_OF_SAFETY_FCF			= "Intrinsic Value (using Free Cash Flow) / Market Capitalization"
 	DUPONT_SYSTEM_1					= "Net Profit Margin * Total Asset Turnover * Equity Multiplier"
 	DUPONT_SYSTEM_2					= "Return on Assets * (1 + Debt to Equity Ratio)"
+	
+	# Dividend Measures:
 	RETENTION_RATIO					= "Retained Earnings / Net Income"
 	DIV_PAYOUT_RATIO				= "Dividends / Net Income"
 	EARNINGS_YIELD					= "Net Income / Price"
@@ -426,7 +460,7 @@ class Basics:
 	def marginalTax():
 		return 35
 	def grahamFairReturnRate():
-		return 1 / 8.5
+		return round(100 * (1 / 8.5), 2)
 	def noGrowthPe():
 		return 8.5	
 	def growthMultiple():
@@ -436,35 +470,35 @@ class Basics:
 	def aaaBondYield():
 		return 3.04
 	def growthRate(VALUE_0, VALUE_1):
-		return ((VALUE_0 - VALUE_1) / VALUE_1) if (VALUE_0 != None and VALUE_1 != None and VALUE_1 != 0) else None	
+		return round(((VALUE_0 - VALUE_1) / VALUE_1), 2) if (VALUE_0 != None and VALUE_1 != None and VALUE_1 != 0) else None	
 	def avg(VALUE_0, VALUE_1):
-		return ((VALUE_0 + VALUE_1) / 2) if (VALUE_0 != None and VALUE_1 != None) else None	
+		return round(((VALUE_0 + VALUE_1) / 2), 2) if (VALUE_0 != None and VALUE_1 != None) else None	
 	def threeYearAvg(VALUE_0, VALUE_1, VALUE_2):
-		return ((VALUE_0 + VALUE_1 + VALUE_2) / 3) if (VALUE_0 != None and VALUE_1 != None and VALUE_2 != None) else None	
+		return round(((VALUE_0 + VALUE_1 + VALUE_2) / 3), 2) if (VALUE_0 != None and VALUE_1 != None and VALUE_2 != None) else None	
 	def fiveYearAvg(VALUE_0, VALUE_1, VALUE_2, VALUE_3, VALUE_4):
-		return (VALUE_0 + VALUE_1 + VALUE_2 + VALUE_3 + VALUE_4) / 5 if (VALUE_0 != None and VALUE_1 != None and VALUE_2 != None and VALUE_3 != None and VALUE_4 != None) else None
+		return round(((VALUE_0 + VALUE_1 + VALUE_2 + VALUE_3 + VALUE_4) / 5), 2) if (VALUE_0 != None and VALUE_1 != None and VALUE_2 != None and VALUE_3 != None and VALUE_4 != None) else None
 	def costOfSales(INV_0, INV_1, CHG_INVENTORIES):
-		return (INV_1 + CHG_INVENTORIES - INV_0) if (INV_0 != None and INV_1 != None and CHG_INVENTORIES != None) else None
+		return round((INV_1 + CHG_INVENTORIES - INV_0), 2) if (INV_0 != None and INV_1 != None and CHG_INVENTORIES != None) else None
 	def workingCapital(TOTAL_CURR_ASSETS, TOTAL_CURR_LIAB):
-		return (TOTAL_CURR_ASSETS - TOTAL_CURR_LIAB) if (TOTAL_CURR_ASSETS != None and TOTAL_CURR_LIAB != None) else None
+		return round((TOTAL_CURR_ASSETS - TOTAL_CURR_LIAB), 2) if (TOTAL_CURR_ASSETS != None and TOTAL_CURR_LIAB != None) else None
 	def capitalEmployed(TOTAL_ASSETS1, TOTAL_CURR_LIAB):
-		return (TOTAL_ASSETS1 - TOTAL_CURR_LIAB) if (TOTAL_ASSETS1 != None and TOTAL_CURR_LIAB != None) else None
+		return round((TOTAL_ASSETS1 - TOTAL_CURR_LIAB), 2) if (TOTAL_ASSETS1 != None and TOTAL_CURR_LIAB != None) else None
 	def totalInvestments(ST_INVEST, LT_INVEST):
-		return (ST_INVEST + LT_INVEST) if (ST_INVEST != None and LT_INVEST != None) else None
+		return round((ST_INVEST + LT_INVEST), 2) if (ST_INVEST != None and LT_INVEST != None) else None
 	def totalDebt(ST_DEBT, LT_DEBT):
-		return (ST_DEBT + LT_DEBT) if (ST_DEBT != None and LT_DEBT != None) else None
+		return round((ST_DEBT + LT_DEBT), 2) if (ST_DEBT != None and LT_DEBT != None) else None
 	def ebitda(EBIT, DEPRE_AMORT):
-		return (EBIT + DEPRE_AMORT) if (EBIT != None and DEPRE_AMORT != None) else None
+		return round((EBIT + DEPRE_AMORT), 2) if (EBIT != None and DEPRE_AMORT != None) else None
 	def ebiat(EBIT, DEPRE_AMORT, ACC_DEPREC):
-		return (EBIT + DEPRE_AMORT - ACC_DEPREC) if (EBIT != None and DEPRE_AMORT != None and ACC_DEPREC != None) else None
+		return round((EBIT + DEPRE_AMORT - ACC_DEPREC), 2) if (EBIT != None and DEPRE_AMORT != None and ACC_DEPREC != None) else None
 	def ebit(NI_INC, INT_EXP, INC_TAX_EXPENSE):
-		return (NI_INC + INT_EXP + INC_TAX_EXPENSE) if (NI_INC != None and INT_EXP != None) else None
+		return round((NI_INC + INT_EXP + INC_TAX_EXPENSE), 2) if (NI_INC != None and INT_EXP != None) else None
 	def capex(PPE_0, PPE_1, ACC_DEPREC):
-		return (PPE_0 - PPE_1 + ACC_DEPREC) if (PPE_0 != None and PPE_1 != None and ACC_DEPREC != None) else None
+		return round((PPE_0 - PPE_1 + ACC_DEPREC), 2) if (PPE_0 != None and PPE_1 != None and ACC_DEPREC != None) else None
 	def leveredFreeCashFlow(NI_INC, DEPRE_AMORT, WORKING_CAPITAL_0, WORKING_CAPITAL_1, CAPEX):
-		return (NI_INC + DEPRE_AMORT - (WORKING_CAPITAL_0 - WORKING_CAPITAL_1) - CAPEX) if (NI_INC != None and DEPRE_AMORT != None and WORKING_CAPITAL_0 != None and WORKING_CAPITAL_1 != None) else None
+		return round((NI_INC + DEPRE_AMORT - (WORKING_CAPITAL_0 - WORKING_CAPITAL_1) - CAPEX), 2) if (NI_INC != None and DEPRE_AMORT != None and WORKING_CAPITAL_0 != None and WORKING_CAPITAL_1 != None) else None
 	def unleveredFreeCashFlow(NI_INC, NON_CASH_ITEMS, WORKING_CAPITAL_0, WORKING_CAPITAL_1, CAPEX):
-		return (NI_INC + NON_CASH_ITEMS - (WORKING_CAPITAL_0 - WORKING_CAPITAL_1) - CAPEX) if (NI_INC != None and NON_CASH_ITEMS != None and WORKING_CAPITAL_0 != None and WORKING_CAPITAL_1 != None and CAPEX != None) else None
+		return round((NI_INC + NON_CASH_ITEMS - (WORKING_CAPITAL_0 - WORKING_CAPITAL_1) - CAPEX), 2) if (NI_INC != None and NON_CASH_ITEMS != None and WORKING_CAPITAL_0 != None and WORKING_CAPITAL_1 != None and CAPEX != None) else None
 	
 class Solvency: 
 	def cashRatio(CASH_EQ, TOTAL_CURR_LIAB):
@@ -491,7 +525,7 @@ class Solvency:
 
 class  CapStructure:
 	def netDebt(TOTAL_DEBT, CASH_EQ):
-		return (TOTAL_DEBT - CASH_EQ) if(TOTAL_DEBT != None and CASH_EQ != None) else None
+		return round((TOTAL_DEBT - CASH_EQ), 2) if(TOTAL_DEBT != None and CASH_EQ != None) else None
 	def debtRatio(TOTAL_DEBT, TOTAL_ASSETS1):
 		return round((TOTAL_DEBT / TOTAL_ASSETS1), 2) if (TOTAL_DEBT != None and TOTAL_ASSETS1 != None and TOTAL_ASSETS1 != 0) else None
 	def debtEquityRatio(TOTAL_DEBT, TOTAL_EQUITY):
@@ -505,7 +539,7 @@ class  CapStructure:
 	def degreeOperatingLeverage(EBIT_0, EBIT_1, REV_0, REV_1):
 		return round(((EBIT_0 - EBIT_1) / EBIT_1) / ((REV_0 - REV_1) / REV_1), 2) if (EBIT_0 != None and EBIT_1 != None and EBIT_1 != 0 and REV_0 != None and REV_1 != None and REV_1 != 0) else None
 	def degreeFinancialLeverage(EPS_DILUTED_NI_0, EPS_DILUTED_NI_1, EBIT_0, EBIT_1):
-		return round(((EPS_DILUTED_NI_0 - EPS_DILUTED_NI_1) / EPS_DILUTED_NI_1) / ((EBIT_0 - EBIT_1) / EBIT_1), 2) if (EPS_DILUTED_NI_1 != None and EPS_DILUTED_NI_1 != None and EPS_DILUTED_NI_1 != 0 and EBIT_0 != None and EBIT_1 != None and EBIT_1 != 0) else None
+		return round(((EPS_DILUTED_NI_0 - EPS_DILUTED_NI_1) / EPS_DILUTED_NI_1) / ((EBIT_0 - EBIT_1) / EBIT_1), 2) if (EPS_DILUTED_NI_0 != None and EPS_DILUTED_NI_1 != None and EPS_DILUTED_NI_1 != 0 and EBIT_0 != None and EBIT_1 != None and EBIT_1 != 0) else None
 	def dflRatio(EBIT, INT_EXP):
 		return round((EBIT / (EBIT - INT_EXP)), 2) if(EBIT != None and INT_EXP != None and (EBIT -INT_EXP) != 0) else None
 	def financialLeverage(AVG_ASSETS, AVG_EQUITY):
@@ -637,8 +671,8 @@ class  Valuations:
 		return round(((MV + TOTAL_DEBT - CASH_EQ) / NI_INC), 2) if (MV != None and TOTAL_DEBT != None and CASH_EQ != None and NI_INC != None and NI_INC != 0) else None
 	def bookValue(TOTAL_ASSETS1, TOTAL_INTANG_ASSETS, TOTAL_LIAB):
 		return round((TOTAL_ASSETS1 - TOTAL_INTANG_ASSETS - TOTAL_LIAB), 2) if (TOTAL_ASSETS1 != None and TOTAL_INTANG_ASSETS != None and TOTAL_LIAB != None) else None
-	#def bookValueToNI(BV, NI_INC):
-	#	return round((BV / NI_INC), 2) if (BV != None and NI_INC != None and NI_INC != 0) else None
+	def bookValueToNI(BV, NI_INC):
+		return round((BV / NI_INC), 2) if (BV != None and NI_INC != None and NI_INC != 0) else None
 	def bookValueToEBIT(BV, EBIT):
 		return round((BV / EBIT), 2) if (BV != None and EBIT != None and EBIT != 0) else None
 	def bookValueEBITperShare(BV, EPS_EBIT_DILUTED):

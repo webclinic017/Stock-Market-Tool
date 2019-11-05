@@ -9,6 +9,8 @@ import inspect
 #STI is now ST_INVEST
 #CHG_ACCTS_REC is now CREDIT_SALES
 #INC_TAX_BENEFIT is now INC_TAX_EXPENSE
+#CASH_INVEST_ACT2 is now TOTAL_INVEST
+#TOTAL_INVEST is now CASH_INVEST (in cashflow)
 
 #TODO: Compare all duplicates: Put in PythonApplication1. If Unused, delete them all.
 #i=0
@@ -33,49 +35,60 @@ import inspect
 #		print('CASH_FIN_ACT1 != CASH_FIN_ACT2')
 #	i += 1
 
+class fin(str):
+	# data Values
+	REV = "Net Revenue after Provisions"
+	COST_OF_REV = "Total Non-Interest Expense"
+	OP_INC_LOSS = "Operating Income (Loss)"
+	PRETAX_INCOME = "Pretax Income (Loss), GAAP"
+
+	# dataCalc values
+	TOTAL_INVEST = "ST And LT Investments"
+
+
 class inc(str):
-	YEAR_INC				 = "In Millions of USD except Per Share"
-	REV						 = "Revenue"
-	SALES_SERV_REV			 = "Sales & Services Revenue"
-	OTHER_REV				 = "Other Revenue"
-	COST_OF_REV				 = "Cost of Revenue"
-	COGS					 = "Cost of Goods & Services"
-	PROFIT					 = "Gross Profit"
-	OTH_PROFIT				 = "Other Operating Income"			
-	OP_EXP					 = "Operating Expenses"		
-	SG_AND_ADMIN			 = "Selling, General & Admin"
-	SELL_AND_MARK			 = "Selling & Marketing"	
-	GEN_AND_ADMIN			 = "General & Administrative"
-	R_AND_D 				 = "Research & Development"
-	DEP_AMORT				 = "Depreciation & Amortization"
-	OTH_OP_EXP				 = "Other Operating Expense"
-	OP_INC_LOSS				 = "Operating Income (Loss)"
-	NON_OP_INC_LOSS			 = "Non-Operating (Income) Loss"
-	NET_INT_EXP				 = "Interest Expense, Net"
-	INT_EXP					 = "Interest Expense"
-	INT_INC					 = "Interest Income"
-	FOREX					 = "Foreign Exch (Gain) Loss"
-	AFFILIATES				 = "(Income) Loss from Affiliates"
-	NON_OP_INC				 = "Other Non-Op (Income) Loss"
-	PRETAX_INCOME			 = "Pretax Income"
-	INC_TAX_EXPENSE			 = "Income Tax Expense (Benefit)"
-	CURR_INC_TAX			 = "Current Income Tax"
-	DEFF_INC_TAX			 = "Deferred Income Tax"
-	CONT_OPS				 = "Income (Loss) from Cont Ops"
-	NET_EXTRA1				 = "Net Extraordinary Losses (Gains)"
-	DISC_OPS				 = "Discontinued Operations"
-	ACCT_CHNG				 = "XO & Accounting Changes"
-	INCOME_MI				 = "Income (Loss) Incl. MI"
-	MIN_INTEREST			 = "Minority Interest"
-	NI_INC  			     = "Net Income, GAAP"
-	PREF_DIVS				 = "Preferred Dividends"
-	OTH_ADJ					 = "Other Adjustments"
-	NI_AVAIL_COMMON_GAAP	 = "Net Income Avail to Common, GAAP"
-	NI_AVAIL_COMMON_ADJ		 = "Net Income Avail to Common, Adj"
-	NET_ABNORMAL			 = "Net Abnormal Losses (Gains)"
-	NET_EXTRA2				 = "Net Extraordinary Losses (Gains)"
-	BASIC_WEIGHT_AVG_SHARES  = "Basic Weighted Avg Shares"
-	DIL_WEIGHT_AVG_SHARES	 = "Diluted Weighted Avg Shares"
+	YEAR_INC					= "In Millions of USD except Per Share"
+	REV							= "Revenue"
+	SALES_SERV_REV				= "Sales & Services Revenue"
+	OTHER_REV					= "Other Revenue"
+	COST_OF_REV					= "Cost of Revenue"
+	COGS						= "Cost of Goods & Services"
+	PROFIT						= "Gross Profit"
+	OTH_PROFIT					= "Other Operating Income"			
+	OP_EXP						= "Operating Expenses"		
+	SG_AND_ADMIN				= "Selling, General & Admin"
+	SELL_AND_MARK				= "Selling & Marketing"	
+	GEN_AND_ADMIN				= "General & Administrative"
+	R_AND_D 					= "Research & Development"
+	DEP_AMORT					= "Depreciation & Amortization"
+	OTH_OP_EXP					= "Other Operating Expense"
+	OP_INC_LOSS					= "Operating Income (Loss)"
+	NON_OP_INC_LOSS				= "Non-Operating (Income) Loss"
+	NET_INT_EXP					= "Interest Expense, Net"
+	INT_EXP						= "Interest Expense"
+	INT_INC						= "Interest Income"
+	FOREX						= "Foreign Exch (Gain) Loss"
+	AFFILIATES					= "(Income) Loss from Affiliates"
+	NON_OP_INC					= "Other Non-Op (Income) Loss"
+	PRETAX_INCOME				= "Pretax Income"
+	INC_TAX_EXPENSE				= "Income Tax Expense (Benefit)"
+	CURR_INC_TAX				= "Current Income Tax"
+	DEFF_INC_TAX				= "Deferred Income Tax"
+	CONT_OPS					= "Income (Loss) from Cont Ops"
+	NET_EXTRA1					= "Net Extraordinary Losses (Gains)"
+	DISC_OPS					= "Discontinued Operations"
+	ACCT_CHNG					= "XO & Accounting Changes"
+	INCOME_MI					= "Income (Loss) Incl. MI"
+	MIN_INTEREST				= "Minority Interest"
+	NI_INC  					= "Net Income, GAAP"
+	PREF_DIVS					= "Preferred Dividends"
+	OTH_ADJ						= "Other Adjustments"
+	NI_AVAIL_COMMON_GAAP		= "Net Income Avail to Common, GAAP"
+	NI_AVAIL_COMMON_ADJ			= "Net Income Avail to Common, Adj"
+	NET_ABNORMAL				= "Net Abnormal Losses (Gains)"
+	NET_EXTRA2					= "Net Extraordinary Losses (Gains)"
+	BASIC_WEIGHT_AVG_SHARES		= "Basic Weighted Avg Shares"
+	DIL_WEIGHT_AVG_SHARES		= "Diluted Weighted Avg Shares"
 
 class bal(str):
 	YEAR_BAL					= "In Millions of USD except Per Share"
@@ -185,7 +198,7 @@ class cf(str):
 	CASH_JVS					 = "Cash for JVs"						  
 	OTH_INVEST_ACT				 = "Other Investing Activities"			  
 	NET_CASH_DISC_OPS2			 = "Net Cash From Disc Ops"				  
-	CASH_INVEST_ACT2			 = "Cash from Investing Activities"		  
+	CASH_INVEST					 = "Cash from Investing Activities"		  
 	CASH_FIN_ACT1				 = "Cash from Financing Activities"		  
 	DIVS_PAID					 = "Dividends Paid"						  
 	CASH_REPAY_DEBT				 = "Cash From (Repayment) Debt"			  
@@ -253,6 +266,7 @@ class ticker(float):
 	CASH_EQ_STI					= [None] * 35
 	CASH_EQ						= [None] * 35
 	ST_INVEST					= [None] * 35
+	TOTAL_INVEST				= [None] * 35
 	ACCTS_REC					= [None] * 35
 	ACCTS_REC_NET				= [None] * 35
 	NOTES_REC_NET				= [None] * 35
@@ -355,7 +369,6 @@ class ticker(float):
 	CASH_JVS					= [None] * 35
 	OTH_INVEST_ACT				= [None] * 35
 	NET_CASH_DISC_OPS2			= [None] * 35
-	CASH_INVEST_ACT2			= [None] * 35
 	CASH_FIN_ACT1				= [None] * 35
 	DIVS_PAID					= [None] * 35
 	CASH_REPAY_DEBT				= [None] * 35
@@ -373,12 +386,3 @@ class ticker(float):
 	CASH_PAID_TAXES				= [None] * 35
 	CASH_PAID_INT				= [None] * 35
 	
-	
-def getTickerAttrs():
-	omit = "as_integer_ratio", "conjugate", "fromhex", "hex", "imag", "is_integer", "real"
-	return [x for x in inspect.getmembers(ticker) if not (x[0].startswith('__') or x[0] in omit) ]
-
-def getTickerLabels():
-	omit = "as_integer_ratio", "conjugate", "fromhex", "hex", "imag", "is_integer", "real"
-	return [x for x in dir(ticker) if not (x.startswith('__') or x in omit) ]
-

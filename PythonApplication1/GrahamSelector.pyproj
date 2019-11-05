@@ -5,7 +5,7 @@
     <ProjectGuid>5e9653e4-1063-46eb-b817-6e3774ea1467</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>PythonApplication1.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,18 +22,35 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="boundings.py" />
     <Compile Include="dbConnect.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Calcs.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="doCalcs.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums.py" />
+    <Compile Include="instantiate.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="manageJson.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="test_price_service.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="readXlsx.py" />
     <Compile Include="Reported.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PythonApplication1.py" />
+    <Compile Include="main.py" />
     <Compile Include="Stocks.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="yearly_price_service.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
