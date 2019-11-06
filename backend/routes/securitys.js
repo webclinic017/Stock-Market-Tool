@@ -26,7 +26,7 @@ function getCurrentPrice(ticker, callback) {
 }
 
 router.post("/scorecard", (req, res, next) => {
-    Reported.findOne({ symbol: req.query.ticker })
+    Reported.findOne({ symbol: req.body.ticker })
     .then(reported => {
         if(!reported) {
             console.log("\n");
@@ -35,11 +35,9 @@ router.post("/scorecard", (req, res, next) => {
                 message: "Reported security not found in database!"
             });
         }
-        getCurrentPrice(req.query.ticker, function(){
+        getCurrentPrice(req.body.ticker, function(){
             var price = this;
             var spawn = require("child_process");
-            //let testJson = JSON.parse(jsonifyBadJsonService.jsonifyBadJson(reported.toString()));
-            //console.log(testJson);
             var process = spawn.spawnSync('python', ["././GrahamSelector/PythonApplication1/PythonApplication1.py", reported, price.toString()]);
             console.log(process.stdout.toString());
             console.log(process.stderr.toString());
@@ -75,7 +73,7 @@ router.post("/getReportedTicker", /*checkAuth,*/ (req, res, next) => { // TODO: 
 
 router.get("/currentPrice", (req, res, next) => {
     const Http = new XMLHttpRequest();
-    const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + req.query.ticker + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
+    const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + req.body.ticker + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
     Http.open("GET", url, true);
     Http.send();
 
@@ -94,7 +92,7 @@ router.get("/currentPrice", (req, res, next) => {
 
 router.get("/searchTicker", (req, res, next) => {
     const Http = new XMLHttpRequest();
-    const url = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=' + req.query.keywords + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
+    const url = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=' + req.body.keywords + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
     Http.open("GET", url, true);
     Http.send();
 

@@ -24,6 +24,27 @@ function getCurrentPrice(ticker, callback) {
     };
 }
 
+/*
+var getCurrentPrice = function(ticker) {
+    return new Promise(function(resolve, reject) {
+        const Http = new XMLHttpRequest();
+        const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + ticker + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
+        Http.open("GET", url, true);
+        Http.send();
+
+        Http.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            var myObj = JSON.parse(this.responseText);
+            if(myObj.hasOwnProperty('Error Message')) {
+                reject(Error("It broke"));
+            }
+            resolve(parseFloat(myObj["Global Quote"]["05. price"]));
+            }
+        };
+    });
+  }
+*/
+
 router.post("/register", (req, res, next) => {
     bcryptjs.hash(req.body.password, 10)
         .then(hash => {
@@ -105,7 +126,8 @@ router.post("/addWatchlistTicker", (req, res, next) => {
                     const newStock = {
                         ticker: req.body.ticker,
                         dateAdded: currentDate,
-                        priceEntered: price
+                        priceEntered: price,
+                        currentPrice: 0
                     };
                     user.stocks.push(newStock);
                     user.save().then(result => {
@@ -119,7 +141,6 @@ router.post("/addWatchlistTicker", (req, res, next) => {
                             error: err
                         });
                     });
-
                 });
             }
             else {
@@ -131,7 +152,7 @@ router.post("/addWatchlistTicker", (req, res, next) => {
 });
 
 router.post("/removeWatchlistTicker", (req, res, next) => {
-    User.findOne({username: req.query.username})
+    User.findOne({username: req.body.username})
         .then(user => {
             if(!user)
             {
@@ -139,9 +160,9 @@ router.post("/removeWatchlistTicker", (req, res, next) => {
                     message: "User does not exist!"
                 });
             }
-            if(user.stocks.some(stock => stock.ticker == req.query.ticker))
+            if(user.stocks.some(stock => stock.ticker == req.body.ticker))
             {
-                user.stocks.splice(user.stocks.indexOf(req.query.ticker), 1);
+                user.stocks.splice(user.stocks.indexOf(req.body.ticker), 1);
                 user.save().then(result => {
                     res.status(201).json({
                        message: 'Ticker removed from watchlist!',
@@ -172,7 +193,26 @@ router.post("/getWatchlist", (req, res, next) => {
                 });
             }
             else {
-                res.status(201).json(user.stocks);
+                var i = 0;
+                var counter = 0;
+                for(i = 0; i < user.stocks.length; i++)
+                {            
+                    getCurrentPrice(user.stocks[i]["ticker"], function(){
+                        var price = this;
+                        if(price == -1){
+                            return res.status(500).json({
+                                message: "Unable to obtain price data for the ticker entered!"
+                            });
+                        }
+
+                        user.stocks[counter]["currentPrice"] = price;
+                        counter++;
+                        if(counter == user.stocks.length)
+                        {
+                            return res.status(201).json(user.stocks);
+                        }
+                    });
+                }
             }
         })
 });
