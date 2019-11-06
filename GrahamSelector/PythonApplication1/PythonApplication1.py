@@ -1,20 +1,27 @@
-import readXlsx
+#import readXlsx
 import glob
 #import TestCalculations
 import Reported
 import json
 import inspect
 import Calcs
+import sys
+
 
 #Creates JSON objects for database:
-symbols = glob.glob("*.xlsx")
-for symbol in symbols:
-	readXlsx.createLocaljsonObj(symbol)
+#symbols = glob.glob("*.xlsx")
+#for symbol in symbols:
+	#readXlsx.createLocaljsonObj(symbol)
 
 #Read JSON object
-data = {}
-with open('AAL.json') as json_file:
-	data = json.load(json_file)
+data = sys.argv[1]
+#with open('AAL.json') as json_file:
+	#data = json.load(json_file)
+#data = json.loads(sys.argv[1])
+#data = sys.argv[1]
+#print(type(data))
+print(data)
+
 
 path = './'
 def ToFile(path, fileName, data):
@@ -67,7 +74,7 @@ def applyYear(row):
 def calculate():
 
 	dataCalc = {}
-	dataCalc['SYMBOL'] = data['SYMBOL']
+	dataCalc['symbol'] = data['symbol']
 	dataCalc['YEAR_INC'] = data['YEAR_INC']
 	dataCalc['YEAR_BAL'] = data['YEAR_BAL']
 	dataCalc['YEAR_CF'] = data['YEAR_CF']
@@ -347,7 +354,7 @@ def calculate():
 	dataCalc['DIVS_YIELD'][0] = "Dividends Yield Ratio"
 	dataCalc['SGR'] = Calcs.Vars.SGR
 	dataCalc['SGR'][0] = "Sustainable Growth Rate"
-	unkept = []
+	#unkept = []
 
 	i = 1
 	# Independent calculations:
@@ -425,7 +432,7 @@ def calculate():
 	while(i < 34):
 		#Stop if error:
 		if(dataCalc['YEAR_INC'][i] != dataCalc['YEAR_BAL'][i] and dataCalc['YEAR_CF'][i] != dataCalc['YEAR_BAL'][i]):
-			print("Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
+			#print("Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
 			break
 		#Write recursive average Functions
 		dataCalc['AVG_NI_3YEAR'][i] = Calcs.Basics.threeYearAvg(data['NI_INC'][i], data['NI_INC'][i+1], data['NI_INC'][i+1])
@@ -445,7 +452,7 @@ def calculate():
 	while(i < 34):
 		#Stop if error:
 		if(dataCalc['YEAR_INC'][i] != dataCalc['YEAR_BAL'][i] and dataCalc['YEAR_CF'][i] != dataCalc['YEAR_BAL'][i]):
-			print("Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
+			#print("Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
 			break
 
 		# Basic Functions
@@ -535,8 +542,8 @@ def calculate():
 		
 		i += 1
 		
-	print(dataCalc)
-	filename = dataCalc['SYMBOL']
+	#\print(dataCalc)
+	filename = dataCalc['symbol']
 	ToFile(path, filename, dataCalc)
 	decorateFile(path, filename + ".json" )
 	getTickerObject()
