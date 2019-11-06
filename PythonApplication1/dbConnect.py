@@ -1,5 +1,4 @@
 
-from pymongo import MongoClient
 
 #The standard URI connection string includes the following components:
 #mongodb://					#A required prefix to identify that this is a string in the standard connection format.
@@ -8,17 +7,32 @@ from pymongo import MongoClient
 #/database					#Optional. The name of the database to authenticate if the connection string includes authentication credentials in the form of username:password@. If /database is not specified and the connection string includes credentials, the driver will authenticate to the admin database.
 #?<options>					#Optional. A query string that specifies connection specific options as <name>=<value> pairs.
 
-#prefix = "mongodb://"
-#username = "JimSeeber"
-#password = "&4TOe3uH8Nu#"
-#port = "27017"
-#hostname = "cluster0-988hr.mongodb.net[:"+ port +"]"
-#hostname2 = "cluster0-988hr.mongodb.net:"+ port +""
-#db = "test"
-#db = "securities"
-#collection = "testCollection"
-#url = hostname+"/"+db+"."+collection
-#url2 = hostname2+"/"+db+"."+collection
+
+from pymongo import MongoClient
+# pprint library is used to make the output look more pretty
+from pprint import pprint
+
+
+prefix = "mongodb://"
+username = "JimSeeber"
+password = "&4TOe3uH8Nu#"
+port = "27017"
+hostname = "cluster0-988hr.mongodb.net[:"+ port +"]"
+hostname2 = "cluster0-988hr.mongodb.net:"+ port +""
+db = "test"
+db = "securities"
+collection = "testCollection"
+url = hostname+"/"+db+"."+collection
+url2 = hostname2+"/"+db+"."+collection
+# connect to MongoDB, change the << MONGODB URL >> to reflect your own connection string
+client = MongoClient(url)
+db=client.admin
+# Issue the serverStatus command and print the results
+serverStatusResult=db.command("serverStatus")
+pprint(serverStatusResult)
+
+
+
 
 #print(url2)
 

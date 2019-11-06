@@ -1,4 +1,7 @@
 
+#Added:
+#CASH_STI_RATIO
+#CASH_COVERAGE_RATIO is now CASH_ST_DEBT_RATIO
 
 class Names:
 	# Basics
@@ -38,9 +41,10 @@ class Names:
 	
 	# Solvency:
 	CASH_RATIO						= "Cash Ratio"
+	CASH_STI_RATIO					= "Liquid Cash Ratio"
 	CASH_SERVICE_RATIO				= "Cash Service Ratio"			
 	INT_SERVICE_RATIO				= "Interest Service Ratio"	
-	CASH_COVERAGE_RATIO				= "Cash Coverage Ratio"
+	CASH_ST_DEBT_RATIO				= "Cash to Short Term Debt Ratio"
 	ACID_TEST						= "Acid Test Ratio"
 	QUICK_RATIO						= "Quick Ratio"
 	QUICK_RATIO_2					= "Quick Ratio"	# (with Prepaid Expenses subtracted)
@@ -191,9 +195,10 @@ class Formulas:
 	
 	# Solvency:
 	CASH_RATIO						= "(Cash + Cash Equivalents) / Current Liabilities"
+	CASH_STI_RATIO					= "(Cash + Cash Equivalents + Short Term Investments) / Current Liabilities"
 	CASH_SERVICE_RATIO				= "(Cash & Cash Equivalents) / Interest Expense"
 	INT_SERVICE_RATIO				= "EBIT / Interest Expense"
-	CASH_COVERAGE_RATIO				= "Cash & Cash Equivalents / Short Term Debt"
+	CASH_ST_DEBT_RATIO				= "Cash & Cash Equivalents / Short Term Debt"
 	ACID_TEST						= "(Cash + Cash Equivalents + Marketable Securities + Current Accounts Receivable) / Current Liabilities"
 	QUICK_RATIO						= "(Current Assets - Inventory) / Current Liabilities"
 	QUICK_RATIO_2					= "(Current Assets - Inventory - Prepaid Expenses) / Current Liabilities"
@@ -343,9 +348,10 @@ class Vars:
 	AVG_DEBT						= [None] * 35
 	# Solvency:						  
 	CASH_RATIO						= [None] * 35
+	CASH_STI_RATIO					= [None] * 35
 	CASH_SERVICE_RATIO				= [None] * 35
 	INT_SERVICE_RATIO				= [None] * 35
-	CASH_COVERAGE_RATIO				= [None] * 35
+	CASH_ST_DEBT_RATIO				= [None] * 35
 	ACID_TEST						= [None] * 35
 	QUICK_RATIO						= [None] * 35
 	QUICK_RATIO_2					= [None] * 35
@@ -503,11 +509,13 @@ class Basics:
 class Solvency: 
 	def cashRatio(CASH_EQ, TOTAL_CURR_LIAB):
 		return round((CASH_EQ / TOTAL_CURR_LIAB), 2) if (CASH_EQ != None and TOTAL_CURR_LIAB != None and TOTAL_CURR_LIAB != 0) else None
+	def cashStiRatio(CASH_EQ_STI, TOTAL_CURR_LIAB):
+		return round((CASH_EQ_STI / TOTAL_CURR_LIAB), 2) if (CASH_EQ_STI != None and TOTAL_CURR_LIAB != None and TOTAL_CURR_LIAB != 0) else None
 	def cashServiceRatio(CASH_EQ, INT_EXP):
 		return round((CASH_EQ / INT_EXP), 2) if (CASH_EQ != None and INT_EXP != None and INT_EXP != 0) else None
 	def interestServiceRatio(EBIT, INT_EXP):
 		return round((EBIT / INT_EXP), 2) if (EBIT != None and INT_EXP != None and INT_EXP != 0) else None
-	def cashCoverageRatio(CASH_EQ, ST_DEBT):
+	def cashStDebtRatio(CASH_EQ, ST_DEBT):
 		return round((CASH_EQ / ST_DEBT), 2) if (CASH_EQ != None and ST_DEBT != None and ST_DEBT != 0) else None
 	def acidTest(CASH_EQ_STI, ACCTS_REC, TOTAL_CURR_LIAB):
 		return round(((CASH_EQ_STI + ACCTS_REC) / TOTAL_CURR_LIAB), 2) if (CASH_EQ_STI != None and ACCTS_REC != None and TOTAL_CURR_LIAB != None and TOTAL_CURR_LIAB != 0) else None

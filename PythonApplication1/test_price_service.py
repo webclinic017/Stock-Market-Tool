@@ -1,4 +1,5 @@
 import yearly_price_service
+import glob
 
 # yearly_price_service.py must be in same directory as file doing import.
 from yearly_price_service import YearlyPriceService
@@ -14,19 +15,23 @@ yearly_price_service = YearlyPriceService()
 # The third parameter is a string of the file path from the file you are writing to the json-data folder.
 #    (NOTE): the trailing '/' is required.
 
-path = './'
-yearCurr = 2019
-yearStart = 1987
-#Creates JSON objects for database:
-symbols = glob.glob("*.xlsx")
-for symbol in symbols:
-	symbol = symbol.strip(".xlsx")
-	i = 0
-	while((yearCurr - i) > yearStart):
+def getPrices(symbol, years):
+	path = './'
+	prices = []
+	#Creates JSON objects for database:
+	i = 1
+	years = iter(years)
+	next(years)
+	for year in years:
+		print(int(year))
 		try:
-			print(yearly_price_service.get_avg_price(symbol, (year - i), '../machine-learning/data/alpha-vantage/json-data/'))
+			print(yearly_price_service.get_avg_price(symbol, year, '../machine-learning/data/alpha-vantage/json-data/'))
+			prices.append(yearly_price_service.get_avg_price(symbol, year, '../machine-learning/data/alpha-vantage/json-data/'))
 		except:
 			print('Ticker not found!')
+			prices.append(-1)
 		i += 1
+
+	return prices
 # The return type is a float of the average adjusted closing price for that year.
 # If you have requested a year for which no data is available (such as 'GOOG', '2000'), it will return 0.

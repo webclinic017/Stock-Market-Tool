@@ -12,7 +12,6 @@ class YearlyPriceService:
             price_data = response['Time Series (Daily)']
         return price_data
         
-
     def compute_avg_price(self, price_data, year):
         number_of_dates = 0
         total_price_of_dates = 0
