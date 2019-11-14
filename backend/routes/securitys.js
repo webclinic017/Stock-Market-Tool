@@ -26,18 +26,20 @@ function getCurrentPrice(ticker, callback) {
 }
 
 router.post("/scorecard", (req, res, next) => {
-    Reported.findOne({ symbol: req.body.ticker })
+    Reported.findOne({ symbol: req.query.ticker })
     .then(reported => {
         if(!reported) {
             console.log("\n");
-            console.log(req.body);
+            console.log(req.query);
             return res.status(401).json({
                 message: "Reported security not found in database!"
             });
         }
-        getCurrentPrice(req.body.ticker, function(){
+        getCurrentPrice(req.query.ticker, function(){
             var price = this;
             var spawn = require("child_process");
+            //reported.set('_id', "Hello");
+            console.log(reported);
             var process = spawn.spawnSync('python', ["././GrahamSelector/PythonApplication1/PythonApplication1.py", reported, price.toString()]);
             console.log(process.stdout.toString());
             console.log(process.stderr.toString());
