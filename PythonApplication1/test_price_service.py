@@ -1,5 +1,6 @@
 import yearly_price_service
 import glob
+import Calcs
 
 # yearly_price_service.py must be in same directory as file doing import.
 from yearly_price_service import YearlyPriceService
@@ -23,12 +24,13 @@ def getPrices(symbol, years):
 	years = iter(years)
 	next(years)
 	for year in years:
-		print(int(year))
 		try:
-			print(yearly_price_service.get_avg_price(symbol, year, '../machine-learning/data/alpha-vantage/json-data/'))
-			prices.append(yearly_price_service.get_avg_price(symbol, year, '../machine-learning/data/alpha-vantage/json-data/'))
+			price = yearly_price_service.get_avg_price(symbol, year, '../machine-learning/data/alpha-vantage/json-data/')
+			if(price != 0):
+				prices.append(round(price, 3))
+			else:
+				prices.append(-1)
 		except:
-			print('Ticker not found!')
 			prices.append(-1)
 		i += 1
 

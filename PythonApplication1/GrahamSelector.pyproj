@@ -39,6 +39,10 @@
     <Compile Include="manageJson.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="getSectors.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sectors.py" />
     <Compile Include="test_price_service.py">
       <SubType>Code</SubType>
     </Compile>

@@ -30,12 +30,33 @@ def decorateFile(path, fileName):
 	newFile.close()  
 
 path = './'
-	
+class priceData:
+	def getPrices(symbol, years):
+		prices = []
+		#Creates JSON objects for database:
+		i = 1
+		years = iter(years)
+		next(years)
+		for year in years:
+			#print(int(year))
+			try:
+				price = yearly_price_service.YearlyPriceService.get_avg_price(symbol, year, '../machine-learning/data/alpha-vantage/json-data/')
+				print(price)
+				prices.append(price)
+			except:
+#				print('Ticker not found!')
+				prices.append(-1)
+			i += 1
+
+		return prices
+
 
 def calculate(data):
 	dataCalc = instantiate.instantiateDataCalc(data)
 	unkept = []
+	# Instantiate object.
 	dataCalc['PRICE'] = test_price_service.getPrices(data['symbol'], dataCalc['YEAR_BAL'])
+	#print(dataCalc['PRICE'])
 	i = 1
 	# Independent calculations:
 	while(i < 34):
@@ -56,10 +77,10 @@ def calculate(data):
 		dataCalc['COST_OF_SALES'][i] = Calcs.Basics.costOfSales(data['INV'][i], data['INV'][i+1], data['CHG_INVENTORIES'][i])
 		dataCalc['WORKING_CAPITAL'][i] = Calcs.Basics.workingCapital(data['TOTAL_CURR_ASSETS'][i], data['TOTAL_CURR_LIAB'][i])
 		dataCalc['CAPITAL_EMPLOYED'][i] = Calcs.Basics.capitalEmployed(data['TOTAL_ASSETS1'][i], data['TOTAL_CURR_LIAB'][i])
+		dataCalc['TOTAL_INVEST'][i] = Calcs.Basics.totalInvestments(data['ST_INVEST'][i], data['LT_INVEST'][i])
 		#if(data['ST_INVEST'][i] == 0 and data['LT_INVEST'][i] == 0):
 			#dataCalc['TOTAL_INVEST'][i] = data['TOTAL_INVEST'][i]
 		#else:
-		dataCalc['TOTAL_INVEST'][i] = Calcs.Basics.totalInvestments(data['ST_INVEST'][i], data['LT_INVEST'][i])
 		dataCalc['TOTAL_DEBT'][i] = Calcs.Basics.totalDebt(data['ST_DEBT'][i], data['LT_DEBT'][i])
 		dataCalc['EBIT'][i] = Calcs.Basics.ebit(data['NI_INC'][i], data['INT_EXP'][i], data['INC_TAX_EXPENSE'][i])
 		dataCalc['EBIAT'][i] = Calcs.Basics.ebiat(dataCalc['EBIT'][i], data['DEPRE_AMORT'][i], data['ACC_DEPREC'][i])
@@ -75,14 +96,14 @@ def calculate(data):
 		dataCalc['AVG_EQUITY'][i] = Calcs.Basics.avg(data['TOTAL_EQUITY'][i], data['TOTAL_EQUITY'][i+1])
 		# Solvency:						  
 		dataCalc['CASH_RATIO'][i] = Calcs.Solvency.cashRatio(data['CASH_EQ'][i], data['TOTAL_CURR_LIAB'][i])
-		dataCalc['CASH_STI_RATIO'][i] = Calcs.Solvency.cashRatio(data['CASH_EQ_STI'][i], data['TOTAL_CURR_LIAB'][i])
+		dataCalc['CASH_STI_RATIO'][i] = Calcs.Solvency.cashStiRatio(data['CASH_EQ_STI'][i], data['TOTAL_CURR_LIAB'][i])
 		dataCalc['CASH_SERVICE_RATIO'][i] = Calcs.Solvency.cashServiceRatio(data['CASH_EQ'][i], data['INT_EXP'][i])
-		dataCalc['INT_SERVICE_RATIO'][i] = Calcs.Solvency.cashStiRatio(data['CASH_EQ_STI'][i], data['ST_DEBT'][i])
+		dataCalc['CASH_ST_DEBT_RATIO'][i] = Calcs.Solvency.cashStDebtRatio(data['CASH_EQ_STI'][i], data['ST_DEBT'][i])
 		dataCalc['ACID_TEST'][i] = Calcs.Solvency.acidTest(data['CASH_EQ_STI'][i], data['ACCTS_REC'][i], data['TOTAL_CURR_LIAB'][i])
 		dataCalc['QUICK_RATIO'][i] = Calcs.Solvency.quickRatio(data['TOTAL_CURR_ASSETS'][i], data['INV'][i], data['TOTAL_CURR_LIAB'][i])
 		dataCalc['QUICK_RATIO_2'][i] = Calcs.Solvency.quickRatio2(data['TOTAL_CURR_ASSETS'][i], data['INV'][i], data['PREPAID_EXP'][i], data['TOTAL_CURR_LIAB'][i])
 		dataCalc['CURRENT_RATIO'][i] = Calcs.Solvency.currentRatio(data['TOTAL_CURR_ASSETS'][i], data['TOTAL_CURR_LIAB'][i])
-		dataCalc['WORKING_CAP_RATIO'][i] = Calcs.Solvency.workingCapitalRatio(data['TOTAL_CURR_ASSETS'][i], data['TOTAL_CURR_LIAB'][i], data['TOTAL_ASSETS1'][i])
+		dataCalc['NWC_TO_TA'][i] = Calcs.Solvency.netWorkingToTotalAssets(data['TOTAL_CURR_ASSETS'][i], data['TOTAL_CURR_LIAB'][i], data['TOTAL_ASSETS1'][i])
 		# Capital Structure:		
 		dataCalc['EQUITY_RATIO'][i] = Calcs.CapStructure.equityRatio(data['TOTAL_EQUITY'][i], data['TOTAL_ASSETS1'][i])
 		dataCalc['EQUITY_MULTIPLIER_RATIO_1'][i] = Calcs.CapStructure.equityMultiplier1(data['TOTAL_ASSETS1'][i], data['TOTAL_EQUITY'][i])
@@ -92,7 +113,7 @@ def calculate(data):
 		# Liability Activity:
 		dataCalc['PAYABLES_TURNOVER_COGS'][i] = Calcs.Liab_Activity.payablesTurnoverCOGS(data['PAYABLES'][i], data['COGS'][i])
 		dataCalc['PAYABLES_TURNOVER_COS'][i] = Calcs.Liab_Activity.payablesTurnoverCOS(data['PAYABLES'][i], data['COST_OF_REV'][i])
-		dataCalc['CHG_DEBT_REPAYMENT_REQ'][i] = Calcs.Liab_Activity.changeStDebt(data['ST_DEBT'][i], data['ST_DEBT'][i+1])
+		dataCalc['CHG_DEBT_REPAYMENT_REQ'][i] = Calcs.Liab_Activity.changeDebtObligations(data['ST_DEBT'][i], data['ST_DEBT'][i+1], data['CURR_LT_DEBT'][i], data['CURR_LT_DEBT'][i+1])
 		# Profitability:
 		dataCalc['ROS'][i] = Calcs.Profitability.returnOnSales(data['NI_INC'][i], data['REV'][i])
 		dataCalc['ROE'][i] = Calcs.Profitability.returnOnEquity(data['NI_INC'][i], data['TOTAL_EQUITY'][i])
@@ -128,7 +149,8 @@ def calculate(data):
 		dataCalc['EBITDA_GROWTH_RATE'][i] = Calcs.Display.GrowthRate(Calcs.Basics.growthRate(dataCalc['EBITDA'][i], dataCalc['EBITDA'][i+1]))
 		dataCalc['EBIT_GROWTH_RATE'][i] = Calcs.Display.GrowthRate(Calcs.Basics.growthRate(dataCalc['EBIT'][i], dataCalc['EBIT'][i+1]))
 		dataCalc['EPS_GROWTH_RATE'][i] = Calcs.Display.GrowthRate(Calcs.Basics.growthRate(dataCalc['EPS_DILUTED_NI'][i], dataCalc['EPS_DILUTED_NI'][i+1]))
-	
+		dataCalc['NET_DEBT'][i] = Calcs.CapStructure.netDebt(dataCalc['TOTAL_DEBT'][i], data['CASH_EQ'][i])
+
 		i += 1
 
 	i = 1
@@ -144,12 +166,16 @@ def calculate(data):
 		dataCalc['UN_LEV_FCF'][i] = Calcs.Basics.unleveredFreeCashFlow(data['NI_INC'][i], data['NON_CASH_ITEMS'][i], dataCalc['WORKING_CAPITAL'][i], dataCalc['WORKING_CAPITAL'][i+1], dataCalc['CAPEX'][i])
 		# Solvency:
 		dataCalc['INT_SERVICE_RATIO'][i] = Calcs.Solvency.interestServiceRatio(dataCalc['EBIT'][i], data['INT_EXP'][i])
-		dataCalc['DEBT_SERVICE_RATIO'][i] = Calcs.Solvency.debtServiceCoverageRatio(dataCalc['EBIT'][i], data['INT_EXP'][i], data['ST_DEBT'][i])
+		dataCalc['DEBT_SERVICE_RATIO'][i] = Calcs.Solvency.debtServiceCoverageRatio(dataCalc['EBIT'][i], data['INT_EXP'][i], data['ST_DEBT'][i], dataCalc['MARGINAL_TAX_RATE'][i])
 		# Capital Structure:
-		dataCalc['NET_DEBT'][i] = Calcs.CapStructure.netDebt(dataCalc['TOTAL_DEBT'][i], data['CASH_EQ'][i])
+		dataCalc['CHG_ST_DEBT'][i] = Calcs.Basics.yoyChange(data['ST_DEBT'][i], data['ST_DEBT'][i+1])
+		dataCalc['CHG_LT_DEBT'][i] = Calcs.Basics.yoyChange(data['LT_DEBT'][i], data['LT_DEBT'][i+1])
+		dataCalc['CHG_NET_DEBT'][i] = Calcs.Basics.yoyChange(dataCalc['NET_DEBT'][i], dataCalc['NET_DEBT'][i+1])
 		dataCalc['DEBT_RATIO'][i] = Calcs.CapStructure.debtRatio(dataCalc['TOTAL_DEBT'][i], data['TOTAL_ASSETS1'][i])
 		dataCalc['DEBT_EQ_RATIO'][i] = Calcs.CapStructure.debtEquityRatio(dataCalc['TOTAL_DEBT'][i], data['TOTAL_EQUITY'][i])
-		dataCalc['DEBT_TO_NI'][i] = Calcs.CapStructure.debtIncomeRatio(dataCalc['TOTAL_DEBT'][i], data['NI_INC'][i])
+		dataCalc['TOTAL_CURR_LIAB_RATIO'][i] = Calcs.CapStructure.stDebtRatio(data['TOTAL_CURR_LIAB'][i], dataCalc['TOTAL_DEBT'][i])
+		dataCalc['LT_DEBT_RATIO'][i] = Calcs.CapStructure.ltDebtRatio(data['LT_DEBT'][i], dataCalc['TOTAL_DEBT'][i])
+		dataCalc['DEBT_TO_EBIT'][i] = Calcs.CapStructure.debtIncomeRatio(data['CURR_LT_DEBT'][i], data['NI_INC'][i])
 		dataCalc['FIXED_CHARGE_COVERAGE'][i] = Calcs.CapStructure.fixedChargeCoverage(dataCalc['EBIT'][i], data['CHG_FIXED_INTANG'][i], data['INT_EXP'][i])
 		dataCalc['DEGREE_COMBINED_LEV'][i] = Calcs.CapStructure.degreeCombinedLeverage(dataCalc['EPS_DILUTED_NI'][i], dataCalc['EPS_DILUTED_NI'][i+1], data['REV'][i], data['REV'][i+1])
 		dataCalc['DEGREE_OPERATING_LEV'][i] = Calcs.CapStructure.degreeOperatingLeverage(dataCalc['EBIT'][i], dataCalc['EBIT'][i+1], data['REV'][i], data['REV'][i+1])
@@ -187,36 +213,38 @@ def calculate(data):
 		# Profitability
 		dataCalc['CCC'][i] = Calcs.Profitability.cashConversionCycle(dataCalc['DIO'][i], dataCalc['DSO'][i], dataCalc['DPO_COGS'][i])
 		dataCalc['ROCE_EBIT'][i] = Calcs.Profitability.returnOnCapitalEmployedEBIT(dataCalc['EBIT'][i], data['TOTAL_ASSETS1'][i], data['TOTAL_CURR_LIAB'][i])
-		#dataCalc['PE'][i] = Calcs.Profitability.priceEarnings(data['PRICE'][i], data['DIL_WEIGHT_AVG_SHARES'][i], dataCalc['NI_INC'][i])
-		#dataCalc['PE_REL_3'][i] = Calcs.Profitability.priceEarnings3(dataCalc['PE'][i], dataCalc['PE'][i+1], dataCalc['PE'][i+2])
-		#dataCalc['PE_REL_5'][i] = Calcs.Profitability.priceEarnings5(dataCalc['PE'][i], dataCalc['PE'][i+1], dataCalc['PE'][i+2], dataCalc['PE'][i+3], dataCalc['PE'][i+4])
+		dataCalc['PE'][i] = Calcs.Profitability.priceEarnings(dataCalc['PRICE'][i], data['DIL_WEIGHT_AVG_SHARES'][i], data['NI_INC'][i])
+		if(i < 30):
+			dataCalc['PE_REL_3'][i] = Calcs.Profitability.priceEarnings3(dataCalc['PE'][i], dataCalc['PE'][i+1], dataCalc['PE'][i+2])
+		if(i < 30):
+			dataCalc['PE_REL_5'][i] = Calcs.Profitability.priceEarnings5(dataCalc['PE'][i], dataCalc['PE'][i+1], dataCalc['PE'][i+2], dataCalc['PE'][i+3], dataCalc['PE'][i+4])
 		dataCalc['EARNINGS_POWER'][i] = Calcs.Profitability.earningsPower(dataCalc['EBIT'][i], data['TOTAL_ASSETS1'][i])
 		dataCalc['ROIC'][i] = Calcs.Profitability.returnOnInvestedCapital(dataCalc['NOPAT_NI'][i], dataCalc['TOTAL_INVEST'][i])
 		dataCalc['NOPAT_EBIT'][i] = Calcs.Profitability.netOperatingProfitAfterTaxEBIT(data['OP_INC_LOSS'][i], dataCalc['MARGINAL_TAX_RATE'][i])
 		# Valuation Measures:
-		#dataCalc['MV'][i] = Calcs.Valuations.marketCap(data['PRICE'][i], data['DIL_WEIGHT_AVG_SHARES'][i])
-		#dataCalc['MV_EBIT_RATIO'][i] = Calcs.Valuations.marketCapEBITRatio(dataCalc['MV'][i], dataCalc['EBIT'][i])
+		dataCalc['MV'][i] = Calcs.Valuations.marketCap(dataCalc['PRICE'][i], data['DIL_WEIGHT_AVG_SHARES'][i])
+		dataCalc['MV_EBIT_RATIO'][i] = Calcs.Valuations.marketCapEBITRatio(dataCalc['MV'][i], dataCalc['EBIT'][i])
 		dataCalc['ORIG_GRAHAM'][i] = Calcs.Valuations.originalGraham(dataCalc['EPS_DILUTED_NI'][i], dataCalc['NO_GROWTH_PE'][i], dataCalc['GROWTH_MULTIPLE'][i], dataCalc['EPS_GROWTH_RATE'][i])
 		dataCalc['REVISED_GRAHAM'][i] = Calcs.Valuations.revisedGraham(dataCalc['EPS_DILUTED_NI'][i], dataCalc['NO_GROWTH_PE'][i], dataCalc['GROWTH_MULTIPLE'][i], dataCalc['EPS_GROWTH_RATE'][i], dataCalc['REQUIRED_RETURN'][i], dataCalc['AAA_BOND_YIELD'][i])
-		#dataCalc['EV'][i] = Calcs.Valuations.enterpriseValue(dataCalc['MV'][i], dataCalc['TOTAL_DEBT'][i], data['CASH_EQ'][i])
-		#dataCalc['EV_EBIT'][i] = Calcs.Valuations.enterpriseValueEBIT(dataCalc['MV'][i], dataCalc['TOTAL_DEBT'][i], data['CASH_EQ'][i], dataCalc['EBIT'][i])
-		#dataCalc['EV_NI'][i] = Calcs.Valuations.enterpriseValueNI(dataCalc['MV'][i], dataCalc['TOTAL_DEBT'][i], data['CASH_EQ'][i], data['NI_INC'][i])
+		dataCalc['EV'][i] = Calcs.Valuations.enterpriseValue(dataCalc['MV'][i], dataCalc['TOTAL_DEBT'][i], data['CASH_EQ'][i])
+		dataCalc['EV_EBIT'][i] = Calcs.Valuations.enterpriseValueEBIT(dataCalc['MV'][i], dataCalc['TOTAL_DEBT'][i], data['CASH_EQ'][i], dataCalc['EBIT'][i])
+		dataCalc['EV_NI'][i] = Calcs.Valuations.enterpriseValueNI(dataCalc['MV'][i], dataCalc['TOTAL_DEBT'][i], data['CASH_EQ'][i], data['NI_INC'][i])
 		dataCalc['BV'][i] = Calcs.Valuations.bookValue(data['TOTAL_ASSETS1'][i], data['TOTAL_INTANG_ASSETS'][i], data['TOTAL_LIAB'][i+1])
 		dataCalc['BV_NI'][i] = Calcs.Valuations.bookValueNIperShare(dataCalc['BV'][i], dataCalc['EPS_DILUTED_NI'][i])
 		dataCalc['BV_EBIT'][i] = Calcs.Valuations.bookValueEBITperShare(dataCalc['BV'][i], dataCalc['EPS_DILUTED_EBIT'][i])
-		#dataCalc['PRICE_SALES'][i] = Calcs.Valuations.priceToSales(dataCalc['PRICE'][i], data['REV'][i])
-		#dataCalc['PRICE_BOOK'][i] = Calcs.Valuations.priceToBook(dataCalc['PRICE'][i], dataCalc['BV'][i])
-		#dataCalc['PRICE_NAV'][i] = Calcs.Valuations.priceToNAV(dataCalc['PRICE'][i], dataCalc['NAV'][i])
-		#dataCalc['PRICE_FCF'][i] = Calcs.Valuations.pricetoLeveredFreeCashFlow(dataCalc['PRICE'][i], dataCalc['LEV_FCF'][i])
-		#dataCalc['PRICE_UN_FCF'][i] = Calcs.Valuations.priceToUnLeveredFreeCashFlow(dataCalc['PRICE'][i], dataCalc['UN_LEV_FCF'][i])
-		#dataCalc['MV_OCF'][i] = Calcs.Valuations.marketValueToOCF(dataCalc['MV'][i], dataCalc['EBIT'][i])
-		#dataCalc['CASH_PRICE_RATIO'][i] = Calcs.Valuations.cashPriceRatio(dataCalc['MV'][i], data['CASH_EQ'][i])
+		dataCalc['PRICE_SALES'][i] = Calcs.Valuations.priceToSales(dataCalc['PRICE'][i], data['REV'][i])
+		dataCalc['PRICE_BOOK'][i] = Calcs.Valuations.priceToBook(dataCalc['PRICE'][i], dataCalc['BV'][i])
+		dataCalc['PRICE_NAV'][i] = Calcs.Valuations.priceToNAV(dataCalc['PRICE'][i], dataCalc['NAV'][i])
+		dataCalc['PRICE_FCF'][i] = Calcs.Valuations.pricetoLeveredFreeCashFlow(dataCalc['PRICE'][i], dataCalc['LEV_FCF'][i])
+		dataCalc['PRICE_UN_FCF'][i] = Calcs.Valuations.priceToUnLeveredFreeCashFlow(dataCalc['PRICE'][i], dataCalc['UN_LEV_FCF'][i])
+		dataCalc['MV_OCF'][i] = Calcs.Valuations.marketValueToOCF(dataCalc['MV'][i], dataCalc['EBIT'][i])
+		dataCalc['CASH_PRICE_RATIO'][i] = Calcs.Valuations.cashPriceRatio(dataCalc['MV'][i], data['CASH_EQ'][i])
 		dataCalc['INTRINSIC_VALUE_NI'][i] = Calcs.Valuations.intrinsicValueNI(0, dataCalc['AVG_NI_3YEAR'][i], dataCalc['FAIR_RETURN_RATE'][i], 1)
 		dataCalc['INTRINSIC_VALUE_EBIT'][i] = Calcs.Valuations.intrinsicValueEBIT(0, dataCalc['AVG_EBIT_3YEAR'][i], dataCalc['FAIR_RETURN_RATE'][i], 1)
 		dataCalc['INTRINSIC_VALUE_FCF'][i] = Calcs.Valuations.intrinsicValueFCF(0, dataCalc['AVG_LEV_FCF_3YEAR'][i], dataCalc['FAIR_RETURN_RATE'][i], 1)
-		#dataCalc['MARGIN_OF_SAFETY_NI'][i] = Calcs.Valuations.marginOfSafety_NI(dataCalc['INTRINSIC_VALUE_NI'][i], dataCalc['MV'][i])
-		#dataCalc['MARGIN_OF_SAFETY_EBIT'][i] = Calcs.Valuations.marginOfSafety_EBIT(dataCalc['INTRINSIC_VALUE_EBIT'][i], dataCalc['MV'][i])
-		#dataCalc['MARGIN_OF_SAFETY_FCF'][i] = Calcs.Valuations.marginOfSafety_FCF(dataCalc['INTRINSIC_VALUE_FCF'][i], dataCalc['MV'][i])
+		dataCalc['MARGIN_OF_SAFETY_NI'][i] = Calcs.Valuations.marginOfSafety_NI(dataCalc['INTRINSIC_VALUE_NI'][i], dataCalc['MV'][i])
+		dataCalc['MARGIN_OF_SAFETY_EBIT'][i] = Calcs.Valuations.marginOfSafety_EBIT(dataCalc['INTRINSIC_VALUE_EBIT'][i], dataCalc['MV'][i])
+		dataCalc['MARGIN_OF_SAFETY_FCF'][i] = Calcs.Valuations.marginOfSafety_FCF(dataCalc['INTRINSIC_VALUE_FCF'][i], dataCalc['MV'][i])
 		dataCalc['DUPONT_SYSTEM_1'][i] = Calcs.Valuations.dupontSystem_1(dataCalc['ROS'][i], dataCalc['ASSET_TURNOVER'][i], dataCalc['EQUITY_MULTIPLIER_RATIO_1'][i])
 		dataCalc['DUPONT_SYSTEM_2'][i] = Calcs.Valuations.dupontSystem_2(dataCalc['ROA'][i], dataCalc['DEBT_EQ_RATIO'][i])
 		# Dividends: 

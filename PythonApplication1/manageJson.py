@@ -10,6 +10,7 @@ import doCalcs
 import os
 import boundings
 
+
 def decorateReadingFile(path, fileName):
 	myfile = open(fileName, "r+")
 	contents = myfile.read()        
@@ -40,10 +41,6 @@ def runJson(symbol):
 
 	#Generate all the calculations
 	dataCalcs = doCalcs.calculate(data)
-
-	#Turn Calcs into meaningful interpreatations
-	boundings.genRatings(data, dataCalcs)
-
 
 	if(newJsonFile):
 		os.remove(newJsonFile)

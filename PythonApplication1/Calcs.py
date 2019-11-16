@@ -1,12 +1,20 @@
 
 #Added:
 #CASH_STI_RATIO
+#TOTAL_CURR_LIAB_RATIO
+#LT_DEBT_RATIO
 #CASH_COVERAGE_RATIO is now CASH_ST_DEBT_RATIO
+#DEBT_TO_NI is now DEBT_TO_EBIT
 
 class Names:
 	# Basics
+	PRICE							= "Share Price of Common Stock"
 	MARGINAL_TAX_RATE				= "Marginal Corporate Tax Rate" #(Taxable Income above $18.333 million)
 	FAIR_RETURN_RATE				= "Graham's Fair Rate of Return (%)"
+	NO_GROWTH_PE					= "Graham's No Growth PE"
+	REQUIRED_RETURN					= "A Required Rate of Return (%)"
+	AAA_BOND_YIELD					= "AAA Bond Yield (%)"
+	GROWTH_MULTIPLE					= "Graham's Growth Multiple Coefficient"
 	REV_GROWTH_RATE 				= "Revenue Growth Rate (%)"
 	EBITDA_GROWTH_RATE 				= "EBITDA Growth Rate (%)"
 	EBIT_GROWTH_RATE 				= "EBIT Growth Rate (%)"
@@ -49,14 +57,19 @@ class Names:
 	QUICK_RATIO						= "Quick Ratio"
 	QUICK_RATIO_2					= "Quick Ratio"	# (with Prepaid Expenses subtracted)
 	CURRENT_RATIO					= "Current Ratio"
-	WORKING_CAP_RATIO				= "Net Working Capital Ratio"
+	NWC_TO_TA						= "Net Working Capital Ratio"
 	DEBT_SERVICE_RATIO				= "Debt Service Ratio"			
 	
 	# Capital Structure
+	CHG_ST_DEBT						= "Change in Short Term Debt (%)"
+	CHG_LT_DEBT						= "Change in Long Term Debt (%)"
+	CHG_NET_DEBT					= "Change in Net Debt (%)"
 	NET_DEBT						= "Net Debt"
-	DEBT_RATIO						= "Debt Ratio"
+	TOTAL_CURR_LIAB_RATIO			= "Short Term Obligations Ratio"
+	LT_DEBT_RATIO					= "Long Term Debt Ratio"
+	DEBT_RATIO						= "Debt Ratio (%)"
 	DEBT_EQ_RATIO					= "Debt to Equity Ratio"
-	DEBT_TO_NI						= "Debt to Income Ratio"
+	DEBT_TO_EBIT					= "Debt to EBIT Ratio"
 	FIXED_CHARGE_COVERAGE			= "Fixed Charge Coverage"
 	DEGREE_COMBINED_LEV				= "Degree of Combined Leverage"
 	DEGREE_OPERATING_LEV			= "Degree of Operating Leverage"
@@ -203,14 +216,14 @@ class Formulas:
 	QUICK_RATIO						= "(Current Assets - Inventory) / Current Liabilities"
 	QUICK_RATIO_2					= "(Current Assets - Inventory - Prepaid Expenses) / Current Liabilities"
 	CURRENT_RATIO					= "Current Assets / Current Liabilities"
-	WORKING_CAP_RATIO				= "(Current Assets - Current Liabiities) / Total Assets"
+	NWC_TO_TA				= "(Current Assets - Current Liabiities) / Total Assets"
 	DEBT_SERVICE_RATIO				= "EBIT / Total Debt Payments"
 	
 	# Capital Structure
 	NET_DEBT						= "Total Debt - Cash & Cash Equivalents"
 	DEBT_RATIO						= "Total Debt / Assets"
 	DEBT_EQ_RATIO					= "Total Debt / Equity"
-	DEBT_TO_NI						= "Total Debt / NI"
+	DEBT_TO_EBIT						= "Current Portion of Long Term Debt / EBIT"
 	FIXED_CHARGE_COVERAGE			= "(EBIT + Fixed Charges Before Tax) / (Fixed Charges Before Tax * interest)"
 	DEGREE_COMBINED_LEV				= "(% Change EPS) / (% Change Sales)"
 	DEGREE_OPERATING_LEV			= "(% Change EBIT) / (% Change Sales)"
@@ -251,7 +264,7 @@ class Formulas:
 	DPO_COS							= "Cost of Sales Payables Turnover * 365"
 	LIAB_TURNOVER					= "Liabilities / Average Accounts Payable"
 	LIAB_TURN_RATE					= "Liabilities Turnover * 365"
-	CHG_DEBT_REPAYMENT_REQ			= "(Current Short Term Debt - Previous Short Term Debt) / Previous Short Term Debt * 100"
+	CHG_DEBT_REPAYMENT_REQ			= "(Current Debt Obligations - Previous Debt Obligations) / Previous Debt Obligations * 100"
 	DEBTORS_PAYBACK_PERIOD			= "Average Total Debt / Debt Payments"
 	BURN_RATE						= "Cash + Cash Equivalents / (-) EBIT"
 	
@@ -314,6 +327,7 @@ class Formulas:
 	
 class Vars:
 	# Basics
+	PRICE							= [None] * 35
 	MARGINAL_TAX_RATE				= [None] * 35
 	FAIR_RETURN_RATE				= [None] * 35
 	REV_GROWTH_RATE 				= [None] * 35
@@ -356,13 +370,18 @@ class Vars:
 	QUICK_RATIO						= [None] * 35
 	QUICK_RATIO_2					= [None] * 35
 	CURRENT_RATIO					= [None] * 35
-	WORKING_CAP_RATIO				= [None] * 35
+	NWC_TO_TA						= [None] * 35
 	DEBT_SERVICE_RATIO				= [None] * 35
 	# Capital Structure				
+	CHG_ST_DEBT						= [None] * 35
+	CHG_LT_DEBT						= [None] * 35
+	CHG_NET_DEBT					= [None] * 35
+	TOTAL_CURR_LIAB_RATIO			= [None] * 35
+	LT_DEBT_RATIO					= [None] * 35
 	NET_DEBT						= [None] * 35
 	DEBT_RATIO						= [None] * 35
 	DEBT_EQ_RATIO					= [None] * 35
-	DEBT_TO_NI						= [None] * 35
+	DEBT_TO_EBIT						= [None] * 35
 	FIXED_CHARGE_COVERAGE			= [None] * 35
 	DEGREE_COMBINED_LEV				= [None] * 35
 	DEGREE_OPERATING_LEV			= [None] * 35
@@ -463,10 +482,12 @@ class Display:
 
 
 class Basics:
+	def roundPrice(PRICE):
+		return round(PRICE , 3) if(PRICE != None) else None
 	def marginalTax():
-		return 35
+		return 0.35
 	def grahamFairReturnRate():
-		return round(100 * (1 / 8.5), 2)
+		return round((1 / 8.5) * 100, 2)
 	def noGrowthPe():
 		return 8.5	
 	def growthMultiple():
@@ -475,6 +496,10 @@ class Basics:
 		return 4.4
 	def aaaBondYield():
 		return 3.04
+	def BaaBondYield():
+		return 4.05
+	def yoyChange(CURR_YEAR, PREV_YEAR):
+		return round(((CURR_YEAR - PREV_YEAR) / PREV_YEAR) * 100, 2) if (CURR_YEAR != None and PREV_YEAR != None and PREV_YEAR != 0) else None
 	def growthRate(VALUE_0, VALUE_1):
 		return round(((VALUE_0 - VALUE_1) / VALUE_1), 2) if (VALUE_0 != None and VALUE_1 != None and VALUE_1 != 0) else None	
 	def avg(VALUE_0, VALUE_1):
@@ -525,21 +550,25 @@ class Solvency:
 		return round(((TOTAL_CURR_ASSETS - INV - PREPAID_EXP) / TOTAL_CURR_LIAB), 2) if (TOTAL_CURR_ASSETS != None and INV != None and PREPAID_EXP != None and TOTAL_CURR_LIAB != None  and TOTAL_CURR_LIAB != 0) else None
 	def currentRatio(TOTAL_CURR_ASSETS, TOTAL_CURR_LIAB):
 		return round((TOTAL_CURR_ASSETS / TOTAL_CURR_LIAB), 2) if (TOTAL_CURR_ASSETS != None and TOTAL_CURR_LIAB != None and TOTAL_CURR_LIAB != 0) else None
-	def workingCapitalRatio(TOTAL_CURR_ASSETS, TOTAL_CURR_LIAB, TOTAL_ASSETS1):
-		return round(((TOTAL_CURR_ASSETS - TOTAL_CURR_LIAB) / TOTAL_ASSETS1), 2) if (TOTAL_CURR_ASSETS != None and TOTAL_CURR_LIAB != None and TOTAL_ASSETS1 != None  and TOTAL_ASSETS1 != 0) else None
-	def debtServiceCoverageRatio(EBIT, INT_EXP, ST_DEBT):
-		return round((EBIT / (INT_EXP + ST_DEBT)), 2) if (EBIT != None and INT_EXP != None and ST_DEBT != None and (INT_EXP + ST_DEBT) != 0) else None
+	def netWorkingToTotalAssets(TOTAL_CURR_ASSETS, TOTAL_CURR_LIAB, TOTAL_ASSETS1):
+		return round(((TOTAL_CURR_ASSETS - TOTAL_CURR_LIAB) * 100 / TOTAL_ASSETS1), 2) if (TOTAL_CURR_ASSETS != None and TOTAL_CURR_LIAB != None and TOTAL_ASSETS1 != None  and TOTAL_ASSETS1 != 0) else None
+	def debtServiceCoverageRatio(EBIT, INT_EXP, ST_DEBT, TAX_RATE):
+		return round((EBIT / ((1 - TAX_RATE) * INT_EXP + ST_DEBT)), 2) if (EBIT != None and INT_EXP != None and ST_DEBT != None and TAX_RATE != None and ((1- TAX_RATE) * INT_EXP + ST_DEBT) != 0) else None
 
 
 class  CapStructure:
 	def netDebt(TOTAL_DEBT, CASH_EQ):
 		return round((TOTAL_DEBT - CASH_EQ), 2) if(TOTAL_DEBT != None and CASH_EQ != None) else None
+	def stDebtRatio(TOTAL_CURR_LIAB, TOTAL_DEBT):
+		return round((TOTAL_CURR_LIAB / TOTAL_DEBT)  * 100, 2) if (TOTAL_CURR_LIAB != None and TOTAL_DEBT != None and TOTAL_DEBT != 0) else None
+	def ltDebtRatio(LT_DEBT, TOTAL_DEBT):
+		return round((TOTAL_DEBT / TOTAL_DEBT)  * 100, 2) if (LT_DEBT != None and TOTAL_DEBT != None and TOTAL_DEBT != 0) else None
 	def debtRatio(TOTAL_DEBT, TOTAL_ASSETS1):
-		return round((TOTAL_DEBT / TOTAL_ASSETS1), 2) if (TOTAL_DEBT != None and TOTAL_ASSETS1 != None and TOTAL_ASSETS1 != 0) else None
+		return round((TOTAL_DEBT / TOTAL_ASSETS1) * 100, 2) if (TOTAL_DEBT != None and TOTAL_ASSETS1 != None and TOTAL_ASSETS1 != 0) else None
 	def debtEquityRatio(TOTAL_DEBT, TOTAL_EQUITY):
-		return round((TOTAL_DEBT / TOTAL_EQUITY), 2) if (TOTAL_DEBT != None and TOTAL_EQUITY != None and TOTAL_EQUITY != 0) else None
-	def debtIncomeRatio(TOTAL_DEBT, NI_INC):
-		return round((TOTAL_DEBT / NI_INC), 2) if (TOTAL_DEBT != None and NI_INC != None and NI_INC != 0) else None
+		return round((TOTAL_DEBT / TOTAL_EQUITY)  * 100, 2) if (TOTAL_DEBT != None and TOTAL_EQUITY != None and TOTAL_EQUITY != 0) else None
+	def debtIncomeRatio(CURR_LT_DEBT, NI_INC):
+		return round((CURR_LT_DEBT / NI_INC)  * 100, 2) if (CURR_LT_DEBT != None and NI_INC != None and NI_INC != 0) else None
 	def fixedChargeCoverage(EBIT, CHG_FIXED_INTANG, INT_EXP):
 		return round((EBIT + CHG_FIXED_INTANG) / (CHG_FIXED_INTANG + INT_EXP), 2) if (EBIT != None and CHG_FIXED_INTANG != None and INT_EXP != None and (CHG_FIXED_INTANG + INT_EXP) != 0) else None
 	def degreeCombinedLeverage(EPS_DILUTED_NI_0, EPS_DILUTED_NI_1, REV_0, REV_1):
@@ -553,7 +582,7 @@ class  CapStructure:
 	def financialLeverage(AVG_ASSETS, AVG_EQUITY):
 		return round((AVG_ASSETS / AVG_EQUITY), 2) if (AVG_ASSETS != None and AVG_EQUITY != None and AVG_EQUITY != 0) else None
 	def equityRatio(TOTAL_EQUITY, TOTAL_ASSETS1):
-		return round((TOTAL_EQUITY / TOTAL_ASSETS1), 2) if (TOTAL_EQUITY != None and TOTAL_ASSETS1 != None and TOTAL_ASSETS1 != 0) else None
+		return round((TOTAL_EQUITY / TOTAL_ASSETS1)  * 100, 2) if (TOTAL_EQUITY != None and TOTAL_ASSETS1 != None and TOTAL_ASSETS1 != 0) else None
 	def equityMultiplier1(TOTAL_ASSETS1, TOTAL_EQUITY):
 		return round((TOTAL_ASSETS1 / TOTAL_EQUITY), 2) if (TOTAL_ASSETS1 != None and TOTAL_EQUITY != None and TOTAL_EQUITY != 0) else None
 	def equityMultiplier2(DEBT_RATIO):
@@ -561,11 +590,11 @@ class  CapStructure:
 	def netAssetValue(TOTAL_ASSETS1, TOTAL_LIAB, EPS_DILUTED_NI):
 		return round(((TOTAL_ASSETS1 - TOTAL_LIAB) / EPS_DILUTED_NI), 2) if (TOTAL_ASSETS1 != None and TOTAL_LIAB != None and EPS_DILUTED_NI != None and EPS_DILUTED_NI != 0) else None
 	def effectiveInterestRate(INT_EXP, TOTAL_DEBT):
-		return round((INT_EXP / TOTAL_DEBT ), 2) if (INT_EXP != None and TOTAL_DEBT != None and TOTAL_DEBT != 0) else None
+		return round((INT_EXP / TOTAL_DEBT )  * 100, 2) if (INT_EXP != None and TOTAL_DEBT != None and TOTAL_DEBT != 0) else None
 	def debtCostCapital(EFFECTIVE_INT_RATE, MARGINAL_TAX_RATE):
-		return round((EFFECTIVE_INT_RATE * (1 - MARGINAL_TAX_RATE) ), 2) if (EFFECTIVE_INT_RATE != None and MARGINAL_TAX_RATE != None) else None	
+		return round((EFFECTIVE_INT_RATE * (1 - MARGINAL_TAX_RATE) ) , 2) if (EFFECTIVE_INT_RATE != None and MARGINAL_TAX_RATE != None) else None	
 	def wacc(TOTAL_EQUITY, TOTAL_DEBT, FAIR_RETURN_RATE, EFFECTIVE_INT_RATE, MARGINAL_TAX_RATE ):
-		return	round((TOTAL_EQUITY / (TOTAL_DEBT + TOTAL_EQUITY) * FAIR_RETURN_RATE) + (TOTAL_DEBT / (TOTAL_DEBT + TOTAL_EQUITY) * EFFECTIVE_INT_RATE * (1 - MARGINAL_TAX_RATE)), 2) if(TOTAL_EQUITY != None and TOTAL_DEBT != None and FAIR_RETURN_RATE != None and EFFECTIVE_INT_RATE != None and MARGINAL_TAX_RATE != None and (TOTAL_DEBT + TOTAL_EQUITY) != 0 ) else None
+		return	round((TOTAL_EQUITY / (TOTAL_DEBT + TOTAL_EQUITY) * FAIR_RETURN_RATE) + (TOTAL_DEBT / (TOTAL_DEBT + TOTAL_EQUITY) * EFFECTIVE_INT_RATE * (1 - MARGINAL_TAX_RATE)) * 100, 2) if(TOTAL_EQUITY != None and TOTAL_DEBT != None and FAIR_RETURN_RATE != None and EFFECTIVE_INT_RATE != None and MARGINAL_TAX_RATE != None and (TOTAL_DEBT + TOTAL_EQUITY) != 0 ) else None
 
 class  Asset_Activity:
 	def salesTurnover(ACCTS_REC, CREDIT_SALES):
@@ -617,8 +646,8 @@ class  Liab_Activity:
 		return round((TOTAL_LIAB / AVG_PAYABLES_ACCRUALS), 2) if (TOTAL_LIAB != None and AVG_PAYABLES_ACCRUALS != None and AVG_PAYABLES_ACCRUALS != 0) else None
 	def liabitiesTurnoverRate(LIAB_TURNOVER):
 		return round((365 * LIAB_TURNOVER), 2) if (LIAB_TURNOVER != None) else None
-	def changeStDebt(ST_DEBT_0, ST_DEBT_1):
-		return round((ST_DEBT_0 - ST_DEBT_1) / ST_DEBT_1 * 100, 2) if (ST_DEBT_0 != None and ST_DEBT_1 != None and ST_DEBT_1 != 0) else None
+	def changeDebtObligations(ST_DEBT_0, ST_DEBT_1, CURR_LT_DEBT_0, CURR_LT_DEBT_1):
+		return round(((ST_DEBT_0 + CURR_LT_DEBT_0) - (ST_DEBT_1 + CURR_LT_DEBT_1)) / (ST_DEBT_1 + CURR_LT_DEBT_1) * 100, 2) if (ST_DEBT_0 != None and CURR_LT_DEBT_1 != None and CURR_LT_DEBT_0 != None and ST_DEBT_1 != None and (ST_DEBT_1 + CURR_LT_DEBT_1) != 0) else None
 	def debtorsPaybackPeriod(AVG_DEBT, CASH_REPAY_DEBT):
 		return round((AVG_DEBT / CASH_REPAY_DEBT), 2) if (AVG_DEBT != None and CASH_REPAY_DEBT != None and CASH_REPAY_DEBT != 0) else None
 	def burnRate(CASH_EQ, EBIT):
@@ -665,8 +694,8 @@ class  Profitability:
 class  Valuations:
 	def marketCap(PRICE, DIL_WEIGHT_AVG_SHARES):
 		return round((PRICE * DIL_WEIGHT_AVG_SHARES), 2) if (PRICE != None and DIL_WEIGHT_AVG_SHARES != None) else None
-	#def marketCapEBITRatio(MV, EBIT):
-	#	return round((MV / EBIT), 2) if (MV != None and EBIT != None and EBIT != 0) else None
+	def marketCapEBITRatio(MV, EBIT):
+		return round((MV / EBIT), 2) if (MV != None and EBIT != None and EBIT != 0) else None
 	def originalGraham(EPS_DILUTED_NI, NO_GROWTH_PE, GROWTH_MULTIPLE, GROWTH_RATE):
 		return round((EPS_DILUTED_NI * (NO_GROWTH_PE + GROWTH_MULTIPLE * GROWTH_RATE)), 2) if (EPS_DILUTED_NI != None and NO_GROWTH_PE != None and GROWTH_MULTIPLE != None and GROWTH_RATE != None) else None
 	def revisedGraham(EPS_DILUTED_NI, NO_GROWTH_PE, GROWTH_MULTIPLE, GROWTH_RATE, REQUIRED_RETURN, AAA_BOND_YIELD):
@@ -733,12 +762,12 @@ class  Valuations:
 
 class  Dividends:
 	def retentionRatio(RE, NI_INC):
-			return round((RE / NI_INC), 2) if (RE != None and NI_INC != None and NI_INC != 0) else None
+			return round((RE / NI_INC) * 100, 2) if (RE != None and NI_INC != None and NI_INC != 0) else None
 	def dividendPayoutRatio(DIVS_PAID, NI_INC):
-			return round((DIVS_PAID / NI_INC), 2) if (DIVS_PAID != None and NI_INC != None and NI_INC != 0) else None
+			return round((DIVS_PAID / NI_INC) * 100, 2) if (DIVS_PAID != None and NI_INC != None and NI_INC != 0) else None
 	def earningsYieldRatio(NI_INC, MV):
-			return round((NI_INC / MV), 2) if (NI_INC != None and MV != None and MV != 0) else None
+			return round((NI_INC / MV) * 100, 2) if (NI_INC != None and MV != None and MV != 0) else None
 	def dividendYieldRatio(DIVS_PAID, MV):
-			return round((DIVS_PAID / MV), 2) if (DIVS_PAID != None and MV != None and MV != 0) else None
+			return round((DIVS_PAID / MV) * 100, 2) if (DIVS_PAID != None and MV != None and MV != 0) else None
 	def sustainableGrowthRate(ROE, DIV_PAYOUT_RATIO):
-			return round((ROE * (1 - DIV_PAYOUT_RATIO) ), 2) if (ROE != None and DIV_PAYOUT_RATIO != None) else None
+			return round((ROE * (100 - DIV_PAYOUT_RATIO) ), 2) if (ROE != None and DIV_PAYOUT_RATIO != None) else None

@@ -1,210 +1,397 @@
 import Enums
 import instantiate
+import Calcs
+import json
+import inspect
 
 
-def genRatings(data, dataCalcs):
+def getTickerObject():
+	omit = "as_integer_ratio", "conjugate", "fromhex", "hex", "imag", "is_integer", "real"
+	return [x for x in inspect.getmembers(Reported.ticker) if not (x[0].startswith('__') or x[0] in omit) ]
+
+def ToFile(path, fileName, data):
+	filePathNameExt = './' + path + '/' + fileName + 'Rating' + '.json'
 	
-	ratings = instantiate.instantiateDataCalc(data)
-	#dataCalcs['symbol'] = data['symbol']
+	with open(filePathNameExt, 'w') as fp:
+		json.dump(data, fp)
 
-	#dataCalcs['YEAR_INC']
-	#dataCalcs['YEAR_BAL']
-	#dataCalcs['YEAR_CF'] 
-	#dataCalcs['MARGINAL_TAX_RATE']
-	#dataCalcs['FAIR_RETURN_RATE'] 
-	#dataCalcs['NO_GROWTH_PE'] 
-	#dataCalcs['REQUIRED_RETURN'] 
-	#dataCalcs['AAA_BOND_YIELD'] 
-	#dataCalcs['GROWTH_MULTIPLE']
-	#dataCalcs['REV_GROWTH_RATE']
-	#dataCalcs['EBITDA_GROWTH_RATE']
-	#dataCalcs['EBIT_GROWTH_RATE']
-	#dataCalcs['NI_GROWTH_RATE']
-	#dataCalcs['EPS_GROWTH_RATE']
-	#dataCalcs['GROWTH_RATE']
-	#dataCalcs['AVG_3YEARS'] 
-	#dataCalcs['AVG_5YEARS'] 
-	#dataCalcs['COST_OF_SALES']
-	#dataCalcs['WORKING_CAPITAL']
-	#dataCalcs['CAPITAL_EMPLOYED']
-	#dataCalcs['TOTAL_INVEST']
-	#dataCalcs['TOTAL_DEBT']
-	#dataCalcs['EBITDA']
-	#dataCalcs['EBIAT']
-	#dataCalcs['EBIT'] 
-	#dataCalcs['CAPEX']
-	#dataCalcs['LEV_FCF']
-	#dataCalcs['UN_LEV_FCF']
-	#dataCalcs['AVG_RECEIVABLES']
-	#dataCalcs['AVG_PAYABLES_ACCRUALS']
-	#dataCalcs['AVG_WORKING_CAPITAL']
-	#dataCalcs['AVG_INVENTORY']
-	#dataCalcs['AVG_INVEST'] 
-	#dataCalcs['AVG_LT_ASSETS']
-	#dataCalcs['AVG_ASSETS']
-	#dataCalcs['AVG_LIABILITIES']
-	#dataCalcs['AVG_EQUITY']
-	#dataCalcs['AVG_DEBT'] 
+
+def decorateFile(path, fileName):
+	myfile = open(fileName, "r+")
+	contents = myfile.read()        
+	contents = contents.replace('nan', 'null').replace('None', 'null').replace('\"\\\"[', '[').replace(']\\\"\"', ']')
+	contents = contents.replace('\"[', '[').replace(']\"', ']').replace('\\\"', '\'').replace('Shareholders\'', 'Shareholders')
+	contents = contents.replace('\'', '\"')
+	newFile = open(fileName, "w")
+	newFile.write(contents)        
+	myfile.close()               
+	newFile.close()  
+
+path = './'
+
+
+def genRatings(dataFile, dataCalcFile):
+	
+	with open(dataFile) as json_file:
+		data = json.load(json_file)
+	with open(dataCalcFile) as json_file:
+		dataCalc = json.load(json_file)
+
+	ratings = instantiate.instantiateDataCalc(data)
+	ratings['SECTOR'] = "Sector name goes here"
+	ratings['DECISION'] = [0] * 35
+	ratings['DECISION'] = [None] * 35
+	ratings['DECISION'][0] = "Evaluation Decision"
+
+	#dataCalc['symbol'] = data['symbol']
+
+	#dataCalc['YEAR_INC']
+	#dataCalc['YEAR_BAL']
+	#dataCalc['YEAR_CF'] 
+	#dataCalc['MARGINAL_TAX_RATE']
+	#dataCalc['FAIR_RETURN_RATE'] 
+	#dataCalc['NO_GROWTH_PE'] 
+	#dataCalc['REQUIRED_RETURN'] 
+	#dataCalc['AAA_BOND_YIELD'] 
+	#dataCalc['GROWTH_MULTIPLE']
+	#dataCalc['REV_GROWTH_RATE']
+	#dataCalc['EBITDA_GROWTH_RATE']
+	#dataCalc['EBIT_GROWTH_RATE']
+	#dataCalc['NI_GROWTH_RATE']
+	#dataCalc['EPS_GROWTH_RATE']
+	#dataCalc['GROWTH_RATE']
+	#dataCalc['AVG_3YEARS'] 
+	#dataCalc['AVG_5YEARS'] 
+	#dataCalc['COST_OF_SALES']
+	#dataCalc['WORKING_CAPITAL']
+	#dataCalc['CAPITAL_EMPLOYED']
+	#dataCalc['TOTAL_INVEST']
+	#dataCalc['TOTAL_DEBT']
+	#dataCalc['EBITDA']
+	#dataCalc['EBIAT']
+	#dataCalc['EBIT'] 
+	#dataCalc['CAPEX']
+	#dataCalc['LEV_FCF']
+	#dataCalc['UN_LEV_FCF']
+	#dataCalc['AVG_RECEIVABLES']
+	#dataCalc['AVG_PAYABLES_ACCRUALS']
+	#dataCalc['AVG_WORKING_CAPITAL']
+	#dataCalc['AVG_INVENTORY']
+	#dataCalc['AVG_INVEST'] 
+	#dataCalc['AVG_LT_ASSETS']
+	#dataCalc['AVG_ASSETS']
+	#dataCalc['AVG_LIABILITIES']
+	#dataCalc['AVG_EQUITY']
+	#dataCalc['AVG_DEBT'] 
 	
 	i = 1
 	# Dependent calculations:
 	while(i < 34):
 		#Stop if error:
-		if(dataCalcs['YEAR_INC'][i] != dataCalcs['YEAR_BAL'][i] and dataCalcs['YEAR_CF'][i] != dataCalcs['YEAR_BAL'][i]):
-			print("Year mismatch error: ", dataCalcs['YEAR_INC'][i], dataCalcs['YEAR_BAL'][i], dataCalcs['YEAR_CF'][i])
+		if(dataCalc['YEAR_INC'][i] != dataCalc['YEAR_BAL'][i] and dataCalc['YEAR_CF'][i] != dataCalc['YEAR_BAL'][i]):
+			print("Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
 			break
-		ratings['CASH_RATIO'][i] = rateCashRatio(dataCalcs['CASH_RATIO'][i])
-		ratings['CASH_STI_RATIO'][i] = rateCashRatio(dataCalcs['CASH_STI_RATIO'][i])
-		ratings['CASH_SERVICE_RATIO'][i] = rateCashServiceRatio(dataCalcs['CASH_SERVICE_RATIO'][i])
-		ratings['INT_SERVICE_RATIO'][i] = rateInterestServiceRatio(dataCalcs['INT_SERVICE_RATIO'][i])
-		ratings['CASH_ST_DEBT_RATIO'][i] = rateCashRatio(dataCalcs['CASH_ST_DEBT_RATIO'][i])
-		ratings['ACID_TEST'][i] = rateAcidTestRatio(dataCalcs['ACID_TEST'][i])
-		ratings['QUICK_RATIO'][i] = rateQuickRatio(dataCalcs['QUICK_RATIO'][i])
-		ratings['QUICK_RATIO_2'][i] = rateQuick2Ratio(dataCalcs['QUICK_RATIO_2'][i])
-		ratings['CURRENT_RATIO'][i] = rateCurrentRatio(dataCalcs['CURRENT_RATIO'][i])
-		ratings['WORKING_CAP_RATIO'][i] = rateWorkingCapRatio(dataCalcs['WORKING_CAP_RATIO'][i])
-		ratings['DEBT_SERVICE_RATIO'][i] = rateDebtServiceRatio(dataCalcs['DEBT_SERVICE_RATIO'][i])
-		#ratings[''][i] = 
-	#dataCalcs['NET_DEBT']
-	#dataCalcs['DEBT_RATIO']
-	#dataCalcs['DEBT_EQ_RATIO']
-	#dataCalcs['DEBT_TO_NI']
-	#dataCalcs['FIXED_CHARGE_COVERAGE']
-	#dataCalcs['DEGREE_COMBINED_LEV']
-	#dataCalcs['DEGREE_OPERATING_LEV']
-	#dataCalcs['DEGREE_FINANCIAL_LEV']
-	#dataCalcs['DFL_RATIO'] 
-	#dataCalcs['FINANCIAL_LEVERAGE']
-	#dataCalcs['EQUITY_RATIO']
-	#dataCalcs['EQUITY_MULTIPLIER_RATIO_1']
-	#dataCalcs['EQUITY_MULTIPLIER_RATIO_2']
-	#dataCalcs['NAV'] 
-	#dataCalcs['EFFECTIVE_INT_RATE'] 
-	#dataCalcs['DEBT_COST_CAP']
-	#dataCalcs['WACC']
-	#dataCalcs['SALES_TURNOVER'] 
-	#dataCalcs['DSO'] 
-	#dataCalcs['ASSET_TURNOVER'] 
-	#dataCalcs['ASSET_TURN_RATE']
-	#dataCalcs['LT_ASSET_TURNOVER']
-	#dataCalcs['LT_ASSET_TURN_RATE']
-	#dataCalcs['INV_SALES_TURNOVER'] 
-	#dataCalcs['DSI'] 
-	#dataCalcs['INV_COGS_TURNOVER'] 
-	#dataCalcs['DIO'] 
-	#dataCalcs['RECEIVABLES_ACCTS_TURNOVER'] 
-	#dataCalcs['DRO'] 
-	#dataCalcs['WORKING_CAP_TURNOVER'] 
-	#dataCalcs['DWC'] 
-	#dataCalcs['ROI_INVESTMENTS'] 
-	#dataCalcs['CREDITORS_TURNOVER'] 
-	#dataCalcs['CDO'] 
-	#dataCalcs['PAYABLES_TURNOVER_COGS'] 
-	#dataCalcs['DPO_COGS'] 
-	#dataCalcs['PAYABLES_TURNOVER_COS'] 
-	#dataCalcs['DPO_COS'] 
-	#dataCalcs['LIAB_TURNOVER'] 
-	#dataCalcs['LIAB_TURN_RATE'] 
-	#dataCalcs['CHG_DEBT_REPAYMENT_REQ'] 
-	#dataCalcs['DEBTORS_PAYBACK_PERIOD'] 
-	#dataCalcs['BURN_RATE'] 
-	#dataCalcs['CCC'] 
-	#dataCalcs['ROS'] 
-	#dataCalcs['ROE'] 
-	#dataCalcs['ROA'] 
-	#dataCalcs['ROCE_NI']
-	#dataCalcs['EPS_DILUTED_NI']
-	#dataCalcs['EPS_DILUTED_EBIT']
-	#dataCalcs['ROCE_EBIT'] 
-	#dataCalcs['PE'] 
-	#dataCalcs['PE_REL_3'] 
-	#dataCalcs['PE_REL_5'] 
-	#dataCalcs['EARNINGS_POWER']
-	#dataCalcs['GROSS_MARGIN']
-	#dataCalcs['NOPAT_NI']
-	#dataCalcs['NOPAT_EBIT']
-	#dataCalcs['ROIC'] 
-	#dataCalcs['OPERATING_RATIO'] 
-	#dataCalcs['OP_PROFIT_MARGIN']
-	#dataCalcs['MV'] 
-	#dataCalcs['MV_EBIT_RATIO'] 
-	#dataCalcs['ORIG_GRAHAM']
-	#dataCalcs['REVISED_GRAHAM']
-	#dataCalcs['EV'] 
-	#dataCalcs['EV_EBIT'] 
-	#dataCalcs['EV_NI']
-	#dataCalcs['BV'] 
-	#dataCalcs['BV_PER_SHARE'] 
-	#dataCalcs['BV_NI']
-	#dataCalcs['BV_EBIT']
-	#dataCalcs['PRICE_SALES']
-	#dataCalcs['PRICE_BOOK'] 
-	#dataCalcs['PRICE_NAV'] 
-	#dataCalcs['PRICE_FCF'] 
-	#dataCalcs['PRICE_UN_FCF']
-	#dataCalcs['MV_OCF'] 
-	#dataCalcs['CASH_PRICE_RATIO'] 
-	#dataCalcs['INTRINSIC_VALUE_NI']
-	#dataCalcs['INTRINSIC_VALUE_EBIT']
-	#dataCalcs['INTRINSIC_VALUE_FCF'] 
-	#dataCalcs['MARGIN_OF_QUESTIONABLETY_NI'] 
-	#dataCalcs['MARGIN_OF_QUESTIONABLETY_EBIT']
-	#dataCalcs['MARGIN_OF_QUESTIONABLETY_FCF'] 
-	#dataCalcs['DUPONT_SYSTEM_1'] 
-	#dataCalcs['DUPONT_SYSTEM_2'] 
-	#dataCalcs['RETENTION_RATIO'] 
-	#dataCalcs['DIV_PAYOUT_RATIO']
-	#dataCalcs['EARNINGS_YIELD'] 
-	#dataCalcs['DIVS_YIELD'] 
-	#dataCalcs['SGR'] 
-		i += 1
-	print(ratings['CASH_ST_DEBT_RATIO'])
-	return ratings
-	
-
-def rateCashRatio(CASH_RATIO):
-
-	if(CASH_RATIO == None):
-		return None
-
-	if(CASH_RATIO < 0.5):
-		return Enums.Rating.AT_RISK
-	elif(1 < CASH_RATIO):
-		return Enums.Rating.HEALTHY
-	else:
-		return Enums.Rating.QUESTIONABLE
-
-	
-def rateCashServiceRatio(CASH_SERVICE_RATIO):
-
-	if(CASH_SERVICE_RATIO == None):
-		return None
-
-	if(CASH_SERVICE_RATIO < 1):
-		return Enums.Rating.AT_RISK
-	elif(1.5 < CASH_SERVICE_RATIO):
-		return Enums.Rating.HEALTHY
-	else:
-		return Enums.Rating.QUESTIONABLE
-
+		ratings['CASH_RATIO'][i] = halfToOne(dataCalc['CASH_RATIO'][i])
+		ratings['CASH_STI_RATIO'][i] = halfToOne(dataCalc['CASH_STI_RATIO'][i])
+		ratings['CASH_SERVICE_RATIO'][i] = onetoOneAndHalf(dataCalc['CASH_SERVICE_RATIO'][i])
+		ratings['INT_SERVICE_RATIO'][i] = onetoOneAndHalf(dataCalc['INT_SERVICE_RATIO'][i])
+		ratings['CASH_ST_DEBT_RATIO'][i] = halfToOne(dataCalc['CASH_ST_DEBT_RATIO'][i])
+		ratings['ACID_TEST'][i] = onetoOneAndHalf(dataCalc['ACID_TEST'][i])
+		ratings['QUICK_RATIO'][i] = onetoOneAndHalf(dataCalc['QUICK_RATIO'][i])
+		ratings['QUICK_RATIO_2'][i] = onetoOneAndHalf(dataCalc['QUICK_RATIO_2'][i])
+		ratings['CURRENT_RATIO'][i] = onetoOneAndHalf(dataCalc['CURRENT_RATIO'][i])
+		#ratings['NWC_TO_TA'][i] = unknown() #Compare against sector
+		ratings['DEBT_SERVICE_RATIO'][i] = onetoOneAndHalf(dataCalc['DEBT_SERVICE_RATIO'][i])
+		#ratings['NET_DEBT'][i] = unknown() #Compare against sector
+		ratings['DEBT_RATIO'][i] = rateDebtRisk(dataCalc['DEBT_RATIO'][i])
+		#Determine an appropriate industry average of debt to base relative debt load against
+		#ratings['DEBT_EQ_RATIO'][i] = sectorRankDown(['DEBT_EQ_RATIO'][i], industry['DEBT_EQ_RATIO_25'][i], industry['DEBT_EQ_RATIO_75'][i])
+		#ratings['ST_DEBT_EQ_RATIO'][i] = stLtDebtRisk(dataCalc['DEBT_EQ_RATIO'][i], data['ST_DEBT_RATIO'][i], industry['DEBT_EQ_RATIO'][i], industry['ST_DEBT_RATIO_25'][i], industry['ST_DEBT_RATIO_75'][i])
+		#ratings['LT_DEBT_EQ_RATIO'][i] = stLtDebtRisk(dataCalc['DEBT_EQ_RATIO'][i], data['LT_DEBT_RATIO'][i], industry['DEBT_EQ_RATIO'][i], industry['LT_DEBT_RATIO_25'][i], industry['LT_DEBT_RATIO_75'][i])
 		
-def rateInterestServiceRatio(INT_SERVICE_RATIO):
+		ratings['DEBT_TO_EBIT'][i] = rateDebtEbitRatio(dataCalc['DEBT_TO_EBIT'][i])
+		ratings['FIXED_CHARGE_COVERAGE'][i] = rateFCCR(dataCalc['FIXED_CHARGE_COVERAGE'][i])
+		#ratings['DEGREE_COMBINED_LEV'][i] = rateDegreeOfLeverage(dataCalc['DEGREE_COMBINED_LEV'][i], data['REV'][i], data['REV'][i+1], industry['DEGREE_COMBINED_LEV_50'][i])
+		#ratings['DEGREE_OPERATING_LEV'][i] = rateDegreeOfLeverage(dataCalc['DEGREE_OPERATING_LEV'][i], data['REV'][i], data['REV'][i+1], industry['DEGREE_COMBINED_LEV_50'][i])
+		#ratings['DEGREE_FINANCIAL_LEV'][i] = rateDegreeOfLeverage(dataCalc['DEGREE_FINANCIAL_LEV'][i], data['REV'][i], data['REV'][i+1], industry['DEGREE_COMBINED_LEV_50'][i])
+		#ratings['DFL_RATIO'][i] = rateDegreeOfLeverage(dataCalc['DFL_RATIO'][i], data['REV'][i], data['REV'][i+1], industry['DEGREE_COMBINED_LEV_50'][i])
 
-	if(INT_SERVICE_RATIO == None):
+		ratings['FINANCIAL_LEVERAGE'][i] = rateFL(dataCalc['FINANCIAL_LEVERAGE'][i])
+		#ratings['EQUITY_RATIO'][i] = sectorRankUp(dataCalc['EQUITY_RATIO'][i], industry['EQUITY_RATIO_25'][i], industry['EQUITY_RATIO_75'][i])
+		#ratings['EQUITY_MULTIPLIER_RATIO_1'][i] = rateEqMult1(dataCalc['EQUITY_MULTIPLIER_RATIO_1'][i], industry['EQUITY_MULTIPLIER_RATIO_1_25'][i], industry['EQUITY_MULTIPLIER_RATIO_1_75'][i])
+		
+		ratings['EQUITY_MULTIPLIER_RATIO_2'][i] = rateDebtRisk(dataCalc['DEBT_RATIO'][i]) #Note: equations are same math
+		#ratings['NAV'][i] = unknown() #Compare against sector
+		ratings['EFFECTIVE_INT_RATE'][i] = rateCostOfDebt(dataCalc['EFFECTIVE_INT_RATE'][i], dataCalc['ROCE_EBIT'][i])
+		ratings['DEBT_COST_CAP'][i] = rateCostOfDebt(dataCalc['DEBT_COST_CAP'][i], dataCalc['ROCE_NI'][i])
+		#ratings['WACC'][i] = sectorRankDown(dataCalc['WACC'][i], industry['WACC_25'][i], industry['WACC_75'][i])
+		#ratings['SALES_TURNOVER'][i] = sectorRankUp(dataCalc['SALES_TURNOVER'][i], industry['SALES_TURNOVER_25'][i], industry['SALES_TURNOVER_75'][i])
+		#ratings['DSO'][i] = dataCalc['DSO'][i] 
+		#ratings['ASSET_TURNOVER'][i] = dataCalc['ASSET_TURNOVER'][i] 
+		#ratings['ASSET_TURN_RATE'][i] = dataCalc['ASSET_TURN_RATE'][i]
+		#ratings['LT_ASSET_TURNOVER'][i] = dataCalc['LT_ASSET_TURNOVER'][i]
+		#ratings['LT_ASSET_TURN_RATE'][i] = dataCalc['LT_ASSET_TURN_RATE'][i]
+		#ratings['INV_SALES_TURNOVER'][i] = dataCalc['INV_SALES_TURNOVER'][i] 
+		#ratings['DSI'][i] = dataCalc['DSI'][i] 
+		#ratings['INV_COGS_TURNOVER'][i] = dataCalc['INV_COGS_TURNOVER'][i] 
+		#ratings['DIO'][i] = dataCalc['DIO'][i] 
+		#ratings['RECEIVABLES_ACCTS_TURNOVER'][i] = dataCalc['RECEIVABLES_ACCTS_TURNOVER'][i] 
+		#ratings['DRO'][i] = dataCalc['DRO'][i] 
+		#ratings['WORKING_CAP_TURNOVER'][i] = dataCalc['WORKING_CAP_TURNOVER'][i] 
+		#ratings['DWC'][i] = dataCalc[DWC'DWC'][i] 
+		#ratings['ROI_INVESTMENTS'][i] = dataCalc['ROI_INVESTMENTS'][i] 
+		#ratings['CREDITORS_TURNOVER'][i] = dataCalc['CREDITORS_TURNOVER'][i] 
+		#ratings['CDO'][i] = dataCalc['CDO'][i] 
+		#ratings['PAYABLES_TURNOVER_COGS'][i] = dataCalc['PAYABLES_TURNOVER_COGS'][i] 
+		#ratings['DPO_COGS'][i] = dataCalc['DPO_COGS'][i] 
+		#ratings['PAYABLES_TURNOVER_COS'][i] = dataCalc['PAYABLES_TURNOVER_COS'][i] 
+		#ratings['DPO_COS'][i] = dataCalc['DPO_COS'][i] 
+		#ratings['LIAB_TURNOVER'][i] = dataCalc['LIAB_TURNOVER'][i] 
+		#ratings['LIAB_TURN_RATE'][i] = dataCalc['LIAB_TURN_RATE'][i] 
+		#ratings['CHG_DEBT_REPAYMENT_REQ'][i] = dataCalc['CHG_DEBT_REPAYMENT_REQ'][i] 
+		#ratings['DEBTORS_PAYBACK_PERIOD'][i] = dataCalc['DEBTORS_PAYBACK_PERIOD'][i] 
+		#ratings['BURN_RATE'][i] = dataCalc['BURN_RATE'][i] 
+		#ratings['CCC'][i] = dataCalc['CCC'][i] 
+		#ratings['ROS'][i] = dataCalc['ROS'][i] 
+		#ratings['ROE'][i] = dataCalc['ROE'][i] 
+		#ratings['ROA'][i] = dataCalc['ROA'][i] 
+		#ratings['ROCE_NI'][i] = dataCalc['ROCE_NI'][i]
+		#ratings['EPS_DILUTED_NI'][i] = dataCalc['EPS_DILUTED_NI'][i]
+		#ratings['EPS_DILUTED_EBIT'][i] = dataCalc['EPS_DILUTED_EBIT'][i]
+		#ratings['ROCE_EBIT'][i] = dataCalc['ROCE_EBIT'][i] 
+		#ratings['PE'][i] = dataCalc['PE'][i] 
+		#ratings['PE_REL_3'][i] = dataCalc['PE_REL_3'][i] 
+		#ratings['PE_REL_5'][i] = dataCalc['PE_REL_5'][i] 
+		#ratings['EARNINGS_POWER'][i] = dataCalc['EARNINGS_POWER'][i]
+		#ratings['GROSS_MARGIN'][i] = dataCalc['GROSS_MARGIN'][i]
+		#ratings['NOPAT_NI'][i] = dataCalc['NOPAT_NI'][i]
+		#ratings['NOPAT_EBIT'][i] = dataCalc['NOPAT_EBIT'][i]
+		#ratings['ROIC'][i] = dataCalc['ROIC'][i] 
+		#ratings['OPERATING_RATIO'][i] = dataCalc['OPERATING_RATIO'][i] 
+		#ratings['OP_PROFIT_MARGIN'][i] = dataCalc['OP_PROFIT_MARGIN'][i]
+		#ratings['MV'][i] = dataCalc['MV'][i] 
+		#ratings['MV_EBIT_RATIO'][i] = dataCalc['MV_EBIT_RATIO'][i] 
+		#ratings['ORIG_GRAHAM'][i] = dataCalc['ORIG_GRAHAM'][i]
+		#ratings['REVISED_GRAHAM'][i] = dataCalc['REVISED_GRAHAM'][i]
+		#ratings['EV'][i] = dataCalc['EV'][i] 
+		#ratings['EV_EBIT'][i] = dataCalc['EV_EBIT'][i] 
+		#ratings['EV_NI'][i] = dataCalc['EV_NI'][i]
+		#ratings['BV'][i] = dataCalc['BV'][i] 
+		#ratings['BV_PER_SHARE'][i] = dataCalc['BV_PER_SHARE'][i] 
+		#ratings['BV_NI'][i] = dataCalc['BV_NI'][i]
+		#ratings['BV_EBIT'][i] = dataCalc['BV_EBIT'][i]
+		#ratings['PRICE_SALES'][i] = dataCalc['PRICE_SALES'][i]
+		#ratings['PRICE_BOOK'][i] = dataCalc['PRICE_BOOK'][i] 
+		#ratings['PRICE_NAV'][i] = dataCalc['PRICE_NAV'][i] 
+		#ratings['PRICE_FCF'][i] = dataCalc['PRICE_FCF'][i] 
+		#ratings['PRICE_UN_FCF'][i] = dataCalc['PRICE_UN_FCF'][i]
+		#ratings['MV_OCF'][i] = dataCalc['MV_OCF'][i] 
+		#ratings['CASH_PRICE_RATIO'][i] = dataCalc['CASH_PRICE_RATIO'][i] 
+		#ratings['INTRINSIC_VALUE_NI'][i] = dataCalc['INTRINSIC_VALUE_NI'][i]
+		#ratings['INTRINSIC_VALUE_EBIT'][i] = dataCalc['INTRINSIC_VALUE_EBIT'][i]
+		#ratings['INTRINSIC_VALUE_FCF'][i] = dataCalc['INTRINSIC_VALUE_FCF'][i] 
+		#ratings['MARGIN_OF_SAFETY_NI'][i] = dataCalc['MARGIN_OF_SAFETY_NI'][i] 
+		#ratings['MARGIN_OF_SAFETY_EBIT'][i] = dataCalc['MARGIN_OF_SAFETY_EBIT'][i]
+		#ratings['MARGIN_OF_SAFETY_FCF'][i] = dataCalc['MARGIN_OF_SAFETY_FCF'][i] 
+		#ratings['DUPONT_SYSTEM_1'][i] = dataCalc['DUPONT_SYSTEM_1'][i] 
+		#ratings['DUPONT_SYSTEM_2'][i] = dataCalc['DUPONT_SYSTEM_2'][i] 
+		#ratings['RETENTION_RATIO'][i] = dataCalc['RETENTION_RATIO'][i] 
+		#ratings['DIV_PAYOUT_RATIO'][i] = dataCalc['DIV_PAYOUT_RATIO'][i]
+		#ratings['EARNINGS_YIELD'][i] = dataCalc['EARNINGS_YIELD'][i] 
+		#ratings['DIVS_YIELD'][i] = dataCalc['DIVS_YIELD'][i] 
+		#ratings['SGR'][i] = dataCalc['SGR'][i] 
+		ratings['DECISION'][i] = getRating(i, data, dataCalc)
+		i += 1
+
+
+	#print(ratings)
+	filename = ratings['symbol']
+	ToFile(path, filename, ratings)
+	decorateFile(path, filename + ".json" )
+	#getTickerObject()
+
+	return ratings
+#---------------------------------------------------
+def getRating(i, data, dataCalc):
+	return Enums.Recommendation.STRONG_BUY.value
+	#STRONG_BUY	= 5 
+	#BUY		= 4
+	#NEUTRAL	= 3
+	#RISKY		= 2
+	#AVOID		= 1
+	#NA			= 0
+
+#---------------------------------------------------
+def unknown():
+	return Enums.Rating.UNKNOWN.value
+
+def halfToOne(ratioVal):
+
+	if(ratioVal == None):
 		return None
 
-	if(INT_SERVICE_RATIO < 1):
-		return Enums.Rating.AT_RISK
-	elif(1.5 < INT_SERVICE_RATIO):
-		return Enums.Rating.HEALTHY
+	if(ratioVal < 0.5):
+		return Enums.Rating.AT_RISK.value
+	elif(1 < ratioVal):
+		return Enums.Rating.HEALTHY.value
 	else:
-		return Enums.Rating.QUESTIONABLE
+		return Enums.Rating.QUESTIONABLE.value
 
-#def rateAcidTestRatio(ACID_TEST):
-#def rateQuickRatio(QUICK_RATIO_2):
-#def rateQuickRatio2(QUICK_RATIO_2):
-#def rateCurrentRatio(CURRENT_RATIO):
-#def rateWorkingCapRatio(WORKING_CAP_RATIO):
-#def rateDebtServiceRatio(DEBT_SERVICE_RATIO):
-#def ():
-#def ():
+def onetoOneAndHalf(ratioVal):
+
+	if(ratioVal == None):
+		return None
+
+	if(ratioVal < 1):
+		return Enums.Rating.AT_RISK.value
+	elif(1.5 < ratioVal):
+		return Enums.Rating.HEALTHY.value
+	else:
+		return Enums.Rating.QUESTIONABLE.value
+
+
+def sectorRankUp(ratioVal, industry25, industry75):
+	if(ratioVal == None or industry25 == None or industry75 == None):
+		return None
+
+	if(industry75 < ratioVal):
+		return Enums.Rating.HEALTHY.value
+	elif(ratioVal < industry25):
+		return Enums.Rating.AT_RISK.value
+	else:
+		return Enums.Rating.QUESTIONABLE.value
+
+
+def sectorRankDown(ratioVal, industry25, industry75):
+	if(ratioVal == None or industry25 == None or industry75 == None):
+		return None
+
+	if(industry75 < ratioVal):
+		return Enums.Rating.AT_RISK.value
+	elif(ratioVal < industry25):
+		return Enums.Rating.HEALTHY.value
+	else:
+		return Enums.Rating.QUESTIONABLE.value
+
+def rateDebtRisk(ratioVal):
+	if(ratioVal == None):
+		return None
+
+	if(0.80 < ratioVal):
+		return Enums.Rating.AT_RISK.value
+	elif(ratioVal < 0.49):
+		return Enums.Rating.HEALTHY.value
+	else:
+		return Enums.Rating.QUESTIONABLE.value
+
+def stLtDebtRisk(debtRatioVal, stLtDebtRatio, idebtRatioVal, idebtRatio25, idebtRatio75):
+	if(debtRatioVal == None or stLtDebtRatio == None or idebtRatioVal == None or idebtRatio25 == None or idebtRatio75 == None):
+		return None
+
+	if( (idebtRatio75 / idebtRatioVal) < (stLtDebtRatio / debtRatioVal) ):
+		return Enums.Rating.AT_RISK.value
+	elif((stLtDebtRatio / debtRatioVal) < (idebtRatio25 / idebtRatioVal)):
+		return Enums.Rating.HEALTHY.value
+	else:
+		return Enums.Rating.QUESTIONABLE.value
+
+def rateDebtEbitRatio(ratioVal):
+	if(ratioVal == None):
+		return None
+
+	if(0.38 < ratioVal):
+		return Enums.Rating.AT_RISK.value
+	elif(ratioVal < 0.28):
+		return Enums.Rating.HEALTHY.value
+	else:
+		return Enums.Rating.QUESTIONABLE.value
+
+def rateFCCR(ratioVal):
+	if(ratioVal == None):
+		return None
+
+	if(ratioVal < 1.25):
+		return Enums.Rating.AT_RISK.value
+	elif(2 < ratioVal):
+		return Enums.Rating.HEALTHY.value
+	else:
+		return Enums.Rating.QUESTIONABLE.value
+
+def rateDegreeOfLeverage(ratioVal, currSales, prevSales, industryAvg):
+	if(ratioVal == None or currSales == None or prevSales == None or industryAvg == None):
+		return None
+
+	if( chgSales < 0 and industryAvg < ratioVal):
+		return Enums.Rating.AT_RISK.value
+	elif((0 < chgSales and industryAvg < ratioVal) or ratioVal < industryAvg):
+		return Enums.Rating.HEALTHY.value
+	else:
+		return Enums.Rating.UNKNOWN.value
+
+
+def rateFL(ratioVal):
+	if(ratioVal == None):
+		return None
+
+	if(2 < ratioVal):
+		return Enums.Rating.AT_RISK.value
+	elif(ratioVal < 1):
+		return Enums.Rating.HEALTHY.value
+	else:
+		return Enums.Rating.QUESTIONABLE.value
+
+
+
+def rateEqMult1(ratioVal, ieqMult25, ieqMult75):
+	if(ratioVal == None or ieqMult25 == None or ieqMult75 == None):
+		return None
+
+	if(ieqMult25 < ratioVal and ratioVal < ieqMult75):
+		return Enums.Rating.HEALTHY.value
+	elif(ieqMult75 < ratioVal):
+		return Enums.Rating.AT_RISK.value
+	else:
+		return Enums.Rating.UNKNOWN.value
+
+def rateCostOfDebt(ratioVal, ROIC):
+	if(ratioVal == None):
+		return None
+
+	if(ratioVal < ROIC):
+		return Enums.Rating.HEALTHY.value
+	elif(ratioVal > Calcs.Basics.BaaBondYield() ):
+		return Enums.Rating.AT_RISK.value
+	else:
+		return Enums.Rating.QUESTIONABLE.value
+
+	
+
+
+
+
+#def (ratioVal):
+#	if(ratioVal == None):
+#		return None
+
+#	if( < ratioVal):
+#		return Enums.Rating.AT_RISK
+#	elif(ratioVal < ):
+#		return Enums.Rating.HEALTHY
+#	else:
+#		return Enums.Rating.QUESTIONABLE
+
+
+
+
+#-----------------------------------------------
+
+#def (ratioVal):
+#	if(ratioVal == None):
+#		return None
+
+#	if( < ratioVal):
+#		return Enums.Rating.AT_RISK
+#	elif(ratioVal < ):
+#		return Enums.Rating.HEALTHY
+#	else:
+#		return Enums.Rating.QUESTIONABLE
