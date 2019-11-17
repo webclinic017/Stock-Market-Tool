@@ -52,9 +52,13 @@ class priceData:
 
 
 def calculate(data):
-	dataCalc = instantiate.instantiateDataCalc(data)
+	dataCalc = instantiate.instantiateDataCalc()
 	unkept = []
 	# Instantiate object.
+	dataCalc['symbol'] = data['symbol']
+	dataCalc['YEAR_INC']						= data['YEAR_INC']
+	dataCalc['YEAR_BAL']						= data['YEAR_BAL']
+	dataCalc['YEAR_CF']							= data['YEAR_CF']
 	dataCalc['PRICE'] = test_price_service.getPrices(data['symbol'], dataCalc['YEAR_BAL'])
 	#print(dataCalc['PRICE'])
 	i = 1
@@ -140,9 +144,12 @@ def calculate(data):
 			print("Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
 			break
 		#Write recursive average Functions
-		dataCalc['AVG_NI_3YEAR'][i] = round(Calcs.Basics.threeYearAvg(data['NI_INC'][i], data['NI_INC'][i+1], data['NI_INC'][i+1]), 2) if (Calcs.Basics.threeYearAvg(data['NI_INC'][i], data['NI_INC'][i+1], data['NI_INC'][i+1]) != None) else None
-		dataCalc['AVG_EBIT_3YEAR'][i] = round(Calcs.Basics.threeYearAvg(dataCalc['EBIT'][i], dataCalc['EBIT'][i+1], dataCalc['EBIT'][i+1]), 2) if (Calcs.Basics.threeYearAvg(dataCalc['EBIT'][i], dataCalc['EBIT'][i+1], dataCalc['EBIT'][i+1]) != None) else None
-		dataCalc['AVG_LEV_FCF_3YEAR'][i] = Calcs.Basics.threeYearAvg(dataCalc['LEV_FCF'][i], dataCalc['LEV_FCF'][i+1], dataCalc['LEV_FCF'][i+1])
+		if(i < 30):
+			dataCalc['AVG_NI_3YEAR'][i] = round(Calcs.Basics.threeYearAvg(data['NI_INC'][i], data['NI_INC'][i+1], data['NI_INC'][i+2]), 2) if (Calcs.Basics.threeYearAvg(data['NI_INC'][i], data['NI_INC'][i+1], data['NI_INC'][i+2]) != None) else None
+		if(i < 30):
+			dataCalc['AVG_EBIT_3YEAR'][i] = round(Calcs.Basics.threeYearAvg(dataCalc['EBIT'][i], dataCalc['EBIT'][i+1], dataCalc['EBIT'][i+2]), 2) if (Calcs.Basics.threeYearAvg(dataCalc['EBIT'][i], dataCalc['EBIT'][i+1], dataCalc['EBIT'][i+2]) != None) else None
+		if(i < 30):
+			dataCalc['AVG_LEV_FCF_3YEAR'][i] = Calcs.Basics.threeYearAvg(dataCalc['LEV_FCF'][i], dataCalc['LEV_FCF'][i+1], dataCalc['LEV_FCF'][i+2])
 		dataCalc['AVG_WORKING_CAPITAL'][i] = Calcs.Basics.avg(dataCalc['WORKING_CAPITAL'][i], dataCalc['WORKING_CAPITAL'][i+1])
 		dataCalc['AVG_INVEST'][i] = Calcs.Basics.avg(dataCalc['TOTAL_INVEST'][i], dataCalc['TOTAL_INVEST'][i+1])
 		dataCalc['AVG_DEBT'][i] = Calcs.Basics.avg(dataCalc['TOTAL_DEBT'][i], dataCalc['TOTAL_DEBT'][i+1])

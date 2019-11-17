@@ -172,9 +172,9 @@ def instantiateData():
 
 	return data
 	
-def instantiateDataCalc(data):
+def instantiateDataCalc():
 	dataCalc = {}
-	dataCalc['symbol']							= data['symbol']
+	dataCalc['symbol']							= [0]
 	dataCalc['YEAR_INC'] 						= [0] * 35
 	dataCalc['YEAR_BAL']						= [0] * 35
 	dataCalc['YEAR_CF']							= [0] * 35
@@ -236,7 +236,7 @@ def instantiateDataCalc(data):
 	dataCalc['TOTAL_CURR_LIAB_RATIO'] 			= [0] * 35
 	dataCalc['LT_DEBT_RATIO'] 					= [0] * 35
 	dataCalc['DEBT_EQ_RATIO'] 					= [0] * 35
-	dataCalc['DEBT_TO_EBIT'] 						= [0] * 35
+	dataCalc['DEBT_TO_EBIT'] 					= [0] * 35
 	dataCalc['FIXED_CHARGE_COVERAGE'] 			= [0] * 35
 	dataCalc['DEGREE_COMBINED_LEV'] 			= [0] * 35
 	dataCalc['DEGREE_OPERATING_LEV']			= [0] * 35
@@ -477,9 +477,9 @@ def instantiateDataCalc(data):
 	dataCalc['DIVS_YIELD']						= [None] * 35
 	dataCalc['SGR']								= [None] * 35
 
-	dataCalc['YEAR_INC']						= data['YEAR_INC']
-	dataCalc['YEAR_BAL']						= data['YEAR_BAL']
-	dataCalc['YEAR_CF']							= data['YEAR_CF']
+	dataCalc['YEAR_INC']						= Calcs.Names.YEAR_INC
+	dataCalc['YEAR_BAL']						= Calcs.Names.YEAR_BAL
+	dataCalc['YEAR_CF']							= Calcs.Names.YEAR_CF
 	dataCalc['MARGINAL_TAX_RATE'][0]			= Calcs.Names.MARGINAL_TAX_RATE
 	dataCalc['FAIR_RETURN_RATE'][0]				= Calcs.Names.FAIR_RETURN_RATE
 	dataCalc['NO_GROWTH_PE'][0]					= Calcs.Names.NO_GROWTH_PE
@@ -505,6 +505,9 @@ def instantiateDataCalc(data):
 	dataCalc['CAPEX'][0]						= Calcs.Names.CAPEX
 	dataCalc['LEV_FCF'][0]						= Calcs.Names.LEV_FCF
 	dataCalc['UN_LEV_FCF'][0]					= Calcs.Names.UN_LEV_FCF
+	dataCalc['AVG_NI_3YEAR'][0]					= Calcs.Names.AVG_NI_3YEAR
+	dataCalc['AVG_EBIT_3YEAR'][0]				= Calcs.Names.AVG_EBIT_3YEAR
+	dataCalc['AVG_LEV_FCF_3YEAR'][0]			= Calcs.Names.AVG_LEV_FCF_3YEAR
 	dataCalc['AVG_RECEIVABLES'][0]				= Calcs.Names.AVG_RECEIVABLES
 	dataCalc['AVG_PAYABLES_ACCRUALS'][0]		= Calcs.Names.AVG_PAYABLES_ACCRUALS
 	dataCalc['AVG_WORKING_CAPITAL'][0]			= Calcs.Names.AVG_WORKING_CAPITAL

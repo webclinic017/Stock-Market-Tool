@@ -6,16 +6,16 @@ import boundings
 import getSectors
 
 #Keep the folder clean of previous json files
-files = glob.glob("*.json")
-for file in files:
-	if(files != None):
-		os.remove(file)
+#files = glob.glob("*.json")
+#for file in files:
+#	if(files != None):
+#		os.remove(file)
 
 symbols = glob.glob("*.xlsx")
 i=0
 while(i < len(symbols)):
 	symbols[i] = symbols[i].strip(".xlsx")
-	manageJson.runJson(symbols[i])
+	#manageJson.runJson(symbols[i])
 	i += 1
 
 jsonObjs = glob.glob("*.json")
@@ -33,9 +33,11 @@ if(len(dataList) != len(dataCalcList)):
 	print("There has been an error")
 
 #Generate sector data
-sectors = getSectors.makeSectors(symbols)
-print(sectors)
-
+ratings = {}
+sectorList = getSectors.organizeSectors(symbols)
+#print(sectorList)
+sectorStats = getSectors.makeSectorData(sectorList, dataList, dataCalcList)
+#print(sectorStats)
 
 #Generate recommendations
 #Turn Calcs into meaningful interpreatations

@@ -8,6 +8,9 @@
 
 class Names:
 	# Basics
+	YEAR_INC						= "Year Income Statement"
+	YEAR_BAL						= "Year Balance Sheet"
+	YEAR_CF							= "Year Cash Flow Statement"
 	PRICE							= "Share Price of Common Stock"
 	MARGINAL_TAX_RATE				= "Marginal Corporate Tax Rate" #(Taxable Income above $18.333 million)
 	FAIR_RETURN_RATE				= "Graham's Fair Rate of Return (%)"
@@ -36,6 +39,9 @@ class Names:
 	UN_LEV_FCF						= "Unlevered Free Cash Flow"
 	
 	# Averages
+	AVG_NI_3YEAR					= "Average Net Income over last 3 years"
+	AVG_EBIT_3YEAR					= "Average EBIT over last 3 years"
+	AVG_LEV_FCF_3YEAR				= "Average Leverage Free Cash Flow over last 3 years"
 	AVG_RECEIVABLES					= "Average Accounts Receivable"
 	AVG_PAYABLES_ACCRUALS			= "Average Accounts Payable & Accruals"
 	AVG_WORKING_CAPITAL				= "Average Working Capital"
