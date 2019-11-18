@@ -42,6 +42,7 @@
     <Compile Include="getSectors.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PythonApplication1.py" />
     <Compile Include="sectors.py" />
     <Compile Include="test_price_service.py">
       <SubType>Code</SubType>
@@ -50,7 +51,6 @@
     <Compile Include="Reported.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="main.py" />
     <Compile Include="Stocks.py">
       <SubType>Code</SubType>
     </Compile>

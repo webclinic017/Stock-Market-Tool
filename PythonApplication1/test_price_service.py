@@ -23,6 +23,7 @@ def getPrices(symbol, years):
 	i = 1
 	years = iter(years)
 	next(years)
+
 	for year in years:
 		try:
 			price = yearly_price_service.get_avg_price(symbol, year, '../machine-learning/data/alpha-vantage/json-data/')

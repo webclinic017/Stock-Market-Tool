@@ -38,6 +38,10 @@ def genRatings(dataFile, dataCalcFile):
 	with open(dataCalcFile) as json_file:
 		dataCalc = json.load(json_file)
 
+	upperThird = 66.66
+	lowerThird = 33.33
+	mid = 50
+
 	ratings = instantiate.instantiateDataCalc()
 	ratings['SECTOR'] = "Sector name goes here"
 	ratings['DECISION'] = [0] * 35
@@ -106,7 +110,7 @@ def genRatings(dataFile, dataCalcFile):
 		#ratings['NET_DEBT'][i] = unknown() #Compare against sector
 		ratings['DEBT_RATIO'][i] = rateDebtRisk(dataCalc['DEBT_RATIO'][i])
 		#Determine an appropriate industry average of debt to base relative debt load against
-		#ratings['DEBT_EQ_RATIO'][i] = sectorRankDown(['DEBT_EQ_RATIO'][i], np.percentile(industry['DEBT_EQ_RATIO'][i], 33.33), np.percentile(industry['DEBT_EQ_RATIO'][i], 66.66) )
+		#ratings['DEBT_EQ_RATIO'][i] = sectorRankDown(['DEBT_EQ_RATIO'][i], np.percentile(industry['DEBT_EQ_RATIO'][i], lowerThird), np.percentile(industry['DEBT_EQ_RATIO'][i], upperThird) )
 		#ratings['ST_DEBT_EQ_RATIO'][i] = stLtDebtRisk(dataCalc['DEBT_EQ_RATIO'][i], data['ST_DEBT_RATIO'][i], industry['DEBT_EQ_RATIO'][i], industry['ST_DEBT_RATIO_25'][i], industry['ST_DEBT_RATIO_75'][i])
 		#ratings['LT_DEBT_EQ_RATIO'][i] = stLtDebtRisk(dataCalc['DEBT_EQ_RATIO'][i], data['LT_DEBT_RATIO'][i], industry['DEBT_EQ_RATIO'][i], industry['LT_DEBT_RATIO_25'][i], industry['LT_DEBT_RATIO_75'][i])
 		
@@ -118,22 +122,22 @@ def genRatings(dataFile, dataCalcFile):
 		#ratings['DFL_RATIO'][i] = rateDegreeOfLeverage(dataCalc['DFL_RATIO'][i], data['REV'][i], data['REV'][i+1], industry['DEGREE_COMBINED_LEV_50'][i])
 
 		ratings['FINANCIAL_LEVERAGE'][i] = rateFL(dataCalc['FINANCIAL_LEVERAGE'][i])
-		#ratings['EQUITY_RATIO'][i] = sectorRankUp(dataCalc['EQUITY_RATIO'][i], np.percentile(industry['EQUITY_RATIO'][i], 33.33), np.percentile(industry['EQUITY_RATIO'][i], 66.66) )
+		#ratings['EQUITY_RATIO'][i] = sectorRankUp(dataCalc['EQUITY_RATIO'][i], np.percentile(industry['EQUITY_RATIO'][i], lowerThird), np.percentile(industry['EQUITY_RATIO'][i], upperThird) )
 		#ratings['EQUITY_MULTIPLIER_RATIO_1'][i] = rateEqMult1(dataCalc['EQUITY_MULTIPLIER_RATIO_1'][i], industry['EQUITY_MULTIPLIER_RATIO_1_25'][i], industry['EQUITY_MULTIPLIER_RATIO_1_75'][i])
 		
 		ratings['EQUITY_MULTIPLIER_RATIO_2'][i] = rateDebtRisk(dataCalc['DEBT_RATIO'][i]) #Note: equations are same math
 		#ratings['NAV'][i] = unknown() #Compare against sector
 		ratings['EFFECTIVE_INT_RATE'][i] = rateCostOfDebt(dataCalc['EFFECTIVE_INT_RATE'][i], dataCalc['ROCE_EBIT'][i])
 		ratings['DEBT_COST_CAP'][i] = rateCostOfDebt(dataCalc['DEBT_COST_CAP'][i], dataCalc['ROCE_NI'][i])
-		#ratings['WACC'][i] = sectorRankDown(dataCalc['WACC'][i], np.percentile(industry['WACC'][i], 33.33), np.percentile(industry['WACC'][i], 66.66) )
-		#ratings['SALES_TURNOVER'][i] = sectorRankUp(dataCalc['SALES_TURNOVER'][i], np.percentile(industry['SALES_TURNOVER'][i], 33.33), np.percentile(industry['SALES_TURNOVER'][i], 66.66) )
-		#ratings['DSO'][i] = sectorRankDown(dataCalc['DSO'][i], np.percentile(industry['DSO'][i], 33.33), np.percentile(industry['DSO'][i], 66.66) )
-		#ratings['ASSET_TURNOVER'][i] = sectorRankUp(dataCalc['ASSET_TURNOVER'][i], np.percentile(industry['ASSET_TURNOVER'][i], 33.33), np.percentile(industry['ASSET_TURNOVER'][i], 66.66) )
-		#ratings['ASSET_TURN_RATE'][i] = sectorRankUp(dataCalc['ASSET_TURN_RATE'][i], np.percentile(industry['ASSET_TURN_RATE'][i], 33.33), np.percentile(industry['ASSET_TURN_RATE'][i], 66.66) )
-		#ratings['LT_ASSET_TURNOVER'][i] = sectorRankUp(dataCalc['LT_ASSET_TURNOVER'][i], np.percentile(industry['LT_ASSET_TURNOVER'][i], 33.33), np.percentile(industry['LT_ASSET_TURNOVER'][i], 66.66) )
-		#ratings['LT_ASSET_TURN_RATE'][i] = sectorRankUp(dataCalc['LT_ASSET_TURN_RATE'][i], np.percentile(industry['LT_ASSET_TURN_RATE'][i], 33.33), np.percentile(industry['LT_ASSET_TURN_RATE'][i], 66.66) )
-		#ratings['INV_SALES_TURNOVER'][i] = sectorRankUp(dataCalc['INV_SALES_TURNOVER'][i], np.percentile(industry['INV_SALES_TURNOVER'][i], 33.33), np.percentile(industry['INV_SALES_TURNOVER'][i], 66.66) )
-		#ratings['DSI'][i] = sectorRankUp(dataCalc['DSI'][i], np.percentile(industry['DSI'][i], 33.33), np.percentile(industry['DSI'][i], 66.66) )
+		#ratings['WACC'][i] = sectorRankDown(dataCalc['WACC'][i], np.percentile(industry['WACC'][i], lowerThird), np.percentile(industry['WACC'][i], upperThird) )
+		#ratings['SALES_TURNOVER'][i] = sectorRankUp(dataCalc['SALES_TURNOVER'][i], np.percentile(industry['SALES_TURNOVER'][i], lowerThird), np.percentile(industry['SALES_TURNOVER'][i], upperThird) )
+		#ratings['DSO'][i] = sectorRankDown(dataCalc['DSO'][i], np.percentile(industry['DSO'][i], lowerThird), np.percentile(industry['DSO'][i], upperThird) )
+		#ratings['ASSET_TURNOVER'][i] = sectorRankUp(dataCalc['ASSET_TURNOVER'][i], np.percentile(industry['ASSET_TURNOVER'][i], lowerThird), np.percentile(industry['ASSET_TURNOVER'][i], upperThird) )
+		#ratings['ASSET_TURN_RATE'][i] = sectorRankUp(dataCalc['ASSET_TURN_RATE'][i], np.percentile(industry['ASSET_TURN_RATE'][i], lowerThird), np.percentile(industry['ASSET_TURN_RATE'][i], upperThird) )
+		#ratings['LT_ASSET_TURNOVER'][i] = sectorRankUp(dataCalc['LT_ASSET_TURNOVER'][i], np.percentile(industry['LT_ASSET_TURNOVER'][i], lowerThird), np.percentile(industry['LT_ASSET_TURNOVER'][i], upperThird) )
+		#ratings['LT_ASSET_TURN_RATE'][i] = sectorRankUp(dataCalc['LT_ASSET_TURN_RATE'][i], np.percentile(industry['LT_ASSET_TURN_RATE'][i], lowerThird), np.percentile(industry['LT_ASSET_TURN_RATE'][i], upperThird) )
+		#ratings['INV_SALES_TURNOVER'][i] = sectorRankUp(dataCalc['INV_SALES_TURNOVER'][i], np.percentile(industry['INV_SALES_TURNOVER'][i], lowerThird), np.percentile(industry['INV_SALES_TURNOVER'][i], upperThird) )
+		#ratings['DSI'][i] = sectorRankUp(dataCalc['DSI'][i], np.percentile(industry['DSI'][i], lowerThird), np.percentile(industry['DSI'][i], upperThird) )
 		#ratings['INV_COGS_TURNOVER'][i] = dataCalc['INV_COGS_TURNOVER'][i] 
 		#ratings['DIO'][i] = dataCalc['DIO'][i] 
 		#ratings['RECEIVABLES_ACCTS_TURNOVER'][i] = dataCalc['RECEIVABLES_ACCTS_TURNOVER'][i] 

@@ -41,7 +41,7 @@ class priceData:
 			#print(int(year))
 			try:
 				price = yearly_price_service.YearlyPriceService.get_avg_price(symbol, year, '../machine-learning/data/alpha-vantage/json-data/')
-				print(price)
+				#print(price)
 				prices.append(price)
 			except:
 #				print('Ticker not found!')
@@ -59,8 +59,13 @@ def calculate(data):
 	dataCalc['YEAR_INC']						= data['YEAR_INC']
 	dataCalc['YEAR_BAL']						= data['YEAR_BAL']
 	dataCalc['YEAR_CF']							= data['YEAR_CF']
-	dataCalc['PRICE'] = test_price_service.getPrices(data['symbol'], dataCalc['YEAR_BAL'])
-	#print(dataCalc['PRICE'])
+	prices = test_price_service.getPrices(data['symbol'], dataCalc['YEAR_BAL'])
+	
+	i=1
+	dataCalc['PRICE'][0] = Calcs.Names.PRICE
+	while(i<34):
+		dataCalc['PRICE'][i] = prices[i-1]
+		i += 1
 	i = 1
 	# Independent calculations:
 	while(i < 34):

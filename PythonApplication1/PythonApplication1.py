@@ -36,15 +36,15 @@ if(len(dataList) != len(dataCalcList)):
 ratings = {}
 sectorList = getSectors.organizeSectors(symbols)
 #print(sectorList)
-sectorStats = getSectors.makeSectorData(sectorList, dataList, dataCalcList)
-#print(sectorStats)
+sectorData = getSectors.makeSectorData(sectorList, dataList, dataCalcList)
+#print(sectorData)
 
 #Generate recommendations
-#Turn Calcs into meaningful interpreatations
-i=0
-while(i < len(dataList)):
-	boundings.genRatings(dataList[i], dataCalcList[i])
-	i += 1
+##Turn Calcs into meaningful interpreatations
+#i=0
+#while(i < len(dataList)):
+#	boundings.genRatings(dataList[i], dataCalcList[i])
+#	i += 1
 
 
 
