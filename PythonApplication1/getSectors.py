@@ -68,15 +68,16 @@ def makeSectorData(sectorList, dataList, dataCalcList):
 		sectorData = instantiate.instantiateSectors()
 		for tick in range(len(sector)):
 			sectorData['SECTOR'] = sectorList[sec][0]
+			sectorData['LENGTH'] = len(sectorList[sec]) - 1
 
 			if(1 < len(sectorList[sec]) and 0 < tick):
 				#print(sectorList[sec][0], ": ", sectorList[sec][tick])
 				idx =  dataCalcList.index(sectorList[sec][tick] + "Calc.json")
-				print(sectorList[sec][tick], ": ", sectorList[sec][0], dataCalcList.index(sectorList[sec][tick] + "Calc.json"))
+				#print(sectorList[sec][tick], ": ", sectorList[sec][0], dataCalcList.index(sectorList[sec][tick] + "Calc.json"))
 				
-				print()
-				print()
-				print()
+				#print()
+				#print()
+				#print()
 				#print(dataList[idx])
 				#print(dataCalcList[idx])
 				
@@ -88,11 +89,12 @@ def makeSectorData(sectorList, dataList, dataCalcList):
 				#sectorData.append(dataCalc)
 
 				year=1
+				startYear = 2019
 				while(year < 34):
 					
-					#sectorData['YEAR_INC'] = dataCalc['YEAR_INC']				
-					#sectorData['YEAR_BAL'] = dataCalc['YEAR_BAL']						
-					#sectorData['YEAR_CF'] = dataCalc['YEAR_CF']	
+					sectorData['YEAR_INC'][year] = startYear - year				
+					sectorData['YEAR_BAL'][year] = startYear - year						
+					sectorData['YEAR_CF'][year] = startYear - year
 					sectorData['PRICE'][year].append(dataCalc['PRICE'][year])						
 					sectorData['AVG_NI_3YEAR'][year].append(dataCalc['AVG_NI_3YEAR'][year])					
 					sectorData['AVG_EBIT_3YEAR'][year].append(dataCalc['AVG_EBIT_3YEAR'][year])				
@@ -242,15 +244,15 @@ def makeSectorData(sectorList, dataList, dataCalcList):
 					sectorData['SGR'][year].append(dataCalc['SGR'][year])		
 					year += 1
 
-		print(sectorData)
-		print()
-		print()
-		print()
+		#print(sectorData)
+		#print()
+		#print()
+		#print()
 		sectors.append(sectorData)
 
 		sec += 1
 		
-	return sectorData
+	return sectors
 
 
 

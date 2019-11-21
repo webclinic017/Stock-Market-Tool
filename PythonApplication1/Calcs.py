@@ -54,11 +54,11 @@ class Names:
 	AVG_DEBT						= "Average Total Debt"
 	
 	# Solvency:
-	CASH_RATIO						= "Cash Ratio"
-	CASH_STI_RATIO					= "Liquid Cash Ratio"
-	CASH_SERVICE_RATIO				= "Cash Service Ratio"			
-	INT_SERVICE_RATIO				= "Interest Service Ratio"	
-	CASH_ST_DEBT_RATIO				= "Cash to Short Term Debt Ratio"
+	CASH_RATIO						= "Cash Ratio (%)"
+	CASH_STI_RATIO					= "Liquid Ratio (%)"
+	CASH_SERVICE_RATIO				= "Cash Service Ratio (Multiple)"			
+	INT_SERVICE_RATIO				= "Interest Service Ratio (Multiple)"	
+	CASH_ST_DEBT_RATIO				= "Cash to Short Term Debt Ratio (Multiple)"
 	ACID_TEST						= "Acid Test Ratio"
 	QUICK_RATIO						= "Quick Ratio"
 	QUICK_RATIO_2					= "Quick Ratio"	# (with Prepaid Expenses subtracted)
@@ -70,8 +70,8 @@ class Names:
 	CHG_ST_DEBT						= "Change in Short Term Debt (%)"
 	CHG_LT_DEBT						= "Change in Long Term Debt (%)"
 	CHG_NET_DEBT					= "Change in Net Debt (%)"
-	NET_DEBT						= "Net Debt"
-	TOTAL_CURR_LIAB_RATIO			= "Short Term Obligations Ratio"
+	NET_DEBT						= "Net Debt ($)"
+	TOTAL_CURR_LIAB_RATIO			= "Short Term Obligations Ratio (%)"
 	LT_DEBT_RATIO					= "Long Term Debt Ratio"
 	DEBT_RATIO						= "Debt Ratio (%)"
 	DEBT_EQ_RATIO					= "Debt to Equity Ratio"
@@ -82,67 +82,67 @@ class Names:
 	DEGREE_FINANCIAL_LEV			= "Degree of Financial Leverage"
 	DFL_RATIO						= "Degree of Financial Leverage Ratio"
 	FINANCIAL_LEVERAGE				= "Financial Leverage"
-	EQUITY_RATIO					= "Equity Ratio"
+	EQUITY_RATIO					= "Equity Ratio (%)"
 	EQUITY_MULTIPLIER_RATIO_1		= "Equity Multiplier"
 	EQUITY_MULTIPLIER_RATIO_2		= "Equity Multiplier using Debt Ratio"
 	NAV								= "Net Asset Value"
 	EFFECTIVE_INT_RATE				= "Effective Interest Rate (%)"
-	DEBT_COST_CAP					= "Debt to Cost of Capital"
-	WACC							= "Weighted Average Cost of Capital"
+	DEBT_COST_CAP					= "Debt to Cost of Capital (%)"
+	WACC							= "Weighted Average Cost of Capital (%)"
 	
 	# Asset Activity
 	SALES_TURNOVER					= "Sales Turnover"
-	DSO								= "Days Sales Outstanding"
+	DSO								= "Days Sales Outstanding (in days)"
 	ASSET_TURNOVER					= "Asset Turnover"
-	ASSET_TURN_RATE					= "Asset Turnover Rate in Days"
+	ASSET_TURN_RATE					= "Asset Turnover Rate (in days)"
 	LT_ASSET_TURNOVER				= "Long Term Asset Turnover"
-	LT_ASSET_TURN_RATE				= "Long Term Asset Turnover Rate in Days"
+	LT_ASSET_TURN_RATE				= "Long Term Asset Turnover Rate (in days)"
 	INV_SALES_TURNOVER				= "Inventory Sales Turnover"
-	DSI								= "Days Sales Inventory"	
+	DSI								= "Days Sales Inventory (in days)"	
 	INV_COGS_TURNOVER				= "Inventory COGS Turnover"
-	DIO								= "Days Inventory Outstanding "
+	DIO								= "Days Inventory Outstanding (in days)"
 	RECEIVABLES_ACCTS_TURNOVER		= "Accounts Receivables Turnover"
-	DRO 							= "Days Receivables Outstanding"
+	DRO 							= "Days Receivables Outstanding (in days)"
 	WORKING_CAP_TURNOVER			= "Working Capital Turnover"
-	DWC								= "Days Working Capital"
-	ROI_INVESTMENTS					= "Return on Investments"
+	DWC								= "Days Working Capital (in days)"
+	ROI_INVESTMENTS					= "Return on Investments (%)"
 	
 	# Liability Activity
 	CREDITORS_TURNOVER				= "Creditors Turnover"
-	CDO								= "Creditors Days Outstandings"
+	CDO								= "Creditors Days Outstandings (in days)"
 	PAYABLES_TURNOVER_COGS			= "Payables Turnover using COGS"
-	DPO_COGS						= "Days Payables Outstanding using COGS"
+	DPO_COGS						= "Days Payables Outstanding using COGS (in days)"
 	PAYABLES_TURNOVER_COS			= "Payables Turnover using Cost of Sales"
-	DPO_COS							= "Days Payables Outstanding using Cost of Sales"
+	DPO_COS							= "Days Payables Outstanding using Cost of Sales (in days)"
 	LIAB_TURNOVER					= "Liabilities Turnover"
-	LIAB_TURN_RATE					= "Liabilities Turnover Rate in Days"		
-	CHG_DEBT_REPAYMENT_REQ			= "Change in Required Short Term Debt Repayments"
-	DEBTORS_PAYBACK_PERIOD			= "Pace of Debt Repayment"
+	LIAB_TURN_RATE					= "Liabilities Turnover Rate (in days)"		
+	CHG_DEBT_REPAYMENT_REQ			= "Change in Required Short Term Debt Repayments (%)"
+	DEBTORS_PAYBACK_PERIOD			= "Pace of Debt Repayment (in years)"
 	BURN_RATE						= "Burn Rate (%)"
 	
 	# Profitability 
-	CCC								= "Cash Conversion Cycle"
-	ROS								= "Return on Sales"
-	ROE								= "Return on Equity"	
-	ROA								= "Return on Assets"
-	ROCE_NI							= "Return on Capital Employed using Net Income"
-	EPS_DILUTED_NI					= "Earnings per Share on Diluted Shares"
-	EPS_DILUTED_EBIT				= "EBIT per Share on Diluted Shares"
-	ROCE_EBIT						= "Return on Capital Employed using EBIT"
+	CCC								= "Cash Conversion Cycle (in days)"
+	ROS								= "Return on Sales (%)"
+	ROE								= "Return on Equity (%)"	
+	ROA								= "Return on Assets (%)"
+	ROCE_NI							= "Return on Capital Employed using Net Income (%)"
+	EPS_DILUTED_NI					= "Earnings (per share)"
+	EPS_DILUTED_EBIT				= "EBIT (per share)"
+	ROCE_EBIT						= "Return on Capital Employed using EBIT (%)"
 	PE								= "Price to Earnings Ratio"
 	PE_REL_3						= "3 Year Average of PE Ratio"
 	PE_REL_5						= "5 Year Average of PE Ratio"
-	EARNINGS_POWER 					= "Earnings Power"
-	GROSS_MARGIN					= "Gross Margin"
-	NOPAT_NI						= "Net Operating Profit After Tax using Net Income"
-	NOPAT_EBIT						= "Net Operating Profit After Tax using Operating Income"
-	ROIC							= "Return on Invested Capital"
-	OPERATING_RATIO					= "Operating Ratio"
-	OP_PROFIT_MARGIN				= "Operating Profit Margin"
+	EARNINGS_POWER 					= "Earnings Power (%)"
+	GROSS_MARGIN					= "Gross Margin (%)"
+	NOPAT_NI						= "Net Operating Profit After Tax using Net Income (per share)"
+	NOPAT_EBIT						= "Net Operating Profit After Tax using Operating Income (per share)"
+	ROIC							= "Return on Invested Capital (%)"
+	OPERATING_RATIO					= "Operating Ratio (%)"
+	OP_PROFIT_MARGIN				= "Operating Profit Margin (%)"
 	
 	# Valuation Measures
-	MV								= "Market Value"
-	MV_EBIT_RATIO					= "Market Value to Cash Flow"
+	MV								= "Market Value ($)"
+	MV_EBIT_RATIO					= "Cash Flow to Market Value (%)"
 	ORIG_GRAHAM						= "Original Graham Equation" #TRY Net Income vs. EBIT vs EBITDA
 	REVISED_GRAHAM					= "Revised Graham Equation" #TRY Net Income vs. EBIT vs EBITDA
 	EV								= "Enterprise Value"
@@ -152,12 +152,12 @@ class Names:
 	BV_PER_SHARE					= "Book Value per Share Outstanding"
 	BV_NI							= "Book Value to Net Income"
 	BV_EBIT							= "Book Value to Cash Flow"
-	PRICE_SALES						= "Price to Sales Ratio"
-	PRICE_BOOK						= "Price to Book Ratio"
-	PRICE_NAV						= "Price to Net Asset Value"
-	PRICE_FCF						= "Price to Free Cash Flow"
-	PRICE_UN_FCF					= "Price to UnLevered Free Cash Flow"
-	MV_OCF							= "Price to Operating Cash Flow"
+	PRICE_SALES						= "Sales to Price (%)"
+	PRICE_BOOK						= "Book Value to Price (%)"
+	PRICE_NAV						= "Net Asset Value to Price (%)"
+	PRICE_FCF						= "Free Cash Flow to Price (%)"
+	PRICE_UN_FCF					= "UnLevered Free Cash Flow to Price (%)"
+	MV_OCF							= "Operating Cash Flow to Market Value (%)"
 	CASH_PRICE_RATIO				= "Cash to Price Ratio"
 	INTRINSIC_VALUE_NI				= "Intrinsic Value by 3 Year Net Income Average"
 	INTRINSIC_VALUE_EBIT 			= "Intrinsic Value by 3 Year EBIT Average"
@@ -169,10 +169,10 @@ class Names:
 	DUPONT_SYSTEM_2					= "DuPont System of Valuation Method 2"
 	
 	# Dividend Measures:
-	RETENTION_RATIO					= "Retention Ratio"
-	DIV_PAYOUT_RATIO				= "Dividend Payout Ratio"
-	EARNINGS_YIELD					= "Earnings Yield Ratio"
-	DIVS_YIELD						= "Dividends Yield Ratio"
+	RETENTION_RATIO					= "Retention Ratio (%)"
+	DIV_PAYOUT_RATIO				= "Dividend Payout Ratio (%)"
+	EARNINGS_YIELD					= "Earnings Yield Ratio (%)"
+	DIVS_YIELD						= "Dividends Yield Ratio (%)"
 	SGR								= "Sustainable Growth Rate (%)"
 
 
@@ -197,8 +197,8 @@ class Formulas:
 	EBIAT							= "Earnings + Interst + Amortization + Taxes"
 	EBIT							= "Net Income + Interest + Taxes"
 	CAPEX							= "Current PP&E - Previous PP&E + Accumulated Depreciation"
-	LEV_FCF							= "Net Income + Depreciation + Amortization - (Change) Net Working Capital - Capital Expenditures"
-	UN_LEV_FCF						= "Net Income + Non-Cash Expenses - (Change) Net Working Capital - Capital Expenditures"
+	#LEV_FCF							= "Net Income + Depreciation + Amortization - (Change) Net Working Capital - Capital Expenditures"
+	#UN_LEV_FCF						= "Net Income + Non-Cash Expenses - (Change) Net Working Capital - Capital Expenditures"
 	
 	# Averages
 	AVG_RECEIVABLES					= "1/2 (Beginning + Ending) Accounts Receivable"
@@ -271,7 +271,7 @@ class Formulas:
 	LIAB_TURNOVER					= "Liabilities / Average Accounts Payable"
 	LIAB_TURN_RATE					= "Liabilities Turnover * 365"
 	CHG_DEBT_REPAYMENT_REQ			= "(Current Debt Obligations - Previous Debt Obligations) / Previous Debt Obligations * 100"
-	DEBTORS_PAYBACK_PERIOD			= "Average Total Debt / Debt Payments"
+	DEBTORS_PAYBACK_PERIOD			= "Debt Payments / Average Total Debt"
 	BURN_RATE						= "Cash + Cash Equivalents / (-) EBIT"
 	
 	# Profitability 
@@ -532,16 +532,16 @@ class Basics:
 		return round((NI_INC + INT_EXP + INC_TAX_EXPENSE), 2) if (NI_INC != None and INT_EXP != None) else None
 	def capex(PPE_0, PPE_1, ACC_DEPREC):
 		return round((PPE_0 - PPE_1 + ACC_DEPREC), 2) if (PPE_0 != None and PPE_1 != None and ACC_DEPREC != None) else None
-	def leveredFreeCashFlow(NI_INC, DEPRE_AMORT, WORKING_CAPITAL_0, WORKING_CAPITAL_1, CAPEX):
-		return round((NI_INC + DEPRE_AMORT - (WORKING_CAPITAL_0 - WORKING_CAPITAL_1) - CAPEX), 2) if (NI_INC != None and DEPRE_AMORT != None and WORKING_CAPITAL_0 != None and WORKING_CAPITAL_1 != None) else None
-	def unleveredFreeCashFlow(NI_INC, NON_CASH_ITEMS, WORKING_CAPITAL_0, WORKING_CAPITAL_1, CAPEX):
-		return round((NI_INC + NON_CASH_ITEMS - (WORKING_CAPITAL_0 - WORKING_CAPITAL_1) - CAPEX), 2) if (NI_INC != None and NON_CASH_ITEMS != None and WORKING_CAPITAL_0 != None and WORKING_CAPITAL_1 != None and CAPEX != None) else None
+	def leveredFreeCashFlow(NI_INC, DEPRE_AMORT, WORKING_CAPITAL_0, WORKING_CAPITAL_1, CURR_LT_DEBT, ST_DEBT):
+		return round((NI_INC + DEPRE_AMORT - (WORKING_CAPITAL_0 - WORKING_CAPITAL_1) - (CURR_LT_DEBT + ST_DEBT)), 2) if (NI_INC != None and DEPRE_AMORT != None and WORKING_CAPITAL_0 != None and WORKING_CAPITAL_1 != None and CURR_LT_DEBT != None and ST_DEBT != None) else None
+	def unleveredFreeCashFlow(EBITDA, CAPEX, WORKING_CAPITAL, CURR_INC_TAX):
+		return round((EBITDA - CAPEX - WORKING_CAPITAL - CURR_INC_TAX), 2) if (EBITDA != None and CAPEX != None and WORKING_CAPITAL != None and CURR_INC_TAX != None) else None
 	
 class Solvency: 
 	def cashRatio(CASH_EQ, TOTAL_CURR_LIAB):
-		return round((CASH_EQ / TOTAL_CURR_LIAB), 2) if (CASH_EQ != None and TOTAL_CURR_LIAB != None and TOTAL_CURR_LIAB != 0) else None
+		return round((CASH_EQ / TOTAL_CURR_LIAB) * 100, 2) if (CASH_EQ != None and TOTAL_CURR_LIAB != None and TOTAL_CURR_LIAB != 0) else None
 	def cashStiRatio(CASH_EQ_STI, TOTAL_CURR_LIAB):
-		return round((CASH_EQ_STI / TOTAL_CURR_LIAB), 2) if (CASH_EQ_STI != None and TOTAL_CURR_LIAB != None and TOTAL_CURR_LIAB != 0) else None
+		return round((CASH_EQ_STI / TOTAL_CURR_LIAB) * 100, 2) if (CASH_EQ_STI != None and TOTAL_CURR_LIAB != None and TOTAL_CURR_LIAB != 0) else None
 	def cashServiceRatio(CASH_EQ, INT_EXP):
 		return round((CASH_EQ / INT_EXP), 2) if (CASH_EQ != None and INT_EXP != None and INT_EXP != 0) else None
 	def interestServiceRatio(EBIT, INT_EXP):
@@ -566,9 +566,9 @@ class  CapStructure:
 	def netDebt(TOTAL_DEBT, CASH_EQ):
 		return round((TOTAL_DEBT - CASH_EQ), 2) if(TOTAL_DEBT != None and CASH_EQ != None) else None
 	def stDebtRatio(TOTAL_CURR_LIAB, TOTAL_DEBT):
-		return round((TOTAL_CURR_LIAB / TOTAL_DEBT)  * 100, 2) if (TOTAL_CURR_LIAB != None and TOTAL_DEBT != None and TOTAL_DEBT != 0) else None
+		return round((TOTAL_CURR_LIAB / TOTAL_DEBT) * 100, 2) if (TOTAL_CURR_LIAB != None and TOTAL_DEBT != None and TOTAL_DEBT != 0) else None
 	def ltDebtRatio(LT_DEBT, TOTAL_DEBT):
-		return round((TOTAL_DEBT / TOTAL_DEBT)  * 100, 2) if (LT_DEBT != None and TOTAL_DEBT != None and TOTAL_DEBT != 0) else None
+		return round((TOTAL_DEBT / TOTAL_DEBT) * 100, 2) if (LT_DEBT != None and TOTAL_DEBT != None and TOTAL_DEBT != 0) else None
 	def debtRatio(TOTAL_DEBT, TOTAL_ASSETS1):
 		return round((TOTAL_DEBT / TOTAL_ASSETS1) * 100, 2) if (TOTAL_DEBT != None and TOTAL_ASSETS1 != None and TOTAL_ASSETS1 != 0) else None
 	def debtEquityRatio(TOTAL_DEBT, TOTAL_EQUITY):
@@ -593,8 +593,8 @@ class  CapStructure:
 		return round((TOTAL_ASSETS1 / TOTAL_EQUITY), 2) if (TOTAL_ASSETS1 != None and TOTAL_EQUITY != None and TOTAL_EQUITY != 0) else None
 	def equityMultiplier2(DEBT_RATIO):
 		return round((1 / (1 - DEBT_RATIO)), 2) if (DEBT_RATIO != None and (1 - DEBT_RATIO) != 0) else None
-	def netAssetValue(TOTAL_ASSETS1, TOTAL_LIAB, EPS_DILUTED_NI):
-		return round(((TOTAL_ASSETS1 - TOTAL_LIAB) / EPS_DILUTED_NI), 2) if (TOTAL_ASSETS1 != None and TOTAL_LIAB != None and EPS_DILUTED_NI != None and EPS_DILUTED_NI != 0) else None
+	def netAssetValue(TOTAL_ASSETS1, TOTAL_LIAB, DIL_WEIGHT_AVG_SHARES):
+		return round(((TOTAL_ASSETS1 - TOTAL_LIAB) / DIL_WEIGHT_AVG_SHARES), 2) if (TOTAL_ASSETS1 != None and TOTAL_LIAB != None and DIL_WEIGHT_AVG_SHARES != None and DIL_WEIGHT_AVG_SHARES != 0) else None
 	def effectiveInterestRate(INT_EXP, TOTAL_DEBT):
 		return round((INT_EXP / TOTAL_DEBT )  * 100, 2) if (INT_EXP != None and TOTAL_DEBT != None and TOTAL_DEBT != 0) else None
 	def debtCostCapital(EFFECTIVE_INT_RATE, MARGINAL_TAX_RATE):
@@ -603,78 +603,78 @@ class  CapStructure:
 		return	round((TOTAL_EQUITY / (TOTAL_DEBT + TOTAL_EQUITY) * FAIR_RETURN_RATE) + (TOTAL_DEBT / (TOTAL_DEBT + TOTAL_EQUITY) * EFFECTIVE_INT_RATE * (1 - MARGINAL_TAX_RATE)) * 100, 2) if(TOTAL_EQUITY != None and TOTAL_DEBT != None and FAIR_RETURN_RATE != None and EFFECTIVE_INT_RATE != None and MARGINAL_TAX_RATE != None and (TOTAL_DEBT + TOTAL_EQUITY) != 0 ) else None
 
 class  Asset_Activity:
-	def salesTurnover(ACCTS_REC, CREDIT_SALES):
+	def salesTurnover(REV, ACCTS_REC):
+		return round((REV / ACCTS_REC), 2) if (REV != None and ACCTS_REC != None and ACCTS_REC != 0) else None
+	def receivablesTurnover(ACCTS_REC, CREDIT_SALES):
 		return round((ACCTS_REC / CREDIT_SALES), 2) if (ACCTS_REC != None and CREDIT_SALES != None and CREDIT_SALES != 0) else None
 	def daysSalesOutstanding(SALES_TURNOVER):
-		return round((365 * SALES_TURNOVER), 2) if (SALES_TURNOVER != None) else None
+		return round((365 / SALES_TURNOVER), 2) if (SALES_TURNOVER != None and SALES_TURNOVER != 0) else None
 	def assetTurnover(REV, AVG_ASSETS):
 		return round((REV / AVG_ASSETS), 2) if (REV != None and AVG_ASSETS != None and AVG_ASSETS != 0) else None
 	def assetTurnoverRate(ASSET_TURNOVER):
-		return round((365 * ASSET_TURNOVER ), 2) if (ASSET_TURNOVER != None) else None
+		return round((365 / ASSET_TURNOVER ), 2) if (ASSET_TURNOVER != None and ASSET_TURNOVER != 0) else None
 	def longTermAssetTurnover(REV, AVG_LT_ASSETS):
 		return round((REV / AVG_LT_ASSETS), 2) if (REV != None and AVG_LT_ASSETS != None and AVG_LT_ASSETS != 0) else None
 	def longTermAssetTurnoverRate(LT_ASSET_TURNOVER):
-		return round((365 * LT_ASSET_TURNOVER), 2) if (LT_ASSET_TURNOVER != None) else None
+		return round((365 / LT_ASSET_TURNOVER), 2) if (LT_ASSET_TURNOVER != None and LT_ASSET_TURNOVER != 0) else None
 	def inventorySalesTurnover(REV, AVG_INVENTORY):
 		return round((REV / AVG_INVENTORY), 2) if (REV != None and AVG_INVENTORY != None and AVG_INVENTORY != 0) else None
 	def daysSalesInventory(INV_SALES_TURNOVER):
-		return round((365 * INV_SALES_TURNOVER), 2) if (INV_SALES_TURNOVER != None) else None
+		return round((365 / INV_SALES_TURNOVER), 2) if (INV_SALES_TURNOVER != None and INV_SALES_TURNOVER != 0) else None
 	def inventoryCOGSTurnover(COGS, AVG_INVENTORY):
 		return round((COGS / AVG_INVENTORY), 2) if (COGS != None and AVG_INVENTORY != None and AVG_INVENTORY != 0) else None
 	def daysInventoryOutstanding(INV_COGS_TURNOVER):
-		return round((365 * INV_COGS_TURNOVER), 2) if (INV_COGS_TURNOVER != None) else None
-	def receivablesTurnover(ACCTS_REC, REV):
-		return round((ACCTS_REC / REV), 2) if (ACCTS_REC != None and REV != None and REV != 0) else None
+		return round((365 / INV_COGS_TURNOVER), 2) if (INV_COGS_TURNOVER != None and INV_COGS_TURNOVER != 0) else None
 	def daysReceivablesOutstanding(RECEIVABLES_ACCTS_TURNOVER):
-		return round((365 * RECEIVABLES_ACCTS_TURNOVER), 2) if (RECEIVABLES_ACCTS_TURNOVER != None) else None
+		return round((365 / RECEIVABLES_ACCTS_TURNOVER), 2) if (RECEIVABLES_ACCTS_TURNOVER != None and RECEIVABLES_ACCTS_TURNOVER != 0) else None
 	def workingCapitalTurnover(REV, AVG_WORKING_CAPITAL):
 		return round((REV / AVG_WORKING_CAPITAL), 2) if (REV != None and AVG_WORKING_CAPITAL != None and AVG_WORKING_CAPITAL != 0) else None
 	def daysWorkingCapital(WORKING_CAP_TURNOVER):
-		return round((365 * WORKING_CAP_TURNOVER), 2) if (WORKING_CAP_TURNOVER != None) else None
+		return round((365 / WORKING_CAP_TURNOVER), 2) if (WORKING_CAP_TURNOVER != None and  WORKING_CAP_TURNOVER != 0) else None
 	def investmentsROI(CASH_INVEST_ACT1, AVG_INVEST):
-		return round((CASH_INVEST_ACT1 / AVG_INVEST), 2) if (CASH_INVEST_ACT1 != None and AVG_INVEST != None and AVG_INVEST != 0) else None
+		return round((CASH_INVEST_ACT1 / AVG_INVEST) * 100, 2) if (CASH_INVEST_ACT1 != None and AVG_INVEST != None and AVG_INVEST != 0) else None
 
 
 class  Liab_Activity:
-	def CreditorsTurnover(CREDIT_SALES, AVG_RECEIVABLES):
-		return round((CREDIT_SALES / AVG_RECEIVABLES), 2) if (CREDIT_SALES != None and AVG_RECEIVABLES != None and AVG_RECEIVABLES != 0) else None
+	def CreditorsTurnover(AVG_RECEIVABLES, CREDIT_SALES):
+		return round((AVG_RECEIVABLES / CREDIT_SALES), 2) if (AVG_RECEIVABLES != None and CREDIT_SALES != None and CREDIT_SALES != 0) else None
 	def CreditorsDaysOutstanding(CREDITORS_TURNOVER):
-		return round((365 * CREDITORS_TURNOVER), 2) if (CREDITORS_TURNOVER != None) else None
-	def payablesTurnoverCOGS(PAYABLES, COGS):
-		return round((PAYABLES / COGS), 2) if (PAYABLES != None and COGS != None and COGS != 0) else None
+		return round((365 / CREDITORS_TURNOVER), 2) if (CREDITORS_TURNOVER != None and CREDITORS_TURNOVER != 0) else None
+	def payablesTurnoverCOGS(COGS, PAYABLES):
+		return round((COGS / PAYABLES), 2) if (COGS != None and PAYABLES != None and PAYABLES != 0) else None
 	def daysPayableOutstandingCOGS(PAYABLES_TURNOVER_COGS):
-		return round((365 * PAYABLES_TURNOVER_COGS), 2) if (PAYABLES_TURNOVER_COGS != None) else None
-	def payablesTurnoverCOS(PAYABLES, COST_OF_REV):
-		return round((PAYABLES / COST_OF_REV), 2) if (PAYABLES != None and COST_OF_REV != None and COST_OF_REV != 0) else None
+		return round((365 / PAYABLES_TURNOVER_COGS), 2) if (PAYABLES_TURNOVER_COGS != None and PAYABLES_TURNOVER_COGS != 0) else None
+	def payablesTurnoverCOS(COST_OF_REV, PAYABLES):
+		return round((COST_OF_REV / PAYABLES), 2) if (COST_OF_REV != None and PAYABLES != None and PAYABLES != 0) else None
 	def daysPayableOutstandingCOS(PAYABLES_TURNOVER_COS):
-		return round((365 * PAYABLES_TURNOVER_COS), 2) if (PAYABLES_TURNOVER_COS != None) else None
-	def liabitiesTurnover(TOTAL_LIAB, AVG_PAYABLES_ACCRUALS):
-		return round((TOTAL_LIAB / AVG_PAYABLES_ACCRUALS), 2) if (TOTAL_LIAB != None and AVG_PAYABLES_ACCRUALS != None and AVG_PAYABLES_ACCRUALS != 0) else None
+		return round((365 / PAYABLES_TURNOVER_COS), 2) if (PAYABLES_TURNOVER_COS != None and PAYABLES_TURNOVER_COS != 0) else None
+	def liabitiesTurnover(REV, TOTAL_CURR_LIAB):
+		return round((REV / TOTAL_CURR_LIAB), 2) if (REV != None and TOTAL_CURR_LIAB != None and TOTAL_CURR_LIAB != 0) else None
 	def liabitiesTurnoverRate(LIAB_TURNOVER):
-		return round((365 * LIAB_TURNOVER), 2) if (LIAB_TURNOVER != None) else None
+		return round((365 / LIAB_TURNOVER), 2) if (LIAB_TURNOVER != None and LIAB_TURNOVER != 0) else None
 	def changeDebtObligations(ST_DEBT_0, ST_DEBT_1, CURR_LT_DEBT_0, CURR_LT_DEBT_1):
 		return round(((ST_DEBT_0 + CURR_LT_DEBT_0) - (ST_DEBT_1 + CURR_LT_DEBT_1)) / (ST_DEBT_1 + CURR_LT_DEBT_1) * 100, 2) if (ST_DEBT_0 != None and CURR_LT_DEBT_1 != None and CURR_LT_DEBT_0 != None and ST_DEBT_1 != None and (ST_DEBT_1 + CURR_LT_DEBT_1) != 0) else None
 	def debtorsPaybackPeriod(AVG_DEBT, CASH_REPAY_DEBT):
-		return round((AVG_DEBT / CASH_REPAY_DEBT), 2) if (AVG_DEBT != None and CASH_REPAY_DEBT != None and CASH_REPAY_DEBT != 0) else None
+		return round((AVG_DEBT / CASH_REPAY_DEBT ), 2) if (AVG_DEBT != None and CASH_REPAY_DEBT != None and CASH_REPAY_DEBT > 0) else None
 	def burnRate(CASH_EQ, EBIT):
-		return round((CASH_EQ / EBIT), 2) if (CASH_EQ != None and EBIT != None and EBIT < 0) else None
+		return round((CASH_EQ / abs(EBIT)), 2) if (CASH_EQ != None and EBIT != None and EBIT < 0) else None
 
 
 class  Profitability:
 	def cashConversionCycle(DIO, DSO, DPO_COGS):
 		return round((DIO + DSO - DPO_COGS), 2) if (DIO != None and DSO != None and DPO_COGS != None) else None
 	def returnOnSales(NI_INC, REV):
-		return round((NI_INC / REV), 2) if (NI_INC != None and REV != None and REV != 0) else None
+		return round((NI_INC / REV) * 100, 2) if (NI_INC != None and REV != None and REV != 0) else None
 	def returnOnEquity(NI_INC, TOTAL_EQUITY):
-		return round((NI_INC / TOTAL_EQUITY), 2) if (NI_INC != None and TOTAL_EQUITY != None and TOTAL_EQUITY != 0) else None
+		return round((NI_INC / TOTAL_EQUITY) * 100, 2) if (NI_INC != None and TOTAL_EQUITY != None and TOTAL_EQUITY != 0) else None
 	def returnOnAssets(NI_INC, TOTAL_ASSETS1):
-		return round((NI_INC / TOTAL_ASSETS1), 2) if (NI_INC != None and TOTAL_ASSETS1 != None and TOTAL_ASSETS1 != 0) else None
+		return round((NI_INC / TOTAL_ASSETS1) * 100, 2) if (NI_INC != None and TOTAL_ASSETS1 != None and TOTAL_ASSETS1 != 0) else None
 	def earningsPerShare(NI_INC, DIL_WEIGHT_AVG_SHARES):
 		return round((NI_INC / DIL_WEIGHT_AVG_SHARES), 2) if(NI_INC != None and DIL_WEIGHT_AVG_SHARES != None and DIL_WEIGHT_AVG_SHARES != 0) else None
 	def returnOnCapitalEmployedNI(NI_INC, TOTAL_ASSETS1, TOTAL_CURR_LIAB):
-		return round((NI_INC / (TOTAL_ASSETS1 - TOTAL_CURR_LIAB)), 2) if (NI_INC != None and TOTAL_ASSETS1 != None and TOTAL_CURR_LIAB != None and (TOTAL_ASSETS1 - TOTAL_CURR_LIAB) != 0) else None
+		return round((NI_INC / (TOTAL_ASSETS1 - TOTAL_CURR_LIAB)) * 100, 2) if (NI_INC != None and TOTAL_ASSETS1 != None and TOTAL_CURR_LIAB != None and (TOTAL_ASSETS1 - TOTAL_CURR_LIAB) != 0) else None
 	def returnOnCapitalEmployedEBIT(EBIT, TOTAL_ASSETS1, TOTAL_CURR_LIAB):
-		return round((EBIT / (TOTAL_ASSETS1 - TOTAL_CURR_LIAB)), 2) if (EBIT != None and TOTAL_ASSETS1 != None and TOTAL_CURR_LIAB != None and (TOTAL_ASSETS1 - TOTAL_CURR_LIAB) != 0) else None
+		return round((EBIT / (TOTAL_ASSETS1 - TOTAL_CURR_LIAB)) * 100, 2) if (EBIT != None and TOTAL_ASSETS1 != None and TOTAL_CURR_LIAB != None and (TOTAL_ASSETS1 - TOTAL_CURR_LIAB) != 0) else None
 	def priceEarnings(PRICE, DIL_WEIGHT_AVG_SHARES, NI_INC):
 		return round((PRICE * DIL_WEIGHT_AVG_SHARES / NI_INC), 2) if (PRICE != None and DIL_WEIGHT_AVG_SHARES != None and NI_INC != None and NI_INC != 0) else None
 	def priceEarnings3(PE_0, PE_1, PE_2):
@@ -682,26 +682,26 @@ class  Profitability:
 	def priceEarnings5(PE_0, PE_1, PE_2, PE_3, PE_4):
 		return round(((PE_0 + PE_1 + PE_2 + PE_3 + PE_4) / 5), 2) if (PE_0 != None and PE_1 != None and PE_2 != None and PE_3 != None and PE_4 != None) else None
 	def earningsPower(EBIT, TOTAL_ASSETS1):
-		return round((EBIT / TOTAL_ASSETS1), 2) if (EBIT != None and TOTAL_ASSETS1 != None and TOTAL_ASSETS1 != 0) else None
+		return round((EBIT / TOTAL_ASSETS1) * 100, 2) if (EBIT != None and TOTAL_ASSETS1 != None and TOTAL_ASSETS1 != 0) else None
 	def grossMarginRatio(PROFIT, REV):
-		return round((PROFIT / REV), 2) if (PROFIT != None and REV != None and REV != 0) else None
-	def netOperatingProfitAfterTaxNI(NI_INC, NON_OP_INC_LOSS, INT_EXP):
-		return round((NI_INC - NON_OP_INC_LOSS + INT_EXP), 2) if (NI_INC != None and NON_OP_INC_LOSS != None and INT_EXP != None) else None
-	def netOperatingProfitAfterTaxEBIT(OP_INC_LOSS, MARGINAL_TAX_RATE):
-		return round((OP_INC_LOSS * (1 - MARGINAL_TAX_RATE)), 2) if (OP_INC_LOSS != None and MARGINAL_TAX_RATE != None) else None
+		return round((PROFIT / REV) * 100, 2) if (PROFIT != None and REV != None and REV != 0) else None
+	def netOperatingProfitAfterTaxNI(NI_INC, NON_OP_INC_LOSS, INT_EXP, DIL_WEIGHT_AVG_SHARES):
+		return round((NI_INC - NON_OP_INC_LOSS + INT_EXP) / DIL_WEIGHT_AVG_SHARES, 2) if (NI_INC != None and NON_OP_INC_LOSS != None and INT_EXP != None and DIL_WEIGHT_AVG_SHARES != None and DIL_WEIGHT_AVG_SHARES != 0) else None
+	def netOperatingProfitAfterTaxEBIT(OP_INC_LOSS, MARGINAL_TAX_RATE, DIL_WEIGHT_AVG_SHARES):
+		return round((OP_INC_LOSS * (1 - MARGINAL_TAX_RATE)) / DIL_WEIGHT_AVG_SHARES, 2) if (OP_INC_LOSS != None and MARGINAL_TAX_RATE != None and DIL_WEIGHT_AVG_SHARES != None and DIL_WEIGHT_AVG_SHARES != 0) else None
 	def returnOnInvestedCapital(NOPAT, TOTAL_INVEST):
-		return round((NOPAT / TOTAL_INVEST), 2) if (NOPAT != None and TOTAL_INVEST != None and TOTAL_INVEST != 0) else None
+		return round((NOPAT / TOTAL_INVEST) * 100, 2) if (NOPAT != None and TOTAL_INVEST != None and TOTAL_INVEST != 0) else None
 	def operatingRatio(OP_EXP, REV):
-		return round((OP_EXP / REV), 2) if (OP_EXP != None and REV != None and REV != 0) else None
+		return round((OP_EXP / REV) * 100, 2) if (OP_EXP != None and REV != None and REV != 0) else None
 	def operatingProfitMargin(OP_INC_LOSS, REV):
-		return round((OP_INC_LOSS / REV), 2) if (OP_INC_LOSS != None and REV != None and REV != 0) else None
+		return round((OP_INC_LOSS / REV) * 100, 2) if (OP_INC_LOSS != None and REV != None and REV != 0) else None
 
 
 class  Valuations:
 	def marketCap(PRICE, DIL_WEIGHT_AVG_SHARES):
 		return round((PRICE * DIL_WEIGHT_AVG_SHARES), 2) if (PRICE != None and DIL_WEIGHT_AVG_SHARES != None) else None
-	def marketCapEBITRatio(MV, EBIT):
-		return round((MV / EBIT), 2) if (MV != None and EBIT != None and EBIT != 0) else None
+	def ebitToMv(EBIT, MV):
+		return round((EBIT / MV) * 100, 2) if (EBIT != None and MV != None and MV != 0) else None
 	def originalGraham(EPS_DILUTED_NI, NO_GROWTH_PE, GROWTH_MULTIPLE, GROWTH_RATE):
 		return round((EPS_DILUTED_NI * (NO_GROWTH_PE + GROWTH_MULTIPLE * GROWTH_RATE)), 2) if (EPS_DILUTED_NI != None and NO_GROWTH_PE != None and GROWTH_MULTIPLE != None and GROWTH_RATE != None) else None
 	def revisedGraham(EPS_DILUTED_NI, NO_GROWTH_PE, GROWTH_MULTIPLE, GROWTH_RATE, REQUIRED_RETURN, AAA_BOND_YIELD):
@@ -713,7 +713,9 @@ class  Valuations:
 	def enterpriseValueNI(MV, TOTAL_DEBT, CASH_EQ, NI_INC):
 		return round(((MV + TOTAL_DEBT - CASH_EQ) / NI_INC), 2) if (MV != None and TOTAL_DEBT != None and CASH_EQ != None and NI_INC != None and NI_INC != 0) else None
 	def bookValue(TOTAL_ASSETS1, TOTAL_INTANG_ASSETS, TOTAL_LIAB):
-		return round((TOTAL_ASSETS1 - TOTAL_INTANG_ASSETS - TOTAL_LIAB), 2) if (TOTAL_ASSETS1 != None and TOTAL_INTANG_ASSETS != None and TOTAL_LIAB != None) else None
+		return round((TOTAL_ASSETS1 - TOTAL_INTANG_ASSETS - TOTAL_LIAB), 2) if (TOTAL_ASSETS1 != None and TOTAL_INTANG_ASSETS != None and TOTAL_LIAB != None) else None	
+	def bookValuePerShare(BV, DIL_WEIGHT_AVG_SHARES):
+		return round((BV / DIL_WEIGHT_AVG_SHARES), 2) if (BV != None and DIL_WEIGHT_AVG_SHARES != None and DIL_WEIGHT_AVG_SHARES != 0) else None
 	def bookValueToNI(BV, NI_INC):
 		return round((BV / NI_INC), 2) if (BV != None and NI_INC != None and NI_INC != 0) else None
 	def bookValueToEBIT(BV, EBIT):
@@ -722,36 +724,33 @@ class  Valuations:
 		return round((BV / EPS_EBIT_DILUTED), 2) if (BV != None and EPS_EBIT_DILUTED != None and EPS_EBIT_DILUTED != 0) else None
 	def bookValueNIperShare(BV, EPS_NI_DILUTED):
 		return round((BV / EPS_NI_DILUTED), 2) if (BV != None and EPS_NI_DILUTED != None and EPS_NI_DILUTED != 0) else None	
-	def priceToSales(PRICE, REV):
-		return round((PRICE / REV), 2) if (PRICE != None and REV != None and REV != 0) else None
-	def priceToBook(PRICE, BV):
-		return round((PRICE / BV), 2) if (PRICE != None and BV != None and BV != 0) else None
-	def priceToNAV(PRICE, NAV):
-		return round((PRICE / NAV), 2) if (PRICE != None and NAV != None and NAV != 0) else None	
-	def pricetoLeveredFreeCashFlow(PRICE, LEV_FCF):
-		return round((PRICE / LEV_FCF), 2) if (PRICE != None and LEV_FCF != None and LEV_FCF != 0) else None	
-	def priceToUnLeveredFreeCashFlow(PRICE, UN_LEV_FCF):
-		return round((PRICE / UN_LEV_FCF), 2) if (PRICE != None and UN_LEV_FCF != None and UN_LEV_FCF != 0) else None
-	def marketValueToOCF(MV, OP_INC_LOSS):
-		return round((MV / OP_INC_LOSS), 2) if (MV != None and OP_INC_LOSS != None and  OP_INC_LOSS != 0) else None
-	def cashPriceRatio(MV, CASH_EQ):
-		return round((MV / CASH_EQ), 2) if (MV != None and CASH_EQ != None and CASH_EQ != 0) else None
-	def intrinsicValueNI(VALUE, NI_3YEAR_AVG, DISC_RATE, i):
-		if not ((VALUE != None and NI_3YEAR_AVG != None and DISC_RATE != None and i != None and ((1 + DISC_RATE) ** i)) != 0):
+	def priceToSalesPerShare(PRICE, REV, DIL_WEIGHT_AVG_SHARES):
+		return round(((REV / DIL_WEIGHT_AVG_SHARES) / PRICE ) * 100, 2) if (PRICE != None and REV != None and DIL_WEIGHT_AVG_SHARES != None and PRICE != 0 and DIL_WEIGHT_AVG_SHARES != 0) else None
+	def priceToBookPerShare(PRICE, BV, DIL_WEIGHT_AVG_SHARES):
+		return round(((BV / DIL_WEIGHT_AVG_SHARES) / PRICE ) * 100, 2) if (PRICE != None and BV != None and DIL_WEIGHT_AVG_SHARES != None and PRICE != 0 and DIL_WEIGHT_AVG_SHARES != 0) else None
+	def priceToNAVPerShare(PRICE, NAV):
+		return round((NAV / PRICE ) * 100, 2) if (PRICE != None and NAV != None and PRICE != 0) else None	
+	def pricetoLeveredFreeCashFlowPerShare(PRICE, LEV_FCF, DIL_WEIGHT_AVG_SHARES):
+		return round(((LEV_FCF / DIL_WEIGHT_AVG_SHARES) / PRICE ) * 100, 2) if (PRICE != None and LEV_FCF != None and DIL_WEIGHT_AVG_SHARES != None and PRICE != 0 and DIL_WEIGHT_AVG_SHARES != 0) else None	
+	def priceToUnLeveredFreeCashFlowPerShare(PRICE, UN_LEV_FCF, DIL_WEIGHT_AVG_SHARES):
+		return round(((UN_LEV_FCF / DIL_WEIGHT_AVG_SHARES) / PRICE) * 100, 2) if (PRICE != None and UN_LEV_FCF != None and DIL_WEIGHT_AVG_SHARES != None and PRICE != 0 and DIL_WEIGHT_AVG_SHARES != 0) else None
+	def ocfToMv(OP_INC_LOSS, MV):
+		return round((OP_INC_LOSS / MV) * 100, 2) if (OP_INC_LOSS != None and MV != None and  MV != 0) else None
+	def cashPriceRatio(CASH_EQ, MV):
+		return round((CASH_EQ / MV) * 100, 2) if (CASH_EQ != None and MV != None and MV != 0) else None
+	def intrinsicValueNI(VALUE, AVG_NI_3YEAR, DISC_RATE, i):
+		if not ((VALUE != None and AVG_NI_3YEAR != None and DISC_RATE != None and i != None and ((1 + DISC_RATE) ** i)) != 0):
 			return None 
-		#print(str((i-1)) + ": " + str(VALUE))
-		VALUE = (VALUE + (NI_3YEAR_AVG / ((1 + DISC_RATE) ** i)) )
-		return round(VALUE, 2) if (NI_3YEAR_AVG / ((1 + DISC_RATE) ** i) < 1) else Valuations.intrinsicValueNI(VALUE, NI_3YEAR_AVG, DISC_RATE, i+1)
+		VALUE = (VALUE + (AVG_NI_3YEAR / ((1 + DISC_RATE) ** i)) )
+		return round(VALUE, 2) if (AVG_NI_3YEAR / ((1 + DISC_RATE) ** i) < 1) else Valuations.intrinsicValueNI(VALUE, AVG_NI_3YEAR, DISC_RATE, i+1)
 	def intrinsicValueEBIT(VALUE, EBIT_3YEAR_AVG, DISC_RATE, i):
 		if not ((VALUE != None and EBIT_3YEAR_AVG != None and DISC_RATE != None and i != None and ((1 + DISC_RATE) ** i)) != 0):
 			return None 
-		#print(str((i-1)) + ": " + str(VALUE))
 		VALUE = (VALUE + (EBIT_3YEAR_AVG / ((1 + DISC_RATE) ** i)) )
 		return round(VALUE, 2) if (EBIT_3YEAR_AVG / ((1 + DISC_RATE) ** i) < 1) else Valuations.intrinsicValueEBIT(VALUE, EBIT_3YEAR_AVG, DISC_RATE, i+1)
 	def intrinsicValueFCF(VALUE, FCF_3YEAR_AVG, DISC_RATE, i):
 		if not ((VALUE != None and FCF_3YEAR_AVG != None and DISC_RATE != None and i != None and ((1 + DISC_RATE) ** i)) != 0):
 			return None 
-		#print(str((i-1)) + ": " + str(VALUE))
 		VALUE = (VALUE + (FCF_3YEAR_AVG / ((1 + DISC_RATE) ** i)) )
 		return round(VALUE, 2) if (FCF_3YEAR_AVG / ((1 + DISC_RATE) ** i) < 1) else Valuations.intrinsicValueFCF(VALUE, FCF_3YEAR_AVG, DISC_RATE, i+1)
 	def marginOfSafety_NI(IVALUE_NI, MV):
@@ -767,13 +766,13 @@ class  Valuations:
 
 
 class  Dividends:
-	def retentionRatio(RE, NI_INC):
-			return round((RE / NI_INC) * 100, 2) if (RE != None and NI_INC != None and NI_INC != 0) else None
+	def retentionRatio(NI_INC, RE):
+			return round((NI_INC / RE) * 100, 2) if (NI_INC != None and RE != None and RE != 0) else None
 	def dividendPayoutRatio(DIVS_PAID, NI_INC):
-			return round((DIVS_PAID / NI_INC) * 100, 2) if (DIVS_PAID != None and NI_INC != None and NI_INC != 0) else None
+			return round((abs(DIVS_PAID) / NI_INC) * 100, 2) if (DIVS_PAID != None and NI_INC != None and NI_INC != 0) else None
 	def earningsYieldRatio(NI_INC, MV):
 			return round((NI_INC / MV) * 100, 2) if (NI_INC != None and MV != None and MV != 0) else None
 	def dividendYieldRatio(DIVS_PAID, MV):
-			return round((DIVS_PAID / MV) * 100, 2) if (DIVS_PAID != None and MV != None and MV != 0) else None
-	def sustainableGrowthRate(ROE, DIV_PAYOUT_RATIO):
-			return round((ROE * (100 - DIV_PAYOUT_RATIO) ), 2) if (ROE != None and DIV_PAYOUT_RATIO != None) else None
+			return round((abs(DIVS_PAID) / MV) * 100, 2) if (DIVS_PAID != None and MV != None and MV != 0) else None
+	def sustainableGrowthRate(ROE, RETENTION_RATIO):
+			return round((ROE * RETENTION_RATIO ) / 100, 2) if (ROE != None and RETENTION_RATIO != None) else None

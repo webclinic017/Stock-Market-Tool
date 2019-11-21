@@ -634,6 +634,7 @@ def instantiateSectors():
 	neg =  - (sys.maxsize -1)
 	sectorData = {}
 	sectorData['SECTOR']							= None
+	sectorData['LENGTH']							= None
 	sectorData['YEAR_INC'] 							= [Calcs.Names.YEAR_INC,[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg]] 
 	sectorData['YEAR_BAL']							= [Calcs.Names.YEAR_BAL,[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg]] 
 	sectorData['YEAR_CF']							= [Calcs.Names.YEAR_CF,[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg]] 
