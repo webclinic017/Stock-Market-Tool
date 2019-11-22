@@ -66,14 +66,11 @@ def genRatings(dataFile, dataCalcFile, industry):
 		ratings['QUICK_RATIO'][i] = onetoOneAndHalf(dataCalc['QUICK_RATIO'][i])
 		ratings['QUICK_RATIO_2'][i] = onetoOneAndHalf(dataCalc['QUICK_RATIO_2'][i])
 		ratings['CURRENT_RATIO'][i] = onetoOneAndHalf(dataCalc['CURRENT_RATIO'][i])
-		#ratings['NWC_TO_TA'][i] = unknown() #Compare against sector
+		ratings['NWC_TO_TA'][i] = sectorRankUp(dataCalc['NWC_TO_TA'][i], industry['NWC_TO_TA'][i])
 		ratings['DEBT_SERVICE_RATIO'][i] = onetoOneAndHalf(dataCalc['DEBT_SERVICE_RATIO'][i])
 		ratings['NET_DEBT'][i] = unknown() #Compare against sector on per share basis
 		ratings['DEBT_RATIO'][i] = rateDebtRisk(dataCalc['DEBT_RATIO'][i]) #Note: equation is same math as EQUITY_MULTIPLIER_RATIO_2
-		#Determine an appropriate industry average of debt to base relative debt load against
 		ratings['DEBT_EQ_RATIO'][i] = sectorRankDown(dataCalc['DEBT_EQ_RATIO'][i], industry['DEBT_EQ_RATIO'][i])
-		#ratings['ST_DEBT_EQ_RATIO'][i] = stLtDebtRisk(dataCalc['DEBT_EQ_RATIO'][i], data['ST_DEBT_RATIO'][i], industry['DEBT_EQ_RATIO'][i], industry['ST_DEBT_RATIO_25'][i], industry['ST_DEBT_RATIO_75'][i])
-		#ratings['LT_DEBT_EQ_RATIO'][i] = stLtDebtRisk(dataCalc['DEBT_EQ_RATIO'][i], data['LT_DEBT_RATIO'][i], industry['DEBT_EQ_RATIO'][i], industry['LT_DEBT_RATIO_25'][i], industry['LT_DEBT_RATIO_75'][i])
 		ratings['DEBT_TO_EBIT'][i] = rateDebtEbitRatio(dataCalc['DEBT_TO_EBIT'][i])
 		ratings['FIXED_CHARGE_COVERAGE'][i] = rateFCCR(dataCalc['FIXED_CHARGE_COVERAGE'][i])
 		ratings['DEGREE_COMBINED_LEV'][i] = rateDegreeOfLeverage(dataCalc['DEGREE_COMBINED_LEV'][i], data['REV'][i], data['REV'][i+1], industry['DEGREE_COMBINED_LEV'][i])
@@ -82,12 +79,12 @@ def genRatings(dataFile, dataCalcFile, industry):
 		ratings['DFL_RATIO'][i] = rateDegreeOfLeverage(dataCalc['DFL_RATIO'][i], data['REV'][i], data['REV'][i+1], industry['DFL_RATIO'][i])
 		ratings['FINANCIAL_LEVERAGE'][i] = rateFL(dataCalc['FINANCIAL_LEVERAGE'][i])
 		ratings['EQUITY_RATIO'][i] = sectorRankUp(dataCalc['EQUITY_RATIO'][i], industry['EQUITY_RATIO'][i])
-		#ratings['EQUITY_MULTIPLIER_RATIO_1'][i] = rateEqMult1(dataCalc['EQUITY_MULTIPLIER_RATIO_1'][i], industry['EQUITY_MULTIPLIER_RATIO_1_25'][i], industry['EQUITY_MULTIPLIER_RATIO_1_75'][i])
+		ratings['EQUITY_MULTIPLIER_RATIO_1'][i] = sectorRankMidLower(dataCalc['EQUITY_MULTIPLIER_RATIO_1'][i], industry['EQUITY_MULTIPLIER_RATIO_1'][i])
 		ratings['EQUITY_MULTIPLIER_RATIO_2'][i] = rateDebtRisk(dataCalc['DEBT_RATIO'][i]) #Note: equation is same math as DEBT_RATIO
 		ratings['NAV'][i] = unknown() #Compare against sector
 		ratings['EFFECTIVE_INT_RATE'][i] = rateCostOfDebt(dataCalc['EFFECTIVE_INT_RATE'][i], dataCalc['ROCE_EBIT'][i])
 		ratings['DEBT_COST_CAP'][i] = rateCostOfDebt(dataCalc['DEBT_COST_CAP'][i], dataCalc['ROCE_NI'][i])
-		ratings['WACC'][i] = sectorRankDown(dataCalc['WACC'][i], industry['WACC'][i])
+		ratings['WACC'][i] = sectorRankDown(dataCalc['WACC'][i], industry['WACC'][i]) #Important
 		ratings['SALES_TURNOVER'][i] = sectorRankUp(dataCalc['SALES_TURNOVER'][i], industry['SALES_TURNOVER'][i])
 		ratings['DSO'][i] = sectorRankDown(dataCalc['DSO'][i], industry['DSO'][i])
 		ratings['ASSET_TURNOVER'][i] = sectorRankUp(dataCalc['ASSET_TURNOVER'][i], industry['ASSET_TURNOVER'][i])
@@ -105,15 +102,10 @@ def genRatings(dataFile, dataCalcFile, industry):
 		ratings['ROI_INVESTMENTS'][i] =  sectorRankUp(dataCalc['ROI_INVESTMENTS'][i], industry['ROI_INVESTMENTS'][i])
 		ratings['CREDITORS_TURNOVER'][i] =  sectorRankUp(dataCalc['CREDITORS_TURNOVER'][i], industry['CREDITORS_TURNOVER'][i])
 		ratings['CDO'][i] = sectorRankDown(dataCalc['CDO'][i], industry['CDO'][i])
-		
-		#if(i < 30):
-		#	print(dataCalc['symbol'], i, industry['PAYABLES_TURNOVER_COGS'][i], industry['PAYABLES_TURNOVER_COGS'][i+1])
-		#	print(dataCalc['symbol'], i, industry['PAYABLES_TURNOVER_COS'][i], industry['PAYABLES_TURNOVER_COS'][i+1])
-		#	ratings['PAYABLES_TURNOVER_COGS'][i] = sectorRankRateOfChangeDown(dataCalc['PAYABLES_TURNOVER_COGS'][i], dataCalc['PAYABLES_TURNOVER_COGS'][i+1], industry['PAYABLES_TURNOVER_COGS'][i], industry['PAYABLES_TURNOVER_COGS'][i+1])    
-			#ratings['PAYABLES_TURNOVER_COS'][i] = sectorRankRateOfChangeDown(dataCalc['PAYABLES_TURNOVER_COS'][i], dataCalc['PAYABLES_TURNOVER_COS'][i+1], industry['PAYABLES_TURNOVER_COS'][i], industry['PAYABLES_TURNOVER_COS'][i+1])
+		ratings['PAYABLES_TURNOVER_COGS'][i] = sectorRankDown(dataCalc['PAYABLES_TURNOVER_COGS'][i], industry['PAYABLES_TURNOVER_COGS'][i]) #Improve with rate of change 
+		ratings['PAYABLES_TURNOVER_COS'][i] = sectorRankDown(dataCalc['PAYABLES_TURNOVER_COS'][i], industry['PAYABLES_TURNOVER_COS'][i]) #Improve with rate of change 
 		ratings['DPO_COGS'][i] = sectorRankMidLower(dataCalc['DPO_COGS'][i], industry['DPO_COGS'][i]) 
 		ratings['DPO_COS'][i] = sectorRankMidLower(dataCalc['DPO_COS'][i], industry['DPO_COS'][i]) 
-		
 		ratings['LIAB_TURNOVER'][i] = sectorRankUp(dataCalc['LIAB_TURNOVER'][i], industry['LIAB_TURNOVER'][i])
 		ratings['LIAB_TURN_RATE'][i] = sectorRankDown(dataCalc['LIAB_TURN_RATE'][i], industry['LIAB_TURN_RATE'][i])
 		ratings['CHG_DEBT_REPAYMENT_REQ'][i] = sectorRankDown(dataCalc['CHG_DEBT_REPAYMENT_REQ'][i], industry['CHG_DEBT_REPAYMENT_REQ'][i])
@@ -132,37 +124,36 @@ def genRatings(dataFile, dataCalcFile, industry):
 		ratings['PE_REL_5'][i] = sectorRankDown(dataCalc['PE_REL_5'][i], industry['PE_REL_5'][i]) 
 		ratings['EARNINGS_POWER'][i] = sectorRankUp(dataCalc['EARNINGS_POWER'][i], industry['EARNINGS_POWER'][i]) #!Important
 		ratings['GROSS_MARGIN'][i] = sectorRankUp(dataCalc['GROSS_MARGIN'][i], industry['GROSS_MARGIN'][i])
-		#ratings['NOPAT_NI'][i] = dataCalc['NOPAT_NI'][i]
-		#ratings['NOPAT_EBIT'][i] = dataCalc['NOPAT_EBIT'][i]
+		ratings['NOPAT_NI'][i] = sectorRankUp(dataCalc['NOPAT_NI'][i], industry['NOPAT_NI'][i])
+		ratings['NOPAT_EBIT'][i] = sectorRankUp(dataCalc['NOPAT_EBIT'][i], industry['NOPAT_EBIT'][i])
 		ratings['ROIC'][i] = sectorRankUp(dataCalc['ROIC'][i], industry['ROIC'][i])
 		ratings['OPERATING_RATIO'][i] = sectorRankDown(dataCalc['OPERATING_RATIO'][i], industry['OPERATING_RATIO'][i])
 		ratings['OP_PROFIT_MARGIN'][i] = sectorRankUp(dataCalc['OP_PROFIT_MARGIN'][i], industry['OP_PROFIT_MARGIN'][i])
-		ratings['MV'][i] = unknown() #Relative to Intrinsic Value
+		ratings['MV'][i] = unknown() 
 		ratings['MV_EBIT_RATIO'][i] = sectorRankUp(dataCalc['MV_EBIT_RATIO'][i], industry['MV_EBIT_RATIO'][i])
-		#ratings['ORIG_GRAHAM'][i] = dataCalc['ORIG_GRAHAM'][i]
-		#ratings['REVISED_GRAHAM'][i] = dataCalc['REVISED_GRAHAM'][i]
+		ratings['ORIG_GRAHAM'][i] =  unknown() 
+		ratings['REVISED_GRAHAM'][i] =  unknown() 
 		ratings['EV'][i] = unknown()
-		#ratings['EV_EBIT'][i] = dataCalc['EV_EBIT'][i] 
-		#ratings['EV_NI'][i] = dataCalc['EV_NI'][i]
+		ratings['EV_EBIT'][i] = sectorRankUp(dataCalc['EV_EBIT'][i], industry['EV_EBIT'][i])
+		ratings['EV_NI'][i] = sectorRankUp(dataCalc['EV_NI'][i], industry['EV_NI'][i])
 		ratings['BV'][i] = unknown()
 		ratings['BV_PER_SHARE'][i] =  sectorRankUp(dataCalc['BV_PER_SHARE'][i], industry['BV_PER_SHARE'][i])
-		#ratings['BV_NI'][i] = dataCalc['BV_NI'][i]
-		#ratings['BV_EBIT'][i] = dataCalc['BV_EBIT'][i]
+		ratings['BV_NI'][i] = sectorRankUp(dataCalc['BV_NI'][i], industry['BV_NI'][i])
+		ratings['BV_EBIT'][i] = sectorRankUp(dataCalc['BV_EBIT'][i], industry['BV_EBIT'][i])
 		ratings['PRICE_SALES'][i] = sectorRankUp(dataCalc['PRICE_SALES'][i], industry['PRICE_SALES'][i])
 		ratings['PRICE_BOOK'][i] = sectorRankUp(dataCalc['PRICE_BOOK'][i], industry['PRICE_BOOK'][i])
 		ratings['PRICE_NAV'][i] = sectorRankUp(dataCalc['PRICE_NAV'][i], industry['PRICE_NAV'][i])
 		ratings['PRICE_FCF'][i] = sectorRankUp(dataCalc['PRICE_FCF'][i], industry['PRICE_FCF'][i])
-		#ratings['PRICE_UN_FCF'][i] = dataCalc['PRICE_UN_FCF'][i]
+		ratings['PRICE_UN_FCF'][i] = sectorRankUp(dataCalc['PRICE_UN_FCF'][i], industry['PRICE_UN_FCF'][i])
 		ratings['MV_OCF'][i] = sectorRankUp(dataCalc['MV_OCF'][i], industry['MV_OCF'][i])
 		ratings['CASH_PRICE_RATIO'][i] = sectorRankUp(dataCalc['CASH_PRICE_RATIO'][i], industry['CASH_PRICE_RATIO'][i])
-		#ratings['INTRINSIC_VALUE_NI'][i] = dataCalc['INTRINSIC_VALUE_NI'][i]
-		#ratings['INTRINSIC_VALUE_EBIT'][i] = dataCalc['INTRINSIC_VALUE_EBIT'][i]
-		#ratings['INTRINSIC_VALUE_FCF'][i] = dataCalc['INTRINSIC_VALUE_FCF'][i] 
-		#ratings['MARGIN_OF_SAFETY_NI'][i] = dataCalc['MARGIN_OF_SAFETY_NI'][i] 
-		#ratings['MARGIN_OF_SAFETY_EBIT'][i] = dataCalc['MARGIN_OF_SAFETY_EBIT'][i]
-		#ratings['MARGIN_OF_SAFETY_FCF'][i] = dataCalc['MARGIN_OF_SAFETY_FCF'][i] 
-		#ratings['DUPONT_SYSTEM_1'][i] = dataCalc['DUPONT_SYSTEM_1'][i] 
-		#ratings['DUPONT_SYSTEM_2'][i] = dataCalc['DUPONT_SYSTEM_2'][i] 
+		ratings['INTRINSIC_VALUE_NI'][i] = unknown()
+		ratings['INTRINSIC_VALUE_EBIT'][i] = unknown()
+		ratings['INTRINSIC_VALUE_FCF'][i] = unknown()
+		ratings['MARGIN_OF_SAFETY_NI'][i] = rateMarginOfSafety(dataCalc['MARGIN_OF_SAFETY_NI'][i], industry['MARGIN_OF_SAFETY_NI'][i])
+		ratings['MARGIN_OF_SAFETY_EBIT'][i] = sectorRankUp(dataCalc['MARGIN_OF_SAFETY_EBIT'][i], industry['MARGIN_OF_SAFETY_EBIT'][i])
+		ratings['MARGIN_OF_SAFETY_FCF'][i] = sectorRankUp(dataCalc['MARGIN_OF_SAFETY_FCF'][i], industry['MARGIN_OF_SAFETY_FCF'][i])
+		ratings['DUPONT_SYSTEM_1'][i] = sectorRankUp(dataCalc['DUPONT_SYSTEM_1'][i], industry['DUPONT_SYSTEM_1'][i])
 		ratings['RETENTION_RATIO'][i] = sectorRankUp(dataCalc['RETENTION_RATIO'][i], industry['RETENTION_RATIO'][i])
 		ratings['DIV_PAYOUT_RATIO'][i] = sectorRankUp(dataCalc['DIV_PAYOUT_RATIO'][i], industry['DIV_PAYOUT_RATIO'][i])
 		ratings['EARNINGS_YIELD'][i] = sectorRankUp(dataCalc['EARNINGS_YIELD'][i], industry['EARNINGS_YIELD'][i])
@@ -322,6 +313,31 @@ def sectorRankDown(ratioVal, industryVals):
 #	else:
 #		return Enums.Rating.QUESTIONABLE.value
 
+def rateMarginOfSafety(ratioVal, industryVals):
+	if(ratioVal == None):
+		return None
+
+	if(ratioVal < 0):
+		return Enums.Rating.AT_RISK.value
+
+	vals = [neg]
+	vals = []
+
+	for item in industryVals:
+		if(item != None):
+			vals.append(item)
+
+	lowerThird = np.percentile(vals, oneThird)
+	upperThird = np.percentile(vals, twoThirds) 
+
+	if(upperThird < ratioVal):
+		return Enums.Rating.HEALTHY.value
+	elif(ratioVal < lowerThird):
+		return Enums.Rating.AT_RISK.value
+	else:
+		return Enums.Rating.QUESTIONABLE.value
+
+
 def rateCCC(value, industryVals):
 	if(value == None):
 		return None
@@ -347,17 +363,6 @@ def rateDebtRisk(ratioVal):
 	if(0.80 < ratioVal):
 		return Enums.Rating.AT_RISK.value
 	elif(ratioVal < 0.49):
-		return Enums.Rating.HEALTHY.value
-	else:
-		return Enums.Rating.QUESTIONABLE.value
-
-def stLtDebtRisk(debtRatioVal, stLtDebtRatio, idebtRatioVal, idebtRatio25, idebtRatio75):
-	if(debtRatioVal == None or stLtDebtRatio == None or idebtRatioVal == None or idebtRatio25 == None or idebtRatio75 == None):
-		return None
-
-	if( (idebtRatio75 / idebtRatioVal) < (stLtDebtRatio / debtRatioVal) ):
-		return Enums.Rating.AT_RISK.value
-	elif((stLtDebtRatio / debtRatioVal) < (idebtRatio25 / idebtRatioVal)):
 		return Enums.Rating.HEALTHY.value
 	else:
 		return Enums.Rating.QUESTIONABLE.value
@@ -441,34 +446,3 @@ def rateCostOfDebt(ratioVal, ROIC):
 	else:
 		return Enums.Rating.QUESTIONABLE.value
 
-	
-
-
-
-
-#def (ratioVal):
-#	if(ratioVal == None):
-#		return None
-
-#	if( < ratioVal):
-#		return Enums.Rating.AT_RISK
-#	elif(ratioVal < ):
-#		return Enums.Rating.HEALTHY
-#	else:
-#		return Enums.Rating.QUESTIONABLE
-
-
-
-
-#-----------------------------------------------
-
-#def (ratioVal):
-#	if(ratioVal == None):
-#		return None
-
-#	if( < ratioVal):
-#		return Enums.Rating.AT_RISK
-#	elif(ratioVal < ):
-#		return Enums.Rating.HEALTHY
-#	else:
-#		return Enums.Rating.QUESTIONABLE

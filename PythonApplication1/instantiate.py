@@ -319,7 +319,6 @@ def instantiateDataCalc():
 	dataCalc['MARGIN_OF_SAFETY_EBIT']			= [0] * 35
 	dataCalc['MARGIN_OF_SAFETY_FCF']			= [0] * 35
 	dataCalc['DUPONT_SYSTEM_1']					= [0] * 35
-	dataCalc['DUPONT_SYSTEM_2']					= [0] * 35
 	dataCalc['RETENTION_RATIO']					= [0] * 35
 	dataCalc['DIV_PAYOUT_RATIO']				= [0] * 35
 	dataCalc['EARNINGS_YIELD']					= [0] * 35
@@ -470,7 +469,6 @@ def instantiateDataCalc():
 	dataCalc['MARGIN_OF_SAFETY_EBIT']			= [None] * 35
 	dataCalc['MARGIN_OF_SAFETY_FCF']			= [None] * 35
 	dataCalc['DUPONT_SYSTEM_1']					= [None] * 35
-	dataCalc['DUPONT_SYSTEM_2']					= [None] * 35
 	dataCalc['RETENTION_RATIO']					= [None] * 35
 	dataCalc['DIV_PAYOUT_RATIO']				= [None] * 35
 	dataCalc['EARNINGS_YIELD']					= [None] * 35
@@ -620,7 +618,6 @@ def instantiateDataCalc():
 	dataCalc['MARGIN_OF_SAFETY_EBIT'][0]		= Calcs.Names.MARGIN_OF_SAFETY_EBIT
 	dataCalc['MARGIN_OF_SAFETY_FCF'][0]			= Calcs.Names.MARGIN_OF_SAFETY_FCF
 	dataCalc['DUPONT_SYSTEM_1'][0]				= Calcs.Names.DUPONT_SYSTEM_1
-	dataCalc['DUPONT_SYSTEM_2'][0]				= Calcs.Names.DUPONT_SYSTEM_2
 	dataCalc['RETENTION_RATIO'][0]				= Calcs.Names.RETENTION_RATIO
 	dataCalc['DIV_PAYOUT_RATIO'][0]				= Calcs.Names.DIV_PAYOUT_RATIO
 	dataCalc['EARNINGS_YIELD'][0]				= Calcs.Names.EARNINGS_YIELD
@@ -779,7 +776,6 @@ def instantiateSectors():
 	sectorData['MARGIN_OF_SAFETY_EBIT']				= [Calcs.Names.MARGIN_OF_SAFETY_EBIT,[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg]] 
 	sectorData['MARGIN_OF_SAFETY_FCF']				= [Calcs.Names.MARGIN_OF_SAFETY_FCF,[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg]] 
 	sectorData['DUPONT_SYSTEM_1']					= [Calcs.Names.DUPONT_SYSTEM_1,[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg]] 
-	sectorData['DUPONT_SYSTEM_2']					= [Calcs.Names.DUPONT_SYSTEM_2,[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg]] 
 	sectorData['RETENTION_RATIO']					= [Calcs.Names.RETENTION_RATIO,[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg]] 
 	sectorData['DIV_PAYOUT_RATIO']					= [Calcs.Names.DIV_PAYOUT_RATIO,[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg]] 
 	sectorData['EARNINGS_YIELD']					= [Calcs.Names.EARNINGS_YIELD,[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg],[neg]] 
@@ -931,7 +927,6 @@ def instantiateSectors():
 	sectorData['MARGIN_OF_SAFETY_EBIT']				= [Calcs.Names.MARGIN_OF_SAFETY_EBIT,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]] 
 	sectorData['MARGIN_OF_SAFETY_FCF']				= [Calcs.Names.MARGIN_OF_SAFETY_FCF,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]] 
 	sectorData['DUPONT_SYSTEM_1']					= [Calcs.Names.DUPONT_SYSTEM_1,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]] 
-	sectorData['DUPONT_SYSTEM_2']					= [Calcs.Names.DUPONT_SYSTEM_2,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]] 
 	sectorData['RETENTION_RATIO']					= [Calcs.Names.RETENTION_RATIO,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]] 
 	sectorData['DIV_PAYOUT_RATIO']					= [Calcs.Names.DIV_PAYOUT_RATIO,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]] 
 	sectorData['EARNINGS_YIELD']					= [Calcs.Names.EARNINGS_YIELD,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]] 

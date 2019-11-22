@@ -236,7 +236,6 @@ def makeSectorData(sectorList, dataList, dataCalcList):
 					sectorData['MARGIN_OF_SAFETY_EBIT'][year].append(dataCalc['MARGIN_OF_SAFETY_EBIT'][year])		
 					sectorData['MARGIN_OF_SAFETY_FCF'][year].append(dataCalc['MARGIN_OF_SAFETY_FCF'][year])			
 					sectorData['DUPONT_SYSTEM_1'][year].append(dataCalc['DUPONT_SYSTEM_1'][year])				
-					sectorData['DUPONT_SYSTEM_2'][year].append(dataCalc['DUPONT_SYSTEM_2'][year])				
 					sectorData['RETENTION_RATIO'][year].append(dataCalc['RETENTION_RATIO'][year])				
 					sectorData['DIV_PAYOUT_RATIO'][year].append(dataCalc['DIV_PAYOUT_RATIO'][year])				
 					sectorData['EARNINGS_YIELD'][year].append(dataCalc['EARNINGS_YIELD'][year])				
