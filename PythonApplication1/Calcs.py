@@ -443,8 +443,8 @@ class  CapStructure:
 	def debtCostCapital(EFFECTIVE_INT_RATE, MARGINAL_TAX_RATE):
 		return round((EFFECTIVE_INT_RATE * (1 - MARGINAL_TAX_RATE) ) , 2) if (EFFECTIVE_INT_RATE != None and MARGINAL_TAX_RATE != None) else None	
 	def wacc(TOTAL_EQUITY, TOTAL_DEBT, FAIR_RETURN_RATE, EFFECTIVE_INT_RATE, MARGINAL_TAX_RATE ):
-		return round(((TOTAL_EQUITY / (TOTAL_DEBT + TOTAL_EQUITY) * FAIR_RETURN_RATE) + (TOTAL_DEBT / (TOTAL_DEBT + TOTAL_EQUITY) * EFFECTIVE_INT_RATE * (1 - MARGINAL_TAX_RATE))) * 100, 2) if(TOTAL_EQUITY != None and TOTAL_DEBT != None and FAIR_RETURN_RATE != None and EFFECTIVE_INT_RATE != None and MARGINAL_TAX_RATE != None and (TOTAL_DEBT + TOTAL_EQUITY) != 0 ) else None
-						#"E / (E + D) * Cost of Equity + D / (E + D) * Cost of Debt *(1 - Tax Rate)"
+		return round(((TOTAL_EQUITY / (TOTAL_DEBT + TOTAL_EQUITY) * FAIR_RETURN_RATE) + (TOTAL_DEBT / (TOTAL_DEBT + TOTAL_EQUITY) * EFFECTIVE_INT_RATE * (1 - MARGINAL_TAX_RATE))) * 100, 2) if(TOTAL_EQUITY != None and 1 < TOTAL_EQUITY and TOTAL_DEBT != None and FAIR_RETURN_RATE != None and EFFECTIVE_INT_RATE != None and MARGINAL_TAX_RATE != None and 0 < FAIR_RETURN_RATE and  0 < EFFECTIVE_INT_RATE and  0 < MARGINAL_TAX_RATE and (TOTAL_DEBT + TOTAL_EQUITY) != 0 ) else None
+
 class  Asset_Activity:
 	def salesTurnover(REV, ACCTS_REC):
 		return round((REV / ACCTS_REC), 2) if (REV != None and ACCTS_REC != None and ACCTS_REC != 0) else None
@@ -584,21 +584,23 @@ class  Valuations:
 	def cashPriceRatio(CASH_EQ, MV):
 		return round((CASH_EQ / MV) * 100, 2) if (CASH_EQ != None and MV != None and MV != 0) else None
 	def intrinsicValueNI(VALUE, AVG_NI_3YEAR, DISC_RATE, i):
-		if (VALUE == None or AVG_NI_3YEAR == None or DISC_RATE == None or i == None or ((1 + DISC_RATE) ** i) == 0):
+		if (VALUE == None or AVG_NI_3YEAR == None or AVG_NI_3YEAR < 1 or DISC_RATE == None or i == None or ((1 + DISC_RATE) ** i) == 0):
 			return None 
-
 		VALUE = (VALUE + (AVG_NI_3YEAR / ((1 + DISC_RATE) ** i)) )
-		return round(VALUE, 2) if (AVG_NI_3YEAR / ((1 + DISC_RATE) ** i) < .001 or VALUE < 0) else Valuations.intrinsicValueNI(VALUE, AVG_NI_3YEAR, DISC_RATE, i+1)
+		print(VALUE, AVG_NI_3YEAR, DISC_RATE, i)
+		return round(VALUE, 2) if (AVG_NI_3YEAR / ((1 + DISC_RATE) ** i) < 1) else Valuations.intrinsicValueNI(VALUE, AVG_NI_3YEAR, DISC_RATE, i+1)
 	def intrinsicValueEBIT(VALUE, EBIT_3YEAR_AVG, DISC_RATE, i):
-		if (VALUE == None or EBIT_3YEAR_AVG == None or DISC_RATE == None or i == None or ((1 + DISC_RATE) ** i) == 0):
+		if (VALUE == None or EBIT_3YEAR_AVG == None or EBIT_3YEAR_AVG < 1 or DISC_RATE == None or i == None or ((1 + DISC_RATE) ** i) == 0):
 			return None 
 		VALUE = (VALUE + (EBIT_3YEAR_AVG / ((1 + DISC_RATE) ** i)) )
-		return round(VALUE, 2) if (EBIT_3YEAR_AVG / ((1 + DISC_RATE) ** i) < .001 or VALUE < 0) else Valuations.intrinsicValueEBIT(VALUE, EBIT_3YEAR_AVG, DISC_RATE, i+1)
+		print(VALUE, EBIT_3YEAR_AVG, DISC_RATE, i)
+		return round(VALUE, 2) if (EBIT_3YEAR_AVG / ((1 + DISC_RATE) ** i) < 1) else Valuations.intrinsicValueEBIT(VALUE, EBIT_3YEAR_AVG, DISC_RATE, i+1)
 	def intrinsicValueFCF(VALUE, FCF_3YEAR_AVG, DISC_RATE, i):
-		if (VALUE == None or FCF_3YEAR_AVG == None or DISC_RATE == None or i == None or ((1 + DISC_RATE) ** i) == 0):
+		if (VALUE == None or FCF_3YEAR_AVG == None or FCF_3YEAR_AVG < 1  or DISC_RATE == None or i == None or ((1 + DISC_RATE) ** i) == 0):
 			return None 
 		VALUE = (VALUE + (FCF_3YEAR_AVG / ((1 + DISC_RATE) ** i)) )
-		return round(VALUE, 2) if (FCF_3YEAR_AVG / ((1 + DISC_RATE) ** i) < .001 or VALUE < 0) else Valuations.intrinsicValueFCF(VALUE, FCF_3YEAR_AVG, DISC_RATE, i+1)
+		print(VALUE, FCF_3YEAR_AVG, DISC_RATE, i)
+		return round(VALUE, 2) if (FCF_3YEAR_AVG / ((1 + DISC_RATE) ** i) < 1) else Valuations.intrinsicValueFCF(VALUE, FCF_3YEAR_AVG, DISC_RATE, i+1)
 	def marginOfSafety_NI(IVALUE_NI, PRICE):
 		return round((1 - (IVALUE_NI / PRICE)) * 100, 2) if (IVALUE_NI != None and PRICE != None and PRICE != 0) else None
 	def marginOfSafety_EBIT(IVALUE_EBIT, PRICE):

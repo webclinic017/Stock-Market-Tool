@@ -18,7 +18,6 @@ def createLocaljsonObj(symbol):
 	j = 0
 
 	symXlsx = symbol + strXlsx
-	
 	inc = pd.DataFrame(pd.read_excel(symXlsx, sheet_name='Income - GAAP'))
 	bal = pd.DataFrame(pd.read_excel(symXlsx, sheet_name='Bal Sheet - Standardized'))
 	cf = pd.DataFrame(pd.read_excel(symXlsx, sheet_name='Cash Flow - Standardized'))

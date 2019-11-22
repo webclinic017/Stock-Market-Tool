@@ -31,25 +31,6 @@ def decorateFile(path, fileName):
 	newFile.close()  
 
 path = './'
-#class priceData:
-#	def getPrices(symbol, years):
-#		prices = []
-#		#Creates JSON objects for database:
-#		i = 1
-#		years = iter(years)
-#		next(years)
-#		for year in years:
-#			#print(int(year))
-#			try:
-#				price = yearly_price_service.YearlyPriceService.get_avg_price(symbol, year, '../machine-learning/data/alpha-vantage/json-data/')
-#				#print(price)
-#				prices.append(price)
-#			except:
-##				print('Ticker not found!')
-#				prices.append(-1)
-#			i += 1
-
-#		return prices
 neg =  - (sys.maxsize -1)
 
 def calculate(data):
@@ -72,7 +53,7 @@ def calculate(data):
 	while(i < 34):
 		#Stop if error:
 		if(dataCalc['YEAR_INC'][i] != dataCalc['YEAR_BAL'][i] and dataCalc['YEAR_CF'][i] != dataCalc['YEAR_BAL'][i]):
-			print("Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
+			print(data['symbol'], "Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
 			break
 
 		# Basic Functions
@@ -150,7 +131,7 @@ def calculate(data):
 	while(i < 34):
 		#Stop if error:
 		if(dataCalc['YEAR_INC'][i] != dataCalc['YEAR_BAL'][i] and dataCalc['YEAR_CF'][i] != dataCalc['YEAR_BAL'][i]):
-			print("Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
+			print(data['symbol'], "Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
 			break
 		#Write recursive average Functions
 		if(i < 30):
@@ -172,7 +153,7 @@ def calculate(data):
 	while(i < 34):
 		#Stop if error:
 		if(dataCalc['YEAR_INC'][i] != dataCalc['YEAR_BAL'][i] and dataCalc['YEAR_CF'][i] != dataCalc['YEAR_BAL'][i]):
-			print("Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
+			print(data['symbol'], "Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
 			break
 
 		# Basic Functions
@@ -206,6 +187,8 @@ def calculate(data):
 			dataCalc['DEBT_COST_CAP'][i] = Calcs.CapStructure.debtCostCapital(dataCalc['EFFECTIVE_INT_RATE'][i], (dataCalc['MARGINAL_TAX_RATE'][i] / 100))
 		if(dataCalc['FAIR_RETURN_RATE'][i] != None and dataCalc['EFFECTIVE_INT_RATE'][i] != None and dataCalc['MARGINAL_TAX_RATE'][i] != None):
 			dataCalc['WACC'][i] = Calcs.CapStructure.wacc(data['TOTAL_EQUITY'][i], dataCalc['TOTAL_DEBT'][i], (dataCalc['FAIR_RETURN_RATE'][i] / 100), (dataCalc['EFFECTIVE_INT_RATE'][i] / 100), (dataCalc['MARGINAL_TAX_RATE'][i] / 100))
+			if( dataCalc['WACC'][i] != None  and dataCalc['WACC'][i] < 0):
+				print(dataCalc['symbol'], dataCalc['WACC'][i])
 		# Asset Activity:
 		dataCalc['DSO'][i] = Calcs.Asset_Activity.daysSalesOutstanding(dataCalc['SALES_TURNOVER'][i])
 		dataCalc['ASSET_TURNOVER'][i] = Calcs.Asset_Activity.assetTurnover(data['REV'][i], dataCalc['AVG_ASSETS'][i])
