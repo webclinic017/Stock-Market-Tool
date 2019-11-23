@@ -30,7 +30,7 @@ router.post("/scorecard", (req, res, next) => {
     .then(reported => {
         if(!reported) {
             console.log("\n");
-            console.log(req.body);
+            console.log(req.query);
             return res.status(401).json({
                 message: "Reported security not found in database!"
             });
@@ -53,6 +53,54 @@ router.post("/scorecard", (req, res, next) => {
     });
 });
 
+router.post("/getIntrinsicValue", /*checkAuth,*/ (req, res, next) => { 
+    Reported.findOne({ symbol: req.body.ticker })
+    .then(reported => {
+        if(!reported) {
+            return res.status(401).json({
+                message: "Reported security not found in database!"
+            });
+        }
+        const cleanTicker = tickerDataService.getCleanTickerData(reported);
+        const corporateAAA = 3.04;
+        const corporateAAAOld = 4.4;
+        const PEValue = 20.037027;
+        const gCoefficient = -10.682356;
+        const bias = 26.22732;
+        var dilWeightAvgShares = cleanTicker["fiscalYears"][0]["incomeSheet"]["dilWeightAvgShares"];
+        var niAvailCommonGaap = cleanTicker["fiscalYears"][0]["incomeSheet"]["niAvailCommonGaap"];
+        var EPS = niAvailCommonGaap / dilWeightAvgShares;
+        var priorDilWeightAvgShares = cleanTicker["fiscalYears"][1]["incomeSheet"]["dilWeightAvgShares"];
+        var priorNiAvailCommonGaap = cleanTicker["fiscalYears"][1]["incomeSheet"]["niAvailCommonGaap"];
+        var priorEPS = priorNiAvailCommonGaap / priorDilWeightAvgShares;
+        var growthRate = (EPS - priorEPS)/priorEPS;
+        var intrinsicValue = ((EPS * (PEValue + gCoefficient * growthRate) * corporateAAAOld) / corporateAAA) + bias;
+        getCurrentPrice(req.body.ticker, function(){
+            var price = this;
+            var shouldRecommend = intrinsicValue / price > 1.5;
+            if(shouldRecommend) {
+                return res.status(200).json({
+                    recommend: true,
+                    currentPrice: price,
+                    intrinsicValue: intrinsicValue
+                });
+            }
+            else {
+                return res.status(200).json({
+                    recommend: false,
+                    currentPrice: price,
+                    intrinsicValue: intrinsicValue
+                });
+            }
+        });
+    })
+    .catch(err => {
+        return res.status(401).json({
+            message: "Reported security lookup failed!"
+        });
+    });
+});
+
 router.post("/getReportedTicker", /*checkAuth,*/ (req, res, next) => { // TODO: Put back auth once ML no longer needs to hit this.
     Reported.findOne({ symbol: req.body.ticker })
     .then(reported => {
@@ -61,7 +109,7 @@ router.post("/getReportedTicker", /*checkAuth,*/ (req, res, next) => { // TODO: 
                 message: "Reported security not found in database!"
             });
         }
-        //const reportedTicker = tickerDataService.getCleanTickerData(reported);
+        const reportedTicker = tickerDataService.getCleanTickerData(reported);
         res.status(200).json(reported);
     })
     .catch(err => {

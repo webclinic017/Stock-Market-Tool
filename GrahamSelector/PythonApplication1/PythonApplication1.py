@@ -6,6 +6,7 @@ import json
 import inspect
 import Calcs
 import sys
+import ast
 
 
 #Creates JSON objects for database:
@@ -14,13 +15,13 @@ import sys
 	#readXlsx.createLocaljsonObj(symbol)
 
 #Read JSON object
-data = sys.argv[1]
+#data = sys.argv[1]
 #with open('AAL.json') as json_file:
 	#data = json.load(json_file)
 #data = json.loads(sys.argv[1])
 #data = sys.argv[1]
 #print(type(data))
-print(data)
+#print(data)
 
 
 path = './'
@@ -73,6 +74,9 @@ def applyYear(row):
 
 def calculate():
 
+	#print(sys.argv[1])
+	#temp = json.loads(sys.argv[1])
+	data = ast.literal_eval(sys.argv[1])
 	dataCalc = {}
 	dataCalc['symbol'] = data['symbol']
 	dataCalc['YEAR_INC'] = data['YEAR_INC']
@@ -542,7 +546,7 @@ def calculate():
 		
 		i += 1
 		
-	#\print(dataCalc)
+	#print(dataCalc)
 	filename = dataCalc['symbol']
 	ToFile(path, filename, dataCalc)
 	decorateFile(path, filename + ".json" )
