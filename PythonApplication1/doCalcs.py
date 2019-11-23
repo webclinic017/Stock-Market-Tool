@@ -42,7 +42,6 @@ def calculate(data):
 	dataCalc['YEAR_BAL']						= data['YEAR_BAL']
 	dataCalc['YEAR_CF']							= data['YEAR_CF']
 	prices = test_price_service.getPrices(data['symbol'], dataCalc['YEAR_BAL'])
-	
 	i=1
 	dataCalc['PRICE'][0] = Calcs.Names.PRICE
 	while(i<34):
@@ -53,8 +52,9 @@ def calculate(data):
 	while(i < 34):
 		#Stop if error:
 		if(dataCalc['YEAR_INC'][i] != dataCalc['YEAR_BAL'][i] and dataCalc['YEAR_CF'][i] != dataCalc['YEAR_BAL'][i]):
-			print(data['symbol'], "Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
-			break
+			#print(data['symbol'], "Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
+			i += 1
+			continue
 
 		# Basic Functions
 		dataCalc['MARGINAL_TAX_RATE'][i] = Calcs.Basics.marginalTax()
@@ -131,8 +131,9 @@ def calculate(data):
 	while(i < 34):
 		#Stop if error:
 		if(dataCalc['YEAR_INC'][i] != dataCalc['YEAR_BAL'][i] and dataCalc['YEAR_CF'][i] != dataCalc['YEAR_BAL'][i]):
-			print(data['symbol'], "Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
-			break
+			#print(data['symbol'], "Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
+			i += 1
+			continue
 		#Write recursive average Functions
 		if(i < 30):
 			dataCalc['AVG_NI_3YEAR'][i] = round(Calcs.Basics.threeYearAvg(data['NI_INC'][i], data['NI_INC'][i+1], data['NI_INC'][i+2]), 2) if (Calcs.Basics.threeYearAvg(data['NI_INC'][i], data['NI_INC'][i+1], data['NI_INC'][i+2]) != None) else None
@@ -153,8 +154,9 @@ def calculate(data):
 	while(i < 34):
 		#Stop if error:
 		if(dataCalc['YEAR_INC'][i] != dataCalc['YEAR_BAL'][i] and dataCalc['YEAR_CF'][i] != dataCalc['YEAR_BAL'][i]):
-			print(data['symbol'], "Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
-			break
+			#print(data['symbol'], "Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
+			i += 1
+			continue
 
 		# Basic Functions
 		if(i < 30):
@@ -187,8 +189,6 @@ def calculate(data):
 			dataCalc['DEBT_COST_CAP'][i] = Calcs.CapStructure.debtCostCapital(dataCalc['EFFECTIVE_INT_RATE'][i], (dataCalc['MARGINAL_TAX_RATE'][i] / 100))
 		if(dataCalc['FAIR_RETURN_RATE'][i] != None and dataCalc['EFFECTIVE_INT_RATE'][i] != None and dataCalc['MARGINAL_TAX_RATE'][i] != None):
 			dataCalc['WACC'][i] = Calcs.CapStructure.wacc(data['TOTAL_EQUITY'][i], dataCalc['TOTAL_DEBT'][i], (dataCalc['FAIR_RETURN_RATE'][i] / 100), (dataCalc['EFFECTIVE_INT_RATE'][i] / 100), (dataCalc['MARGINAL_TAX_RATE'][i] / 100))
-			if( dataCalc['WACC'][i] != None  and dataCalc['WACC'][i] < 0):
-				print(dataCalc['symbol'], dataCalc['WACC'][i])
 		# Asset Activity:
 		dataCalc['DSO'][i] = Calcs.Asset_Activity.daysSalesOutstanding(dataCalc['SALES_TURNOVER'][i])
 		dataCalc['ASSET_TURNOVER'][i] = Calcs.Asset_Activity.assetTurnover(data['REV'][i], dataCalc['AVG_ASSETS'][i])

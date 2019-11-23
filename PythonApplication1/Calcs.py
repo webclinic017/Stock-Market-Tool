@@ -421,11 +421,11 @@ class  CapStructure:
 	def fixedChargeCoverage(EBIT, CHG_FIXED_INTANG, INT_EXP):
 		return round((EBIT + CHG_FIXED_INTANG) / (CHG_FIXED_INTANG + INT_EXP), 2) if (EBIT != None and CHG_FIXED_INTANG != None and INT_EXP != None and (CHG_FIXED_INTANG + INT_EXP) != 0) else None
 	def degreeCombinedLeverage(EPS_DILUTED_NI_0, EPS_DILUTED_NI_1, REV_0, REV_1):
-		return round(((EPS_DILUTED_NI_0 - EPS_DILUTED_NI_1) / EPS_DILUTED_NI_1) / ((REV_0 - REV_1) / REV_1), 2) if (EPS_DILUTED_NI_0 != None and EPS_DILUTED_NI_1 != None and EPS_DILUTED_NI_1 != 0 and REV_0 != None and REV_1 != None and REV_1 != 0) else None
+		return round(((EPS_DILUTED_NI_0 - EPS_DILUTED_NI_1) / EPS_DILUTED_NI_1) / ((REV_0 - REV_1) / REV_1), 2) if (EPS_DILUTED_NI_0 != None and EPS_DILUTED_NI_1 != None and EPS_DILUTED_NI_1 != 0 and REV_0 != None and REV_1 != None and REV_1 != 0 and ((REV_0 - REV_1) / REV_1) != 0) else None
 	def degreeOperatingLeverage(EBIT_0, EBIT_1, REV_0, REV_1):
-		return round(((EBIT_0 - EBIT_1) / EBIT_1) / ((REV_0 - REV_1) / REV_1), 2) if (EBIT_0 != None and EBIT_1 != None and EBIT_1 != 0 and REV_0 != None and REV_1 != None and REV_1 != 0) else None
+		return round(((EBIT_0 - EBIT_1) / EBIT_1) / ((REV_0 - REV_1) / REV_1), 2) if (EBIT_0 != None and EBIT_1 != None and EBIT_1 != 0 and REV_0 != None and REV_1 != None and REV_1 != 0 and ((REV_0 - REV_1) / REV_1) != 0) else None
 	def degreeFinancialLeverage(EPS_DILUTED_NI_0, EPS_DILUTED_NI_1, EBIT_0, EBIT_1):
-		return round(((EPS_DILUTED_NI_0 - EPS_DILUTED_NI_1) / EPS_DILUTED_NI_1) / ((EBIT_0 - EBIT_1) / EBIT_1), 2) if (EPS_DILUTED_NI_0 != None and EPS_DILUTED_NI_1 != None and EPS_DILUTED_NI_1 != 0 and EBIT_0 != None and EBIT_1 != None and EBIT_1 != 0) else None
+		return round(((EPS_DILUTED_NI_0 - EPS_DILUTED_NI_1) / EPS_DILUTED_NI_1) / ((EBIT_0 - EBIT_1) / EBIT_1), 2) if (EPS_DILUTED_NI_0 != None and EPS_DILUTED_NI_1 != None and EPS_DILUTED_NI_1 != 0 and EBIT_0 != None and EBIT_1 != None and EBIT_1 != 0 and  ((EBIT_0 - EBIT_1) / EBIT_1) != 0) else None
 	def dflRatio(EBIT, INT_EXP):
 		return round((EBIT / (EBIT - INT_EXP)), 2) if(EBIT != None and INT_EXP != None and (EBIT -INT_EXP) != 0) else None
 	def financialLeverage(AVG_ASSETS, AVG_EQUITY):
@@ -587,26 +587,23 @@ class  Valuations:
 		if (VALUE == None or AVG_NI_3YEAR == None or AVG_NI_3YEAR < 1 or DISC_RATE == None or i == None or ((1 + DISC_RATE) ** i) == 0):
 			return None 
 		VALUE = (VALUE + (AVG_NI_3YEAR / ((1 + DISC_RATE) ** i)) )
-		print(VALUE, AVG_NI_3YEAR, DISC_RATE, i)
 		return round(VALUE, 2) if (AVG_NI_3YEAR / ((1 + DISC_RATE) ** i) < 1) else Valuations.intrinsicValueNI(VALUE, AVG_NI_3YEAR, DISC_RATE, i+1)
 	def intrinsicValueEBIT(VALUE, EBIT_3YEAR_AVG, DISC_RATE, i):
 		if (VALUE == None or EBIT_3YEAR_AVG == None or EBIT_3YEAR_AVG < 1 or DISC_RATE == None or i == None or ((1 + DISC_RATE) ** i) == 0):
 			return None 
 		VALUE = (VALUE + (EBIT_3YEAR_AVG / ((1 + DISC_RATE) ** i)) )
-		print(VALUE, EBIT_3YEAR_AVG, DISC_RATE, i)
 		return round(VALUE, 2) if (EBIT_3YEAR_AVG / ((1 + DISC_RATE) ** i) < 1) else Valuations.intrinsicValueEBIT(VALUE, EBIT_3YEAR_AVG, DISC_RATE, i+1)
 	def intrinsicValueFCF(VALUE, FCF_3YEAR_AVG, DISC_RATE, i):
 		if (VALUE == None or FCF_3YEAR_AVG == None or FCF_3YEAR_AVG < 1  or DISC_RATE == None or i == None or ((1 + DISC_RATE) ** i) == 0):
 			return None 
 		VALUE = (VALUE + (FCF_3YEAR_AVG / ((1 + DISC_RATE) ** i)) )
-		print(VALUE, FCF_3YEAR_AVG, DISC_RATE, i)
 		return round(VALUE, 2) if (FCF_3YEAR_AVG / ((1 + DISC_RATE) ** i) < 1) else Valuations.intrinsicValueFCF(VALUE, FCF_3YEAR_AVG, DISC_RATE, i+1)
 	def marginOfSafety_NI(IVALUE_NI, PRICE):
-		return round((1 - (IVALUE_NI / PRICE)) * 100, 2) if (IVALUE_NI != None and PRICE != None and PRICE != 0) else None
+		return round(((IVALUE_NI / PRICE) - 1) * 100, 2) if (IVALUE_NI != None and PRICE != None and PRICE != 0) else None
 	def marginOfSafety_EBIT(IVALUE_EBIT, PRICE):
-		return round((1 - (IVALUE_EBIT / PRICE)) * 100, 2) if (IVALUE_EBIT != None and PRICE != None and PRICE != 0) else None
+		return round(((IVALUE_EBIT / PRICE) - 1) * 100, 2) if (IVALUE_EBIT != None and PRICE != None and PRICE != 0) else None
 	def marginOfSafety_FCF(IVALUE_FCF, PRICE):
-		return round((1 - (IVALUE_FCF / PRICE)) * 100, 2) if (IVALUE_FCF != None and PRICE != None and PRICE != 0) else None
+		return round(((IVALUE_FCF / PRICE) - 1) * 100, 2) if (IVALUE_FCF != None and PRICE != None and PRICE != 0) else None
 
 
 class  Dividends:

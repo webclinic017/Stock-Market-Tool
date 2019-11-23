@@ -3,6 +3,7 @@ import glob
 import os
 import Enums
 import boundings
+#import requests
 import getSectors
 
 #Keep the folder clean of previous json files
@@ -16,6 +17,7 @@ i=0
 while(i < len(symbols)):
 	symbols[i] = symbols[i].strip(".xlsx")
 	manageJson.runJson(symbols[i])
+	print(symbols[i], " Passed")
 	i += 1
 
 jsonObjs = glob.glob("*.json")

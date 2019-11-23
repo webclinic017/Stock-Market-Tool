@@ -55,8 +55,9 @@ def genRatings(dataFile, dataCalcFile, industry):
 	while(i < 34):
 		#Stop if error:
 		if(dataCalc['YEAR_INC'][i] != dataCalc['YEAR_BAL'][i] and dataCalc['YEAR_CF'][i] != dataCalc['YEAR_BAL'][i]):
-			print(dataCalc['symbol'], "Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
-			break
+			#print(data['symbol'], "Year mismatch error: ", dataCalc['YEAR_INC'][i], dataCalc['YEAR_BAL'][i], dataCalc['YEAR_CF'][i])
+			i += 1
+			continue
 		ratings['CASH_RATIO'][i] = halfToOne(dataCalc['CASH_RATIO'][i])
 		ratings['CASH_STI_RATIO'][i] = halfToOne(dataCalc['CASH_STI_RATIO'][i]) #!Important
 		ratings['CASH_SERVICE_RATIO'][i] = onetoOneAndHalf(dataCalc['CASH_SERVICE_RATIO'][i])
@@ -160,6 +161,7 @@ def genRatings(dataFile, dataCalcFile, industry):
 		ratings['DIVS_YIELD'][i] = sectorRankUp(dataCalc['DIVS_YIELD'][i], industry['DIVS_YIELD'][i])
 		ratings['SGR'][i] = sectorRankUp(dataCalc['SGR'][i], industry['SGR'][i]) 
 		#ratings['DECISION'][i] = getRating(i, data, dataCalc)
+		#ratings['TIME_TO_MATURE'][i]
 		i += 1
 
 

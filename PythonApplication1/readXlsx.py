@@ -588,7 +588,6 @@ def createLocaljsonObj(symbol):
 			data['CASH_PAID_INT'] = Reported.ticker.CASH_PAID_INT
 		else:
 			unkept.append(label)
-		row = [None] * 35
 
 	filename = symbol.strip(strXlsx)
 	ToFile(path, filename, data)
