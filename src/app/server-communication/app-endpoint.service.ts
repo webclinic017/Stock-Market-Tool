@@ -8,7 +8,9 @@ import {
     ReportedRequest,
     ReportedResponse,
     GetScoreCardRequest,
-    GetScoreCardResponse
+    GetScoreCardResponse,
+    GetIntrinsicValueRequest,
+    GetIntrinsicValueResponse
 } from './app-endpoint.constants';
 
 @Injectable({ providedIn: 'root' })
@@ -39,5 +41,9 @@ export class AppEndpointService {
 
     public getScoreCard(getScoreCardRequest: GetScoreCardRequest): Promise<GetScoreCardResponse> {
         return this.http.post<GetScoreCardResponse>(`${this._dbUrl}security/scorecard`, getScoreCardRequest).toPromise();
+    }
+
+    public getIntrinsicValue(getIntrinsicValueRequest: GetIntrinsicValueRequest): Promise<GetIntrinsicValueResponse> {
+        return this.http.post<GetIntrinsicValueResponse>(`${this._dbUrl}security/getIntrinsicValue`, getIntrinsicValueRequest).toPromise();
     }
 }

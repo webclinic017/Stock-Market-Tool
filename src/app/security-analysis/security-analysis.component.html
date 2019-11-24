@@ -14,138 +14,29 @@
             </div>
             <div class="owner-summary-body">
                 <div class="owner-summary-body-col">
-                    <div class="buy-recommendation">
+                    <div *ngIf="intrinsicValueResponse.recommend" class="buy-recommendation">
                         <span>BUY</span>
                     </div>
-                </div>
-                <!--<div class="owner-summary-body-col">
-                    <div class="col-row">
-                        <span>Intrinsic Value</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>1 Year Growth</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>5 Year Average</span>
-                        <span>1232</span>
+
+                    <div *ngIf="!intrinsicValueResponse.recommend" class="not-buy-recommendation">
+                        <span>DON'T BUY</span>
                     </div>
                 </div>
-                <div class="owner-summary-body-col">
-                    <div class="col-row">
-                        <span style="padding-right: 3.89rem; font-weight: bold;">Historic Financials</span>
-                        <span
-                            *ngIf="this.testData.historicFin === 0; else unhealthyHistMobile"
-                            style="font-weight: bold; color: LimeGreen">
-                            {{ this.finEnum[this.testData.historicFin] }}
-                            <span
-                                popover="Explains why this is healthy."
-                                popoverPlacement="top-right"
-                                [popoverOnHover]="true"
-                                [popoverCloseOnMouseOutside]="true"
-                                class="oi oi-circle-check"
-                                style="color: LimeGreen"
-                                aria-hidden="true">
-                            </span>
-                        </span>
-                        <ng-template #unhealthyHistMobile>
-                            <span style="font-weight: bold; color: Red">
-                                {{ this.finEnum[this.testData.historicFin] }}
-                                <span
-                                popover="Explains why this is unhealthy."
-                                popoverPlacement="top-right"
-                                [popoverOnHover]="true"
-                                [popoverCloseOnMouseOutside]="true"
-                                class="oi oi-circle-x"
-                                style="color: Red"
-                                aria-hidden="true">
-                                </span>
-                            </span>
-                        </ng-template>
+                <div class="instrinsic-details">
+                    <div class="instrinsic-detail">
+                        <div><span style="font-weight:bold;">Current Price</span></div>
+                        <div><span>{{intrinsicValueResponse.currentPrice.toFixed(2)}}</span></div>
                     </div>
-                    <div class="col-row">
-                        <span style="padding-right: 5.1rem; font-weight: bold;">Acute Financials</span>
-                        <span
-                            *ngIf="this.testData.acuteFin === 0; else unhealthyAcuteMobile"
-                            style="font-weight: bold; color: LimeGreen">
-                            {{ this.finEnum[this.testData.acuteFin] }}
-                            <span
-                                popover="Explains why this is healthy."
-                                popoverPlacement="top-right"
-                                [popoverOnHover]="true"
-                                [popoverCloseOnMouseOutside]="true"
-                                class="oi oi-circle-check"
-                                style="color: LimeGreen"
-                                aria-hidden="true">
-                            </span>
-                        </span>
-                        <ng-template #unhealthyAcuteMobile>
-                            <span style="font-weight: bold; color: Red">
-                                {{ this.finEnum[this.testData.acuteFin] }}
-                                <span
-                                popover="Explains why this is unhealthy."
-                                popoverPlacement="top-right"
-                                [popoverOnHover]="true"
-                                [popoverCloseOnMouseOutside]="true"
-                                class="oi oi-circle-x"
-                                style="color: Red"
-                                aria-hidden="true">
-                                </span>
-                            </span>
-                        </ng-template>
-                    </div>
-                    <div class="col-row">
-                        <span style="padding-right: 2.6rem; font-weight: bold;">Projected Financials</span>
-                        <span
-                            *ngIf="this.testData.projectedFin === 0; else unhealthyProjMobile"
-                            style="font-weight: bold; color: LimeGreen">
-                            {{ this.finEnum[this.testData.projectedFin] }}
-                            <span
-                                popover="Explains why this is healthy."
-                                popoverPlacement="top-right"
-                                [popoverOnHover]="true"
-                                [popoverCloseOnMouseOutside]="true"
-                                class="oi oi-circle-check"
-                                style="color: LimeGreen"
-                                aria-hidden="true">
-                            </span>
-                        </span>
-                        <ng-template #unhealthyProjMobile>
-                            <span style="font-weight: bold; color: Red">
-                                {{ this.finEnum[this.testData.projectedFin] }}
-                                <span
-                                popover="Explains why this is unhealthy."
-                                popoverPlacement="top-right"
-                                [popoverOnHover]="true"
-                                [popoverCloseOnMouseOutside]="true"
-                                class="oi oi-circle-x"
-                                style="color: Red"
-                                aria-hidden="true">
-                                </span>
-                            </span>
-                        </ng-template>
+                    <div class="instrinsic-detail">
+                        <div><span style="font-weight:bold;">Intrinsic Value</span></div>
+                        <div><span>{{intrinsicValueResponse.intrinsicValue.toFixed(2)}}</span></div>
                     </div>
                 </div>
-                <div class="owner-summary-body-col">
-                    <div class="col-row">
-                        <span>Est. Time to Value</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Sustainable Growth Rate</span>
-                        <span>1232</span>
-                    </div>
-                    <div class="col-row">
-                        <span>Effect from Intrinsic Value</span>
-                        <span>1232</span>
-                    </div>
-                </div>-->
             </div>
         </div>
 
         <!-- Interact Bar -->
-        <div class="interact-bar">
+        <div *ngIf="shouldShowOwnerSummary" class="interact-bar">
                 <button class="btn btn-primary view-button" (click)="handleComponentClick('dashboard')">Score Cards</button>
                 <button class="btn btn-primary view-button" (click)="handleComponentClick('reported')">Reported</button>
                 <button class="btn btn-primary watchlist-button" (click)="handleAddWatchlistClick()">Add to Watchlist</button>
@@ -153,7 +44,8 @@
 
         <!-- Loaded Component -->
         <app-dashboard *ngIf="shouldShowOwnerSummary && loadedComponent === 'dashboard'"
-            [@slideUp]>
+            [@slideUp]
+            [ticker]="reportedTickerName">
         </app-dashboard>
         <app-reported *ngIf="shouldShowOwnerSummary && loadedComponent === 'reported'"
             [@slideUp]
