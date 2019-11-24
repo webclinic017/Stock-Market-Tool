@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SecurityAnalysisService } from '../security-analysis.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -116,4 +117,12 @@ import { Component } from '@angular/core';
     `,
     styleUrls: ['dashboard.component.scss']
 })
-export class DashboardComponent { }
+export class DashboardComponent implements OnInit {
+
+    constructor(public securityAnalysisService: SecurityAnalysisService) {}
+
+    async ngOnInit() {
+        const response = await this.securityAnalysisService.getScorecards({ticker: 'ZTS'});
+        console.log(response);
+    }
+}

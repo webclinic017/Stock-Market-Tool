@@ -213,3 +213,237 @@ export interface ReportedRequest {
 export interface ReportedResponse {
     fiscalYears: FiscalYear[];
 }
+
+export interface GetScoreCardRequest {
+    ticker: string;
+}
+
+export interface GetScoreCardResponse {
+    solvency: Solvency;
+    capitalStructure: CapitalStructure;
+    AssetActivity: AssetActivity;
+    LiabilityActivity: LiabilityActivity;
+    ProfitabilityAndDividends: ProfitabilityAndDividends;
+    Valuation: Valuation;
+}
+
+export interface Solvency {
+    CashRatio: number;
+    CashRatioRating: string;
+    CashAndShortTermInvestments: number;
+    CashAndShortTermInvestmentsRating: string;
+    CashServiceRatio: number;
+    CashServiceRatioRating: string;
+    InterestServiceRatio: number;
+    InterestServiceRatioRating: string;
+    DebtServiceRatio: number;
+    DebtServiceRatioRating: string;
+    CashToShortTermDebtRatio: number;
+    CashToShortTermDebtRatioRating: string;
+    AcidTestRatio: number;
+    AcidTestRatioRating: string;
+    QuickRatioDef1: number;
+    QuickRatioDef1Rating: string;
+    QuickRatioDef2: number;
+    QuickRatioDef2Rating: string;
+    CurrentRatio: number;
+    CurrentRatioRating: string;
+    NetWorkingCapitalToAssets: number;
+    NetWorkingCapitalToAssetsRating: string;
+}
+
+export interface CapitalStructure {
+    ChangeInShortTermDebt;
+    ChangeInShortTermDebtRating;
+    ChangeInLongTermDebt: number;
+    ChangeInLongTermDebtRating;
+    ChangeInNetDebt: number;
+    ChangeInNetDebtRating;
+    NetDebt: number;
+    NetDebtRating;
+    ShortTermObligationsRatio: number;
+    ShortTermObligationsRatioRating;
+    LongTermDebtRatio: number;
+    LongTermDebtRatioRating;
+    DebtRatio: number;
+    DebtRatioRating: string;
+    DebtEquityRatio: number;
+    DebtEquityRatioRating: string;
+    FixedCoverageChargeRatio: number;
+    FixedCoverageChargeRatioRating: string;
+    DegreeOfCombinedLeverage: number;
+    DegreeOfCombinedLeverageRating: string;
+    DegreeOfOperatingLeverage: number;
+    DegreeOfOperatingLeverageRating: string;
+    DegreeOfFinancialLeverage: number;
+    DegreeOfFinancialLeverageRating: string;
+    DegreeOfFinancialLeverageRatio: number;
+    DegreeOfFinancialLeverageRatioRating: string;
+    FinancialLeverageRatio: number;
+    FinancialLeverageRatioRating: string;
+    EquityRatio: number;
+    EquityRatioRating: string;
+    EquityMultiplierDef1: number;
+    EquityMultiplierDef1Rating: string;
+    EquityMultiplierDef2: number;
+    EquityMultiplierDef2Rating: string;
+    NetAssetValue: number;
+    NetAssetValueRating;
+    EffectiveInterestRate: number;
+    EffectiveInterestRateRating: string;
+    DebtCostOfCapital: number;
+    DebtCostOfCapitalRating: string;
+    EquityCostOfCapital: number;
+    EquityCostOfCapitalRating;
+    WeightAvgCostOfCapital: number;
+    WeightAvgCostOfCapitalRating: string;
+}
+
+export interface AssetActivity {
+    SalesTurnover: number;
+    SalesTurnoverRating: string;
+    DaysSalesOutstanding: number;
+    DaysSalesOutstandingRating: string;
+    InventorySalesTurnover: number;
+    InventorySalesTurnoverRating: string;
+    DaysSalesInventory: number;
+    DaysSalesInventoryRating: string;
+    InventoryTurnoverCOGS: number;
+    InventoryTurnoverCOGSRating: string;
+    DaysInventoryOutstanding: number;
+    DaysInventoryOutstandingRating: string;
+    CreditorsTurnover: number;
+    CreditorsTurnoverRating: string;
+    CreditorsDaysOutstanding: number;
+    CreditorsDaysOutstandingRating: string;
+    AccountsReceivablesTurnover: number;
+    AccountsReceivablesTurnoverRating: string;
+    DaysReceivablesOutstanding: number;
+    DaysReceivablesOutstandingRating: string;
+    WorkingCapitalTurnover: number;
+    WorkingCapitalTurnoverRating: string;
+    DaysWorkingCapital: number;
+    DaysWorkingCapitalRating: string;
+    AssetTurnover: number;
+    AssetTurnoverRating: string;
+    AssetTurnRate: number;
+    AssetTurnRateRating: string;
+    LongTermAssetTurnover: number;
+    LongTermAssetTurnoverRating: string;
+    LongTermAssetRate: number;
+    LongTermAssetRateRating: string;
+    CashConversionCycle: number;
+    CashConversionCycleRating;
+    ReturnOnInvestments: number;
+    ReturnOnInvestmentsRating: string;
+
+}
+
+export interface LiabilityActivity {
+    PayablesTurnoverCOGS: number;
+    PayablesTurnoverCOGSRating: string;
+    COGSDaysPayablesOutstanding: number;
+    COGSDaysPayablesOutstandingRating: string;
+    COSPayablesTurnover: number;
+    COSPayablesTurnoverRating: string;
+    COSDaysPayablesOutstanding: number;
+    COSDaysPayablesOutstandingRating: string;
+    LiabilitiesTurnover: number;
+    LiabilitiesTurnoverRating: string;
+    LiabilitiesTurnoverRate: number;
+    LiabilitiesTurnoverRateRating: string;
+    ChangeInDebtObligations;
+    ChangeInDebtObligationsRating;
+    DebtorsPaybackPeriod: number;
+    DebtorsPaybackPeriodRating: string;
+    BurnRate;
+    BurnRateRating: string;
+}
+
+export interface ProfitabilityAndDividends {
+    Earnings: number;
+    EarningsRating: string;
+    EBITCashflow: number;
+    EBITCashflowRating: string;
+    ReturnOnSales: number;
+    ReturnOnSalesRating: string;
+    ReturnOnEquity: number;
+    ReturnOnEquityRating: string;
+    DupontROE: number;
+    DupontROERating: string;
+    ReturnOnAssets: number;
+    ReturnOnAssetsRating: string;
+    NIReturnOnCapitalEmployed: number;
+    NIReturnOnCapitalEmployedRating: string;
+    EBITReturnOnCapitalEmployed: number;
+    EBITReturnOnCapitalEmployedRating: string;
+    PERatio: number;
+    PERatioRating: string;
+    ThreeYearPERatioAverage: number;
+    ThreeYearPERatioAverageRating: string;
+    FiveYearPERatioAverage: number;
+    FiveYearPERatioAverageRating: string;
+    EarningsPower: number;
+    EarningsPowerRating: string;
+    GrossProfitMargin: number;
+    GrossProfitMarginRating: string;
+    NetOperatingProfitAfterTax: number;
+    NetOperatingProfitAfterTaxRating: string;
+    ReturnOnInvestedCapital: number;
+    ReturnOnInvestedCapitalRating: string;
+    OperatingExpensesRatio: number;
+    OperatingExpensesRatioRating: string;
+    OperatingProfitRatio: number;
+    OperatingProfitRatioRating: string;
+    RetentionRatio: number;
+    RetentionRatioRating: string;
+    DividendPayoutRatio: number;
+    DividendPayoutRatioRating: string;
+    EarningsYield: number;
+    EarningsYieldRating: string;
+    DividendYield: number;
+    DividendYieldRating: string;
+    SustainableGrowthRate: number;
+    SustainableGrowthRateRating: string;
+}
+
+export interface Valuation {
+    MarketValue: number;
+    MarketValueRating;
+    CashAndEquivalentsToPrice: number;
+    CashAndEquivalentsToPriceRating: string;
+    NetAssetValueToPrice: number;
+    NetAssetValueToPriceRating: string;
+    EBITCashFlowToPrice: number;
+    EBITCashFlowToPriceRating: string;
+    FreeCashFlowToPrice: number;
+    FreeCashFlowToPriceRating: string;
+    UnleveredFreeCashFlowToPrice: number;
+    UnleveredFreeCashFlowToPriceRating: string;
+    SalesToPrice: number;
+    SalesToPriceRating: string;
+    BookValueToPrice: number;
+    BookValueToPriceRating: string;
+    OriginalGrahamValuation: number;
+    OriginalGrahamValuationRating: string;
+    RevisedGrahamValuation: number;
+    RevisedGrahamValuationRating: string;
+    DCFValuation: number;
+    DCFValuationRating;
+    MarginOfSafety: number;
+    MarginOfSafetyRating: string;
+    EnterpriseValuation: number;
+    EnterpriseValuationRating;
+    NetIncomeToEnterpriseValuation: number;
+    NetIncomeToEnterpriseValuationRating: string;
+    EBITToEnterpriseValuation: number;
+    EBITToEnterpriseValuationRating: string;
+    BookValue: number;
+    BookValueRating;
+    BookValuePerShare: number;
+    BookValuePerShareRating: string;
+    NetIncomeToBookValue: number;
+    NetIncomeToBookValueRating: string;
+    EBITToBookValue: number;
+    EBITToBookValueRating: string;
+}

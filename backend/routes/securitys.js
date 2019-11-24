@@ -337,7 +337,7 @@ router.post("/getReportedTicker", /*checkAuth,*/ (req, res, next) => { // TODO: 
             });
         }
         const reportedTicker = tickerDataService.getCleanTickerData(reported);
-        res.status(200).json(reported);
+        res.status(200).json(reportedTicker);
     })
     .catch(err => {
         return res.status(401).json({
