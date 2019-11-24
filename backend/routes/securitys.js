@@ -42,7 +42,34 @@ router.post("/scorecard", (req, res, next) => {
                     message: "Rating Data for security not found in database!"
                 });
             }
+            getCurrentPrice(req.body.ticker, function(){
+            var price = this;
             res.status(200).json({
+                FinancialHighlights: {
+                    MarketPrice: price,
+                    DCFIntinsicValueNetIncome: scorecard["INTRINSIC_VALUE_NI"][1],
+                    DCFIntinsicValueEBIT: scorecard["INTRINSIC_VALUE_EBIT"][1],
+                    DCFIntinsicValueFCF: scorecard["INTRINSIC_VALUE_FCF"][1],
+                    MarginOfSafetyNI: ((scorecard["INTRINSIC_VALUE_NI"][1] / price) - 1) * 100,
+                    MarginOfSafetyNIRating: rating["MARGIN_OF_SAFETY_NI"][1],
+                    MarginOfSafetyEBIT: ((scorecard["INTRINSIC_VALUE_EBIT"][1] / price) - 1) * 100,
+                    MarginOfSafetyEBITRating: rating["MARGIN_OF_SAFETY_EBIT"][1],
+                    MarginOfSafetyFCF: ((scorecard["INTRINSIC_VALUE_FCF"][1] / price) - 1) * 100,
+                    MarginOfSafetyFCFRating: rating["MARGIN_OF_SAFETY_FCF"][1],
+                    PE: price / scorecard["EPS_DILUTED_NI"][1],
+                    PERating: rating["PE"][1],
+                    LiquidAssets: scorecard["CASH_STI_RATIO"][1],
+                    LiquidAssetsRating: rating["CASH_STI_RATIO"][1],
+                    EarningsPower: scorecard["EARNINGS_POWER"][1],    
+                    EarningsPowerRating: rating["EARNINGS_POWER"][1],
+                    WeightAvgCostOfCapital: scorecard["WACC"][1],
+                    WeightAvgCostOfCapitalRating: rating["WACC"][1],
+                    SustainableGrowthRate: scorecard["SGR"][1],
+                    SustainableGrowthRateRating: rating["SGR"][1],
+                    CashConversionCycle: scorecard["CCC"][1],
+                    CashConversionCycleRating: rating["CCC"][1],
+                    Sector: rating["SECTOR"][1]
+                },
                 Solvency: {
                     CashRatio: scorecard["CASH_RATIO"][1],
                     CashRatioRating: rating["CASH_RATIO"][1],
@@ -188,7 +215,7 @@ router.post("/scorecard", (req, res, next) => {
                     NIReturnOnCapitalEmployedRating: rating["ROCE_NI"][1], 
                     EBITReturnOnCapitalEmployed: scorecard["ROCE_EBIT"][1],
                     EBITReturnOnCapitalEmployedRating: rating["ROCE_EBIT"][1], 
-                    PERatio: scorecard["PE"][1],    
+                    PERatio: price / scorecard["EPS_DILUTED_NI"][1],    
                     PERatioRating: rating["PE"][1],           
                     ThreeYearPERatioAverage: scorecard["PE_REL_3"][1],  
                     ThreeYearPERatioAverageRating: rating["PE_REL_3"][1],      
@@ -240,16 +267,16 @@ router.post("/scorecard", (req, res, next) => {
                     RevisedGrahamValuationRating: rating["REVISED_GRAHAM"][1], 
                     DCFValuation: scorecard["INTRINSIC_VALUE_NI"][1],
                     DCFValuationRating: rating["INTRINSIC_VALUE_NI"][1], 
-                    MarginOfSafety: scorecard["MARGIN_OF_SAFETY_NI"][1],
-                    MarginOfSafetyRating: rating["MARGIN_OF_SAFETY_NI"][1], 
+                    MarginOfSafetyNI: ((scorecard["INTRINSIC_VALUE_NI"][1] / price) - 1) * 100,
+                    MarginOfSafetyNIRating: rating["MARGIN_OF_SAFETY_NI"][1], 
                     DCFValuation: scorecard["INTRINSIC_VALUE_EBIT"][1],
                     DCFValuationRating: rating["INTRINSIC_VALUE_EBIT"][1], 
-                    MarginOfSafety: scorecard["MARGIN_OF_SAFETY_EBIT"][1],
-                    MarginOfSafetyRating: rating["MARGIN_OF_SAFETY_EBIT"][1], 
+                    MarginOfSafetyEBIT: ((scorecard["INTRINSIC_VALUE_EBIT"][1] / price) - 1) * 100,
+                    MarginOfSafetyEBITRating: rating["MARGIN_OF_SAFETY_EBIT"][1], 
                     DCFValuation: scorecard["INTRINSIC_VALUE_FCF"][1],
                     DCFValuationRating: rating["INTRINSIC_VALUE_FCF"][1], 
-                    MarginOfSafety: scorecard["MARGIN_OF_SAFETY_FCF"][1],
-                    MarginOfSafetyRating: rating["MARGIN_OF_SAFETY_FCF"][1], 
+                    MarginOfSafetyFCF: ((scorecard["INTRINSIC_VALUE_FCF"][1] / price) - 1) * 100,
+                    MarginOfSafetyFCFRating: rating["MARGIN_OF_SAFETY_FCF"][1], 
                     EnterpriseValuation: scorecard["EV"][1],
                     EnterpriseValuationRating: rating["EV"][1], 
                     NetIncomeToEnterpriseValuation: scorecard["EV_NI"][1],
@@ -265,6 +292,7 @@ router.post("/scorecard", (req, res, next) => {
                     EBITToBookValue: scorecard["BV_EBIT"][1],
                     EBITToBookValueRating: rating["BV_EBIT"][1]
                 }
+            });
             });
         })
         .catch(err => {
