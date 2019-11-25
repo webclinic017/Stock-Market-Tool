@@ -34,6 +34,6 @@ export class HomeComponent implements OnInit {
 
     // Route to Market Analysis.
     public onStartNow(): void {
-        this._router.navigate(['about']);
+        this._router.navigate(['/auth']);
     }
 }

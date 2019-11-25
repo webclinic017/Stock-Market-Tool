@@ -2,38 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AppEndpointService } from '../server-communication/app-endpoint.service';
 import { device } from 'device.js';
 import { trigger, transition, style, animate, state } from '@angular/animations';
-import { ReportedResponse } from '../server-communication/app-endpoint.constants';
+import { ReportedResponse, GetIntrinsicValueResponse } from '../server-communication/app-endpoint.constants';
 import { ReportedService } from './reported/reported.service';
+import { ToastrService } from 'ngx-toastr';
 
-/*export enum FinancialsDisplayEnum {
-    'Healthy',
-    'Unhealthy'
-}
-
-// TODO: Get real values from Jimmy.
-export enum FinacialsEnum {
-    Healthy,
-    Unhealthy
-}
-
-// TODO: Replicate on backend.
-export class OwnerSummary {
-    public ticker: string;
-    public intrinsicValue: number;
-    public oneYearGrowth: number;
-    public fiveYearGrowth: number;
-    public historicFin: FinacialsEnum;
-    public acuteFin: FinacialsEnum;
-    public projectedFin: FinacialsEnum;
-    public timeToValue: number;
-    public growthRate: number;
-    public effectOfIntrVal: number;
-}
-
-// TODO: Ticker enum that displays as follows:
-// AXP : 0, then in display enum 'American express Co. (AXP)'
-// export class tickerEnum {} export class tickerDisplayEnum
-*/
 @Component({
     selector: 'app-security-analysis',
     templateUrl: 'security-analysis.component.html',
@@ -54,20 +26,6 @@ export class OwnerSummary {
     ]
 })
 export class SecurityAnalysisComponent implements OnInit {
-    /*public testData: OwnerSummary = {
-        ticker: 'AXP',
-        intrinsicValue: 1212,
-        oneYearGrowth: 12121,
-        fiveYearGrowth: 1212,
-        historicFin: 0,
-        acuteFin: 0,
-        projectedFin: 1,
-        timeToValue: 1,
-        growthRate: 12,
-        effectOfIntrVal: 1211
-    };*/
-    // public finEnum = FinancialsDisplayEnum;
-
     // Booleans.
     public isMobile: boolean;
     public isLoading = false;
@@ -79,10 +37,12 @@ export class SecurityAnalysisComponent implements OnInit {
 
     // API data.
     public reportedData;
+    public intrinsicValueResponse: GetIntrinsicValueResponse;
 
     constructor(
         private _endpointService: AppEndpointService,
-        public reportedService: ReportedService
+        public reportedService: ReportedService,
+        public toastService: ToastrService
     ) { }
 
     ngOnInit() {
@@ -97,7 +57,9 @@ export class SecurityAnalysisComponent implements OnInit {
 
         const ticker = tickerInput.value;
         this.reportedData = await this._endpointService.getReported({ticker: ticker});
-        console.log(this.reportedData);
+
+        this.intrinsicValueResponse = await this._endpointService.getIntrinsicValue({ticker: ticker});
+        console.log(this.intrinsicValueResponse);
 
         this.reportedTickerName = tickerInput.value;
         this.shouldShowOwnerSummary = true;
@@ -108,7 +70,12 @@ export class SecurityAnalysisComponent implements OnInit {
         this.loadedComponent = securityComponent;
     }
 
-    public handleAddWatchlistClick() {
-        this.reportedService.addTickerToWatchlist(this.reportedTickerName);
+    public async handleAddWatchlistClick() {
+        try {
+            await this.reportedService.addTickerToWatchlist(this.reportedTickerName);
+            this.toastService.success("Successfully Added " + this.reportedTickerName + " to WatchList")
+        } catch (e) {
+            this.toastService.error(e);
+        }
     }
 }

@@ -219,12 +219,38 @@ export interface GetScoreCardRequest {
 }
 
 export interface GetScoreCardResponse {
-    solvency: Solvency;
-    capitalStructure: CapitalStructure;
+    FinancialHighlights: FinancialHighlights;
+    Solvency: Solvency;
+    CapitalStructure: CapitalStructure;
     AssetActivity: AssetActivity;
     LiabilityActivity: LiabilityActivity;
     ProfitabilityAndDividends: ProfitabilityAndDividends;
     Valuation: Valuation;
+}
+
+export interface FinancialHighlights {
+    MarketPrice: number;
+    DCFIntinsicValueNetIncome: number;
+    DCFIntinsicValueEBIT: number;
+    DCFIntinsicValueFCF: number;
+    MarginOfSafetyNI: number;
+    MarginOfSafetyNIRating: string;
+    MarginOfSafetyEBIT: number;
+    MarginOfSafetyEBITRating: string;
+    MarginOfSafetyFCF: number;
+    MarginOfSafetyFCFRating: string;
+    PE: number;
+    PERating: string;
+    LiquidAssets: number;
+    LiquidAssetsRating: string;
+    EarningsPower: number;
+    EarningsPowerRating: string;
+    WeightAvgCostOfCapital: number;
+    WeightAvgCostOfCapitalRating: string;
+    SustainableGrowthRate: number;
+    SustainableGrowthRateRating: string;
+    CashConversionCycle: number;
+    CashConversionCycleRating;
 }
 
 export interface Solvency {
@@ -430,8 +456,12 @@ export interface Valuation {
     RevisedGrahamValuationRating: string;
     DCFValuation: number;
     DCFValuationRating;
-    MarginOfSafety: number;
-    MarginOfSafetyRating: string;
+    MarginOfSafetyNI: number;
+    MarginOfSafetyNIRating: string;
+    MarginOfSafetyEBIT: number;
+    MarginOfSafetyEBITRating: string;
+    MarginOfSafetyFCF: number;
+    MarginOfSafetyFCFRating: string;
     EnterpriseValuation: number;
     EnterpriseValuationRating;
     NetIncomeToEnterpriseValuation: number;
@@ -446,4 +476,14 @@ export interface Valuation {
     NetIncomeToBookValueRating: string;
     EBITToBookValue: number;
     EBITToBookValueRating: string;
+}
+
+export interface GetIntrinsicValueRequest {
+    ticker: string;
+}
+
+export interface GetIntrinsicValueResponse {
+    recommend: boolean;
+    currentPrice: number;
+    intrinsicValue: number;
 }

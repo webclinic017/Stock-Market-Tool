@@ -8,25 +8,21 @@ import { ProfileService } from './profile.service';
     selector: 'app-profile',
     template: `
         <div *ngIf="!pageIsLoading" class="container profile-body">
+            <div class="profile-heading">
+                {{username}}'s Profile
+            </div>
             <div class="profile-row">
                 <div class="profile-component">
                     <div class="portfolio">
                         <div class="profile-component-header">
-                            <span style="font-size: 6rem;">Watchlist</span>
+                            <span style="font-size: 6rem; border-bottom: 2px solid black;">Watchlist</span>
                         </div>
                         <div *ngFor="let item of watchlist;" class="watchlist-item">
-                                {{item.ticker}}
+                            <div class="ticker-name">{{item.ticker}}</div>
+                            <div>Current Price: {{item.currentPrice.toFixed(2)}}</div>
+                            <div>Original Price: {{item.priceEntered.toFixed(2)}}</div>
+                            <div>Date Added: {{item.dateAdded.slice(0,10)}}</div>
                         </div>
-                    </div>
-                </div>
-                <div *ngIf="tickerIsLoaded" class="profile-component">
-                    <div class="profile-component-header">
-                        <span>Watchlist</span>
-                    </div>
-                    <div *ngFor="let item of watchlist;">
-                        <span>
-                            {{item.ticker}}
-                        </span>
                     </div>
                 </div>
             </div>
@@ -34,12 +30,8 @@ import { ProfileService } from './profile.service';
                 <div>
                     <button
                         (click)="handleLogoutClick()"
-                        class="btn btn-info">Logout
+                        class="btn btn-danger">Logout
                     </button>
-                </div>
-                <div *ngIf="tickerIsLoaded" class="profile-component">
-                    <div class="">
-                    </div>
                 </div>
             </div>
         </div>
@@ -50,9 +42,9 @@ import { ProfileService } from './profile.service';
     styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-    public tickerIsLoaded = false;
     public pageIsLoading: boolean;
     public watchlist;
+    public username;
 
     constructor(
         public router: Router,
@@ -62,6 +54,7 @@ export class ProfileComponent implements OnInit {
     ) { }
 
     async ngOnInit() {
+        this.username = this.authService.loggedInUser;
         this.pageIsLoading = true;
         this.watchlist = await this.profileService.listWatchlist();
         this.pageIsLoading = false;
@@ -74,10 +67,3 @@ export class ProfileComponent implements OnInit {
         this.router.navigate(['home']);
     }
 }
-
-/*
-dateAdded: "2019-09-28T04:00:00.000Z"
-priceEntered: 94.99
-ticker: "KMX"
-_id: "5db726cc74361f39a50163d7"
-*/

@@ -3,19 +3,39 @@
 .profile-body {
     display: flex;
     flex-direction: column;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    background-color: $navbar-background;
+    border-top: 1px solid $navbar-border;
+    border-left: 1px solid $navbar-border;
+    border-right: 1px solid $navbar-border;
+    border-bottom: 1px solid $navbar-border;
+    .profile-heading {
+        background-color: $blue;
+        color: white;
+        font-size: 4.2rem;
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+    }
     .profile-row {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: center;
         padding-bottom: 5rem;
         .profile-component {
-            background-color: $navbar-background;
-            border-top: 1px solid $navbar-border;
-            border-left: 1px solid $navbar-border;
-            border-right: 1px solid $navbar-border;
-            border-bottom: 1px solid $navbar-border;
+            padding-top: 2rem;
         }
     }
+}
+
+.portfolio {
+    width: 65rem;
+}
+
+.ticker-name {
+    font-weight: bold;
+    background-color: $navbar-border;
 }
 
 .lds-dual-ring {
