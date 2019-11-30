@@ -59,6 +59,7 @@ export class SecurityAnalysisComponent implements OnInit {
         this.reportedData = await this._endpointService.getReported({ticker: ticker});
 
         this.intrinsicValueResponse = await this._endpointService.getIntrinsicValue({ticker: ticker});
+        this.reportedService.intrinsicValue = this.intrinsicValueResponse.intrinsicValue.toFixed(2);
         console.log(this.intrinsicValueResponse);
 
         this.reportedTickerName = tickerInput.value;

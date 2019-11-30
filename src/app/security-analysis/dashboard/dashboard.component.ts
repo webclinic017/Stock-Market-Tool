@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SecurityAnalysisService } from '../security-analysis.service';
 import { GetScoreCardResponse } from '../../server-communication/app-endpoint.constants';
+import { ReportedService } from '../reported/reported.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -11,31 +12,31 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
             <div class="score-card">
                 <h3>Financial Highlights</h3>
                 <div class="col-row">
-                    <div class="row-header"><span>Market Price</span></div>
+                    <div class="row-header"><span>Market Price ($)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.FinancialHighlights.MarketPrice != null">
                         {{scoreCards.FinancialHighlights.MarketPrice.toFixed(2)}}
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>DCF Intrinsic Value Net Income</span></div>
+                    <div class="row-header"><span>DCF Intrinsic Value Net Income (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.FinancialHighlights.DCFIntinsicValueNetIncome != null">
                         {{scoreCards.FinancialHighlights.DCFIntinsicValueNetIncome.toFixed(2)}}
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>DCF Intrinsic Value EBIT</span></div>
+                    <div class="row-header"><span>DCF Intrinsic Value EBIT (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.FinancialHighlights.DCFIntinsicValueEBIT != null">
                         {{scoreCards.FinancialHighlights.DCFIntinsicValueEBIT.toFixed(2)}}
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>DCF Intrinsic Value FCF</span></div>
+                    <div class="row-header"><span>DCF Intrinsic Value FCF (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.FinancialHighlights.DCFIntinsicValueFCF != null">
                         {{scoreCards.FinancialHighlights.DCFIntinsicValueFCF.toFixed(2)}}
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Margin Of Safety NI</span></div>
+                    <div class="row-header"><span>Margin Of Safety NI (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.FinancialHighlights.MarginOfSafetyNI != null">
                         {{scoreCards.FinancialHighlights.MarginOfSafetyNI.toFixed(2)}}
                     </span>
@@ -44,7 +45,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Margin Of Safety EBIT</span></div>
+                    <div class="row-header"><span>Margin Of Safety EBIT (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.FinancialHighlights.MarginOfSafetyEBIT != null">
                         {{scoreCards.FinancialHighlights.MarginOfSafetyEBIT.toFixed(2)}}
                     </span>
@@ -53,7 +54,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Margin Of Safety FCF</span></div>
+                    <div class="row-header"><span>Margin Of Safety FCF (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.FinancialHighlights.MarginOfSafetyFCF != null">
                         {{scoreCards.FinancialHighlights.MarginOfSafetyFCF.toFixed(2)}}
                     </span>
@@ -71,7 +72,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Liquid Assets</span></div>
+                    <div class="row-header"><span>Liquid Assets (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.FinancialHighlights.LiquidAssets != null">
                         {{scoreCards.FinancialHighlights.LiquidAssets.toFixed(2)}}
                     </span>
@@ -80,7 +81,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Earnings Power</span></div>
+                    <div class="row-header"><span>Earnings Power (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.FinancialHighlights.EarningsPower != null">
                         {{scoreCards.FinancialHighlights.EarningsPower.toFixed(2)}}
                     </span>
@@ -89,7 +90,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Weighted Avg Cost Of Capital</span></div>
+                    <div class="row-header"><span>Weighted Avg Cost Of Capital (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.FinancialHighlights.WeightAvgCostOfCapital != null">
                         {{scoreCards.FinancialHighlights.WeightAvgCostOfCapital.toFixed(2)}}
                     </span>
@@ -98,7 +99,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Sustainable Growth Rate</span></div>
+                    <div class="row-header"><span>Sustainable Growth Rate (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.FinancialHighlights.SustainableGrowthRate != null">
                         {{scoreCards.FinancialHighlights.SustainableGrowthRate.toFixed(2)}}
                     </span>
@@ -107,7 +108,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Cash Conversion Cycle</span></div>
+                    <div class="row-header"><span>Cash Conversion Cycle (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.FinancialHighlights.CashConversionCycle != null">
                         {{scoreCards.FinancialHighlights.CashConversionCycle.toFixed(2)}}
                     </span>
@@ -121,7 +122,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
             <div class="score-card">
                 <h3>Solvency</h3>
                 <div class="col-row">
-                    <div class="row-header"><span>Cash Ratio</span></div>
+                    <div class="row-header"><span>Cash Ratio (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Solvency.CashRatio != null">
                         {{scoreCards.Solvency.CashRatio.toFixed(2)}}
                     </span>
@@ -130,7 +131,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Cash And Short Term Investments</span></div>
+                    <div class="row-header"><span>Cash And Short Term Investments (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Solvency.CashAndShortTermInvestments != null">
                         {{scoreCards.Solvency.CashAndShortTermInvestments.toFixed(2)}}
                     </span>
@@ -211,7 +212,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Net Working Capital To Assets</span></div>
+                    <div class="row-header"><span>Net Working Capital To Assets (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Solvency.NetWorkingCapitalToAssets != null">
                         {{scoreCards.Solvency.NetWorkingCapitalToAssets.toFixed(2)}}
                     </span>
@@ -225,7 +226,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
             <div class="score-card">
                 <h3>Capital Structure</h3>
                 <div class="col-row">
-                    <div class="row-header"><span>Change In Short Term Debt</span></div>
+                    <div class="row-header"><span>Change In Short Term Debt (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.ChangeInShortTermDebt != null">
                         {{scoreCards.CapitalStructure.ChangeInShortTermDebt.toFixed(2)}}
                     </span>
@@ -234,7 +235,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Change In Long Term Debt</span></div>
+                    <div class="row-header"><span>Change In Long Term Debt (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.ChangeInLongTermDebt != null">
                         {{scoreCards.CapitalStructure.ChangeInLongTermDebt.toFixed(2)}}
                     </span>
@@ -243,7 +244,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Change In Net Debt</span></div>
+                    <div class="row-header"><span>Change In Net Debt (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.ChangeInNetDebt != null">
                         {{scoreCards.CapitalStructure.ChangeInNetDebt.toFixed(2)}}
                     </span>
@@ -252,7 +253,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Net Debt</span></div>
+                    <div class="row-header"><span>Net Debt ($)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.NetDebt != null">
                         {{scoreCards.CapitalStructure.NetDebt.toFixed(2)}}
                     </span>
@@ -261,7 +262,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Short Term Obligations Ratio</span></div>
+                    <div class="row-header"><span>Short Term Obligations Ratio (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.ShortTermObligationsRatio != null">
                         {{scoreCards.CapitalStructure.ShortTermObligationsRatio.toFixed(2)}}
                     </span>
@@ -270,7 +271,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>LongTermDebtRatio</span></div>
+                    <div class="row-header"><span>Long Term Debt Ratio (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.LongTermDebtRatio != null">
                         {{scoreCards.CapitalStructure.LongTermDebtRatio.toFixed(2)}}
                     </span>
@@ -279,7 +280,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Debt Ratio</span></div>
+                    <div class="row-header"><span>Debt Ratio (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.DebtRatio != null">
                         {{scoreCards.CapitalStructure.DebtRatio.toFixed(2)}}
                     </span>
@@ -351,7 +352,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Equity Ratio</span></div>
+                    <div class="row-header"><span>Equity Ratio (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.EquityRatio != null">
                         {{scoreCards.CapitalStructure.EquityRatio.toFixed(2)}}
                     </span>
@@ -378,7 +379,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Net Asset Value</span></div>
+                    <div class="row-header"><span>Net Asset Value (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.NetAssetValue != null">
                         {{scoreCards.CapitalStructure.NetAssetValue.toFixed(2)}}
                     </span>
@@ -387,7 +388,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Effective Interest Rate</span></div>
+                    <div class="row-header"><span>Effective Interest Rate (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.EffectiveInterestRate != null">
                         {{scoreCards.CapitalStructure.EffectiveInterestRate.toFixed(2)}}
                     </span>
@@ -396,7 +397,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Debt Cost Of Capital</span></div>
+                    <div class="row-header"><span>Debt Cost Of Capital (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.DebtCostOfCapital != null">
                         {{scoreCards.CapitalStructure.DebtCostOfCapital.toFixed(2)}}
                     </span>
@@ -405,7 +406,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Equity Cost Of Capital</span></div>
+                    <div class="row-header"><span>Equity Cost Of Capital (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.EquityCostOfCapital != null">
                         {{scoreCards.CapitalStructure.EquityCostOfCapital.toFixed(2)}}
                     </span>
@@ -414,7 +415,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Weight Avg Cost Of Capital</span></div>
+                    <div class="row-header"><span>Weight Avg Cost Of Capital, WACC (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.CapitalStructure.WeightAvgCostOfCapital != null">
                         {{scoreCards.CapitalStructure.WeightAvgCostOfCapital.toFixed(2)}}
                     </span>
@@ -437,7 +438,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Days Sales Outstanding</span></div>
+                    <div class="row-header"><span>Days Sales Outstanding (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.DaysSalesOutstanding != null">
                         {{scoreCards.AssetActivity.DaysSalesOutstanding.toFixed(2)}}
                     </span>
@@ -455,7 +456,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Days Sales Inventory</span></div>
+                    <div class="row-header"><span>Days Sales Inventory (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.DaysSalesInventory != null">
                         {{scoreCards.AssetActivity.DaysSalesInventory.toFixed(2)}}
                     </span>
@@ -473,7 +474,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Days Inventory Outstanding</span></div>
+                    <div class="row-header"><span>Days Inventory Outstanding (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.DaysInventoryOutstanding != null">
                         {{scoreCards.AssetActivity.DaysInventoryOutstanding.toFixed(2)}}
                     </span>
@@ -491,7 +492,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Creditors Days Outstanding</span></div>
+                    <div class="row-header"><span>Creditors Days Outstanding (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.CreditorsDaysOutstanding != null">
                         {{scoreCards.AssetActivity.CreditorsDaysOutstanding.toFixed(2)}}
                     </span>
@@ -509,7 +510,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Days Receivables Outstanding</span></div>
+                    <div class="row-header"><span>Days Receivables Outstanding (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.DaysReceivablesOutstanding != null">
                         {{scoreCards.AssetActivity.DaysReceivablesOutstanding.toFixed(2)}}
                     </span>
@@ -527,7 +528,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Days Working Capital</span></div>
+                    <div class="row-header"><span>Days Working Capital (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.DaysWorkingCapital != null">
                         {{scoreCards.AssetActivity.DaysWorkingCapital.toFixed(2)}}
                     </span>
@@ -545,7 +546,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Asset Turn Rate</span></div>
+                    <div class="row-header"><span>Asset Turn Rate (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.AssetTurnRate != null">
                         {{scoreCards.AssetActivity.AssetTurnRate.toFixed(2)}}
                     </span>
@@ -563,7 +564,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Long Term Asset Rate</span></div>
+                    <div class="row-header"><span>Long Term Asset Rate (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.LongTermAssetRate != null">
                         {{scoreCards.AssetActivity.LongTermAssetRate.toFixed(2)}}
                     </span>
@@ -572,7 +573,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Cash Conversion Cycle</span></div>
+                    <div class="row-header"><span>Cash Conversion Cycle (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.CashConversionCycle != null">
                         {{scoreCards.AssetActivity.CashConversionCycle.toFixed(2)}}
                     </span>
@@ -581,7 +582,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Return On Investments</span></div>
+                    <div class="row-header"><span>Return On Investments, ROI (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.ReturnOnInvestments != null">
                         {{scoreCards.AssetActivity.ReturnOnInvestments.toFixed(2)}}
                     </span>
@@ -595,7 +596,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
             <div class="score-card">
                 <h3>Liability Activity</h3>
                 <div class="col-row">
-                    <div class="row-header"><span>Payables Turnover COGS</span></div>
+                    <div class="row-header"><span>Payables Turnover, COGS</span></div>
                     <span class="normal-value" *ngIf="scoreCards.LiabilityActivity.PayablesTurnoverCOGS != null">
                         {{scoreCards.LiabilityActivity.PayablesTurnoverCOGS.toFixed(2)}}
                     </span>
@@ -604,7 +605,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>COGS Days Payables Outstanding</span></div>
+                    <div class="row-header"><span>COGS Days Payables Outstanding (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.LiabilityActivity.COGSDaysPayablesOutstanding != null">
                         {{scoreCards.LiabilityActivity.COGSDaysPayablesOutstanding.toFixed(2)}}
                     </span>
@@ -640,7 +641,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Liabilities Turnover Rate</span></div>
+                    <div class="row-header"><span>Liabilities Turnover Rate (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.LiabilityActivity.LiabilitiesTurnoverRate != null">
                         {{scoreCards.LiabilityActivity.LiabilitiesTurnoverRate.toFixed(2)}}
                     </span>
@@ -649,7 +650,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Change In Debt Obligations</span></div>
+                    <div class="row-header"><span>Change In Debt Obligations (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.LiabilityActivity.ChangeInDebtObligations != null">
                         {{scoreCards.LiabilityActivity.ChangeInDebtObligations.toFixed(2)}}
                     </span>
@@ -658,7 +659,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Debtors Payback Period</span></div>
+                    <div class="row-header"><span>Debtors Payback Period (Years)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.LiabilityActivity.DebtorsPaybackPeriod != null">
                         {{scoreCards.LiabilityActivity.DebtorsPaybackPeriod.toFixed(2)}}
                     </span>
@@ -667,7 +668,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Burn Rate</span></div>
+                    <div class="row-header"><span>Burn Rate (Years Remaining)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.LiabilityActivity.BurnRate != null">
                         {{scoreCards.LiabilityActivity.BurnRate.toFixed(2)}}
                     </span>
@@ -681,7 +682,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
             <div class="score-card">
                 <h3>Profitability And Dividends</h3>
                 <div class="col-row">
-                    <div class="row-header"><span>Earnings</span></div>
+                    <div class="row-header"><span>Earnings (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.Earnings != null">
                         {{scoreCards.ProfitabilityAndDividends.Earnings.toFixed(2)}}
                     </span>
@@ -690,7 +691,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>EBIT Cashflow</span></div>
+                    <div class="row-header"><span>EBIT Cashflow (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.EBITCashflow != null">
                         {{scoreCards.ProfitabilityAndDividends.EBITCashflow.toFixed(2)}}
                     </span>
@@ -699,7 +700,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Return On Sales</span></div>
+                    <div class="row-header"><span>Return On Sales (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.ReturnOnSales != null">
                         {{scoreCards.ProfitabilityAndDividends.ReturnOnSales.toFixed(2)}}
                     </span>
@@ -708,7 +709,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Return On Equity</span></div>
+                    <div class="row-header"><span>Return On Equity (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.ReturnOnEquity != null">
                         {{scoreCards.ProfitabilityAndDividends.ReturnOnEquity.toFixed(2)}}
                     </span>
@@ -717,7 +718,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Dupont ROE</span></div>
+                    <div class="row-header"><span>Dupont ROE (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.DupontROE != null">
                         {{scoreCards.ProfitabilityAndDividends.DupontROE.toFixed(2)}}
                     </span>
@@ -726,7 +727,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Return On Assets</span></div>
+                    <div class="row-header"><span>Return On Assets (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.ReturnOnAssets != null">
                         {{scoreCards.ProfitabilityAndDividends.ReturnOnAssets.toFixed(2)}}
                     </span>
@@ -735,7 +736,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>NI Return On Capital Employed</span></div>
+                    <div class="row-header"><span>NI Return On Capital Employed (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.NIReturnOnCapitalEmployed != null">
                         {{scoreCards.ProfitabilityAndDividends.NIReturnOnCapitalEmployed.toFixed(2)}}
                     </span>
@@ -744,7 +745,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>EBIT Return On Capital Employed</span></div>
+                    <div class="row-header"><span>EBIT Return On Capital Employed (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.EBITReturnOnCapitalEmployed != null">
                         {{scoreCards.ProfitabilityAndDividends.EBITReturnOnCapitalEmployed.toFixed(2)}}
                     </span>
@@ -780,7 +781,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Earnings Power</span></div>
+                    <div class="row-header"><span>Earnings Power (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.EarningsPower != null">
                         {{scoreCards.ProfitabilityAndDividends.EarningsPower.toFixed(2)}}
                     </span>
@@ -789,7 +790,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Gross Profit Margin</span></div>
+                    <div class="row-header"><span>Gross Profit Margin (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.GrossProfitMargin != null">
                         {{scoreCards.ProfitabilityAndDividends.GrossProfitMargin.toFixed(2)}}
                     </span>
@@ -798,7 +799,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Net Operating Profit After Tax</span></div>
+                    <div class="row-header"><span>Net Operating Profit After Tax (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.NetOperatingProfitAfterTax != null">
                         {{scoreCards.ProfitabilityAndDividends.NetOperatingProfitAfterTax.toFixed(2)}}
                     </span>
@@ -807,7 +808,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Return On Invested Capital</span></div>
+                    <div class="row-header"><span>Return On Invested Capital (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.ReturnOnInvestedCapital != null">
                         {{scoreCards.ProfitabilityAndDividends.ReturnOnInvestedCapital.toFixed(2)}}
                     </span>
@@ -816,7 +817,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Operating Expenses Ratio</span></div>
+                    <div class="row-header"><span>Operating Expenses Ratio (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.OperatingExpensesRatio != null">
                         {{scoreCards.ProfitabilityAndDividends.OperatingExpensesRatio.toFixed(2)}}
                     </span>
@@ -825,7 +826,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Operating Profit Ratio</span></div>
+                    <div class="row-header"><span>Operating Profit Ratio (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.OperatingProfitRatio != null">
                         {{scoreCards.ProfitabilityAndDividends.OperatingProfitRatio.toFixed(2)}}
                     </span>
@@ -834,7 +835,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Retention Ratio</span></div>
+                    <div class="row-header"><span>Retention Ratio (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.RetentionRatio != null">
                         {{scoreCards.ProfitabilityAndDividends.RetentionRatio.toFixed(2)}}
                     </span>
@@ -843,7 +844,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Dividend Payout Ratio</span></div>
+                    <div class="row-header"><span>Dividend Payout Ratio (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.DividendPayoutRatio != null">
                         {{scoreCards.ProfitabilityAndDividends.DividendPayoutRatio.toFixed(2)}}
                     </span>
@@ -852,7 +853,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Earnings Yield</span></div>
+                    <div class="row-header"><span>Earnings Yield (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.EarningsYield != null">
                         {{scoreCards.ProfitabilityAndDividends.EarningsYield.toFixed(2)}}
                     </span>
@@ -861,7 +862,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Dividend Yield</span></div>
+                    <div class="row-header"><span>Dividend Yield (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.DividendYield != null">
                         {{scoreCards.ProfitabilityAndDividends.DividendYield.toFixed(2)}}
                     </span>
@@ -870,7 +871,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Sustainable Growth Rate</span></div>
+                    <div class="row-header"><span>Sustainable Growth Rate (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.ProfitabilityAndDividends.SustainableGrowthRate != null">
                         {{scoreCards.ProfitabilityAndDividends.SustainableGrowthRate.toFixed(2)}}
                     </span>
@@ -884,7 +885,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
             <div class="score-card">
                 <h3>Valuation</h3>
                 <div class="col-row">
-                    <div class="row-header"><span>Market Value</span></div>
+                    <div class="row-header"><span>Market Value ($)</span></div>
                     <span class="normal-value" class="normal-value" *ngIf="scoreCards.Valuation.MarketValue != null">
                         {{scoreCards.Valuation.MarketValue.toFixed(2)}}
                     </span>
@@ -893,7 +894,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Cash And Equivalents To Price</span></div>
+                    <div class="row-header"><span>Cash And Equivalents To Price (%)</span></div>
                     <span class="normal-value" class="normal-value"  *ngIf="scoreCards.Valuation.CashAndEquivalentsToPrice != null">
                         {{scoreCards.Valuation.CashAndEquivalentsToPrice.toFixed(2)}}
                     </span>
@@ -902,7 +903,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Net Asset Value To Price</span></div>
+                    <div class="row-header"><span>Net Asset Value To Price (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.NetAssetValueToPrice != null">
                         {{scoreCards.Valuation.NetAssetValueToPrice.toFixed(2)}}
                     </span>
@@ -911,7 +912,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>EBIT Cash Flow To Price</span></div>
+                    <div class="row-header"><span>EBIT Cash Flow To Price (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.EBITCashFlowToPrice != null">
                         {{scoreCards.Valuation.EBITCashFlowToPrice.toFixed(2)}}
                     </span>
@@ -920,7 +921,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Free Cash Flow To Price</span></div>
+                    <div class="row-header"><span>Free Cash Flow To Price (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.FreeCashFlowToPrice != null">
                         {{scoreCards.Valuation.FreeCashFlowToPrice.toFixed(2)}}
                     </span>
@@ -929,7 +930,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Unlevered Free Cash Flow To Price</span></div>
+                    <div class="row-header"><span>Unlevered Free Cash Flow To Price (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.UnleveredFreeCashFlowToPrice != null">
                         {{scoreCards.Valuation.UnleveredFreeCashFlowToPrice.toFixed(2)}}
                     </span>
@@ -938,7 +939,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Sales To Price</span></div>
+                    <div class="row-header"><span>Sales To Price (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.SalesToPrice != null">
                         {{scoreCards.Valuation.SalesToPrice.toFixed(2)}}
                     </span>
@@ -947,7 +948,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Book Value To Price</span></div>
+                    <div class="row-header"><span>Book Value To Price (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.BookValueToPrice != null">
                         {{scoreCards.Valuation.BookValueToPrice.toFixed(2)}}
                     </span>
@@ -956,7 +957,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Original Graham Valuation</span></div>
+                    <div class="row-header"><span>Original Graham Valuation (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.OriginalGrahamValuation != null">
                         {{scoreCards.Valuation.OriginalGrahamValuation.toFixed(2)}}
                     </span>
@@ -965,16 +966,16 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Revised Graham Valuation</span></div>
+                    <div class="row-header"><span>Revised Graham Valuation (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.RevisedGrahamValuation != null">
-                        {{scoreCards.Valuation.RevisedGrahamValuation.toFixed(2)}}
+                        {{reportedService.intrinsicValue}}
                     </span>
                     <span *ngIf="scoreCards.Valuation.RevisedGrahamValuationRating != null">
                         {{scoreCards.Valuation.RevisedGrahamValuationRating}}
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>DCF Valuation</span></div>
+                    <div class="row-header"><span>DCF Valuation (Net Income Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.DCFValuation != null">
                         {{scoreCards.Valuation.DCFValuation.toFixed(2)}}
                     </span>
@@ -983,7 +984,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Margin Of Safety NI</span></div>
+                    <div class="row-header"><span>Margin Of Safety (Using Net Income DCF)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.MarginOfSafetyNI != null">
                         {{scoreCards.Valuation.MarginOfSafetyNI.toFixed(2)}}
                     </span>
@@ -992,7 +993,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Margin Of Safety EBIT</span></div>
+                    <div class="row-header"><span>Margin Of Safety (Using EBIT DCF)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.MarginOfSafetyEBIT != null">
                         {{scoreCards.Valuation.MarginOfSafetyEBIT.toFixed(2)}}
                     </span>
@@ -1001,7 +1002,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Margin Of Safety FCF</span></div>
+                    <div class="row-header"><span>Margin Of Safety (Using FCF DCF)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.MarginOfSafetyFCF != null">
                         {{scoreCards.Valuation.MarginOfSafetyFCF.toFixed(2)}}
                     </span>
@@ -1019,7 +1020,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Net Income To Enterprise Valuation</span></div>
+                    <div class="row-header"><span>Net Income To Enterprise Valuation (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.NetIncomeToEnterpriseValuation != null">
                         {{scoreCards.Valuation.NetIncomeToEnterpriseValuation.toFixed(2)}}
                     </span>
@@ -1028,7 +1029,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>EBIT To Enterprise Valuation</span></div>
+                    <div class="row-header"><span>EBIT To Enterprise Valuation (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.EBITToEnterpriseValuation != null">
                         {{scoreCards.Valuation.EBITToEnterpriseValuation.toFixed(2)}}
                     </span>
@@ -1037,7 +1038,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Book Value</span></div>
+                    <div class="row-header"><span>Book Value ($)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.BookValue != null">
                         {{scoreCards.Valuation.BookValue.toFixed(2)}}
                     </span>
@@ -1046,7 +1047,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Book Value Per Share</span></div>
+                    <div class="row-header"><span>Book Value (Per Share)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.BookValuePerShare != null">
                         {{scoreCards.Valuation.BookValuePerShare.toFixed(2)}}
                     </span>
@@ -1055,7 +1056,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>Net Income To Book Value</span></div>
+                    <div class="row-header"><span>Net Income To Book Value (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.NetIncomeToBookValue != null">
                         {{scoreCards.Valuation.NetIncomeToBookValue.toFixed(2)}}
                     </span>
@@ -1064,7 +1065,7 @@ import { GetScoreCardResponse } from '../../server-communication/app-endpoint.co
                     </span>
                 </div>
                 <div class="col-row">
-                    <div class="row-header"><span>EBIT To Book Value</span></div>
+                    <div class="row-header"><span>EBIT To Book Value (%)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.Valuation.EBITToBookValue != null">
                         {{scoreCards.Valuation.EBITToBookValue.toFixed(2)}}
                     </span>
@@ -1082,7 +1083,10 @@ export class DashboardComponent implements OnInit {
     public scoreCards: GetScoreCardResponse;
     public isLoading = true;
 
-    constructor(public securityAnalysisService: SecurityAnalysisService) {}
+    constructor(
+        public securityAnalysisService: SecurityAnalysisService,
+        public reportedService: ReportedService
+        ) {}
 
     async ngOnInit() {
         this.scoreCards = await this.securityAnalysisService.getScorecards({ticker: this.ticker});

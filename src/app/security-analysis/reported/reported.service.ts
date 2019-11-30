@@ -7,6 +7,7 @@ import { AuthService } from '../../authorization/auth.service';
 export class ReportedService {
     public reportedData: ReportedResponse;
     public loggedInUser: string;
+    public intrinsicValue: string;
 
     constructor(
         private _appEndpointService: AppEndpointService,
