@@ -482,7 +482,7 @@ import { ReportedService } from '../reported/reported.service';
                         {{scoreCards.AssetActivity.DaysInventoryOutstandingRating}}
                     </span>
                 </div>
-                <div class="col-row">
+                <!--<div class="col-row">
                     <div class="row-header"><span>Creditors Turnover</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.CreditorsTurnover != null">
                         {{scoreCards.AssetActivity.CreditorsTurnover.toFixed(2)}}
@@ -490,8 +490,8 @@ import { ReportedService } from '../reported/reported.service';
                     <span *ngIf="scoreCards.AssetActivity.CreditorsTurnoverRating != null">
                         {{scoreCards.AssetActivity.CreditorsTurnoverRating}}
                     </span>
-                </div>
-                <div class="col-row">
+                </div>-->
+                <!--<div class="col-row">
                     <div class="row-header"><span>Creditors Days Outstanding (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.CreditorsDaysOutstanding != null">
                         {{scoreCards.AssetActivity.CreditorsDaysOutstanding.toFixed(2)}}
@@ -499,8 +499,8 @@ import { ReportedService } from '../reported/reported.service';
                     <span *ngIf="scoreCards.AssetActivity.CreditorsDaysOutstandingRating != null">
                         {{scoreCards.AssetActivity.CreditorsDaysOutstandingRating}}
                     </span>
-                </div>
-                <div class="col-row">
+                </div>-->
+                <!--<div class="col-row">
                     <div class="row-header"><span>Accounts Receivables Turnover</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.AccountsReceivablesTurnover != null">
                         {{scoreCards.AssetActivity.AccountsReceivablesTurnover.toFixed(2)}}
@@ -508,8 +508,8 @@ import { ReportedService } from '../reported/reported.service';
                     <span *ngIf="scoreCards.AssetActivity.AccountsReceivablesTurnoverRating != null">
                         {{scoreCards.AssetActivity.AccountsReceivablesTurnoverRating}}
                     </span>
-                </div>
-                <div class="col-row">
+                </div>-->
+                <!--<div class="col-row">
                     <div class="row-header"><span>Days Receivables Outstanding (Days)</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.DaysReceivablesOutstanding != null">
                         {{scoreCards.AssetActivity.DaysReceivablesOutstanding.toFixed(2)}}
@@ -517,7 +517,7 @@ import { ReportedService } from '../reported/reported.service';
                     <span *ngIf="scoreCards.AssetActivity.DaysReceivablesOutstandingRating != null">
                         {{scoreCards.AssetActivity.DaysReceivablesOutstandingRating}}
                     </span>
-                </div>
+                </div>-->
                 <div class="col-row">
                     <div class="row-header"><span>Working Capital Turnover</span></div>
                     <span class="normal-value" *ngIf="scoreCards.AssetActivity.WorkingCapitalTurnover != null">
