@@ -11,7 +11,7 @@ const router = express.Router();
 
 function getCurrentPrice(ticker, callback) {
     const Http = new XMLHttpRequest();
-    const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + ticker + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
+    const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + ticker + '&apikey=6HYZSQEHOQOURB6Y';
     Http.open("GET", url, true);
     Http.send();
 
@@ -376,7 +376,7 @@ router.post("/getReportedTicker", /*checkAuth,*/ (req, res, next) => { // TODO: 
 
 router.get("/currentPrice", (req, res, next) => {
     const Http = new XMLHttpRequest();
-    const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + req.body.ticker + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
+    const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + req.body.ticker + '&apikey=6HYZSQEHOQOURB6Y';
     Http.open("GET", url, true);
     Http.send();
 
@@ -395,7 +395,7 @@ router.get("/currentPrice", (req, res, next) => {
 
 router.get("/searchTicker", (req, res, next) => {
     const Http = new XMLHttpRequest();
-    const url = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=' + req.body.keywords + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
+    const url = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=' + req.body.keywords + '&apikey=6HYZSQEHOQOURB6Y';
     Http.open("GET", url, true);
     Http.send();
 

@@ -8,7 +8,7 @@ const router = express.Router();
 
 function getCurrentPrice(ticker, callback) {
     const Http = new XMLHttpRequest();
-    const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + ticker + '&apikey=OjdkMzliY2VkOWVlYTZjYjNlYzg2NDkxZDBmMzVjZTdi';
+    const url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + ticker + '&apikey=6HYZSQEHOQOURB6Y';
     Http.open("GET", url, true);
     Http.send();
 
@@ -162,7 +162,8 @@ router.post("/removeWatchlistTicker", (req, res, next) => {
             }
             if(user.stocks.some(stock => stock.ticker == req.body.ticker))
             {
-                user.stocks.splice(user.stocks.indexOf(req.body.ticker), 1);
+                var index = user.stocks.findIndex(stock => stock.ticker == req.body.ticker);
+                user.stocks.splice(index, 1);
                 user.save().then(result => {
                     res.status(201).json({
                        message: 'Ticker removed from watchlist!',
