@@ -55,14 +55,14 @@ export class SecurityAnalysisComponent implements OnInit {
         this.isLoading = true;
         this.shouldShowOwnerSummary = false;
 
-        const ticker = tickerInput.value;
+        const ticker = tickerInput.value.toUpperCase();
         this.reportedData = await this._endpointService.getReported({ticker: ticker});
 
         this.intrinsicValueResponse = await this._endpointService.getIntrinsicValue({ticker: ticker});
         this.reportedService.intrinsicValue = this.intrinsicValueResponse.intrinsicValue.toFixed(2);
         console.log(this.intrinsicValueResponse);
 
-        this.reportedTickerName = tickerInput.value;
+        this.reportedTickerName = tickerInput.value.toUpperCase();
         this.shouldShowOwnerSummary = true;
         this.isLoading = false;
     }

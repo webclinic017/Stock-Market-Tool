@@ -37,7 +37,25 @@ import { Component, OnInit } from '@angular/core';
                     <img src="assets/linReg.png" alt="graph" width="500rem" height="300rem">
                 </div>
                 <div class="gray-box">
-                    <p>hi</p>
+                    <h3>Model Supported by Machine Learning</h3>
+                    <p>
+                        This web application uses a modified version of Graham's intrinsic value formula. In his forumla, PE is
+                        assumed to be 7, and gr to be 1. This application chose to challenge these constants, and through the use
+                        of a mulit-variate linear regression machine learning model, different values were selected. A PE of 9 and
+                        gr of 2, as well as an added bias of 27.5, were the results of running the regression against decades of
+                        historic price data for all 500 companies in the S&P 500.
+
+                    </p>
+                </div>
+            </div>
+            <div class="smt-last-row">
+                <div class="gray-box set-width">
+                    <h3>How to Use this Web Application</h3>
+                    <p>
+                        This web application is designed as an eductation tool to be used by anyone looking to make financially-sound
+                        investments. This application is not here to tell you what to invest in or not invest in, but rather provide
+                        a wealth of data so that you can make that decision for yourself.
+                    </p>
                 </div>
             </div>
         </div>
