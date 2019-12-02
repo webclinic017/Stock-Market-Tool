@@ -10,7 +10,8 @@ import { ReportedService } from './reported.service';
             <app-income-statement-table></app-income-statement-table>
             <h3>Balance Sheet</h3>
             <app-balance-statement-table></app-balance-statement-table>
-            <!-- TODO: cashflow sheet -->
+            <h3>Cashflow Sheet</h3>
+            <app-cashflow-statement-table></app-cashflow-statement-table>
         </div>
     `,
     styleUrls: ['reported.component.scss']

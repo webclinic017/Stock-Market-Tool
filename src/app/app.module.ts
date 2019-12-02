@@ -34,6 +34,11 @@ import { SmtBalanceTwoComponent } from './security-analysis/reported/tables/bala
 import { SmtBalanceThreeComponent } from './security-analysis/reported/tables/balance/smt-balance-three.component';
 import { SmtBalanceFourComponent } from './security-analysis/reported/tables/balance/smt-balance-four.component';
 import { SmtBalanceFiveComponent } from './security-analysis/reported/tables/balance/smt-balance-five.component';
+import { SmtCashflowOneComponent } from './security-analysis/reported/tables/cashflow/smt-cashflow-one.component';
+import { SmtCashflowTwoComponent } from './security-analysis/reported/tables/cashflow/smt-cashflow-two.component';
+import { SmtCashflowThreeComponent } from './security-analysis/reported/tables/cashflow/smt-cashflow-three.component';
+import { SmtCashflowFourComponent } from './security-analysis/reported/tables/cashflow/smt-cashflow-four.component';
+import { SmtCashflowFiveComponent } from './security-analysis/reported/tables/cashflow/smt-cashflow-five.component';
 
 
 @NgModule({
@@ -62,7 +67,12 @@ import { SmtBalanceFiveComponent } from './security-analysis/reported/tables/bal
         SmtBalanceTwoComponent,
         SmtBalanceThreeComponent,
         SmtBalanceFourComponent,
-        SmtBalanceFiveComponent
+        SmtBalanceFiveComponent,
+        SmtCashflowOneComponent,
+        SmtCashflowTwoComponent,
+        SmtCashflowThreeComponent,
+        SmtCashflowFourComponent,
+        SmtCashflowFiveComponent
     ],
     imports: [
         BrowserModule,
