@@ -25,11 +25,19 @@ import { Component, OnInit } from '@angular/core';
                         the formular presented here to the right. This intrinsic formula was developed by famed investor and
                         scholar Benjamin Graham. Here, EPS refers to earning per share, PE to fair Rate of Return for a no
                         growth stock, g to growth rate of a company's earnings, gr to some coefficient for that growth, 4.4 to
-                        the required return, and Y to AAA yield. <br /><br />
+                        the required return, and Y to AAA yield.
                     </p>
                 </div>
                 <div class="pic">
-                    <img src="./formula.png" alt="forumla" width="250rem" height="80rem">
+                    <img src="assets/formula.png" alt="forumla" width="250rem" height="80rem">
+                </div>
+            </div>
+            <div class="smt-row">
+                <div class="pic-2">
+                    <img src="assets/linReg.png" alt="graph" width="500rem" height="300rem">
+                </div>
+                <div class="gray-box">
+                    <p>hi</p>
                 </div>
             </div>
         </div>
