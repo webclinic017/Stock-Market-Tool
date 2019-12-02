@@ -1,7 +1,7 @@
 // To start server from terminal use command "npm run start:server"
 // Server will then be listening on localhost:3000 by default.
 
-const app = require("./backend/app");
+const app = require("./app");
 const debug = require("debug")("node-angular");
 const http = require("http");
 
