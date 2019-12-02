@@ -13,7 +13,11 @@ export class ProfileService {
         this.loggedInUser = this.authService.loggedInUser;
     }
 
-    listWatchlist() {
+    public listWatchlist() {
         return this.appEndpointService.getWatchList({username: this.loggedInUser});
+    }
+
+    public removeTicker(ticker: string) {
+        this.appEndpointService.removeWatchlistTicker({username: this.loggedInUser, ticker: ticker});
     }
 }

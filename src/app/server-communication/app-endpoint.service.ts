@@ -39,6 +39,10 @@ export class AppEndpointService {
         return this.http.post(`${this._dbUrl}user/addWatchlistTicker`, addWatchlistTickerRequest).toPromise();
     }
 
+    public removeWatchlistTicker(addWatchlistTickerRequest) {
+        return this.http.post(`${this._dbUrl}user/removeWatchlistTicker`, addWatchlistTickerRequest).toPromise();
+    }
+
     public getScoreCard(getScoreCardRequest: GetScoreCardRequest): Promise<GetScoreCardResponse> {
         return this.http.post<GetScoreCardResponse>(`${this._dbUrl}security/scorecard`, getScoreCardRequest).toPromise();
     }

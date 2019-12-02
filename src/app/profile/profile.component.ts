@@ -22,6 +22,7 @@ import { ProfileService } from './profile.service';
                             <div>Current Price: {{item.currentPrice.toFixed(2)}}</div>
                             <div>Original Price: {{item.priceEntered.toFixed(2)}}</div>
                             <div>Date Added: {{item.dateAdded.slice(0,10)}}</div>
+                            <a (click)="removeTickerFromWatchlist(item.ticker)">Remove from watchlist</a>
                         </div>
                     </div>
                 </div>
@@ -65,5 +66,18 @@ export class ProfileComponent implements OnInit {
         this.authService.isLoggedIn.next(false);
         this._toastrService.success('Logout successful');
         this.router.navigate(['home']);
+    }
+
+    public async removeTickerFromWatchlist(ticker: string) {
+        this.profileService.removeTicker(ticker);
+        this.pageIsLoading = true;
+        await this.sleep(1500);
+        this.watchlist = await this.profileService.listWatchlist();
+        this.pageIsLoading = false;
+        console.log(this.watchlist[0]);
+    }
+
+    public sleep(milliseconds) {
+        return new Promise(resolve => setTimeout(resolve, milliseconds));
     }
 }
