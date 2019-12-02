@@ -29,7 +29,7 @@ import { Component, OnInit } from '@angular/core';
                     </p>
                 </div>
                 <div class="pic">
-                    <img src="assets/formula.png" alt="forumla" width="250rem" height="80rem">
+                    <img src="assets/formula.png" alt="forumla" width="300rem" height="80rem">
                 </div>
             </div>
             <div class="smt-row">

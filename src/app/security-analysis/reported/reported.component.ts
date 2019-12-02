@@ -6,8 +6,11 @@ import { ReportedService } from './reported.service';
     selector: 'app-reported',
     template: `
         <div *ngIf="endpointCallIsDone">
+            <h3>Income Sheet</h3>
             <app-income-statement-table></app-income-statement-table>
-            <!-- TODO: balance sheet, cashflow sheet -->
+            <h3>Balance Sheet</h3>
+            <app-balance-statement-table></app-balance-statement-table>
+            <!-- TODO: cashflow sheet -->
         </div>
     `,
     styleUrls: ['reported.component.scss']

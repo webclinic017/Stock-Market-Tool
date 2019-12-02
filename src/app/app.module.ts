@@ -29,6 +29,11 @@ import { SmtIncomeTwoComponent } from './security-analysis/reported/tables/incom
 import { SmtIncomeThreeComponent } from './security-analysis/reported/tables/income/smt-income-three.component';
 import { SmtIncomeFourComponent } from './security-analysis/reported/tables/income/smt-income-four.component';
 import { SmtIncomeFiveComponent } from './security-analysis/reported/tables/income/smt-income-five.component';
+import { SmtBalanceOneComponent } from './security-analysis/reported/tables/balance/smt-balance-one.component';
+import { SmtBalanceTwoComponent } from './security-analysis/reported/tables/balance/smt-balance-two.component';
+import { SmtBalanceThreeComponent } from './security-analysis/reported/tables/balance/smt-balance-three.component';
+import { SmtBalanceFourComponent } from './security-analysis/reported/tables/balance/smt-balance-four.component';
+import { SmtBalanceFiveComponent } from './security-analysis/reported/tables/balance/smt-balance-five.component';
 
 
 @NgModule({
@@ -53,6 +58,11 @@ import { SmtIncomeFiveComponent } from './security-analysis/reported/tables/inco
         SmtIncomeThreeComponent,
         SmtIncomeFourComponent,
         SmtIncomeFiveComponent,
+        SmtBalanceOneComponent,
+        SmtBalanceTwoComponent,
+        SmtBalanceThreeComponent,
+        SmtBalanceFourComponent,
+        SmtBalanceFiveComponent
     ],
     imports: [
         BrowserModule,
